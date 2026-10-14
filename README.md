@@ -83,20 +83,55 @@ Each route has its own dedicated static HTML page with unique Title, Meta Descri
 
 ---
 
-## ⚙️ Configuration Before Launch
+## 🔒 Security & Server Architecture
 
-Before launching to production, update these two placeholder IDs in `index.html` (and each subpage in `sap/`, `ai/`, `recruiting/`, `contact/`):
+The application includes an enterprise server layer providing secure authentication, rate-limiting, confidential document access, and inquiry handling with local Vite dev parity and Vercel serverless functions.
 
-1. **Google Analytics 4 (GA4):**
-   * Search for `G-XXXXXXXXXX` in `index.html`.
-   * Replace with your official GA4 Measurement ID from Google Analytics.
-2. **Google Search Console (GSC):**
-   * Search for `YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE` in `index.html`.
-   * Replace with your domain verification token from Google Search Console.
+### Environment Variables
+Configure the following optional variables in `.env` (local) or Vercel Environment Variables:
+
+| Variable | Description | Default |
+| :--- | :--- | :--- |
+| `SESSION_SECRET` | 32+ character HMAC secret used to sign session cookies | Secure random fallback |
+| `AUTH_CLYPTUS_HASH` | PBKDF2-SHA512 hash for the `clyptus` administrative user | Pre-computed PBKDF2 hash |
+| `AUTH_CLYPTUS_SALT` | Cryptographic salt for `clyptus` user password | Pre-computed salt |
+| `AUTH_AUDIT_HASH` | PBKDF2-SHA512 hash for the `audit` compliance user | Pre-computed PBKDF2 hash |
+| `AUTH_AUDIT_SALT` | Cryptographic salt for `audit` user password | Pre-computed salt |
+| `RESEND_API_KEY` | Optional: Resend API Key for automatic contact email delivery | None (logs to `server/logs/inquiries.jsonl`) |
+| `CONTACT_RECEIVER_EMAIL` | Optional: Destination email address for customer inquiries | `contact@clyptus.com` |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Optional: Custom SMTP server credentials | None |
+
+### Rotating Administrative Credentials
+To generate a new PBKDF2 salt and hash for credential rotation:
+```bash
+node scripts/generate-password-hash.js "YourNewSecurePasswordHere"
+```
+Copy the generated `SALT` and `HASH` values into your environment variables (`AUTH_CLYPTUS_SALT` / `AUTH_CLYPTUS_HASH`).
+
+### Protected HR & Compliance Documents
+Confidential employee handbooks and audit documents are located in `server/protected-documents/`. They are:
+1. Excluded from `dist/` and `public/` builds.
+2. Delivered exclusively through authenticated endpoint `/api/documents?id=<policy-id>`.
+3. Protected by session cookie verification (`HttpOnly`, `SameSite=Lax`, `Secure` in HTTPS) and path traversal prevention.
 
 ---
 
-## 🏗️ Production Build & Deployment
+## ⚙️ Configuration Before Production Launch
+
+Before launching to production:
+
+1. **Google Analytics 4 (GA4):**
+   * Replace `G-XXXXXXXXXX` in `index.html` and subpages with your verified production measurement ID.
+2. **Google Search Console (GSC):**
+   * Replace `YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE` with your verification token.
+3. **Contact Email Provider (Optional):**
+   * Add `RESEND_API_KEY` or SMTP credentials in your hosting platform environment variables to deliver incoming inquiries directly to your inbox. Inquiries are always safely stored in `server/logs/inquiries.jsonl`.
+4. **Deploying on Vercel:**
+   * Build Command: `npm run build`
+   * Output Directory: `dist`
+   * Serverless functions in `api/` will deploy automatically.
+
+---
 
 ### Step 1: Create Production Build
 ```bash

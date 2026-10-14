@@ -9,7 +9,9 @@ import {
   Building2,
   Compass,
   ExternalLink,
-  ShieldCheck
+  ShieldCheck,
+  AlertCircle,
+  Loader2
 } from 'lucide-react';
 import { ClyptusInteractiveGlobe, CLYPTUS_OFFICES } from './ClyptusInteractiveGlobe';
 
@@ -17,29 +19,79 @@ export const ContactSection: React.FC = () => {
   const [selectedOfficeId, setSelectedOfficeId] = useState<'hyderabad' | 'dubai' | 'usa' | null>(null);
   const [hoveredOfficeId, setHoveredOfficeId] = useState<string | null>(null);
   const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     service: 'AI Solutions & Agentic Pipelines',
     message: '',
+    _company_website: '',
   });
 
   const selectedOffice = (selectedOfficeId && CLYPTUS_OFFICES.find((o) => o.id === selectedOfficeId)) || CLYPTUS_OFFICES[0];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      setFormSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: 'AI Solutions & Agentic Pipelines',
-        message: '',
+    setSubmitError(null);
+
+    // Client-side field validations
+    if (!formData.name.trim() || formData.name.trim().length < 2) {
+      setSubmitError('Please enter your full name (minimum 2 characters).');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim() || !emailRegex.test(formData.email.trim())) {
+      setSubmitError('Please provide a valid corporate email address.');
+      return;
+    }
+
+    if (!formData.message.trim() || formData.message.trim().length < 10) {
+      setSubmitError('Please describe your requirements in at least 10 characters.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          service: formData.service,
+          message: formData.message.trim(),
+          _company_website: formData._company_website,
+        }),
       });
-    }, 5000);
+
+      const data = await res.json();
+
+      if (res.ok && data.success) {
+        setFormSubmitted(true);
+        setSubmitError(null);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: 'AI Solutions & Agentic Pipelines',
+          message: '',
+          _company_website: '',
+        });
+      } else {
+        // Preserve user inputs on error!
+        setSubmitError(data.error || 'Failed to submit inquiry. Please try again or email contact@clyptus.com.');
+      }
+    } catch {
+      // Network error: preserve user inputs!
+      setSubmitError('Network error connecting to inquiry server. Please check your connection or reach out at contact@clyptus.com.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const indianBranches = [
@@ -244,21 +296,55 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {formSubmitted ? (
-                <div className="py-10 flex flex-col items-center justify-center text-center gap-3">
+                <div className="py-10 px-4 flex flex-col items-center justify-center text-center gap-3 animate-in fade-in zoom-in-95 duration-200">
                   <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200 shadow-sm animate-bounce">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="text-xl font-black text-slate-900">Message Received!</h4>
-                  <p className="text-xs text-slate-600 max-w-sm">
-                    Thank you for reaching out. A senior Clyptus solution architect will review your project details and contact you promptly.
+                  <h4 className="text-xl font-black text-slate-900">Inquiry Dispatched Successfully!</h4>
+                  <p className="text-xs text-slate-600 max-w-sm leading-relaxed">
+                    Thank you for reaching out. Your project requirements have been recorded and sent to our executive solution architecture team. We will respond within 24 business hours.
                   </p>
+                  <button
+                    type="button"
+                    onClick={() => setFormSubmitted(false)}
+                    className="mt-3 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
+                  >
+                    Send Another Message
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  {/* Error Notification Banner */}
+                  {submitError && (
+                    <div
+                      role="alert"
+                      className="p-3.5 rounded-xl bg-rose-50 border border-rose-200/90 text-rose-700 text-xs font-semibold flex items-start gap-2.5 animate-in fade-in duration-200"
+                    >
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
+
+                  {/* Honeypot Spam Protection Field (Invisible to human users) */}
+                  <div style={{ display: 'none' }} aria-hidden="true">
+                    <label htmlFor="company_website_input">Leave this field empty</label>
+                    <input
+                      id="company_website_input"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      value={formData._company_website}
+                      onChange={(e) => setFormData({ ...formData, _company_website: e.target.value })}
+                    />
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">Your Full Name</label>
+                      <label htmlFor="contact_name_input" className="block text-xs font-bold text-slate-700 mb-1">
+                        Your Full Name <span className="text-rose-500">*</span>
+                      </label>
                       <input
+                        id="contact_name_input"
                         type="text"
                         required
                         value={formData.name}
@@ -269,8 +355,11 @@ export const ContactSection: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">Corporate Email</label>
+                      <label htmlFor="contact_email_input" className="block text-xs font-bold text-slate-700 mb-1">
+                        Corporate Email <span className="text-rose-500">*</span>
+                      </label>
                       <input
+                        id="contact_email_input"
                         type="email"
                         required
                         value={formData.email}
@@ -283,8 +372,11 @@ export const ContactSection: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">Phone Number</label>
+                      <label htmlFor="contact_phone_input" className="block text-xs font-bold text-slate-700 mb-1">
+                        Phone Number <span className="text-slate-400 font-normal">(Optional)</span>
+                      </label>
                       <input
+                        id="contact_phone_input"
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
@@ -294,39 +386,56 @@ export const ContactSection: React.FC = () => {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">Practice / Solution</label>
+                      <label htmlFor="contact_service_select" className="block text-xs font-bold text-slate-700 mb-1">
+                        Practice / Solution
+                      </label>
                       <select
+                        id="contact_service_select"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none bg-white transition-all"
                       >
                         <option value="AI Solutions & Agentic Pipelines">AI Solutions & Agentic Pipelines</option>
-                        <option value="SAP S/4HANA & BTP Consulting">SAP S/4HANA & BTP Consulting</option>
-                        <option value="IT Staffing & Niche Augmentation">IT Staffing & Niche Augmentation</option>
-                        <option value="Cloud Migration & DevOps">Cloud Migration & DevOps</option>
-                        <option value="Enterprise Architecture Advisory">Enterprise Architecture Advisory</option>
+                        <option value="SAP Consulting, BRIM & S/4HANA">SAP Consulting, BRIM & S/4HANA</option>
+                        <option value="IT Staffing & Global Recruitment">IT Staffing & Global Recruitment</option>
+                        <option value="Cloud Architecture & DevOps">Cloud Architecture & DevOps</option>
+                        <option value="Custom Enterprise Development">Custom Enterprise Development</option>
+                        <option value="General Inquiry & Leadership Contact">General Inquiry & Leadership Contact</option>
                       </select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Project Scope or Inquiries</label>
+                    <label htmlFor="contact_message_input" className="block text-xs font-bold text-slate-700 mb-1">
+                      Project Scope or Inquiries <span className="text-rose-500">*</span>
+                    </label>
                     <textarea
+                      id="contact_message_input"
                       rows={3}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline your timeline, current software ecosystem, or headcount requirements..."
+                      placeholder="Outline your timeline, current software ecosystem, or headcount requirements (min 10 characters)..."
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none resize-none transition-all"
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-700 hover:from-sky-700 hover:to-indigo-700 text-white font-extrabold text-xs transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-700 hover:from-sky-700 hover:to-indigo-700 text-white font-extrabold text-xs transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <span>Start a Conversation</span>
-                    <Send className="w-3.5 h-3.5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Inquiry...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Start a Conversation</span>
+                        <Send className="w-3.5 h-3.5" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}

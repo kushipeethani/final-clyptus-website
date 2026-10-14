@@ -2,10 +2,11 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import { viteApiServerPlugin } from './server/viteApiPlugin.ts'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), viteApiServerPlugin()],
   build: {
     rollupOptions: {
       input: {
@@ -18,8 +19,8 @@ export default defineConfig({
     },
   },
   server: {
-    host: true,
     port: 5173,
-    allowedHosts: true,
+    strictPort: false,
   },
 })
+

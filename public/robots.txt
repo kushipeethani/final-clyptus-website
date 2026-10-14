@@ -1,9 +1,8 @@
 # robots.txt for Clyptus (https://clyptus.com)
 User-agent: *
 Allow: /
-
-# Host
-Host: https://clyptus.com
+Disallow: /api/
+Disallow: /documents/
 
 # Sitemaps
 Sitemap: https://clyptus.com/sitemap.xml

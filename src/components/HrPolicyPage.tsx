@@ -22,7 +22,7 @@ interface HrPolicyPageProps {
   onNavigateContact?: () => void;
   isAuthenticated: boolean;
   authenticatedUser: string | null;
-  onLogin: (username: string, pass: string) => boolean;
+  onLogin: (username: string, pass: string) => Promise<{ success: boolean; error?: string }> | boolean;
   onLogout: () => void;
 }
 
@@ -49,11 +49,12 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
   const [passwordInput, setPasswordInput] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loginError, setLoginError] = useState('');
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   // Active Category Filter Tab
   const [activeTab, setActiveTab] = useState<string>('All Policies');
 
-  // 10 OFFICIAL PDF DOCUMENTS FOR USER: CLYPTUS (THEME: ACCENT #0089D7 & MAIN TEXT #111A2E)
+  // 10 OFFICIAL PDF DOCUMENTS FOR USER: CLYPTUS (AUTHENTICATED ENDPOINTS)
   const clyptusPolicies: PolicyCardItem[] = [
     {
       id: 'code-of-conduct',
@@ -62,7 +63,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Mandates ethical behavior, fair competition, protection of company assets, and prohibition of illegal gifts. Effective January 1, 2026 for all employees, contractors, and vendors.',
       fileName: 'Code of Conduct.pdf',
-      fileUrl: '/documents/clyptus/Code of Conduct.pdf',
+      fileUrl: '/api/documents?id=code-of-conduct',
       fileSize: '341 KB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <Shield className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -74,7 +75,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Addresses misconduct for all employees excluding contractors. Warnings progress from first (12 months) to final, with potential dismissal for gross misconduct like theft or breaches.',
       fileName: 'Disciplinary Policy.pdf',
-      fileUrl: '/documents/clyptus/Disciplinary Policy.pdf',
+      fileUrl: '/api/documents?id=disciplinary-policy',
       fileSize: '378 KB',
       gradient: 'from-[#0089D7] via-[#0096eb] to-[#005e95]',
       icon: <AlertTriangle className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -86,7 +87,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Covers health insurance, provident fund, and perks for all Clyptus employees. Benefits aim to support employee welfare and retention. Contact HR for entitlements and eligibility details.',
       fileName: 'Employee benefits policy.pdf',
-      fileUrl: '/documents/clyptus/Employee benefits policy.pdf',
+      fileUrl: '/api/documents?id=employee-benefits',
       fileSize: '273 KB',
       gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
       icon: <Heart className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -98,7 +99,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Covers casual, sick, and earned leave entitlements for all employees. Defines accrual and approval processes. The signed policy ensures full compliance with applicable Indian labor laws.',
       fileName: 'Leave, Maternity, Paternity Policy.pdf',
-      fileUrl: '/documents/clyptus/Leave, Maternity, Paternity Policy.pdf',
+      fileUrl: '/api/documents?id=leave-policy',
       fileSize: '1.45 MB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <Calendar className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -110,7 +111,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Provides structured processes for employee complaints and resolutions. Employees can raise issues without retaliation, escalating to higher management if needed. Aims for swift, impartial redressal.',
       fileName: 'Grievance Redressal Policy.pdf',
-      fileUrl: '/documents/clyptus/Grievance Redressal Policy.pdf',
+      fileUrl: '/api/documents?id=grievance-policy',
       fileSize: '435 KB',
       gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
       icon: <MessageSquare className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -122,7 +123,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Complete guide integrating all Clyptus HR policies for daily operations. Covers onboarding, performance, ethics, and company culture. Signed acknowledgment binds employees to its terms.',
       fileName: 'Clyptus Employee Handbook.pdf',
-      fileUrl: '/documents/clyptus/Clyptus Employee Handbook.pdf',
+      fileUrl: '/api/documents?id=employee-handbook',
       fileSize: '397 KB',
       gradient: 'from-[#111A2E] via-[#0089D7] to-[#005e95]',
       icon: <BookOpen className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -134,7 +135,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Provides maternity benefits for eligible female employees per Indian labor laws. Includes paid leave duration, adoption provisions, return-to-work support, and nursing break entitlements.',
       fileName: 'Leave, Maternity, Paternity Policy.pdf',
-      fileUrl: '/documents/clyptus/Leave, Maternity, Paternity Policy.pdf',
+      fileUrl: '/api/documents?id=maternity-leave-policy',
       fileSize: '1.45 MB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <UserCheck className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -146,7 +147,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Prevention of Sexual Harassment — complies with Indian law. Internal Committee investigates allegations impartially. Protections against retaliation; training is mandatory for all employees.',
       fileName: 'Clyptus_POSH.pdf',
-      fileUrl: '/documents/clyptus/Clyptus_POSH.pdf',
+      fileUrl: '/api/documents?id=posh-policy',
       fileSize: '282 KB',
       gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
       icon: <ShieldCheck className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -158,7 +159,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Establishes data protection protocols, client confidentiality standards, device security requirements, and NDA guidelines across all software development operations.',
       fileName: 'Clyptus_Data_Privacy_Policy.pdf',
-      fileUrl: '/documents/clyptus/Clyptus_Data_Privacy_Policy.pdf',
+      fileUrl: '/api/documents?id=data-privacy-policy',
       fileSize: '421 KB',
       gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
       icon: <Lock className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -170,14 +171,14 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Guidelines and eligibility for former Clyptus team members rejoining the company, alongside highlights of employee engagement initiatives and team culture.',
       fileName: 'Rejoin Policy.pdf',
-      fileUrl: '/documents/clyptus/Rejoin Policy.pdf',
+      fileUrl: '/api/documents?id=rejoin-policy',
       fileSize: '310 KB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <Sparkles className="w-8 h-8 text-white stroke-[1.8]" />,
     }
   ];
 
-  // 10 OFFICIAL PDF DOCUMENTS FOR USER: AUDIT
+  // 10 OFFICIAL PDF DOCUMENTS FOR USER: AUDIT (AUTHENTICATED ENDPOINTS)
   const auditPolicies: PolicyCardItem[] = [
     {
       id: 'audit-code-of-conduct',
@@ -186,7 +187,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Mandates ethical behavior, fair competition, protection of company assets, and prohibition of illegal gifts. Effective January 1, 2026 for all employees, contractors, and vendors.',
       fileName: 'Code of Conduct.pdf',
-      fileUrl: '/documents/audit/Code of Conduct.pdf',
+      fileUrl: '/api/documents?id=audit-code-of-conduct',
       fileSize: '341 KB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <Shield className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -198,7 +199,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Addresses misconduct for all employees excluding contractors. Warnings progress from first (12 months) to final, with potential dismissal for gross misconduct like theft or breaches.',
       fileName: 'Disciplinary Policy.pdf',
-      fileUrl: '/documents/audit/Disciplinary Policy.pdf',
+      fileUrl: '/api/documents?id=audit-disciplinary-policy',
       fileSize: '378 KB',
       gradient: 'from-[#0089D7] via-[#0096eb] to-[#005e95]',
       icon: <AlertTriangle className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -210,7 +211,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Covers health insurance, provident fund, and perks for all Clyptus employees. Benefits aim to support employee welfare and retention. Contact HR for entitlements and eligibility details.',
       fileName: 'Employee benefits policy.pdf',
-      fileUrl: '/documents/audit/Employee benefits policy.pdf',
+      fileUrl: '/api/documents?id=audit-employee-benefits',
       fileSize: '273 KB',
       gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
       icon: <Heart className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -222,7 +223,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Covers casual, sick, and earned leave entitlements for all employees. Defines accrual and approval processes. The signed policy ensures full compliance with applicable Indian labor laws.',
       fileName: 'Leave, Maternity, Paternity Policy.pdf',
-      fileUrl: '/documents/audit/Leave, Maternity, Paternity Policy.pdf',
+      fileUrl: '/api/documents?id=audit-leave-policy',
       fileSize: '1.45 MB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <Calendar className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -234,7 +235,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Provides structured processes for employee complaints and resolutions. Employees can raise issues without retaliation, escalating to higher management if needed. Aims for swift, impartial redressal.',
       fileName: 'Grievance Redressal Policy.pdf',
-      fileUrl: '/documents/audit/Grievance Redressal Policy.pdf',
+      fileUrl: '/api/documents?id=audit-grievance-policy',
       fileSize: '435 KB',
       gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
       icon: <MessageSquare className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -246,7 +247,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Complete guide integrating all Clyptus HR policies for daily operations. Covers onboarding, performance, ethics, and company culture. Signed acknowledgment binds employees to its terms.',
       fileName: 'Clyptus Employee Handbook.pdf',
-      fileUrl: '/documents/audit/Clyptus Employee Handbook.pdf',
+      fileUrl: '/api/documents?id=audit-employee-handbook',
       fileSize: '397 KB',
       gradient: 'from-[#111A2E] via-[#0089D7] to-[#005e95]',
       icon: <BookOpen className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -258,7 +259,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Provides maternity benefits for eligible female employees per Indian labor laws. Includes paid leave duration, adoption provisions, return-to-work support, and nursing break entitlements.',
       fileName: 'Leave, Maternity, Paternity Policy (1).pdf',
-      fileUrl: '/documents/audit/Leave, Maternity, Paternity Policy (1).pdf',
+      fileUrl: '/api/documents?id=audit-maternity-leave-policy',
       fileSize: '1.45 MB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <UserCheck className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -270,7 +271,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Prevention of Sexual Harassment — complies with Indian law. Internal Committee investigates allegations impartially. Protections against retaliation; training is mandatory for all employees.',
       fileName: 'Clyptus_POSH.pdf',
-      fileUrl: '/documents/audit/Clyptus_POSH.pdf',
+      fileUrl: '/api/documents?id=audit-posh-policy',
       fileSize: '282 KB',
       gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
       icon: <ShieldCheck className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -282,7 +283,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Establishes data protection protocols, client confidentiality standards, device security requirements, and NDA guidelines across all software development operations.',
       fileName: 'Clyptus_Data_Privacy_Policy.pdf',
-      fileUrl: '/documents/audit/Clyptus_Data_Privacy_Policy.pdf',
+      fileUrl: '/api/documents?id=audit-data-privacy-policy',
       fileSize: '421 KB',
       gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
       icon: <Lock className="w-8 h-8 text-white stroke-[1.8]" />,
@@ -294,20 +295,31 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       description:
         'Guidelines and eligibility for former Clyptus team members rejoining the company, alongside highlights of employee engagement initiatives and team culture.',
       fileName: 'Rejoin Policy.pdf',
-      fileUrl: '/documents/audit/Rejoin Policy.pdf',
+      fileUrl: '/api/documents?id=audit-rejoin-policy',
       fileSize: '310 KB',
       gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
       icon: <Sparkles className="w-8 h-8 text-white stroke-[1.8]" />,
     }
   ];
 
-  const handleLoginSubmit = (e: React.FormEvent) => {
+  const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoginError('');
+    setIsLoggingIn(true);
 
-    const success = onLogin(usernameInput.trim(), passwordInput.trim());
-    if (!success) {
-      setLoginError('Invalid Username or Password. Access denied.');
+    try {
+      const result = await onLogin(usernameInput.trim(), passwordInput.trim());
+      if (typeof result === 'boolean') {
+        if (!result) {
+          setLoginError('Invalid Username or Password. Access denied.');
+        }
+      } else if (!result.success) {
+        setLoginError(result.error || 'Invalid Username or Password. Access denied.');
+      }
+    } catch {
+      setLoginError('Authentication service unreachable. Please try again.');
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
@@ -406,9 +418,17 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
 
             <button
               type="submit"
-              className="w-full py-3.5 px-6 rounded-xl bg-[#0089D7] hover:bg-[#0077be] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-98 transition-all duration-200"
+              disabled={isLoggingIn}
+              className="w-full py-3.5 px-6 rounded-xl bg-[#0089D7] hover:bg-[#0077be] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-98 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              SIGN IN
+              {isLoggingIn ? (
+                <>
+                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  <span>SIGNING IN...</span>
+                </>
+              ) : (
+                <span>SIGN IN</span>
+              )}
             </button>
           </form>
 

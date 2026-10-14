@@ -12,8 +12,10 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@types/canvas-confetti": "^1.9.0",
+    "@types/dompurify": "^3.0.5",
     "@types/three": "^0.186.0",
     "canvas-confetti": "^1.9.4",
+    "dompurify": "^3.4.17",
     "framer-motion": "^14.0.0",
     "globe.gl": "^2.46.2",
     "gsap": "^3.15.0",

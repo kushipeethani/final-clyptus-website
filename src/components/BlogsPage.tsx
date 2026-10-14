@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import DOMPurify from 'dompurify';
 import { 
   Sparkles, Calendar, UserCheck, X, ArrowRight, ArrowLeft, Search, 
   Lock, Unlock, PenTool, LogOut, AlertCircle, CheckCircle2, Upload, Trash2, Pencil, Loader2,
@@ -84,8 +85,21 @@ const formatContentToHtml = (content: string): string => {
 
 const renderCustomContent = (excerpt: string, rawContent: string): React.ReactNode => {
   const hasContent = Boolean(rawContent && rawContent.trim().length > 0);
-  const htmlToRender = hasContent
+  const rawHtml = hasContent
     ? (isHtmlContent(rawContent) ? rawContent : formatContentToHtml(rawContent))
+    : '';
+
+  // Sanitize strictly using DOMPurify with secure allowlist to prevent XSS
+  const sanitizedHtml = rawHtml
+    ? DOMPurify.sanitize(rawHtml, {
+        ALLOWED_TAGS: [
+          'p', 'b', 'i', 'em', 'strong', 'a', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+          'ul', 'ol', 'li', 'blockquote', 'pre', 'code', 'br', 'span', 'img', 'hr',
+          'div', 'table', 'thead', 'tbody', 'tr', 'th', 'td', 'center'
+        ],
+        ALLOWED_ATTR: ['href', 'target', 'rel', 'src', 'alt', 'class', 'style', 'width', 'height', 'align'],
+        ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel):|[^a-z]|[a-z+.-]+(?:[^a-z+.\-:]|$))/i,
+      })
     : '';
 
   return (
@@ -98,7 +112,7 @@ const renderCustomContent = (excerpt: string, rawContent: string): React.ReactNo
       {hasContent && (
         <div 
           className="rich-article-body text-base sm:text-lg leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: htmlToRender }} 
+          dangerouslySetInnerHTML={{ __html: sanitizedHtml }} 
         />
       )}
     </div>
@@ -930,7 +944,20 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
   const [authPassword, setAuthPassword] = useState<string>('');
   const [showAuthPassword, setShowAuthPassword] = useState<boolean>(false);
   const [authError, setAuthError] = useState<string>('');
+  const [isAuthSubmitting, setIsAuthSubmitting] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  // Restore session from server if already authenticated as Audit
+  useEffect(() => {
+    fetch('/api/auth/session')
+      .then((res) => (res.ok ? res.json() : { authenticated: false }))
+      .then((data) => {
+        if (data.authenticated && data.user?.role === 'audit') {
+          setIsAuthenticated(true);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Create Blog Form State
   const [newTitle, setNewTitle] = useState<string>('');
@@ -1327,22 +1354,43 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
     }, 3500);
   };
 
-  const handleAuthSubmit = (e: React.FormEvent) => {
+  const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (authUsername.trim() === 'Audit' && authPassword === 'V9#qL2!mX7@pR4') {
-      setIsAuthenticated(true);
-      try {
-        sessionStorage.setItem('clyptus_blog_auth', 'true');
-      } catch {}
-      setAuthError('');
-      setIsAuthModalOpen(false);
-      showToast('Authenticated as Audit. Blog management mode active.');
-    } else {
-      setAuthError('Invalid credentials! Username or password does not match.');
+    setAuthError('');
+    setIsAuthSubmitting(true);
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: authUsername.trim(), password: authPassword }),
+      });
+      const data = await res.json();
+
+      if (res.ok && data.success && data.user?.role === 'audit') {
+        setIsAuthenticated(true);
+        try {
+          sessionStorage.setItem('clyptus_blog_auth', 'true');
+        } catch {}
+        setIsAuthModalOpen(false);
+        setAuthPassword('');
+        showToast('Authenticated as Audit. Blog management mode active.');
+      } else if (res.ok && data.success && data.user?.role !== 'audit') {
+        setAuthError('Access restricted: Author / Audit privileges required.');
+      } else {
+        setAuthError(data.error || 'Invalid credentials! Access denied.');
+      }
+    } catch {
+      setAuthError('Authentication service unreachable. Please try again.');
+    } finally {
+      setIsAuthSubmitting(false);
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {}
     setIsAuthenticated(false);
     try {
       sessionStorage.removeItem('clyptus_blog_auth');
@@ -2171,10 +2219,20 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-3 px-5 rounded-xl bg-[#0089D7] hover:bg-[#0077be] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-98 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2"
+                  disabled={isAuthSubmitting}
+                  className="flex-1 py-3 px-5 rounded-xl bg-[#0089D7] hover:bg-[#0077be] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-98 transition-all duration-200 cursor-pointer flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  <Unlock className="w-4 h-4" />
-                  <span>Authenticate &amp; Continue</span>
+                  {isAuthSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span>Authenticating...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Unlock className="w-4 h-4" />
+                      <span>Authenticate &amp; Continue</span>
+                    </>
+                  )}
                 </button>
               </div>
 

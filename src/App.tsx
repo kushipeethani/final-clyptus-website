@@ -75,49 +75,72 @@ export function App() {
     };
   }, []);
 
-  // Apply route-specific SEO metadata and sync URL hash smoothly
+  // Apply route-specific SEO metadata and sync URL path smoothly
   useEffect(() => {
     applySeoForPage(currentPage);
 
-    const hashMap: Record<string, string> = {
-      Home: '',
-      SAP: '#sap',
-      AI: '#ai',
-      Recruiting: '#recruiting',
-      'IT Recruiting': '#recruiting',
-      Contact: '#contact',
-      Projects: '#projects',
-      About: '#about',
-      Careers: '#careers',
-      Industries: '#industries',
-      Blogs: '#blogs',
-      'HR Policies': '#hr-policies',
+    const pathMap: Record<string, string> = {
+      Home: '/',
+      SAP: '/sap',
+      AI: '/ai',
+      Recruiting: '/recruiting',
+      'IT Recruiting': '/recruiting',
+      Contact: '/contact',
+      Projects: '/projects',
+      About: '/about',
+      Careers: '/careers',
+      Industries: '/industries',
+      Blogs: '/blogs',
+      'HR Policies': '/hr-policies',
     };
 
-    const targetHash = hashMap[currentPage] !== undefined ? hashMap[currentPage] : '';
-    if (window.location.hash !== targetHash) {
-      if (targetHash) {
-        window.history.replaceState(null, '', `${window.location.pathname}${targetHash}`);
-      } else if (window.location.hash) {
-        window.history.replaceState(null, '', window.location.pathname);
-      }
+    const targetPath = pathMap[currentPage] || '/';
+    // If running on a dedicated route or clean path, sync URL without hash pollution
+    if (window.location.pathname !== targetPath && !window.location.hash) {
+      window.history.pushState(null, '', targetPath);
     }
   }, [currentPage]);
 
-  // HR Policies Authentication State
+  // HR Policies Authentication State (Server-Side Session Driven)
   const [isHrAuthenticated, setIsHrAuthenticated] = useState<boolean>(false);
   const [authenticatedUser, setAuthenticatedUser] = useState<string | null>(null);
 
-  const handleHrLogin = (u: string, p: string): boolean => {
-    if ((u === 'Clyptus' && p === 'Clyptus@123') || (u === 'Audit' && p === 'V9#qL2!mX7@pR4')) {
-      setIsHrAuthenticated(true);
-      setAuthenticatedUser(u);
-      return true;
+  // Restore authenticated session on initial mount
+  useEffect(() => {
+    fetch('/api/auth/session')
+      .then((res) => (res.ok ? res.json() : { authenticated: false }))
+      .then((data) => {
+        if (data.authenticated && data.user) {
+          setIsHrAuthenticated(true);
+          setAuthenticatedUser(data.user.username);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const handleHrLogin = async (u: string, p: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: u, password: p }),
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setIsHrAuthenticated(true);
+        setAuthenticatedUser(data.user.username);
+        return { success: true };
+      }
+      return { success: false, error: data.error || 'Invalid credentials. Access denied.' };
+    } catch {
+      return { success: false, error: 'Authentication service unreachable. Please try again.' };
     }
-    return false;
   };
 
-  const handleHrLogout = () => {
+  const handleHrLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch {}
     setIsHrAuthenticated(false);
     setAuthenticatedUser(null);
   };
