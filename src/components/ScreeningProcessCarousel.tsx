@@ -80,7 +80,10 @@ export const ScreeningProcessCarousel: React.FC<ScreeningProcessCarouselProps> =
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto z-20">
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-2">
-            How We Screen and Deploy
+            How We Screen and{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
+              Deploy Talent
+            </span>
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 font-medium">
             Scroll down to watch our 4-step process expand outward from the center.
@@ -91,7 +94,7 @@ export const ScreeningProcessCarousel: React.FC<ScreeningProcessCarouselProps> =
         <div className="relative w-full max-w-7xl h-[360px] sm:h-[400px] flex items-center justify-center z-10 my-auto">
           
           {/* Ambient Center Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[280px] bg-gradient-to-r from-sky-400/20 via-indigo-400/15 to-purple-400/20 rounded-full blur-[110px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[280px] bg-gradient-to-r from-blue-400/20 via-indigo-400/15 to-orange-400/20 rounded-full blur-[110px] pointer-events-none" />
 
           {/* Cards Container */}
           <div className="relative w-full h-full flex items-center justify-center">
@@ -139,20 +142,20 @@ export const ScreeningProcessCarousel: React.FC<ScreeningProcessCarouselProps> =
                   <div
                     className={`relative p-6 sm:p-7 rounded-3xl transition-all duration-300 flex flex-col justify-between h-[310px] sm:h-[350px] overflow-hidden ${
                       scrollProgress === 0 && index === 0
-                        ? 'bg-white border-2 border-sky-500 shadow-[0_20px_50px_-10px_rgba(2,132,199,0.35)] ring-4 ring-sky-500/10'
+                        ? 'bg-white border-2 border-blue-500 shadow-[0_20px_50px_-10px_rgba(37,99,235,0.35)] ring-4 ring-blue-500/10'
                         : isHighlight
-                        ? 'bg-white border border-slate-200/90 shadow-lg hover:shadow-2xl hover:border-sky-500/50 hover:-translate-y-1'
+                        ? 'bg-white border border-slate-200/90 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1'
                         : 'bg-white/95 border border-slate-200/90 shadow-md backdrop-blur-md'
                     }`}
                   >
                     {/* Top Section */}
                     <div>
                       <div className="flex items-center justify-between mb-4 sm:mb-5">
-                        <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-sky-600">
+                        <span className="text-3xl sm:text-4xl font-black font-mono tracking-tighter text-blue-600">
                           {step.step}
                         </span>
 
-                        <div className="w-11 h-11 rounded-2xl bg-sky-50 border border-sky-100 text-sky-600 flex items-center justify-center shrink-0 shadow-xs">
+                        <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center shrink-0 shadow-xs">
                           <Icon className="w-5 h-5 stroke-[2]" />
                         </div>
                       </div>
@@ -179,7 +182,7 @@ export const ScreeningProcessCarousel: React.FC<ScreeningProcessCarouselProps> =
           {/* Progress bar track */}
           <div className="w-48 sm:w-64 h-2 rounded-full bg-slate-200 overflow-hidden shadow-inner">
             <div
-              className="h-full bg-gradient-to-r from-sky-500 to-indigo-600 transition-all duration-150 rounded-full"
+              className="h-full bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 transition-all duration-150 rounded-full"
               style={{ width: `${Math.max(8, scrollProgress * 100)}%` }}
             />
           </div>

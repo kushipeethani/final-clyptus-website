@@ -7,8 +7,7 @@ import {
   Layers, 
   Globe, 
   TrendingUp, 
-  FileCheck, 
-  Sparkles
+  FileCheck
 } from 'lucide-react';
 
 export interface ServiceItem {
@@ -139,14 +138,11 @@ export const ArcCarouselStaffingServices: React.FC<ArcCarouselProps> = () => {
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto z-20">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200/80 text-sky-700 shadow-xs mb-3">
-            <Sparkles className="w-4 h-4 text-sky-600 animate-pulse" />
-            <span className="text-xs font-mono font-extrabold tracking-widest uppercase text-sky-700">
-              SCROLL-DRIVEN 3D ARC CAROUSEL
-            </span>
-          </div>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-2">
-            Recruitment & Staffing Services
+            Recruitment &{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
+              Staffing Services
+            </span>
           </h2>
           <p className="text-xs sm:text-base text-slate-600 font-medium">
             Scroll down or up to automatically rotate through our enterprise staffing capabilities.
@@ -157,10 +153,10 @@ export const ArcCarouselStaffingServices: React.FC<ArcCarouselProps> = () => {
         <div className="relative w-full max-w-7xl h-[380px] sm:h-[440px] flex items-center justify-center perspective-[1200px] z-10 my-auto">
 
           {/* Ambient Glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[320px] bg-gradient-to-r from-sky-400/15 via-indigo-400/15 to-purple-400/15 rounded-full blur-[140px] pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[320px] bg-gradient-to-r from-blue-400/15 via-indigo-400/15 to-orange-400/15 rounded-full blur-[140px] pointer-events-none" />
 
           {/* Arc Stage Outer Ring Guide */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88%] h-[300px] rounded-[50%] border border-sky-200/40 pointer-events-none opacity-40" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[88%] h-[300px] rounded-[50%] border border-blue-200/40 pointer-events-none opacity-40" />
 
           {/* Render 8 3D Arc Cards */}
           <div className="relative w-full h-full flex items-center justify-center [transform-style:preserve-3d]">
@@ -205,36 +201,26 @@ export const ArcCarouselStaffingServices: React.FC<ArcCarouselProps> = () => {
                   <div
                     className={`group relative p-7 sm:p-8 rounded-3xl transition-all duration-200 flex flex-col justify-between h-[340px] sm:h-[370px] overflow-hidden ${
                       isClosestCenter
-                        ? 'bg-white border-2 border-sky-500/80 shadow-[0_20px_50px_-15px_rgba(2,132,199,0.3)] ring-4 ring-sky-500/10'
+                        ? 'bg-white border-2 border-blue-500/80 shadow-[0_20px_50px_-15px_rgba(37,99,235,0.3)] ring-4 ring-blue-500/10'
                         : 'bg-white/95 border border-slate-200/90 shadow-md'
                     }`}
                   >
-                    {/* Top Header & Badge */}
+                    {/* Top Header */}
                     <div>
-                      <div className="flex items-center justify-between mb-5">
+                      <div className="mb-5">
                         <div
                           className={`w-13 h-13 rounded-2xl flex items-center justify-center transition-all duration-300 ${
                             isClosestCenter
-                              ? 'bg-gradient-to-r from-sky-600 to-indigo-600 text-white shadow-md'
-                              : 'bg-sky-50 border border-sky-100 text-sky-600'
+                              ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 text-white shadow-md'
+                              : 'bg-blue-50 border border-blue-100 text-blue-600'
                           }`}
                         >
                           <IconComp className="w-6 h-6 stroke-[2]" />
                         </div>
-
-                        <span
-                          className={`px-3 py-1 rounded-full text-[10px] font-mono font-extrabold uppercase tracking-wider ${
-                            isClosestCenter
-                              ? 'bg-sky-100 text-sky-700 border border-sky-200'
-                              : 'bg-slate-100 text-slate-500'
-                          }`}
-                        >
-                          {srv.badge}
-                        </span>
                       </div>
 
                       {/* Tagline */}
-                      <span className="text-[11px] font-mono font-extrabold text-sky-600 uppercase tracking-widest block mb-1.5">
+                      <span className="text-[11px] font-mono font-extrabold text-blue-600 uppercase tracking-widest block mb-1.5">
                         {srv.tagline}
                       </span>
 
@@ -268,7 +254,7 @@ export const ArcCarouselStaffingServices: React.FC<ArcCarouselProps> = () => {
                 key={idx}
                 className={`transition-all duration-300 rounded-full ${
                   activeIntIndex === idx
-                    ? 'w-7 h-2.5 bg-sky-600 shadow-xs'
+                    ? 'w-7 h-2.5 bg-blue-600 shadow-xs'
                     : 'w-2.5 h-2.5 bg-slate-300'
                 }`}
               />
