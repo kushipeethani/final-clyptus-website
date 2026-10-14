@@ -27,10 +27,30 @@ import { FloatingSocialTooltip } from './components/FloatingSocialTooltip';
 import { Footer } from './components/Footer';
 import { MountainFooter } from './components/MountainFooter';
 import { ResourceModal } from './components/ResourceModal';
+import { applySeoForPage } from './utils/seo';
+
+const getInitialPage = (): string => {
+  if (typeof window === 'undefined') return 'Home';
+  const path = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '');
+  const hash = window.location.hash.replace('#', '').toLowerCase();
+  const token = path || hash;
+  if (token === 'sap') return 'SAP';
+  if (token === 'ai') return 'AI';
+  if (token === 'recruiting' || token === 'it-recruiting' || token === 'staffing') return 'Recruiting';
+  if (token === 'contact') return 'Contact';
+  if (token === 'projects') return 'Projects';
+  if (token === 'about') return 'About';
+  if (token === 'careers') return 'Careers';
+  if (token === 'industries') return 'Industries';
+  if (token === 'blogs') return 'Blogs';
+  if (token === 'hr-policies' || token === 'hrpolicies') return 'HR Policies';
+  return 'Home';
+};
 
 export function App() {
-  const [showIntro, setShowIntro] = useState<boolean>(true);
-  const [currentPage, setCurrentPage] = useState<string>('Home');
+  const initialPage = useMemo(() => getInitialPage(), []);
+  const [showIntro, setShowIntro] = useState<boolean>(initialPage === 'Home');
+  const [currentPage, setCurrentPage] = useState<string>(initialPage);
   const [cards, setCards] = useState<SliderCard[]>(SLIDER_CARDS);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [config, setConfig] = useState<SpiralConfig>(DEFAULT_SPIRAL_CONFIG);
@@ -40,24 +60,49 @@ export function App() {
   const [codeModalCard, setCodeModalCard] = useState<SliderCard | null>(null);
   const [activeResourceModal, setActiveResourceModal] = useState<'privacy' | 'terms' | 'cookies' | 'faqs' | 'insights' | null>(null);
 
-  // Sync hash routing (e.g. #contact) with currentPage
+  // Sync hash and pathname routing with currentPage
   useEffect(() => {
-    const handleHash = () => {
-      const hash = window.location.hash.replace('#', '').toLowerCase();
-      if (hash === 'contact') setCurrentPage('Contact');
-      else if (hash === 'projects') setCurrentPage('Projects');
-      else if (hash === 'about') setCurrentPage('About');
-      else if (hash === 'careers') setCurrentPage('Careers');
-      else if (hash === 'industries') setCurrentPage('Industries');
-      else if (hash === 'blogs') setCurrentPage('Blogs');
-      else if (hash === 'hr-policies' || hash === 'hrpolicies') setCurrentPage('HR Policies');
-      else if (hash === 'sap') setCurrentPage('SAP');
-      else if (hash === 'ai') setCurrentPage('AI');
+    const handleNavigation = () => {
+      const page = getInitialPage();
+      setCurrentPage(page);
     };
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    handleNavigation();
+    window.addEventListener('hashchange', handleNavigation);
+    window.addEventListener('popstate', handleNavigation);
+    return () => {
+      window.removeEventListener('hashchange', handleNavigation);
+      window.removeEventListener('popstate', handleNavigation);
+    };
   }, []);
+
+  // Apply route-specific SEO metadata and sync URL hash smoothly
+  useEffect(() => {
+    applySeoForPage(currentPage);
+
+    const hashMap: Record<string, string> = {
+      Home: '',
+      SAP: '#sap',
+      AI: '#ai',
+      Recruiting: '#recruiting',
+      'IT Recruiting': '#recruiting',
+      Contact: '#contact',
+      Projects: '#projects',
+      About: '#about',
+      Careers: '#careers',
+      Industries: '#industries',
+      Blogs: '#blogs',
+      'HR Policies': '#hr-policies',
+    };
+
+    const targetHash = hashMap[currentPage] !== undefined ? hashMap[currentPage] : '';
+    if (window.location.hash !== targetHash) {
+      if (targetHash) {
+        window.history.replaceState(null, '', `${window.location.pathname}${targetHash}`);
+      } else if (window.location.hash) {
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    }
+  }, [currentPage]);
 
   // HR Policies Authentication State
   const [isHrAuthenticated, setIsHrAuthenticated] = useState<boolean>(false);

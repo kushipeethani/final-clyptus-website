@@ -1,0 +1,9 @@
+# robots.txt for Clyptus (https://clyptus.com)
+User-agent: *
+Allow: /
+
+# Host
+Host: https://clyptus.com
+
+# Sitemaps
+Sitemap: https://clyptus.com/sitemap.xml

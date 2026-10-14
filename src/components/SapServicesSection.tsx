@@ -378,7 +378,7 @@ export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContac
 
   // Set document title & metadata
   useEffect(() => {
-    document.title = 'SAP & ERP Implementation Services in Hyderabad | Clyptus';
+    document.title = 'SAP Consulting, Implementation & Support Services | Clyptus';
   }, []);
 
   // 9. FREQUENTLY ASKED QUESTIONS

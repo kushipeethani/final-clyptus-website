@@ -22,7 +22,7 @@ export const FloatingSocialTooltip: React.FC = () => {
   const socialLinks = [
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/company/clyptus/posts/?feedView=all',
+      url: 'https://www.linkedin.com/company/clyptus/posts/',
       // Top position on hover
       position: 'group-hover:-translate-y-20 group-hover:translate-x-0',
       activePosition: '-translate-y-20 translate-x-0',
@@ -35,7 +35,7 @@ export const FloatingSocialTooltip: React.FC = () => {
     },
     {
       name: 'Facebook',
-      url: 'https://facebook.com',
+      url: 'https://www.facebook.com/share/19amDstBuo/',
       // Top-Left 45deg position on hover
       position: 'group-hover:-translate-y-15 group-hover:-translate-x-11',
       activePosition: '-translate-y-15 -translate-x-11',
@@ -48,7 +48,7 @@ export const FloatingSocialTooltip: React.FC = () => {
     },
     {
       name: 'YouTube',
-      url: 'https://youtube.com',
+      url: 'https://www.youtube.com/',
       // Mid-Left 75deg position on hover (inward, fully visible)
       position: 'group-hover:-translate-y-7 group-hover:-translate-x-18',
       activePosition: '-translate-y-7 -translate-x-18',
@@ -61,7 +61,7 @@ export const FloatingSocialTooltip: React.FC = () => {
     },
     {
       name: 'Instagram',
-      url: 'https://instagram.com',
+      url: 'https://instagram.com/clyptussoftwaresolutions?vrfl=c2JucW9hcGRrZWts',
       // Bottom-Left position on hover
       position: 'group-hover:translate-y-6 group-hover:-translate-x-18',
       activePosition: 'translate-y-6 -translate-x-18',

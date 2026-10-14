@@ -461,9 +461,9 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
           >
             {/* Hero Headline */}
             <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] mb-4">
-              Plan, move and run SAP S/4HANA — with{' '}
+              SAP Consulting, Implementation &amp;{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-sky-600 to-indigo-600">
-                Clyptus.
+                Support Services
               </span>
             </h1>
 
@@ -625,9 +625,9 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
         /* MOBILE FALLBACK (< 768px): Clean Hero + Vertical Timeline */
         <div className="py-20 px-4 flex flex-col items-center text-center gap-6 bg-slate-50">
           <h1 className="text-3xl font-black text-slate-900 leading-tight">
-            Plan, move and run SAP S/4HANA — with{' '}
+            SAP Consulting, Implementation &amp;{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-sky-600">
-              Clyptus.
+              Support Services
             </span>
           </h1>
 

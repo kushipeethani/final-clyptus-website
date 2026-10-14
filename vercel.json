@@ -1,0 +1,10 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/sap", "destination": "/sap/index.html" },
+    { "source": "/ai", "destination": "/ai/index.html" },
+    { "source": "/recruiting", "destination": "/recruiting/index.html" },
+    { "source": "/contact", "destination": "/contact/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

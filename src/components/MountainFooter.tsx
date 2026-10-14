@@ -260,7 +260,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
             <div className="flex items-center gap-2.5">
               {/* LinkedIn */}
               <a
-                href="https://www.linkedin.com/company/clyptus/posts/?feedView=all"
+                href="https://www.linkedin.com/company/clyptus/posts/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -273,7 +273,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
 
               {/* Instagram */}
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/clyptussoftwaresolutions?vrfl=c2JucW9hcGRrZWts"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -288,7 +288,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
 
               {/* Facebook */}
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/19amDstBuo/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
@@ -301,7 +301,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
 
               {/* YouTube */}
               <a
-                href="https://youtube.com"
+                href="https://www.youtube.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="YouTube"

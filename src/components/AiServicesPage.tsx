@@ -27,7 +27,7 @@ interface AiServicesPageProps {
 export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContact }) => {
   // Set Page Meta Title & Description
   useEffect(() => {
-    document.title = "AI Consulting & Development Services | Clyptus";
+    document.title = "AI Development & Automation Services | Clyptus";
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(

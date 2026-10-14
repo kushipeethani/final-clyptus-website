@@ -353,7 +353,7 @@ export const AiGalaxyParticleSection: React.FC<AiGalaxyParticleSectionProps> = (
 
           {/* H1 Main Title */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-slate-900 max-w-4xl">
-            AI Consulting & <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Development Services</span>
+            AI Development & <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Automation Services</span>
           </h1>
 
           {/* Headline */}

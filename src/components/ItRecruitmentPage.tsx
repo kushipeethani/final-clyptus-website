@@ -53,7 +53,7 @@ const ScrollAnimatedHeroTitle: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="inline-block"
         >
-          IT &amp; SAP Talent
+          IT &amp; SAP
         </motion.span>{' '}
         <motion.span
           initial={{ opacity: 0, y: 40 }}
@@ -62,7 +62,7 @@ const ScrollAnimatedHeroTitle: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="inline-block"
         >
-          Acquisition and
+          Recruitment and
         </motion.span>{' '}
         <motion.span
           initial={{ opacity: 0, scale: 0.88 }}
