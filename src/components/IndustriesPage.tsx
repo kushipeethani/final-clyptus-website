@@ -195,11 +195,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigateContac
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-sky-400/15 via-indigo-400/15 to-purple-400/15 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-xs font-mono font-bold text-sky-700 uppercase tracking-widest mb-6 shadow-xs">
-            <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
-            TAILORED INDUSTRY TRANSFORMATION
-          </div>
-
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 uppercase mb-6 leading-[1.05]">
             INDUSTRIES WE <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">EMPOWER</span>
           </h1>
@@ -253,9 +248,6 @@ export const IndustriesPage: React.FC<IndustriesPageProps> = ({ onNavigateContac
       <section className="py-16 sm:py-24 px-4 sm:px-6 lg:px-10 bg-slate-100/80 border-t border-slate-200/80">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-14">
-            <span className="text-xs font-mono font-extrabold text-blue-600 uppercase tracking-widest block mb-2">
-              PRE-CONFIGURED ACCELERATORS
-            </span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
               Why Global Enterprises Partner With Clyptus
             </h2>
