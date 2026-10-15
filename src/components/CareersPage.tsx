@@ -215,19 +215,19 @@ export const CareersPage: React.FC<CareersPageProps> = () => {
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto pt-8 border-t border-slate-100 text-center">
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-              <span className="text-3xl font-black text-blue-600 font-mono block">12+</span>
+              <span className="text-3xl font-black text-blue-600 font-sans tabular-nums block">12+</span>
               <span className="text-xs text-slate-600 font-bold uppercase tracking-wider">Open Positions</span>
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-              <span className="text-3xl font-black text-blue-600 font-mono block">2</span>
+              <span className="text-3xl font-black text-blue-600 font-sans tabular-nums block">2</span>
               <span className="text-xs text-slate-600 font-bold uppercase tracking-wider">Office Locations</span>
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-              <span className="text-3xl font-black text-blue-600 font-mono block">100%</span>
+              <span className="text-3xl font-black text-blue-600 font-sans tabular-nums block">100%</span>
               <span className="text-xs text-slate-600 font-bold uppercase tracking-wider">Growth Focused</span>
             </div>
             <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
-              <span className="text-3xl font-black text-amber-600 font-mono block">5★</span>
+              <span className="text-3xl font-black text-amber-600 font-sans tabular-nums block">5★</span>
               <span className="text-xs text-slate-600 font-bold uppercase tracking-wider">Team Culture</span>
             </div>
           </div>

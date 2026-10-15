@@ -170,7 +170,7 @@ export const MetricsCounterSection: React.FC = () => {
                     </div>
 
                     <div className="flex items-baseline">
-                      <span className={`text-5xl sm:text-6xl font-black tracking-tight font-mono bg-gradient-to-r ${numberGradientClass} bg-clip-text text-transparent drop-shadow-xs`}>
+                      <span className={`text-5xl sm:text-6xl font-black tracking-tight font-sans tabular-nums bg-gradient-to-r ${numberGradientClass} bg-clip-text text-transparent drop-shadow-xs`}>
                         {currentCount}
                       </span>
                       <span className={`text-3xl sm:text-4xl font-black ml-0.5 bg-gradient-to-r ${numberGradientClass} bg-clip-text text-transparent`}>
