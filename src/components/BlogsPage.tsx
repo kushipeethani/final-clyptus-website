@@ -1800,13 +1800,13 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
               <div className="p-6 flex flex-col flex-1 justify-between">
                 <div>
                   {/* Meta Details */}
-                  <div className="flex items-center gap-2.5 flex-wrap text-xs font-mono text-slate-500 mb-3">
-                    <span className="flex items-center gap-1.5 font-semibold">
+                  <div className="flex items-center gap-2.5 flex-wrap text-xs font-sans text-slate-500 mb-3">
+                    <span className="flex items-center gap-1.5 font-medium text-slate-600">
                       <Calendar className="w-3.5 h-3.5 text-sky-600" />
                       {post.date}
                     </span>
                     <span className="text-slate-300">•</span>
-                    <span className={`inline-block px-2.5 py-0.5 rounded-full border text-[10px] font-mono font-bold uppercase tracking-wider shadow-2xs ${post.categoryColor}`}>
+                    <span className={`inline-block px-2.5 py-0.5 rounded-full border text-[10px] font-sans font-bold uppercase tracking-wider shadow-2xs ${post.categoryColor}`}>
                       {post.category}
                     </span>
                   </div>
@@ -1838,7 +1838,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
                     </div>
                     <div>
                       <p className="text-xs font-bold text-slate-800 leading-tight">{post.author}</p>
-                      <p className="text-[10px] text-slate-400 font-mono">{post.authorRole}</p>
+                      <p className="text-xs text-slate-500 font-medium font-sans leading-tight mt-0.5">{post.authorRole}</p>
                     </div>
                   </div>
 
@@ -1901,8 +1901,8 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
                 <span className={`px-3 py-1 rounded-full border text-[11px] font-mono font-bold uppercase ${selectedBlog.categoryColor}`}>
                   {selectedBlog.category}
                 </span>
-                <span className="text-xs font-mono text-slate-400 hidden sm:inline">•</span>
-                <span className="text-xs font-mono text-slate-500 hidden sm:inline">{selectedBlog.date}</span>
+                <span className="text-xs text-slate-400 font-sans hidden sm:inline">•</span>
+                <span className="text-xs text-slate-500 font-sans font-medium hidden sm:inline">{selectedBlog.date}</span>
               </div>
 
               <div className="flex items-center gap-2">
@@ -1974,13 +1974,13 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
                 </h1>
 
                 {/* Author Info Bar */}
-                <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-600 bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
+                <div className="flex flex-wrap items-center gap-4 text-xs font-sans text-slate-600 bg-slate-50 border border-slate-200 p-3.5 rounded-2xl">
                   <span className="flex items-center gap-1.5 text-sky-700 font-bold">
                     <UserCheck className="w-4 h-4" />
-                    By {selectedBlog.author} ({selectedBlog.authorRole})
+                    By {selectedBlog.author} <span className="text-slate-500 font-normal">({selectedBlog.authorRole})</span>
                   </span>
                   <span className="text-slate-300">•</span>
-                  <span className="flex items-center gap-1.5 text-slate-500">
+                  <span className="flex items-center gap-1.5 text-slate-600 font-medium">
                     <Calendar className="w-4 h-4" />
                     {selectedBlog.date}
                   </span>
@@ -2062,7 +2062,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
                   <h4 className="text-xl font-black text-slate-900 mb-0.5">
                     Written by {selectedBlog.author}
                   </h4>
-                  <p className="text-xs font-mono text-slate-500 font-bold uppercase tracking-wider mb-2">
+                  <p className="text-xs font-sans text-slate-600 font-semibold mb-2">
                     {selectedBlog.authorRole} at Clyptus Software Solutions
                   </p>
                   <p className="text-sm text-slate-600 font-medium leading-relaxed max-w-xl">
