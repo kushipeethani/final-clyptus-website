@@ -7,7 +7,7 @@ import {
   Workflow,
   Database,
   CheckCircle2,
-  Sparkles,
+  Brain,
   Layers,
   Cpu,
   LineChart,
@@ -218,9 +218,6 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
       {/* ---------------------------------------------------- */}
       <section className="relative z-10 py-20 sm:py-28 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto overflow-hidden bg-transparent">
         <div className="text-center max-w-3xl mx-auto mb-16 relative z-10">
-          <span className="text-xs font-mono font-extrabold text-sky-600 uppercase tracking-widest block mb-2">
-            PRACTICE CAPABILITIES
-          </span>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
             Core Enterprise <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">AI Capabilities</span>
           </h2>
@@ -286,9 +283,6 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
       <section className="relative z-10 py-20 sm:py-28 px-4 sm:px-6 lg:px-10 bg-transparent overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-mono font-extrabold text-sky-600 uppercase tracking-widest block mb-2">
-              COMPLETE PORTFOLIO
-            </span>
             <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-4">
               AI & Data <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Platform Offerings</span>
             </h2>
@@ -305,7 +299,7 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
             >
               <div>
                 <div className="w-12 h-12 rounded-2xl bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600 mb-6">
-                  <Sparkles className="w-6 h-6" />
+                  <Brain className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-black text-slate-900 mb-4">AI Services & Solutions</h3>
                 <ul className="space-y-3">

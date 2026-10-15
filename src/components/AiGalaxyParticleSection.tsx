@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface Particle {
   armIndex: number;
@@ -376,25 +376,6 @@ export const AiGalaxyParticleSection: React.FC<AiGalaxyParticleSectionProps> = (
               <ArrowRight className="w-4 h-4 stroke-[3] group-hover:translate-x-1 transition-transform" />
             </button>
           )}
-
-          {/* Scroll Down Indicator */}
-          <div
-            onClick={() => {
-              targetDisperseRef.current = 1;
-              window.scrollTo({
-                top: window.innerHeight * 0.6,
-                behavior: 'smooth',
-              });
-            }}
-            className="pt-2 flex flex-col items-center gap-2 text-sky-600 animate-bounce cursor-pointer hover:opacity-85 transition-opacity"
-          >
-            <span className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-slate-400">
-              SCROLL DOWN TO EXPLORE CAPABILITIES
-            </span>
-            <div className="w-7 h-7 rounded-full bg-sky-50 border border-sky-100 flex items-center justify-center text-sky-600">
-              <ArrowDown className="w-3.5 h-3.5 stroke-[2.5]" />
-            </div>
-          </div>
         </div>
 
       </div>
