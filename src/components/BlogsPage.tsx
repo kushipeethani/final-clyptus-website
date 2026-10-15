@@ -907,6 +907,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
   const [pdfViewerBlobUrl, setPdfViewerBlobUrl] = useState<string>('');
   const modalScrollRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedCategoryTab, setSelectedCategoryTab] = useState<'All' | 'Technical' | 'Festival'>('All');
 
   // Sync and convert PDF data URL to safe Blob URL when blog is opened
   useEffect(() => {
@@ -1594,13 +1595,43 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
   };
 
   const filteredPosts = blogs.filter((post) => {
-    const q = searchQuery.toLowerCase();
-    return (
-      post.title.toLowerCase().includes(q) ||
-      post.excerpt.toLowerCase().includes(q) ||
-      post.category.toLowerCase().includes(q) ||
-      post.author.toLowerCase().includes(q)
-    );
+    const q = searchQuery.toLowerCase().trim();
+    if (q) {
+      const matchesSearch =
+        post.title.toLowerCase().includes(q) ||
+        post.excerpt.toLowerCase().includes(q) ||
+        post.category.toLowerCase().includes(q) ||
+        post.author.toLowerCase().includes(q);
+      if (!matchesSearch) return false;
+    }
+
+    if (selectedCategoryTab === 'All') return true;
+
+    const cat = (post.category || '').toLowerCase();
+    const title = (post.title || '').toLowerCase();
+
+    const isFestival =
+      cat.includes('festival') ||
+      cat.includes('culture') ||
+      cat.includes('celebrat') ||
+      cat.includes('event') ||
+      cat.includes('chavithi') ||
+      title.includes('festival') ||
+      title.includes('vinayaka') ||
+      title.includes('diwali') ||
+      title.includes('chavithi') ||
+      title.includes('celebrat') ||
+      title.includes('celebration');
+
+    if (selectedCategoryTab === 'Festival') {
+      return isFestival;
+    }
+
+    if (selectedCategoryTab === 'Technical') {
+      return !isFestival;
+    }
+
+    return true;
   });
 
   const handleArticleContentClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -1712,6 +1743,27 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
                 </>
               )}
             </button>
+          </div>
+
+          {/* Category Filter Buttons: All, Technical, Festival */}
+          <div className="flex items-center justify-center gap-2.5 mt-5">
+            {(['All', 'Technical', 'Festival'] as const).map((tab) => {
+              const isActive = selectedCategoryTab === tab;
+              return (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setSelectedCategoryTab(tab)}
+                  className={`px-5 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                    isActive
+                      ? 'bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/20 scale-105'
+                      : 'bg-white/80 hover:bg-white text-slate-700 hover:text-slate-900 border border-slate-200/90 shadow-2xs hover:border-slate-300 hover:shadow-xs'
+                  }`}
+                >
+                  {tab}
+                </button>
+              );
+            })}
           </div>
 
 
@@ -1861,12 +1913,17 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
 
         {filteredPosts.length === 0 && (
           <div className="py-20 text-center text-slate-500">
-            <p className="text-lg font-semibold mb-2">No blog posts found matching "{searchQuery}"</p>
+            <p className="text-lg font-semibold mb-2">
+              {searchQuery ? `No blog posts found matching "${searchQuery}"` : `No blog posts found under "${selectedCategoryTab}"`}
+            </p>
             <button
-              onClick={() => setSearchQuery('')}
-              className="px-5 py-2 rounded-full bg-slate-200 text-slate-800 text-xs font-bold hover:bg-slate-300 transition-all"
+              onClick={() => {
+                setSearchQuery('');
+                setSelectedCategoryTab('All');
+              }}
+              className="px-5 py-2 rounded-full bg-slate-200 text-slate-800 text-xs font-bold hover:bg-slate-300 transition-all cursor-pointer"
             >
-              Clear Search
+              Reset Filters
             </button>
           </div>
         )}
