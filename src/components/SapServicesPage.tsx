@@ -197,7 +197,6 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
         {/* Subtle Ambient Soft Glows (Home Page Sky & Indigo) */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-400/10 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-400/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto flex flex-col items-center text-center">
           

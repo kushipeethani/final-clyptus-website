@@ -258,7 +258,6 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
         {/* Ambient Soft Glows (SAP Blue & Orange Palette) */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-400/15 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-orange-400/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(#2563eb_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
 
         {/* 3D Wireframe GLSL Hills Terrain Backdrop */}
         <div className="absolute inset-0 w-full h-full pointer-events-none opacity-190 mix-blend-multiply overflow-hidden">
