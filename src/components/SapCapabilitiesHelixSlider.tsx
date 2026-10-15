@@ -6,7 +6,7 @@ import {
   Code,
   Users,
   CreditCard,
-  Sparkles,
+  Brain,
   ShieldCheck,
   Cpu,
   RefreshCw,
@@ -72,7 +72,7 @@ export const CAPABILITIES_DATA: SapCapability[] = [
     title: 'SAP AI',
     desc: 'SAP AI capabilities integrated into SAP solutions.',
     badge: 'INTELLIGENT AI',
-    icon: Sparkles,
+    icon: Brain,
     accentHex: '#10B981',
   },
   {

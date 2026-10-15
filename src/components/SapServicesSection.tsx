@@ -11,7 +11,8 @@ import {
   ChevronDown,
   Building2,
   Cpu,
-  Sparkles,
+  Brain,
+  Rocket,
   Award,
   Users,
   Calendar,
@@ -109,7 +110,7 @@ export const coreServices = [
     num: '06',
     title: 'SAP AI',
     desc: 'SAP AI capabilities integrated into SAP solutions.',
-    icon: Sparkles,
+    icon: Brain,
     accentHex: '#10B981',
     badge: 'INTELLIGENT AI',
   },
@@ -179,7 +180,7 @@ export const methodologySteps = [
     step: '05',
     title: 'Intelligent Enterprise',
     desc: 'Innovate, scale and grow on the new platform.',
-    icon: Sparkles,
+    icon: Rocket,
   },
 ];
 

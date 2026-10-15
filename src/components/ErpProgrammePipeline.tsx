@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Compass, Workflow, Cloud, Sparkles, Search } from 'lucide-react';
+import { Compass, Workflow, Cloud, Rocket, Search } from 'lucide-react';
 
 export interface MethodologyStep {
   step: string;
@@ -38,7 +38,7 @@ export const METHODOLOGY_STEPS: MethodologyStep[] = [
     step: '05',
     title: 'Intelligent Enterprise',
     desc: 'Innovate, scale and grow on the new platform.',
-    icon: Sparkles,
+    icon: Rocket,
   },
 ];
 
