@@ -344,7 +344,7 @@ export const Header: React.FC<HeaderProps> = ({
 
 
             {/* Navigation Links Grid */}
-            <div className="grid grid-cols-2 gap-2 mb-4">
+            <div className="grid grid-cols-2 gap-2">
               {navLinks.map((item, idx) => {
                 const link = item.name;
                 const Icon = item.icon;
@@ -368,17 +368,6 @@ export const Header: React.FC<HeaderProps> = ({
                   </motion.button>
                 );
               })}
-            </div>
-
-            {/* Bottom Actions in Mobile Menu */}
-            <div className="pt-3 border-t border-slate-200/70">
-              <button
-                onClick={() => handleMobileNav('Contact')}
-                className="w-full py-2.5 px-3 rounded-xl bg-slate-950 text-white hover:bg-sky-600 font-bold text-xs flex items-center justify-center gap-2 shadow-sm cursor-pointer transition-colors"
-              >
-                <Mail className="w-3.5 h-3.5" />
-                <span>Contact Us</span>
-              </button>
             </div>
           </motion.div>
         )}

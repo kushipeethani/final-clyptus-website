@@ -112,14 +112,19 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
   const [selectedCapabilityNum, setSelectedCapabilityNum] = useState<string | null>(null);
   const totalCards = CAPABILITIES_DATA.length;
   const containerRef = useRef<HTMLDivElement>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  // Scroll-driven progress to cycle through 9 cards while screen is pinned
+  // Scroll-driven progress to cycle through 9 cards while screen is pinned on desktop
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    // Only drive 3D helix by vertical scroll on desktop screens
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return;
+    }
     const calculatedIndex = Math.min(
       totalCards - 1,
       Math.floor(latest * totalCards)
@@ -127,22 +132,65 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
     setActiveIndex((prev) => (prev !== calculatedIndex ? calculatedIndex : prev));
   });
 
+  const scrollToCard = (index: number) => {
+    setActiveIndex(index);
+    if (mobileScrollRef.current) {
+      const container = mobileScrollRef.current;
+      const cardElements = container.children;
+      if (cardElements && cardElements[index]) {
+        const el = cardElements[index] as HTMLElement;
+        const targetScroll = el.offsetLeft - (container.clientWidth - el.offsetWidth) / 2;
+        container.scrollTo({
+          left: Math.max(0, targetScroll),
+          behavior: 'smooth',
+        });
+      }
+    }
+  };
+
+  const handleMobileScroll = () => {
+    if (!mobileScrollRef.current) return;
+    const container = mobileScrollRef.current;
+    const cardElements = container.children;
+    if (!cardElements || cardElements.length === 0) return;
+
+    const containerCenter = container.scrollLeft + container.clientWidth / 2;
+    let closestIndex = 0;
+    let minDiff = Infinity;
+
+    for (let i = 0; i < cardElements.length; i++) {
+      const el = cardElements[i] as HTMLElement;
+      const cardCenter = el.offsetLeft + el.offsetWidth / 2;
+      const diff = Math.abs(containerCenter - cardCenter);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIndex = i;
+      }
+    }
+
+    if (closestIndex !== activeIndex) {
+      setActiveIndex(closestIndex);
+    }
+  };
+
   const handleNext = () => {
-    setActiveIndex((prev) => (prev + 1) % totalCards);
+    const nextIdx = (activeIndex + 1) % totalCards;
+    scrollToCard(nextIdx);
   };
 
   const handlePrev = () => {
-    setActiveIndex((prev) => (prev - 1 + totalCards) % totalCards);
+    const prevIdx = (activeIndex - 1 + totalCards) % totalCards;
+    scrollToCard(prevIdx);
   };
 
   return (
     <div
       ref={containerRef}
       id="core-capabilities"
-      className="relative w-full h-[220vh]"
+      className="relative w-full h-auto md:h-[220vh]"
     >
-      {/* Sticky screen container */}
-      <div className="sticky top-0 h-screen w-full flex flex-col justify-center px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto select-none overflow-hidden">
+      {/* Sticky screen container on desktop, clean block on mobile */}
+      <div className="relative md:sticky md:top-0 h-auto md:h-screen w-full flex flex-col justify-center px-4 sm:px-6 lg:px-12 max-w-7xl mx-auto select-none overflow-hidden py-10 md:py-0">
         {/* Section Heading */}
         <div className="text-center flex flex-col items-center gap-2 mb-3">
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
@@ -301,7 +349,11 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
 
       {/* ================= MOBILE FALLBACK HORIZONTAL SNAP CAROUSEL (< 768px) ================= */}
       <div className="block md:hidden relative w-full">
-        <div className="w-full overflow-x-auto snap-x snap-mandatory flex gap-4 pb-6 pt-2 scrollbar-none">
+        <div
+          ref={mobileScrollRef}
+          onScroll={handleMobileScroll}
+          className="w-full overflow-x-auto snap-x snap-mandatory flex gap-4 pb-6 pt-2 scrollbar-none scroll-smooth px-1"
+        >
           {CAPABILITIES_DATA.map((item, idx) => {
             const IconComp = item.icon;
             const isCenter = idx === activeIndex;
@@ -309,21 +361,27 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
             return (
               <div
                 key={item.num}
-                onClick={() => setActiveIndex(idx)}
-                className={`snap-center shrink-0 w-[85vw] max-w-[320px] p-6 rounded-3xl bg-white border transition-all ${
+                onClick={() => scrollToCard(idx)}
+                className={`snap-center shrink-0 w-[85vw] max-w-[320px] p-6 rounded-3xl bg-white border transition-all cursor-pointer ${
                   isCenter
                     ? 'border-2 border-blue-500 shadow-xl'
                     : 'border-slate-200 shadow-sm'
                 }`}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-xs font-mono font-extrabold px-3 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+                  <span className={`text-xs font-mono font-extrabold px-3 py-1 rounded-full border ${
+                    isCenter
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-slate-100 text-slate-700 border-slate-200'
+                  }`}>
                     {item.num}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="p-3 rounded-2xl bg-blue-600 text-white shadow-sm">
+                  <div className={`p-3 rounded-2xl shadow-sm ${
+                    isCenter ? 'bg-gradient-to-r from-blue-600 to-orange-500 text-white' : 'bg-blue-600 text-white'
+                  }`}>
                     <IconComp className="w-5 h-5" />
                   </div>
                   <h3 className="text-lg font-extrabold text-slate-900">
@@ -339,7 +397,7 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
-                    setActiveIndex(idx);
+                    scrollToCard(idx);
                     setSelectedCapabilityNum(item.num);
                   }}
                   className="flex items-center text-xs font-bold text-blue-600 gap-1 hover:text-blue-700 transition-colors"
@@ -357,8 +415,8 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
           {CAPABILITIES_DATA.map((_, i) => (
             <button
               key={i}
-              onClick={() => setActiveIndex(i)}
-              className={`h-1.5 rounded-full transition-all ${
+              onClick={() => scrollToCard(i)}
+              className={`h-1.5 rounded-full transition-all cursor-pointer ${
                 i === activeIndex ? 'w-6 bg-blue-600' : 'w-1.5 bg-slate-300'
               }`}
               aria-label={`Go to slide ${i + 1}`}
