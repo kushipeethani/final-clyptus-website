@@ -365,14 +365,6 @@ export function App() {
 
           {/* 5 Feature Cards Animated Section + Curtain Reveal 3D Timeline */}
           <RisingSlideCardsSection />
-
-          {/* Clyptus Brandmark Particle Assembly & Early Dispersion Stage */}
-          <section
-            id="clyptus-logo-assemble-target"
-            className="relative z-10 py-16 px-4 w-full max-w-7xl mx-auto overflow-hidden bg-transparent select-none text-center"
-          >
-            <div className="relative w-full h-[360px] sm:h-[420px] mx-auto flex items-center justify-center pointer-events-auto" />
-          </section>
         </main>
       )}
 
