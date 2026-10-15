@@ -65,7 +65,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Code of Conduct.pdf',
       fileUrl: '/api/documents?id=code-of-conduct',
       fileSize: '341 KB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-sky-500 via-blue-600 to-indigo-700',
       icon: <Shield className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -77,7 +77,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Disciplinary Policy.pdf',
       fileUrl: '/api/documents?id=disciplinary-policy',
       fileSize: '378 KB',
-      gradient: 'from-[#0089D7] via-[#0096eb] to-[#005e95]',
+      gradient: 'from-indigo-600 via-purple-600 to-slate-900',
       icon: <AlertTriangle className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -89,7 +89,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Employee benefits policy.pdf',
       fileUrl: '/api/documents?id=employee-benefits',
       fileSize: '273 KB',
-      gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
+      gradient: 'from-blue-600 via-sky-600 to-teal-600',
       icon: <Heart className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -101,7 +101,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Leave, Maternity, Paternity Policy.pdf',
       fileUrl: '/api/documents?id=leave-policy',
       fileSize: '1.45 MB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-teal-600 via-emerald-600 to-sky-700',
       icon: <Calendar className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -113,7 +113,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Grievance Redressal Policy.pdf',
       fileUrl: '/api/documents?id=grievance-policy',
       fileSize: '435 KB',
-      gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
+      gradient: 'from-sky-600 via-blue-700 to-indigo-800',
       icon: <MessageSquare className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -125,7 +125,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Clyptus Employee Handbook.pdf',
       fileUrl: '/api/documents?id=employee-handbook',
       fileSize: '397 KB',
-      gradient: 'from-[#111A2E] via-[#0089D7] to-[#005e95]',
+      gradient: 'from-slate-900 via-indigo-900 to-sky-700',
       icon: <BookOpen className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -137,7 +137,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Leave, Maternity, Paternity Policy.pdf',
       fileUrl: '/api/documents?id=maternity-leave-policy',
       fileSize: '1.45 MB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-sky-500 via-indigo-600 to-purple-600',
       icon: <UserCheck className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -149,7 +149,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Clyptus_POSH.pdf',
       fileUrl: '/api/documents?id=posh-policy',
       fileSize: '282 KB',
-      gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
+      gradient: 'from-purple-600 via-indigo-600 to-blue-700',
       icon: <ShieldCheck className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -161,7 +161,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Clyptus_Data_Privacy_Policy.pdf',
       fileUrl: '/api/documents?id=data-privacy-policy',
       fileSize: '421 KB',
-      gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
+      gradient: 'from-blue-600 via-indigo-700 to-slate-900',
       icon: <Lock className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -173,7 +173,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Rejoin Policy.pdf',
       fileUrl: '/api/documents?id=rejoin-policy',
       fileSize: '310 KB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-indigo-500 via-sky-600 to-blue-600',
       icon: <Sparkles className="w-8 h-8 text-white stroke-[1.8]" />,
     }
   ];
@@ -189,7 +189,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Code of Conduct.pdf',
       fileUrl: '/api/documents?id=audit-code-of-conduct',
       fileSize: '341 KB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-sky-500 via-blue-600 to-indigo-700',
       icon: <Shield className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -201,7 +201,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Disciplinary Policy.pdf',
       fileUrl: '/api/documents?id=audit-disciplinary-policy',
       fileSize: '378 KB',
-      gradient: 'from-[#0089D7] via-[#0096eb] to-[#005e95]',
+      gradient: 'from-indigo-600 via-purple-600 to-slate-900',
       icon: <AlertTriangle className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -213,7 +213,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Employee benefits policy.pdf',
       fileUrl: '/api/documents?id=audit-employee-benefits',
       fileSize: '273 KB',
-      gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
+      gradient: 'from-blue-600 via-sky-600 to-teal-600',
       icon: <Heart className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -225,7 +225,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Leave, Maternity, Paternity Policy.pdf',
       fileUrl: '/api/documents?id=audit-leave-policy',
       fileSize: '1.45 MB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-teal-600 via-emerald-600 to-sky-700',
       icon: <Calendar className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -237,7 +237,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Grievance Redressal Policy.pdf',
       fileUrl: '/api/documents?id=audit-grievance-policy',
       fileSize: '435 KB',
-      gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
+      gradient: 'from-sky-600 via-blue-700 to-indigo-800',
       icon: <MessageSquare className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -249,7 +249,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Clyptus Employee Handbook.pdf',
       fileUrl: '/api/documents?id=audit-employee-handbook',
       fileSize: '397 KB',
-      gradient: 'from-[#111A2E] via-[#0089D7] to-[#005e95]',
+      gradient: 'from-slate-900 via-indigo-900 to-sky-700',
       icon: <BookOpen className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -261,7 +261,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Leave, Maternity, Paternity Policy (1).pdf',
       fileUrl: '/api/documents?id=audit-maternity-leave-policy',
       fileSize: '1.45 MB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-sky-500 via-indigo-600 to-purple-600',
       icon: <UserCheck className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -273,7 +273,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Clyptus_POSH.pdf',
       fileUrl: '/api/documents?id=audit-posh-policy',
       fileSize: '282 KB',
-      gradient: 'from-[#0089D7] via-[#111A2E] to-[#005a9e]',
+      gradient: 'from-purple-600 via-indigo-600 to-blue-700',
       icon: <ShieldCheck className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -285,7 +285,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Clyptus_Data_Privacy_Policy.pdf',
       fileUrl: '/api/documents?id=audit-data-privacy-policy',
       fileSize: '421 KB',
-      gradient: 'from-[#0089D7] via-[#0096eb] to-[#111A2E]',
+      gradient: 'from-blue-600 via-indigo-700 to-slate-900',
       icon: <Lock className="w-8 h-8 text-white stroke-[1.8]" />,
     },
     {
@@ -297,7 +297,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       fileName: 'Rejoin Policy.pdf',
       fileUrl: '/api/documents?id=audit-rejoin-policy',
       fileSize: '310 KB',
-      gradient: 'from-[#0089D7] via-[#0073b6] to-[#111A2E]',
+      gradient: 'from-indigo-500 via-sky-600 to-blue-600',
       icon: <Sparkles className="w-8 h-8 text-white stroke-[1.8]" />,
     }
   ];
@@ -340,31 +340,36 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
   });
 
   // ---------------------------------------------------------
-  // UNAUTHENTICATED GATE (LOGIN MODAL WITH #0089D7 & #111A2E)
+  // UNAUTHENTICATED GATE (LOGIN MODAL MATCHING HOME PAGE THEME)
   // ---------------------------------------------------------
   if (!isAuthenticated) {
     return (
-      <div className="w-full bg-slate-50 min-h-screen py-16 px-4 flex flex-col items-center justify-center font-sans selection:bg-[#0089D7]/20 selection:text-[#111A2E]">
-        
-        <div className="relative w-full max-w-md bg-white rounded-3xl border border-slate-200/90 shadow-2xl p-8 sm:p-10 overflow-hidden">
+      <div className="w-full bg-slate-50 min-h-screen py-16 px-4 flex flex-col items-center justify-center font-sans selection:bg-sky-500/20 selection:text-sky-800 relative overflow-hidden">
+        {/* Ambient Glows Matching Home Page */}
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-sky-200/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-100/25 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative w-full max-w-md bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.12)] p-8 sm:p-10 overflow-hidden transition-all duration-300">
           
-          {/* Top Ambient Glows */}
-          <div className="absolute -top-20 -left-20 w-44 h-44 bg-[#0089D7]/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-44 h-44 bg-[#111A2E]/15 rounded-full blur-3xl pointer-events-none" />
+          {/* Subtle Top Glow Accent */}
+          <div className="absolute -top-16 -right-16 w-36 h-36 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
 
           {/* Icon Header */}
           <div className="flex flex-col items-center text-center mb-8">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#0089D7] to-[#111A2E] text-white flex items-center justify-center shadow-lg shadow-[#0089D7]/20 mb-4">
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-600 text-white flex items-center justify-center shadow-lg shadow-sky-500/25 mb-4 group-hover:scale-105 transition-transform">
               <Lock className="w-8 h-8 stroke-[2.2]" />
             </div>
-            <span className="text-xs font-mono font-extrabold text-[#0089D7] uppercase tracking-widest mb-1">
-              PROTECTED CLYPTUS PORTAL
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#111A2E] tracking-tight">
-              HR Policies Portal
+            
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 text-sky-700 text-xs font-bold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+              <span>PROTECTED CLYPTUS PORTAL</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              HR Policies <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Portal</span>
             </h2>
-            <p className="text-xs text-[#111A2E]/70 font-medium mt-2">
-              Enter your authorized credentials to access employee policies & downloadable files.
+            <p className="text-xs text-slate-600 font-medium mt-2 leading-relaxed">
+              Enter your authorized credentials to access employee policies &amp; downloadable compliance files.
             </p>
           </div>
 
@@ -377,10 +382,10 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
           )}
 
           {/* Form */}
-          <form onSubmit={handleLoginSubmit} className="space-y-5">
+          <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#111A2E] mb-2">
-                User Name
+              <label className="block text-xs font-bold text-slate-800 mb-1.5">
+                Username
               </label>
               <input
                 type="text"
@@ -388,12 +393,12 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
                 placeholder="Enter username"
                 value={usernameInput}
                 onChange={(e) => setUsernameInput(e.target.value)}
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-[#111A2E] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0089D7]/50 focus:border-[#0089D7] transition-all"
+                className="w-full px-4 py-3 bg-slate-50/70 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 transition-all shadow-xs"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#111A2E] mb-2">
+              <label className="block text-xs font-bold text-slate-800 mb-1.5">
                 Password
               </label>
               <div className="relative">
@@ -403,12 +408,12 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
                   placeholder="Enter password"
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
-                  className="w-full pl-4 pr-11 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-[#111A2E] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#0089D7]/50 focus:border-[#0089D7] transition-all"
+                  className="w-full pl-4 pr-11 py-3 bg-slate-50/70 hover:bg-white focus:bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 transition-all shadow-xs"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#111A2E] transition-colors"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors cursor-pointer"
                   title={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -419,7 +424,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full py-3.5 px-6 rounded-xl bg-[#0089D7] hover:bg-[#0077be] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-[1.02] active:scale-98 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 hover:from-sky-500 hover:to-indigo-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35 hover:scale-[1.01] active:scale-98 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mt-2"
             >
               {isLoggingIn ? (
                 <>
@@ -446,39 +451,41 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
   }
 
   // ---------------------------------------------------------
-  // AUTHENTICATED PORTAL VIEW (COLORS: ACCENT #0089D7, TEXT #111A2E)
+  // AUTHENTICATED PORTAL VIEW (MATCHING HOME PAGE THEME)
   // ---------------------------------------------------------
   return (
-    <div className="w-full bg-[#f8fafc] text-[#111A2E] font-sans selection:bg-[#0089D7]/20 selection:text-[#111A2E] min-h-screen pb-24">
+    <div className="w-full bg-slate-50 text-slate-900 font-sans selection:bg-sky-500/20 selection:text-sky-800 min-h-screen pb-24 relative overflow-hidden">
       
-      {/* HERO HEADER SECTION */}
-      <section className="relative w-full pt-14 pb-14 sm:pt-20 sm:pb-16 px-4 sm:px-8 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-[#111A2E] select-none">
-        {/* Soft Ambient Background Glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#0089D7]/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#111A2E]/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(#0089D7_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
+      {/* Background Soft Atmospheric Glows matching Home page */}
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-sky-200/25 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-1/3 left-10 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
+      {/* HERO HEADER SECTION */}
+      <section className="relative w-full pt-14 pb-12 sm:pt-20 sm:pb-16 px-4 sm:px-8 lg:px-16 border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50/50 to-slate-50 select-none">
         <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white shadow-xs border border-slate-200 text-xs font-bold text-slate-800 mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
+              <span>INTERNAL CORPORATE REPOSITORY</span>
+            </div>
 
-
-            {/* Main Title (Main Text Color #111A2E & Accent #0089D7 Gradient) */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-[#111A2E] mb-4">
-              Employee Policies &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0089D7] via-[#0066b3] to-[#111A2E]">Compliance Framework</span>
+            {/* Main Title */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-3">
+              Employee Policies &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Compliance Framework</span>
             </h1>
 
-            <p className="text-base sm:text-lg font-medium text-[#111A2E]/75 leading-relaxed">
+            <p className="text-sm sm:text-base font-medium text-slate-600 leading-relaxed">
               Official corporate guidelines, workplace ethics, leave entitlements, and IT compliance policies for Clyptus Software Solutions.
             </p>
           </div>
 
           {/* User Session Card */}
-          <div className="shrink-0 flex items-center gap-3 bg-white/90 backdrop-blur-md border border-slate-200 p-4 rounded-2xl shadow-sm">
-            <div className="w-11 h-11 rounded-xl bg-[#0089D7] text-white font-black font-mono text-sm flex items-center justify-center shadow-md">
+          <div className="shrink-0 flex items-center gap-3 bg-white/95 backdrop-blur-xl border border-slate-200/90 p-4 rounded-2xl shadow-xs">
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 text-white font-black font-mono text-sm flex items-center justify-center shadow-md shadow-sky-500/20">
               {authenticatedUser?.charAt(0).toUpperCase()}
             </div>
             <div className="text-left">
-              <p className="text-xs font-extrabold text-[#111A2E] leading-tight">User: {authenticatedUser}</p>
+              <p className="text-xs font-extrabold text-slate-900 leading-tight">User: {authenticatedUser}</p>
               <div className="flex items-center gap-1.5 mt-0.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span className="text-[10px] font-mono text-slate-500 font-bold uppercase">Session Active</span>
@@ -486,7 +493,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
             </div>
             <button
               onClick={onLogout}
-              className="ml-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-600 border border-slate-200 transition-colors text-xs font-bold flex items-center gap-1.5"
+              className="ml-2 px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-600 border border-slate-200 hover:border-rose-200 transition-colors text-xs font-bold flex items-center gap-1.5 cursor-pointer"
               title="Sign Out"
             >
               <LogOut className="w-3.5 h-3.5" />
@@ -499,18 +506,18 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       {/* Main Content Hub */}
       <main className="py-12 px-4 sm:px-8 lg:px-16 w-full max-w-7xl mx-auto">
         
-        {/* CATEGORY FILTER PILLS (ACCENT COLOR #0089D7) */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+        {/* CATEGORY FILTER PILLS */}
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-10">
           {['All Policies', 'Conduct', 'Benefits', 'Leave', 'Compliance'].map((cat) => {
             const isActive = activeTab === cat;
             return (
               <button
                 key={cat}
                 onClick={() => setActiveTab(cat)}
-                className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-200 shadow-xs ${
+                className={`px-6 py-2.5 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? 'bg-[#0089D7] text-white font-extrabold shadow-md shadow-[#0089D7]/30 scale-105 border-0'
-                    : 'bg-white text-[#111A2E]/80 hover:text-[#111A2E] border border-slate-200/90 hover:bg-slate-50 font-semibold'
+                    ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white font-extrabold shadow-md shadow-sky-500/25 scale-105 border-0'
+                    : 'bg-white text-slate-700 hover:text-sky-600 border border-slate-200/90 hover:border-sky-300 hover:bg-slate-50 shadow-xs'
                 }`}
               >
                 {cat}
@@ -519,12 +526,12 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
           })}
         </div>
 
-        {/* POLICY CARDS GRID (PRIMARY ACCENT #0089D7 & MAIN TEXT #111A2E) */}
+        {/* POLICY CARDS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredPolicies.map((policy) => (
             <div
               key={policy.id}
-              className="bg-white rounded-3xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 border border-slate-200/80 flex flex-col justify-between group"
+              className="bg-white/95 backdrop-blur-xl rounded-3xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.12)] transition-all duration-300 border border-slate-200/90 hover:border-sky-400 flex flex-col justify-between group hover:-translate-y-1"
             >
               {/* Card Top Header */}
               <div>
@@ -545,25 +552,25 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
                   </div>
                 </div>
 
-                {/* Card Content Body (Main Text Color #111A2E) */}
+                {/* Card Content Body */}
                 <div className="p-5">
-                  <h3 className="text-base font-extrabold text-[#111A2E] mb-2 leading-snug group-hover:text-[#0089D7] transition-colors">
+                  <h3 className="text-base font-extrabold text-slate-900 mb-2 leading-snug group-hover:text-sky-600 transition-colors">
                     {policy.title}
                   </h3>
 
-                  <p className="text-xs text-[#111A2E]/70 font-medium leading-relaxed mb-4 line-clamp-5">
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed mb-4 line-clamp-5">
                     {policy.description}
                   </p>
                 </div>
               </div>
 
-              {/* Card Footer Action: Primary Accent Color #0089D7 Download Button */}
+              {/* Card Footer Action */}
               <div className="px-5 pb-5 pt-0">
                 <a
                   href={policy.fileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-xl bg-[#0089D7] hover:bg-[#0077be] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 transition-all duration-200"
+                  className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm shadow-sky-500/20 hover:shadow-md hover:shadow-sky-500/30 hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
                 >
                   <Download className="w-4 h-4 stroke-[2.5]" />
                   <span>Download PDF</span>
@@ -573,26 +580,29 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
           ))}
         </div>
 
-        {/* NEED HELP WITH A POLICY BANNER (ACCENT #0089D7 & MAIN TEXT #111A2E) */}
-        <div className="mt-12 w-full rounded-3xl bg-gradient-to-r from-[#111A2E] via-[#005e95] to-[#0089D7] p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-white/10">
-          <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 text-white border border-white/20 font-mono text-[10px] font-bold uppercase mb-3">
-              HR SUPPORT &amp; COMPLIANCE HELP
+        {/* NEED HELP WITH A POLICY BANNER */}
+        <div className="mt-14 w-full rounded-3xl bg-gradient-to-r from-slate-950 via-slate-900 to-indigo-950 p-6 sm:p-8 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-slate-800 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="relative z-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-sky-300 border border-white/15 font-mono text-[10px] font-bold uppercase mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse" />
+              <span>HR SUPPORT &amp; COMPLIANCE HELP</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-1.5">
               Need help with a policy?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-200 font-medium max-w-2xl leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-300 font-medium max-w-2xl leading-relaxed">
               Our HR team is available to answer questions about entitlements, eligibility, or any policy content.
             </p>
           </div>
 
           <a
             href="mailto:hr.india@clyptus.com"
-            className="group shrink-0 inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-white text-[#111A2E] font-extrabold text-xs shadow-md hover:bg-slate-100 hover:scale-105 active:scale-95 transition-all duration-200"
+            className="relative z-10 group shrink-0 inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-white hover:bg-sky-50 text-slate-900 font-extrabold text-xs shadow-md hover:scale-105 active:scale-95 transition-all duration-200 border border-slate-100 cursor-pointer"
           >
-            <Mail className="w-4 h-4 text-[#0089D7] stroke-[2.5]" />
-            <span className="font-mono text-xs text-[#111A2E] font-black">hr.india@clyptus.com</span>
+            <Mail className="w-4 h-4 text-sky-600 stroke-[2.2]" />
+            <span className="font-mono text-xs text-slate-900 font-black">hr.india@clyptus.com</span>
           </a>
         </div>
 

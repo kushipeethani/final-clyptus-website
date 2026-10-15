@@ -223,9 +223,6 @@ export const RisingSlideCardsSection: React.FC = () => {
                       <h2 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#1a1a1a] tracking-tight leading-[1.05] whitespace-pre-line mb-5 sm:mb-4">
                         {card.title}
                       </h2>
-                      <span className="text-sm sm:text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
-                        {card.linkText} →
-                      </span>
                     </div>
                   ) : (
                     /* PHOTO PANEL (Proportioned Executive Card on Mobile, Full-Height Split Card on Desktop) */

@@ -3,7 +3,6 @@ import {
   Briefcase, 
   MapPin, 
   Clock, 
-  Sparkles, 
   Search, 
   ArrowRight, 
   Copy, 
@@ -202,11 +201,6 @@ export const CareersPage: React.FC<CareersPageProps> = () => {
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-5xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-700 text-xs font-mono font-extrabold mb-6 uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>WE'RE HIRING TALENT</span>
-          </div>
-
           <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 mb-6 leading-[1.08]">
             Build the Future of <br className="hidden sm:block" />
             <span className="text-blue-600">

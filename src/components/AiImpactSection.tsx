@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Database, Users, Sparkles, ArrowUpRight } from 'lucide-react';
+import { Database, Users, Cpu, ArrowUpRight } from 'lucide-react';
 
 interface AiImpactSectionProps {
   onSelectService?: (serviceId: string) => void;
@@ -345,7 +345,7 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
                 >
                   <div>
                     <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-sky-500 text-white flex items-center justify-center mb-3 sm:mb-6 shadow-md shadow-sky-500/20 group-hover:scale-110 transition-transform">
-                      <Sparkles className="w-5 h-5 sm:w-7 sm:h-7" />
+                      <Cpu className="w-5 h-5 sm:w-7 sm:h-7" />
                     </div>
                     <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-sky-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
                       INTELLIGENT SYSTEMS

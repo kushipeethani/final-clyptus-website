@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "tunnel": ".tools\\cloudflared.exe tunnel --url http://localhost:5173",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"

@@ -1,0 +1,9 @@
+# Cloudflare Pages Redirects & Rewrites
+# Multi-page application route mappings
+/sap         /sap/index.html        200
+/ai          /ai/index.html         200
+/recruiting  /recruiting/index.html 200
+/contact     /contact/index.html    200
+
+# SPA fallback for client-side routing
+/*           /index.html            200

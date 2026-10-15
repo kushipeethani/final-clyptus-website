@@ -6,7 +6,6 @@ import {
   MapPin,
   Send,
   CheckCircle2,
-  Building2,
   Compass,
   ExternalLink,
   ShieldCheck,
@@ -95,17 +94,17 @@ export const ContactSection: React.FC = () => {
   };
 
   const indianBranches = [
-    { name: 'Hyderabad', role: 'Head Office & Global Delivery', tag: 'HQ' },
-    { name: 'Bengaluru', role: 'AI & Cloud Development Lab', tag: 'Tech Hub' },
-    { name: 'Chennai', role: 'Enterprise Systems & Offshore', tag: 'Delivery' },
-    { name: 'Vijayawada', role: 'Regional Delivery Center', tag: 'Branch' },
-    { name: 'Indore', role: 'Central India Operations', tag: 'Branch' },
+    { name: 'Hyderabad', role: 'Head Office & Global Delivery' },
+    { name: 'Bengaluru', role: 'AI & Cloud Development Lab' },
+    { name: 'Chennai', role: 'Enterprise Systems & Offshore' },
+    { name: 'Vijayawada', role: 'Regional Delivery Center' },
+    { name: 'Indore', role: 'Central India Operations' },
   ];
 
   return (
     <section
       id="contact"
-      className="w-full min-h-screen bg-gradient-to-b from-white via-slate-50 to-sky-50/30 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 select-none relative overflow-hidden"
+      className="w-full min-h-screen bg-gradient-to-b from-white via-slate-50 to-sky-50/30 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 select-none relative overflow-hidden font-sans antialiased"
     >
       {/* Background Soft Atmospheric Glow Gradients */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-sky-200/25 rounded-full blur-3xl pointer-events-none -z-10" />
@@ -115,14 +114,14 @@ export const ContactSection: React.FC = () => {
 
         {/* Top Header Section */}
         <div className="text-center flex flex-col items-center gap-3.5 max-w-3xl mx-auto">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.15]">
             Let’s Build Something <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 font-extrabold">
               Great Together
             </span>
           </h1>
 
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-normal">
             Connect directly with our engineering, SAP ERP, and talent leaders across India and the Middle East. Explore our global offices in real-time on the 3D globe.
           </p>
         </div>
@@ -134,8 +133,8 @@ export const ContactSection: React.FC = () => {
           <div className="lg:col-span-6 flex flex-col gap-6 order-2 lg:order-1">
 
             {/* Office Switcher Tabs */}
-            <div className="p-2 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-1.5">
-              <span className="text-[11px] font-mono font-bold text-slate-500 uppercase px-3 py-1 flex items-center gap-1.5">
+            <div className="p-2 rounded-2xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-xs flex flex-wrap items-center justify-between gap-1.5">
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-2.5 py-1 flex items-center gap-1.5">
                 <Compass className="w-3.5 h-3.5 text-sky-600" />
                 Select Hub:
               </span>
@@ -143,8 +142,8 @@ export const ContactSection: React.FC = () => {
                 <button
                   id="hub-tab-overview"
                   onClick={() => setSelectedOfficeId(null)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${selectedOfficeId === null
-                    ? 'bg-slate-900 text-white shadow-sm ring-2 ring-slate-400'
+                  className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center gap-1.5 ${selectedOfficeId === null
+                    ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-md shadow-sky-500/25 ring-2 ring-sky-300'
                     : 'bg-slate-100 hover:bg-slate-200/80 text-slate-700'
                     }`}
                   title="Global Overview"
@@ -160,8 +159,8 @@ export const ContactSection: React.FC = () => {
                       onClick={() => setSelectedOfficeId(isSelected ? null : office.id)}
                       onMouseEnter={() => setHoveredOfficeId(office.id)}
                       onMouseLeave={() => setHoveredOfficeId(null)}
-                      className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center ${isSelected
-                        ? 'bg-sky-600 text-white shadow-sm ring-2 ring-sky-300'
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${isSelected
+                        ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-md shadow-sky-500/25 ring-2 ring-sky-300'
                         : 'bg-slate-100 hover:bg-slate-200/80 text-slate-700'
                         }`}
                     >
@@ -180,7 +179,7 @@ export const ContactSection: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.25 }}
-                className="p-6 sm:p-7 rounded-3xl bg-white/90 backdrop-blur-md border border-sky-100/80 shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
+                className="p-6 sm:p-7 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.12)] hover:border-sky-300 transition-all relative overflow-hidden"
               >
                 {/* Accent Corner Glow */}
                 <div
@@ -190,13 +189,10 @@ export const ContactSection: React.FC = () => {
 
                 <div className="flex items-start justify-between gap-4 mb-4">
                   <div>
-                    <span className="inline-block text-[10px] font-mono font-extrabold px-2.5 py-1 rounded-full text-sky-700 bg-sky-50 border border-sky-200 uppercase mb-2">
-                      {selectedOffice.badge}
-                    </span>
-                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <h2 className="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight flex items-center gap-2">
                       {selectedOffice.label}
                     </h2>
-                    <p className="text-xs text-slate-500 font-medium mt-0.5">
+                    <p className="text-xs text-slate-500 font-normal mt-0.5">
                       {selectedOffice.description}
                     </p>
                   </div>
@@ -205,7 +201,7 @@ export const ContactSection: React.FC = () => {
                     href={selectedOffice.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 text-xs font-bold transition-all border border-sky-200 shrink-0"
+                    className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white text-xs font-semibold transition-all shadow-sm shadow-sky-500/20 shrink-0 cursor-pointer"
                   >
                     <span>Get Directions</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -213,20 +209,20 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 {/* Office Details */}
-                <div className="flex flex-col gap-3 pt-3 border-t border-slate-100 text-xs text-slate-700 font-medium">
+                <div className="flex flex-col gap-3 pt-3 border-t border-slate-100 text-xs text-slate-700 font-normal">
                   <div className="flex items-start gap-2.5">
                     <MapPin className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
-                    <span className="leading-relaxed">{selectedOffice.address}</span>
+                    <span className="leading-relaxed text-xs text-slate-600 font-normal">{selectedOffice.address}</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-mono uppercase text-slate-400 font-bold">Email Channels</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Email Channels</span>
                       {selectedOffice.emails.map((email, idx) => (
                         <a
                           key={idx}
                           href={`mailto:${email}`}
-                          className="inline-flex items-center gap-1.5 font-bold text-slate-800 hover:text-sky-600 transition-colors"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700 hover:text-sky-600 transition-colors"
                         >
                           <Mail className="w-3.5 h-3.5 text-sky-600" />
                           <span>{email}</span>
@@ -235,12 +231,12 @@ export const ContactSection: React.FC = () => {
                     </div>
 
                     <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-mono uppercase text-slate-400 font-bold">Direct Phone</span>
+                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Direct Phone</span>
                       {selectedOffice.phones.map((phone, idx) => (
                         <a
                           key={idx}
                           href={`tel:${phone.split(' ')[0]}`}
-                          className="inline-flex items-center gap-1.5 font-bold text-slate-800 hover:text-sky-600 transition-colors"
+                          className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700 hover:text-sky-600 transition-colors"
                         >
                           <Phone className="w-3.5 h-3.5 text-emerald-600" />
                           <span>{phone}</span>
@@ -252,24 +248,16 @@ export const ContactSection: React.FC = () => {
                   {/* India Branches Strip (Hyderabad, Bengaluru, Chennai, Vijayawada, Indore) */}
                   {selectedOffice.id === 'hyderabad' && (
                     <div className="pt-3.5 border-t border-slate-100 flex flex-col gap-2.5">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[10px] font-mono uppercase font-extrabold text-sky-700 tracking-wider flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-ping" />
-                          India Network & Delivery Branches (5 Hubs)
-                        </span>
-                        <span className="text-[10px] font-mono text-slate-400 font-bold">Live on 3D Globe</span>
-                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                         {indianBranches.map((br) => (
                           <div
                             key={br.name}
-                            className="p-2 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:border-sky-300 hover:bg-sky-50/50 transition-all text-left"
+                            className="p-2.5 rounded-xl bg-slate-50/80 border border-slate-200/80 hover:border-sky-300 hover:bg-sky-50/50 transition-all text-left"
                           >
-                            <div className="flex items-center justify-between gap-1 mb-0.5">
-                              <span className="text-xs font-bold text-slate-800">{br.name}</span>
-                              <span className="text-[9px] font-mono font-extrabold px-1.5 py-0.2 rounded bg-sky-100 text-sky-700">{br.tag}</span>
+                            <div className="mb-0.5">
+                              <span className="text-xs font-semibold text-slate-800">{br.name}</span>
                             </div>
-                            <span className="text-[10px] text-slate-500 leading-tight block truncate">{br.role}</span>
+                            <span className="text-xs text-slate-500 leading-tight block truncate font-normal">{br.role}</span>
                           </div>
                         ))}
                       </div>
@@ -280,18 +268,18 @@ export const ContactSection: React.FC = () => {
             </AnimatePresence>
 
             {/* Direct Consultation Contact Form */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-md flex flex-col gap-5">
+            <div className="p-6 sm:p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.08)] flex flex-col gap-5 transition-all">
               <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                 <div>
-                  <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight">
                     Start a Conversation
                   </h3>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5">
+                  <p className="text-xs text-slate-500 font-normal mt-0.5">
                     Our technical and staffing consultants respond within 24 business hours.
                   </p>
                 </div>
-                <div className="p-2 rounded-xl bg-sky-50 text-sky-600 border border-sky-100">
-                  <ShieldCheck className="w-5 h-5" />
+                <div className="p-2.5 rounded-xl bg-sky-50 text-sky-600 border border-sky-100 shadow-xs">
+                  <ShieldCheck className="w-5 h-5 stroke-[2.2]" />
                 </div>
               </div>
 
@@ -300,14 +288,14 @@ export const ContactSection: React.FC = () => {
                   <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-200 shadow-sm animate-bounce">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h4 className="text-xl font-black text-slate-900">Inquiry Dispatched Successfully!</h4>
-                  <p className="text-xs text-slate-600 max-w-sm leading-relaxed">
+                  <h4 className="text-xl font-bold text-slate-900">Inquiry Dispatched Successfully!</h4>
+                  <p className="text-xs text-slate-600 max-w-sm leading-relaxed font-normal">
                     Thank you for reaching out. Your project requirements have been recorded and sent to our executive solution architecture team. We will respond within 24 business hours.
                   </p>
                   <button
                     type="button"
                     onClick={() => setFormSubmitted(false)}
-                    className="mt-3 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-all shadow-sm hover:scale-105 active:scale-95 cursor-pointer"
+                    className="mt-3 px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white font-semibold text-xs transition-all shadow-md shadow-sky-500/20 hover:scale-105 active:scale-95 cursor-pointer"
                   >
                     Send Another Message
                   </button>
@@ -318,7 +306,7 @@ export const ContactSection: React.FC = () => {
                   {submitError && (
                     <div
                       role="alert"
-                      className="p-3.5 rounded-xl bg-rose-50 border border-rose-200/90 text-rose-700 text-xs font-semibold flex items-start gap-2.5 animate-in fade-in duration-200"
+                      className="p-3.5 rounded-xl bg-rose-50 border border-rose-200/90 text-rose-700 text-xs font-medium flex items-start gap-2.5 animate-in fade-in duration-200"
                     >
                       <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
                       <span>{submitError}</span>
@@ -340,7 +328,7 @@ export const ContactSection: React.FC = () => {
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label htmlFor="contact_name_input" className="block text-xs font-bold text-slate-700 mb-1">
+                      <label htmlFor="contact_name_input" className="block text-xs font-semibold text-slate-700 mb-1.5">
                         Your Full Name <span className="text-rose-500">*</span>
                       </label>
                       <input
@@ -350,12 +338,12 @@ export const ContactSection: React.FC = () => {
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="John Doe"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus:bg-white text-xs font-normal text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 outline-none transition-all shadow-xs"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="contact_email_input" className="block text-xs font-bold text-slate-700 mb-1">
+                      <label htmlFor="contact_email_input" className="block text-xs font-semibold text-slate-700 mb-1.5">
                         Corporate Email <span className="text-rose-500">*</span>
                       </label>
                       <input
@@ -365,15 +353,15 @@ export const ContactSection: React.FC = () => {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="john@enterprise.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus:bg-white text-xs font-normal text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 outline-none transition-all shadow-xs"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label htmlFor="contact_phone_input" className="block text-xs font-bold text-slate-700 mb-1">
-                        Phone Number <span className="text-slate-400 font-normal">(Optional)</span>
+                      <label htmlFor="contact_phone_input" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                        Phone Number <span className="text-slate-400 font-normal text-[11px]">(Optional)</span>
                       </label>
                       <input
                         id="contact_phone_input"
@@ -381,19 +369,19 @@ export const ContactSection: React.FC = () => {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+91 9876543210"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus:bg-white text-xs font-normal text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 outline-none transition-all shadow-xs"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="contact_service_select" className="block text-xs font-bold text-slate-700 mb-1">
+                      <label htmlFor="contact_service_select" className="block text-xs font-semibold text-slate-700 mb-1.5">
                         Practice / Solution
                       </label>
                       <select
                         id="contact_service_select"
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none bg-white transition-all"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus:bg-white text-xs font-normal text-slate-900 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 outline-none transition-all shadow-xs cursor-pointer"
                       >
                         <option value="AI Solutions & Agentic Pipelines">AI Solutions & Agentic Pipelines</option>
                         <option value="SAP Consulting, BRIM & S/4HANA">SAP Consulting, BRIM & S/4HANA</option>
@@ -406,7 +394,7 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="contact_message_input" className="block text-xs font-bold text-slate-700 mb-1">
+                    <label htmlFor="contact_message_input" className="block text-xs font-semibold text-slate-700 mb-1.5">
                       Project Scope or Inquiries <span className="text-rose-500">*</span>
                     </label>
                     <textarea
@@ -416,14 +404,14 @@ export const ContactSection: React.FC = () => {
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Outline your timeline, current software ecosystem, or headcount requirements (min 10 characters)..."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-sky-500 focus:border-sky-500 outline-none resize-none transition-all"
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus:bg-white text-xs font-normal text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 outline-none resize-none transition-all shadow-xs"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-sky-600 via-indigo-600 to-sky-700 hover:from-sky-700 hover:to-indigo-700 text-white font-extrabold text-xs transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 hover:from-sky-500 hover:to-indigo-500 text-white font-semibold text-xs uppercase tracking-wider transition-all shadow-md shadow-sky-500/25 hover:shadow-lg hover:shadow-sky-500/35 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
@@ -468,11 +456,11 @@ export const ContactSection: React.FC = () => {
         <div className="pt-8 border-t border-slate-200/80 flex flex-col gap-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <div>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Global Corporate Directory
+              <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
+                Global <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Corporate Directory</span>
               </h3>
-              <p className="text-xs text-slate-500 font-medium">
-                Comprehensive physical addresses and direct executive channels
+              <p className="text-xs sm:text-sm text-slate-600 font-normal">
+                Comprehensive physical addresses and direct executive channels across continents.
               </p>
             </div>
           </div>
@@ -484,67 +472,76 @@ export const ContactSection: React.FC = () => {
                 <div
                   key={office.id}
                   onClick={() => setSelectedOfficeId(office.id)}
-                  className={`group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white border transition-all duration-300 cursor-pointer ${isSelected
-                    ? 'border-sky-400 ring-2 ring-sky-200 shadow-xl'
-                    : 'border-slate-200/90 shadow-sm hover:shadow-lg hover:border-sky-300'
+                  className={`group relative flex flex-col justify-between p-6 sm:p-7 rounded-3xl bg-white/95 backdrop-blur-xl border transition-all duration-300 cursor-pointer overflow-hidden ${isSelected
+                    ? 'border-sky-500 ring-2 ring-sky-300 shadow-[0_25px_50px_rgba(2,132,199,0.2)] -translate-y-1'
+                    : 'border-slate-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_25px_50px_rgba(2,132,199,0.14)] hover:border-sky-300 hover:-translate-y-1'
                     }`}
                 >
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-mono font-extrabold px-2.5 py-1 rounded-full text-white bg-slate-900 shadow-xs">
-                        {office.badge}
-                      </span>
+                  {/* Subtle Corner Ambient Glow */}
+                  <div
+                    className="absolute -top-12 -right-12 w-32 h-32 rounded-full blur-2xl opacity-15 pointer-events-none group-hover:opacity-30 transition-opacity"
+                    style={{ backgroundColor: office.color }}
+                  />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-end mb-2">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
                           setSelectedOfficeId(office.id);
                         }}
                         title="Rotate globe to this office"
-                        className="p-1 rounded-lg text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition-colors"
+                        className="p-1.5 rounded-xl text-slate-400 hover:text-sky-600 hover:bg-sky-50 transition-colors"
                       >
                         <Compass className="w-4 h-4" />
                       </button>
                     </div>
 
-                    <h4 className="text-lg font-extrabold text-slate-900 mb-0.5">
+                    <h4 className="text-xl font-bold text-slate-900 tracking-tight mb-0.5 group-hover:text-sky-600 transition-colors">
                       {office.city}
                     </h4>
-                    <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-3">
+                    <p className="text-xs font-semibold text-sky-600 uppercase tracking-wider mb-3">
                       {office.country}
                     </p>
 
-                    <div className="flex items-start gap-2 text-xs text-slate-600 leading-relaxed mb-4 font-medium">
-                      <MapPin className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed mb-4 font-normal min-h-[50px]">
+                      <div className="w-5 h-5 rounded-md bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 mt-0.5 border border-sky-100">
+                        <MapPin className="w-3.5 h-3.5" />
+                      </div>
                       <span>{office.address}</span>
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100 flex flex-col gap-3">
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[9px] font-mono uppercase text-slate-400 font-bold">Email Contacts</span>
+                  <div className="pt-4 border-t border-slate-100 flex flex-col gap-3.5 relative z-10">
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Email Contacts</span>
                       {office.emails.map((email, eIdx) => (
                         <a
                           key={eIdx}
                           href={`mailto:${email}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 hover:text-sky-600 transition-colors"
+                          className="inline-flex items-center gap-2 text-xs font-medium text-slate-700 hover:text-sky-600 transition-colors group/link p-1 rounded-lg hover:bg-sky-50/70"
                         >
-                          <Mail className="w-3 h-3 text-sky-600" />
+                          <div className="w-6 h-6 rounded-md bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100 group-hover/link:bg-sky-100 transition-colors">
+                            <Mail className="w-3.5 h-3.5" />
+                          </div>
                           <span className="truncate">{email}</span>
                         </a>
                       ))}
                     </div>
 
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[9px] font-mono uppercase text-slate-400 font-bold">Call Contacts</span>
+                    <div className="flex flex-col gap-1.5">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Call Contacts</span>
                       {office.phones.map((phone, pIdx) => (
                         <a
                           key={pIdx}
                           href={`tel:${phone.split(' ')[0]}`}
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 hover:text-sky-600 transition-colors"
+                          className="inline-flex items-center gap-2 text-xs font-medium text-slate-700 hover:text-emerald-600 transition-colors group/link p-1 rounded-lg hover:bg-emerald-50/70"
                         >
-                          <Phone className="w-3 h-3 text-emerald-600" />
+                          <div className="w-6 h-6 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100 group-hover/link:bg-emerald-100 transition-colors">
+                            <Phone className="w-3.5 h-3.5" />
+                          </div>
                           <span className="truncate">{phone}</span>
                         </a>
                       ))}
@@ -555,50 +552,15 @@ export const ContactSection: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="mt-2 inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-slate-50 hover:bg-sky-50 text-slate-700 hover:text-sky-700 text-xs font-bold border border-slate-200 transition-colors"
+                      className="mt-2 inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white text-xs font-semibold uppercase tracking-wider transition-all duration-200 shadow-sm shadow-sky-500/20 hover:shadow-md hover:shadow-sky-500/30 hover:scale-[1.02] active:scale-95 cursor-pointer"
                     >
                       <span>Get Directions</span>
-                      <ExternalLink className="w-3 h-3" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </a>
                   </div>
                 </div>
               );
             })}
-          </div>
-
-          {/* Regional Delivery Hubs in India */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-sm flex flex-col gap-4">
-            <div className="flex items-center gap-3">
-              <div className="p-2.5 rounded-xl bg-sky-50 text-sky-600 border border-sky-100">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="text-base sm:text-lg font-extrabold text-slate-900">
-                  Regional Delivery & Specialist Hubs
-                </h4>
-                <p className="text-xs text-slate-500 font-medium">
-                  Extended client engineering & development centers across India
-                </p>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {indianBranches.map((branch, rIdx) => (
-                <div
-                  key={rIdx}
-                  className="p-4 rounded-2xl bg-slate-50/80 border border-slate-200/70 flex flex-col gap-1.5 hover:border-sky-300 hover:bg-sky-50/30 transition-all"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-extrabold text-slate-900 flex items-center gap-1.5">
-                      <MapPin className="w-3.5 h-3.5 text-sky-600" />
-                      {branch.name}
-                    </span>
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-100 text-sky-700 font-bold uppercase">{branch.tag}</span>
-                  </div>
-                  <span className="text-[11px] font-mono text-sky-700 font-bold uppercase">{branch.role}</span>
-                </div>
-              ))}
-            </div>
           </div>
 
         </div>

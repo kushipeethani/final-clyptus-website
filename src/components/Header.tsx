@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { 
-  Sliders, 
   Menu, 
   X, 
   Home, 
@@ -19,7 +18,6 @@ import { ClyptusLogo } from './ClyptusLogo';
 interface HeaderProps {
   activePage: string;
   onNavigate: (page: string) => void;
-  onToggleCustomizer: () => void;
   onPlayIntro: () => void;
   onOpen3dServices?: () => void;
 }
@@ -27,7 +25,6 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   activePage,
   onNavigate,
-  onToggleCustomizer,
   onPlayIntro,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -300,21 +297,6 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Right Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0 z-10">
-
-
-          {/* Quick Studio 3D Customizer / Filter Toggle Button */}
-          <motion.button
-            whileHover={reduceMotion ? undefined : { scale: 1.08, rotate: 90 }}
-            whileTap={reduceMotion ? undefined : { scale: 0.92, rotate: 180 }}
-            transition={{ type: 'spring', stiffness: 350, damping: 22 }}
-            onClick={onToggleCustomizer}
-            className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/80 hover:bg-white border border-slate-200/90 text-slate-700 hover:text-sky-600 transition-colors shadow-xs flex items-center justify-center cursor-pointer backdrop-blur-md"
-            title="Toggle Studio Controls"
-            aria-label="Toggle Studio Controls"
-          >
-            <Sliders className="w-3.5 h-3.5" />
-          </motion.button>
-
           {/* Mobile Glassy Hamburger Menu Button */}
           <motion.button
             whileTap={reduceMotion ? undefined : { scale: 0.92 }}
@@ -389,21 +371,10 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
 
             {/* Bottom Actions in Mobile Menu */}
-            <div className="pt-3 border-t border-slate-200/70 flex items-center gap-2">
-              <button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onToggleCustomizer();
-                }}
-                className="flex-1 py-2.5 px-3 rounded-xl bg-slate-100/90 text-slate-700 hover:text-slate-900 font-bold text-xs flex items-center justify-center gap-2 border border-slate-200 cursor-pointer"
-              >
-                <Sliders className="w-3.5 h-3.5 text-sky-600" />
-                <span>Studio 3D Controls</span>
-              </button>
-
+            <div className="pt-3 border-t border-slate-200/70">
               <button
                 onClick={() => handleMobileNav('Contact')}
-                className="flex-1 py-2.5 px-3 rounded-xl bg-slate-950 text-white hover:bg-sky-600 font-bold text-xs flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+                className="w-full py-2.5 px-3 rounded-xl bg-slate-950 text-white hover:bg-sky-600 font-bold text-xs flex items-center justify-center gap-2 shadow-sm cursor-pointer transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" />
                 <span>Contact Us</span>

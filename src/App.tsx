@@ -4,7 +4,6 @@ import { SLIDER_CARDS, DEFAULT_SPIRAL_CONFIG } from './data/sliderData';
 import type { SliderCard, SpiralConfig } from './data/sliderData';
 import { Header } from './components/Header';
 import { SpiralSlider } from './components/SpiralSlider';
-import { StudioCustomizer } from './components/StudioCustomizer';
 import { CodePromptModal } from './components/CodePromptModal';
 import { CardDetailModal } from './components/CardDetailModal';
 import { CinematicIntro } from './components/CinematicIntro';
@@ -47,14 +46,42 @@ const getInitialPage = (): string => {
   return 'Home';
 };
 
+const hasSeenIntro = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  try {
+    return (
+      sessionStorage.getItem('clyptus_intro_seen') === 'true' ||
+      localStorage.getItem('clyptus_intro_seen') === 'true'
+    );
+  } catch {
+    return false;
+  }
+};
+
+const markIntroSeen = () => {
+  if (typeof window === 'undefined') return;
+  try {
+    sessionStorage.setItem('clyptus_intro_seen', 'true');
+    localStorage.setItem('clyptus_intro_seen', 'true');
+  } catch {}
+};
+
 export function App() {
   const initialPage = useMemo(() => getInitialPage(), []);
-  const [showIntro, setShowIntro] = useState<boolean>(initialPage === 'Home');
+  const [showIntro, setShowIntro] = useState<boolean>(() => {
+    return initialPage === 'Home' && !hasSeenIntro();
+  });
   const [currentPage, setCurrentPage] = useState<string>(initialPage);
-  const [cards, setCards] = useState<SliderCard[]>(SLIDER_CARDS);
+
+  // Mark intro as seen so refreshing does not re-trigger it
+  useEffect(() => {
+    if (showIntro) {
+      markIntroSeen();
+    }
+  }, [showIntro]);
+  const [cards] = useState<SliderCard[]>(SLIDER_CARDS);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [config, setConfig] = useState<SpiralConfig>(DEFAULT_SPIRAL_CONFIG);
-  const [isCustomizerOpen, setIsCustomizerOpen] = useState<boolean>(false);
+  const [config] = useState<SpiralConfig>(DEFAULT_SPIRAL_CONFIG);
   const [is3dServicesOpen, setIs3dServicesOpen] = useState<boolean>(false);
   const [selectedCard, setSelectedCard] = useState<SliderCard | null>(null);
   const [codeModalCard, setCodeModalCard] = useState<SliderCard | null>(null);
@@ -101,22 +128,9 @@ export function App() {
     }
   }, [currentPage]);
 
-  // HR Policies Authentication State (Server-Side Session Driven)
+  // HR Policies Authentication State (Transient, strictly scoped to active HR Policies view)
   const [isHrAuthenticated, setIsHrAuthenticated] = useState<boolean>(false);
   const [authenticatedUser, setAuthenticatedUser] = useState<string | null>(null);
-
-  // Restore authenticated session on initial mount
-  useEffect(() => {
-    fetch('/api/auth/session')
-      .then((res) => (res.ok ? res.json() : { authenticated: false }))
-      .then((data) => {
-        if (data.authenticated && data.user) {
-          setIsHrAuthenticated(true);
-          setAuthenticatedUser(data.user.username);
-        }
-      })
-      .catch(() => {});
-  }, []);
 
   const handleHrLogin = async (u: string, p: string): Promise<{ success: boolean; error?: string }> => {
     try {
@@ -145,6 +159,35 @@ export function App() {
     setAuthenticatedUser(null);
   };
 
+  // Sign out whenever user navigates away from HR Policies
+  useEffect(() => {
+    if (currentPage !== 'HR Policies' && isHrAuthenticated) {
+      handleHrLogout();
+    }
+  }, [currentPage, isHrAuthenticated]);
+
+  // Always ensure fresh signout on initial mount or page refresh
+  useEffect(() => {
+    // Explicitly invalidate session on fresh mount/refresh
+    fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    setIsHrAuthenticated(false);
+    setAuthenticatedUser(null);
+
+    // Invalidate session on window unload / refresh
+    const handleUnload = () => {
+      try {
+        navigator.sendBeacon('/api/auth/logout');
+      } catch {}
+    };
+
+    window.addEventListener('beforeunload', handleUnload);
+    window.addEventListener('pagehide', handleUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleUnload);
+      window.removeEventListener('pagehide', handleUnload);
+    };
+  }, []);
+
   // Filter cards by search term
   const filteredCards = useMemo(() => {
     return cards.filter((card) => {
@@ -158,11 +201,17 @@ export function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans selection:bg-sky-500/20 selection:text-sky-800">
-      {/* Full-Screen Cinematic Intro Animation (Disabled) */}
+      {/* Full-Screen Cinematic Intro Animation (1st time visit only) */}
       {showIntro && (
         <CinematicIntro
-          onComplete={() => setShowIntro(false)}
-          onSkip={() => setShowIntro(false)}
+          onComplete={() => {
+            markIntroSeen();
+            setShowIntro(false);
+          }}
+          onSkip={() => {
+            markIntroSeen();
+            setShowIntro(false);
+          }}
         />
       )}
 
@@ -177,7 +226,6 @@ export function App() {
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
-          onToggleCustomizer={() => setIsCustomizerOpen(!isCustomizerOpen)}
           onPlayIntro={() => setShowIntro(true)}
           onOpen3dServices={() => setIs3dServicesOpen(true)}
         />
@@ -447,17 +495,6 @@ export function App() {
           setCurrentPage('Contact');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-      />
-
-      {/* Floating Studio Parameter Drawer */}
-      <StudioCustomizer
-        config={config}
-        onChangeConfig={setConfig}
-        onReset={() => setConfig(DEFAULT_SPIRAL_CONFIG)}
-        isOpen={isCustomizerOpen}
-        onToggleOpen={() => setIsCustomizerOpen(!isCustomizerOpen)}
-        cards={cards}
-        onUpdateCards={setCards}
       />
 
       {/* Card Detail Modal */}

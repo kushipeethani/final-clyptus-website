@@ -56,7 +56,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
   return (
     <footer
       ref={footerRef}
-      className="relative w-full min-h-[560px] sm:min-h-[620px] lg:min-h-[660px] overflow-hidden bg-[#111A2E] text-slate-200 font-sans flex flex-col justify-between select-none"
+      className="relative w-full min-h-[500px] sm:min-h-[620px] lg:min-h-[660px] overflow-hidden bg-[#111A2E] text-slate-200 font-sans flex flex-col justify-between select-none"
     >
       {/* ----------------------------------------------------------- */}
       {/* LAYER 1: 4K SKY & SUNSET BACKGROUND                         */}
@@ -72,10 +72,10 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
       </div>
 
       {/* ----------------------------------------------------------- */}
-      {/* LAYER 2: EXPANDED 4K "CLYPTUS" TYPOGRAPHY (RISES HEROICALLY) */}
+      {/* LAYER 2: EXPANDED 4K "CLYPTUS" TYPOGRAPHY (DESKTOP ONLY)    */}
       {/* ----------------------------------------------------------- */}
       <div
-        className="absolute inset-x-0 top-8 sm:top-10 lg:top-12 z-[5] pointer-events-none flex items-center justify-center will-change-transform px-1 sm:px-4"
+        className="hidden md:flex absolute inset-x-0 top-8 sm:top-10 lg:top-12 z-[5] pointer-events-none items-center justify-center will-change-transform px-1 sm:px-4"
         style={{
           transform: `translateY(${textTranslateY}px)`,
           opacity: textOpacity,
@@ -115,18 +115,24 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
       </div>
 
       {/* ----------------------------------------------------------- */}
-      {/* LAYER 4: INTERACTIVE FOOTER CONTENT & NAVIGATION            */}
+      {/* LAYER 4: DESKTOP FOOTER (>= md)                             */}
       {/* ----------------------------------------------------------- */}
-      <div className="relative z-[20] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-auto pt-0 pb-4 sm:pb-6 flex flex-col justify-end">
+      <div className="hidden md:flex relative z-[20] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-auto pt-0 pb-4 sm:pb-6 flex-col justify-end">
         {/* Navigation Grid embedded gracefully on the lower mountain base */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-6 sm:gap-8 pb-5 border-b border-slate-700/60 items-start">
-          {/* Brand Info */}
+          {/* Brand Logo (Company matter text removed) */}
           <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4 flex flex-col justify-start">
-            <div>
-              <p className="text-[13.5px] sm:text-[14.5px] text-slate-200/95 leading-relaxed font-normal max-w-sm">
-                Empowering modern enterprises through SAP ERP solutions, intelligent AI architectures, and specialized IT talent acquisition.
-              </p>
-            </div>
+            <button
+              type="button"
+              onClick={() => handleNav('Home')}
+              className="inline-flex items-center cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <img
+                src="/logo-white.png"
+                alt="Clyptus Logo"
+                className="h-10 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
+              />
+            </button>
           </div>
 
           {/* Column 2: Company */}
@@ -341,6 +347,240 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
             </button>
           </div>
         </div>
+      </div>
+
+      {/* ----------------------------------------------------------- */}
+      {/* LAYER 5: MOBILE FOOTER (< md) - CARDLESS, SLEEK & CLEAN     */}
+      {/* ----------------------------------------------------------- */}
+      <div className="block md:hidden relative z-[20] w-full px-5 pt-6 pb-6 flex flex-col gap-5 mt-auto">
+        
+        {/* Brand Header: Logo Only (No 2-3 lines of text, No Cards) */}
+        <div className="flex items-center justify-between pb-3.5 border-b border-white/15">
+          <button
+            type="button"
+            onClick={() => handleNav('Home')}
+            className="inline-flex items-center cursor-pointer"
+          >
+            <img
+              src="/logo-white.png"
+              alt="Clyptus Logo"
+              className="h-8 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
+            />
+          </button>
+          <div className="flex items-center gap-2">
+            <a
+              href="https://www.linkedin.com/company/clyptus/posts/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-blue-600 text-slate-200 hover:text-white transition-all flex items-center justify-center border border-white/10"
+            >
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.7a1.63 1.63 0 1 0 0 3.26 1.63 1.63 0 0 0 0-3.26Z"/>
+              </svg>
+            </a>
+            <a
+              href="https://instagram.com/clyptussoftwaresolutions?vrfl=c2JucW9hcGRrZWts"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-pink-600 text-slate-200 hover:text-white transition-all flex items-center justify-center border border-white/10"
+            >
+              <svg className="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/share/19amDstBuo/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-blue-600 text-slate-200 hover:text-white transition-all flex items-center justify-center border border-white/10"
+            >
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.5C10 7.01 11.49 5.63 13.77 5.63c1.09 0 2.23.19 2.23.19v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.77l-.44 3h-2.33v6.8c4.56-.93 8-4.96 8-9.8z"/>
+              </svg>
+            </a>
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-red-600 text-slate-200 hover:text-white transition-all flex items-center justify-center border border-white/10"
+            >
+              <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Cardless Clean Navigation Grid (2 Columns, natural flow) */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+          {/* Column 1: Services */}
+          <div>
+            <h4 className="text-[11px] font-mono font-bold text-sky-400 uppercase tracking-wider mb-2.5">
+              Services
+            </h4>
+            <ul className="space-y-2 text-xs font-medium text-slate-200/90">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('SAP')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  SAP Solutions
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('AI')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  AI Solutions
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('Recruiting')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  IT Recruitment
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('Projects')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  Case Studies
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 2: Company */}
+          <div>
+            <h4 className="text-[11px] font-mono font-bold text-indigo-300 uppercase tracking-wider mb-2.5">
+              Company
+            </h4>
+            <ul className="space-y-2 text-xs font-medium text-slate-200/90">
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('About')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  About Us
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('About', 'journey')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  Our Journey
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('About', 'leadership')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  Leadership
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('Careers')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  Careers
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => handleNav('Contact')}
+                  className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
+                >
+                  Contact Us
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Column 3: Resources */}
+          <div className="col-span-2 pt-2 border-t border-white/10">
+            <h4 className="text-[11px] font-mono font-bold text-orange-400 uppercase tracking-wider mb-2">
+              Resources & Insights
+            </h4>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium text-slate-200/90">
+              <button
+                type="button"
+                onClick={() => handleNav('HR Policies')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                HR Policies
+              </button>
+              <span className="text-slate-500">•</span>
+              <button
+                type="button"
+                onClick={() => handleNav('Blogs')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                Insights / Blog
+              </button>
+              <span className="text-slate-500">•</span>
+              <button
+                type="button"
+                onClick={() => onOpenResourceModal?.('faqs')}
+                className="hover:text-white transition-colors cursor-pointer"
+              >
+                Enterprise FAQs
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Legal & Copyright */}
+        <div className="pt-3 border-t border-white/10 flex flex-col items-center gap-1.5 text-[11px] text-slate-300 font-normal text-center">
+          <div>© 2026 Clyptus Software Solutions. All Rights Reserved.</div>
+          <div className="flex items-center justify-center gap-3 text-slate-300">
+            <button
+              type="button"
+              onClick={() => onOpenResourceModal?.('privacy')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Privacy Policy
+            </button>
+            <span>•</span>
+            <button
+              type="button"
+              onClick={() => onOpenResourceModal?.('terms')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Terms & Conditions
+            </button>
+            <span>•</span>
+            <button
+              type="button"
+              onClick={() => onOpenResourceModal?.('cookies')}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Cookie Policy
+            </button>
+          </div>
+        </div>
+
       </div>
     </footer>
   );

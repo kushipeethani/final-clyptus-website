@@ -39,6 +39,7 @@ const metrics: MetricItem[] = [
 
 export const MetricsCounterSection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [autoTime, setAutoTime] = useState<number>(0);
   const [animProgress, setAnimProgress] = useState<number>(0);
@@ -54,27 +55,34 @@ export const MetricsCounterSection: React.FC = () => {
     return () => cancelAnimationFrame(animId);
   }, []);
 
-  // Intersection Observer for instant 60 FPS count-up triggering
+  // Intersection Observer to trigger count-up every time cards enter the viewport
   useEffect(() => {
+    const target = cardsRef.current || containerRef.current;
+    if (!target) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        const entry = entries[0];
+        if (entry.isIntersecting) {
           setIsVisible(true);
+        } else {
+          // Reset when scrolling away so animation re-triggers every time user scrolls back
+          setIsVisible(false);
+          setAnimProgress(0);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
+    observer.observe(target);
 
     return () => observer.disconnect();
   }, []);
 
-  // Smooth count-up animation lerp (1.0s liquid ease-out curve)
+  // Smooth count-up animation lerp (1.0s liquid ease-out curve) every time cards enter view
   useEffect(() => {
     if (isVisible) {
+      setAnimProgress(0);
       let startTime: number | null = null;
       let frameId: number;
 
@@ -93,12 +101,22 @@ export const MetricsCounterSection: React.FC = () => {
 
       frameId = requestAnimationFrame(step);
       return () => cancelAnimationFrame(frameId);
+    } else {
+      setAnimProgress(0);
     }
   }, [isVisible]);
 
+  // Click handler to allow manual replay anytime
+  const handleCardClick = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 20);
+  };
+
   return (
     /* Clean, tight responsive section without fade-in/fade-out opacity hiding or large scroll gaps */
-    <section ref={containerRef} className="w-full py-16 sm:py-24 bg-white select-none border-y border-slate-100 relative overflow-hidden">
+    <section id="metrics" ref={containerRef} className="w-full py-16 sm:py-24 bg-white select-none border-y border-slate-100 relative overflow-hidden">
       {/* Background Soft Ambient Glow Accents */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-50/70 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-indigo-50/70 rounded-full blur-3xl pointer-events-none" />
@@ -112,12 +130,12 @@ export const MetricsCounterSection: React.FC = () => {
         </div>
 
           {/* 3 Metric Cards (Always 100% visible - No fade-in/fade-out) */}
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <div ref={cardsRef} className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {metrics.map((metric, idx) => {
               const IconComp = metric.icon;
               
               // Count up number calculated with fast cubic ease-out animation curve
-              const currentCount = Math.floor(animProgress * metric.targetValue);
+              const currentCount = Math.round(animProgress * metric.targetValue);
 
               // Subtle 60 FPS organic sine wave float offset
               const autoFloatY = Math.sin(autoTime + idx * 1.5) * 6;
@@ -137,11 +155,13 @@ export const MetricsCounterSection: React.FC = () => {
               return (
                 <div
                   key={metric.id}
+                  onClick={handleCardClick}
+                  title="Click to replay animation"
                   style={{
                     transform: `translate3d(0, ${autoFloatY}px, 0)`,
                     willChange: 'transform',
                   }}
-                  className="flex flex-col items-center md:items-start text-center md:text-left p-6 sm:p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.15)] hover:border-sky-400 transition-all duration-300 group hover:-translate-y-1"
+                  className="flex flex-col items-center md:items-start text-center md:text-left p-6 sm:p-8 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 shadow-[0_15px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(2,132,199,0.15)] hover:border-sky-400 transition-all duration-300 group hover:-translate-y-1 cursor-pointer"
                 >
                   {/* Header Row: Icon + Animated Gradient Percentage */}
                   <div className="flex items-center gap-4 mb-5">

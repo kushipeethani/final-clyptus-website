@@ -31,3 +31,4 @@ dist-ssr
 *.sw?
 *.exe
 cloudflared.exe
+.tools/
