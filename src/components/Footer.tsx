@@ -123,26 +123,8 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Navigation Columns Overlaying Across the Brandmark */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8 my-auto pb-4">
 
-          {/* Column 1: Brand Logo (Company matter text removed) */}
-          <div className="flex flex-col justify-start">
-            <div>
-              <button
-                type="button"
-                onClick={() => {
-                  onNavigate?.('Home');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="inline-flex items-center hover:opacity-90 transition-opacity cursor-pointer group"
-                title="Clyptus Home"
-              >
-                <img
-                  src="/logo-white.png"
-                  alt="Clyptus Logo"
-                  className="h-10 sm:h-11 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)] group-hover:scale-[1.03] transition-transform"
-                />
-              </button>
-            </div>
-          </div>
+          {/* Column 1: Spacer (sub-text removed) */}
+          <div className="hidden lg:block" aria-hidden="true" />
 
           {/* Column 2: Company */}
           <div>
@@ -177,7 +159,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onNavigate?.('About', 'leadership')}
                   className="hover:text-white transition-colors cursor-pointer text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 >
-                  Leadership / Our Team
+                  Leadership Team
                 </button>
               </li>
               <li>
@@ -201,7 +183,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-white transition-colors cursor-pointer text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 >
-                  Projects / Case Studies
+                  Case Studies
                 </button>
               </li>
               <li>
@@ -234,7 +216,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-amber-300 transition-colors cursor-pointer text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 >
-                  SAP Solutions
+                  Enterprise Applications
                 </button>
               </li>
               <li>
@@ -246,7 +228,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-orange-300 transition-colors cursor-pointer text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 >
-                  AI Solutions
+                  AI & Data Intelligence
                 </button>
               </li>
               <li>
@@ -258,7 +240,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-amber-200 transition-colors cursor-pointer text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 >
-                  IT Recruitment
+                  Talent Acquisition
                 </button>
               </li>
             </ul>
@@ -291,7 +273,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-white transition-colors cursor-pointer text-left drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                 >
-                  Insights / Blog
+                  Insights
                 </button>
               </li>
             </ul>
@@ -400,11 +382,9 @@ export const Footer: React.FC<FooterProps> = ({
             }}
             className="inline-flex items-center cursor-pointer"
           >
-            <img
-              src="/logo-white.png"
-              alt="Clyptus Logo"
-              className="h-8 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
-            />
+            <span className="text-xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              Clyptus
+            </span>
           </button>
           <div className="flex items-center gap-2">
             <a
@@ -473,7 +453,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-amber-300 transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  SAP Solutions
+                  Enterprise Applications
                 </button>
               </li>
               <li>
@@ -485,7 +465,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-orange-300 transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  AI Solutions
+                  AI & Data Intelligence
                 </button>
               </li>
               <li>
@@ -497,7 +477,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-amber-200 transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  IT Recruitment
+                  Talent Acquisition
                 </button>
               </li>
             </ul>
@@ -542,7 +522,7 @@ export const Footer: React.FC<FooterProps> = ({
                   }}
                   className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  Leadership
+                  Leadership Team
                 </button>
               </li>
               <li>
@@ -609,7 +589,7 @@ export const Footer: React.FC<FooterProps> = ({
                 }}
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                Insights / Blog
+                Insights
               </button>
             </div>
           </div>

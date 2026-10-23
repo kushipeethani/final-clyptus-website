@@ -72,10 +72,10 @@ const INDUSTRIES_DATA: IndustryItem[] = [
     id: 'professional-services',
     name: 'Professional Services',
     subtitle: 'Consulting, Legal & IT Services',
-    description: 'Commercial Project Management, time & expense tracking, resource utilization analytics, and automated billing.',
+    description: 'Commercial Project Management, time & expense tracking, talent utilization analytics, and automated billing.',
     icon: Briefcase,
     iconBg: 'purple',
-    solutions: ['Resource Optimization', 'Project Billing', 'Time & Expense']
+    solutions: ['Talent Optimization', 'Project Billing', 'Time & Expense']
   },
   {
     id: 'mines-minerals',

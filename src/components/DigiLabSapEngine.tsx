@@ -35,8 +35,8 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
     {
       id: 1,
       num: '01',
-      title: 'Strategy',
-      metric: 'Roadmap & Architecture',
+      title: 'ERP Strategy',
+      metric: 'ERP Transformation Roadmap',
       color: '#EA580C',
       icon: Compass,
       desc: 'Current landscape assessment, business case definition & sequence planning.',
@@ -44,8 +44,8 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
     {
       id: 2,
       num: '02',
-      title: 'Migration',
-      metric: 'ECC -> S/4HANA Conversion',
+      title: 'ERP Migration',
+      metric: 'SAP ECC to S/4HANA Migration',
       color: '#2563EB',
       icon: RefreshCw,
       desc: 'Brownfield conversion, custom-code remediation & data cleansing.',
@@ -53,7 +53,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
     {
       id: 3,
       num: '03',
-      title: 'Implementation',
+      title: 'ERP Implementation',
       metric: 'Core Finance & Supply Chain',
       color: '#0284C7',
       icon: Layers,
@@ -62,8 +62,8 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
     {
       id: 4,
       num: '04',
-      title: 'Development',
-      metric: 'ABAP & Fiori Stack',
+      title: 'ERP Development',
+      metric: 'ABAP & SAP Fiori Development',
       color: '#8B5CF6',
       icon: Code,
       desc: 'Custom SAP extensions, Fiori UX apps and analytics integrations.',
@@ -71,8 +71,8 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
     {
       id: 5,
       num: '05',
-      title: 'Support',
-      metric: '24/7 AMS SLA Response',
+      title: 'ERP Support',
+      metric: 'Application Management Services (AMS)',
       color: '#10B981',
       icon: ShieldCheck,
       desc: 'Post go-live application management, enhancements & release updates.',
@@ -461,16 +461,15 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
           >
             {/* Hero Headline */}
             <h1 className="text-4xl sm:text-6xl font-black text-slate-900 tracking-tight leading-[1.08] mb-4">
-              SAP Consulting, Implementation &amp;{' '}
+              Enterprise ERP Solutions &amp;{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-sky-600 to-indigo-600">
-                Support Services
+                Services
               </span>
             </h1>
 
             {/* Exact Hero Paragraph */}
             <p className="text-slate-600 text-base sm:text-lg font-medium leading-relaxed max-w-2xl mb-8">
-              Clyptus helps businesses plan, implement, convert, develop and support SAP S/4HANA
-              environments, from strategy through post-go-live operations.
+              Architecting resilient, future-ready enterprise systems. We deliver end-to-end SAP S/4HANA migrations, custom BTP innovations, and full-lifecycle ERP support for global enterprises.
             </p>
 
             {/* Exact CTA Button */}
@@ -478,7 +477,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
               onClick={onContactClick}
               className="flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 via-sky-600 to-indigo-600 text-white font-extrabold text-sm shadow-xl hover:shadow-2xl transition-all"
             >
-              <span>Talk to Our SAP Team</span>
+              <span>Talk to Our ERP Team</span>
               <ArrowRight className="w-4 h-4 stroke-[2.5]" />
             </button>
           </div>
@@ -513,7 +512,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
             </div>
 
             <span className="absolute bottom-16 px-4 py-1.5 rounded-full bg-white border border-slate-200/90 text-slate-900 font-mono text-xs font-bold uppercase tracking-widest shadow-md backdrop-blur-md">
-              CONVERGING SAP DATA STREAMS
+              CONVERGING ERP DATA STREAMS
             </span>
           </div>
 
@@ -625,22 +624,21 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
         /* MOBILE FALLBACK (< 768px): Clean Hero + Vertical Timeline */
         <div className="py-20 px-4 flex flex-col items-center text-center gap-6 bg-slate-50">
           <h1 className="text-3xl font-black text-slate-900 leading-tight">
-            SAP Consulting, Implementation &amp;{' '}
+            Enterprise ERP Solutions &amp;{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-sky-600">
-              Support Services
+              Services
             </span>
           </h1>
 
           <p className="text-slate-600 text-sm font-medium leading-relaxed">
-            Clyptus helps businesses plan, implement, convert, develop and support SAP S/4HANA
-            environments, from strategy through post-go-live operations.
+            Architecting resilient, future-ready enterprise systems. We deliver end-to-end SAP S/4HANA migrations, custom BTP innovations, and full-lifecycle ERP support for global enterprises.
           </p>
 
           <button
             onClick={onContactClick}
             className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-sky-600 text-white font-extrabold text-xs shadow-md"
           >
-            Talk to Our SAP Team →
+            Talk to Our ERP Team →
           </button>
 
           {/* Mobile Vertical Timeline */}

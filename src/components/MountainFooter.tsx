@@ -41,8 +41,8 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
     };
   }, []);
 
-  // Starts hidden behind hills (+130px) and rises gracefully into the sky (-20px)
-  const textTranslateY = 130 - scrollProgress * 150;
+  // Starts hidden behind hills (+90px) and rises gracefully into the sky (-20px)
+  const textTranslateY = 90 - scrollProgress * 110;
   const textOpacity = 0.2 + scrollProgress * 0.8;
 
   const handleNav = (page: string, sectionId?: string) => {
@@ -56,7 +56,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
   return (
     <footer
       ref={footerRef}
-      className="relative w-full min-h-[500px] sm:min-h-[620px] lg:min-h-[660px] overflow-hidden bg-[#111A2E] text-slate-200 font-sans flex flex-col justify-between select-none"
+      className="relative w-full min-h-[440px] sm:min-h-[480px] overflow-hidden bg-[#111A2E] text-slate-200 font-sans flex flex-col justify-between select-none"
     >
       {/* ----------------------------------------------------------- */}
       {/* LAYER 1: 4K SKY & SUNSET BACKGROUND                         */}
@@ -75,7 +75,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
       {/* LAYER 2: EXPANDED 4K "CLYPTUS" TYPOGRAPHY (DESKTOP ONLY)    */}
       {/* ----------------------------------------------------------- */}
       <div
-        className="hidden md:flex absolute inset-x-0 top-8 sm:top-10 lg:top-12 z-[5] pointer-events-none items-center justify-center will-change-transform px-1 sm:px-4"
+        className="hidden md:flex absolute inset-x-0 top-6 sm:top-8 z-[5] pointer-events-none items-center justify-center will-change-transform px-1 sm:px-4"
         style={{
           transform: `translateY(${textTranslateY}px)`,
           opacity: textOpacity,
@@ -84,7 +84,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
       >
         <svg
           viewBox="0 0 1350 280"
-          className="w-full max-w-[99vw] h-auto overflow-visible select-none drop-shadow-[0_8px_45px_rgba(255,255,255,0.45)]"
+          className="w-full max-w-[95vw] lg:max-w-[88vw] h-auto overflow-visible select-none drop-shadow-[0_8px_45px_rgba(255,255,255,0.45)]"
           preserveAspectRatio="xMidYMid meet"
         >
           <text
@@ -117,23 +117,11 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
       {/* ----------------------------------------------------------- */}
       {/* LAYER 4: DESKTOP FOOTER (>= md)                             */}
       {/* ----------------------------------------------------------- */}
-      <div className="hidden md:flex relative z-[20] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-auto pt-0 pb-4 sm:pb-6 flex-col justify-end">
+      <div className="hidden md:flex relative z-[20] w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 mt-auto pt-0 pb-3 sm:pb-4 flex-col justify-end">
         {/* Navigation Grid embedded gracefully on the lower mountain base */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-6 sm:gap-8 pb-5 border-b border-slate-700/60 items-start">
-          {/* Brand Logo (Company matter text removed) */}
-          <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4 flex flex-col justify-start">
-            <button
-              type="button"
-              onClick={() => handleNav('Home')}
-              className="inline-flex items-center cursor-pointer hover:opacity-90 transition-opacity"
-            >
-              <img
-                src="/logo-white.png"
-                alt="Clyptus Logo"
-                className="h-10 w-auto object-contain drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]"
-              />
-            </button>
-          </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 lg:grid-cols-12 gap-4 sm:gap-6 pb-4 border-b border-slate-700/60 items-start">
+          {/* Left spacer column (sub-text removed) */}
+          <div className="col-span-1 sm:col-span-2 md:col-span-6 lg:col-span-4" aria-hidden="true" />
 
           {/* Column 2: Company */}
           <div className="col-span-1 sm:col-span-1 md:col-span-3 lg:col-span-2">
@@ -195,7 +183,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('SAP')}
                   className="text-slate-200 hover:text-sky-300 hover:translate-x-1 transition-all duration-200 cursor-pointer text-left block"
                 >
-                  SAP Solutions
+                  Enterprise Applications
                 </button>
               </li>
               <li>
@@ -203,7 +191,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('AI')}
                   className="text-slate-200 hover:text-sky-300 hover:translate-x-1 transition-all duration-200 cursor-pointer text-left block"
                 >
-                  AI Solutions
+                  AI & Data Intelligence
                 </button>
               </li>
               <li>
@@ -211,7 +199,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('Recruiting')}
                   className="text-slate-200 hover:text-sky-300 hover:translate-x-1 transition-all duration-200 cursor-pointer text-left block"
                 >
-                  IT Recruitment
+                  Talent Acquisition
                 </button>
               </li>
               <li>
@@ -244,15 +232,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('Blogs')}
                   className="text-slate-200 hover:text-sky-300 hover:translate-x-1 transition-all duration-200 cursor-pointer text-left block"
                 >
-                  Insights / Blog
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => onOpenResourceModal?.('faqs')}
-                  className="text-slate-200 hover:text-sky-300 hover:translate-x-1 transition-all duration-200 cursor-pointer text-left block"
-                >
-                  Enterprise FAQs
+                  Insights
                 </button>
               </li>
             </ul>
@@ -352,20 +332,18 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
       {/* ----------------------------------------------------------- */}
       {/* LAYER 5: MOBILE FOOTER (< md) - CARDLESS, SLEEK & CLEAN     */}
       {/* ----------------------------------------------------------- */}
-      <div className="block md:hidden relative z-[20] w-full px-5 pt-6 pb-6 flex flex-col gap-5 mt-auto">
+      <div className="block md:hidden relative z-[20] w-full px-5 pt-4 pb-4 flex flex-col gap-4 mt-auto">
         
-        {/* Brand Header: Logo Only (No 2-3 lines of text, No Cards) */}
+        {/* Brand Header: Text Only (Logo removed) */}
         <div className="flex items-center justify-between pb-3.5 border-b border-white/15">
           <button
             type="button"
             onClick={() => handleNav('Home')}
             className="inline-flex items-center cursor-pointer"
           >
-            <img
-              src="/logo-white.png"
-              alt="Clyptus Logo"
-              className="h-8 w-auto object-contain drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]"
-            />
+            <span className="text-xl font-black tracking-tight text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+              Clyptus
+            </span>
           </button>
           <div className="flex items-center gap-2">
             <a
@@ -431,7 +409,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('SAP')}
                   className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  SAP Solutions
+                  Enterprise Applications
                 </button>
               </li>
               <li>
@@ -440,7 +418,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('AI')}
                   className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  AI Solutions
+                  AI & Data Intelligence
                 </button>
               </li>
               <li>
@@ -449,7 +427,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('Recruiting')}
                   className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  IT Recruitment
+                  Talent Acquisition
                 </button>
               </li>
               <li>
@@ -494,7 +472,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                   onClick={() => handleNav('About', 'leadership')}
                   className="hover:text-white transition-colors text-left block w-full truncate cursor-pointer drop-shadow-xs"
                 >
-                  Leadership
+                  Leadership Team
                 </button>
               </li>
               <li>
@@ -537,15 +515,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
                 onClick={() => handleNav('Blogs')}
                 className="hover:text-white transition-colors cursor-pointer"
               >
-                Insights / Blog
-              </button>
-              <span className="text-slate-500">•</span>
-              <button
-                type="button"
-                onClick={() => onOpenResourceModal?.('faqs')}
-                className="hover:text-white transition-colors cursor-pointer"
-              >
-                Enterprise FAQs
+                Insights
               </button>
             </div>
           </div>

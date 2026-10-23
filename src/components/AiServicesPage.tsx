@@ -83,7 +83,7 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
     'Intelligent process automation',
     'Machine learning & predictive analytics',
     'Conversational AI',
-    'AI-powered decision support',
+    'AI-native decision support',
   ];
 
   const dataServicesList = [
@@ -108,32 +108,32 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
   const projectSteps = [
     {
       step: '01',
-      title: 'Data-driven foundation',
-      desc: 'High-quality data engineering for accurate insight.',
+      title: 'Data Audit & Pipeline Readiness',
+      desc: 'Ingesting, cleansing, and structuring enterprise feeds for algorithmic consumption.',
       icon: Database,
     },
     {
       step: '02',
-      title: 'Model engineering',
-      desc: 'State-of-the-art algorithms and architectures.',
+      title: 'Architecture & Model Selection',
+      desc: 'Selecting, fine-tuning, or developing bespoke neural architectures and RAG frameworks.',
       icon: Cpu,
     },
     {
       step: '03',
-      title: 'Training and validation',
-      desc: 'Rigorous testing for reliability and performance.',
+      title: 'Validation & Guardrail Benchmarking',
+      desc: 'Rigorous testing for latency, accuracy, safety, and business-metric thresholds.',
       icon: ShieldCheck,
     },
     {
       step: '04',
-      title: 'Deployment at scale',
-      desc: 'MLOps for smooth and secure deployment.',
+      title: 'Production Deployment & Integration',
+      desc: 'Secure API integration with core enterprise systems via resilient MLOps infrastructure.',
       icon: Layers,
     },
     {
       step: '05',
-      title: 'Continuous learning',
-      desc: 'Models that evolve with your business.',
+      title: 'Continuous Monitoring & Drift Mitigation',
+      desc: 'Automated evaluation loops to prevent data drift and adapt to evolving business patterns.',
       icon: RefreshCw,
     },
   ];
@@ -152,7 +152,7 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
   const industryProjects = [
     {
       sector: 'Retail',
-      title: 'AI-Powered Demand Forecasting',
+      title: 'AI-Native Demand Forecasting',
       desc: 'Machine learning prediction models optimizing inventory levels and order planning across omni-channel fulfillment nodes.',
       icon: ShoppingBag,
       color: 'sky',

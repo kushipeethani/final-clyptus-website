@@ -318,8 +318,11 @@ export function App() {
           {/* Title Hero Banner */}
           <div className="pt-6 sm:pt-8 pb-3 sm:pb-4 px-4 text-center flex flex-col items-center gap-2 sm:gap-3 max-w-3xl">
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-              AI Powered <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Solutions</span> That Change Your Business
+              AI-Driven Solutions for a <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">Smarter Business Future</span>
             </h1>
+            <p className="text-base sm:text-lg text-slate-600 font-medium max-w-2xl leading-relaxed">
+              From AI innovation to end-to-end IT services, we empower businesses to transform, innovate, and scale with intelligent technology solutions built for the future.
+            </p>
           </div>
 
           {/* 3D Spiral Slider Stage (Full Width Edge-to-Edge) */}
@@ -347,7 +350,7 @@ export function App() {
           {/* Metrics Counter Animated Section */}
           <MetricsCounterSection />
 
-          {/* AI Scroll-Driven Section (Stage 1: SMART IT SERVICES -> Stage 2: 3 Cards for SAP, IT Recruiting, AI) */}
+          {/* AI Scroll-Driven Section (Stage 1: INTELLIGENT TECHNOLOGY -> Stage 2: 3 Cards for SAP, Talent Acquisition, AI) */}
           <AiImpactSection
             onSelectService={(serviceId) => {
               if (serviceId === 'sap') {

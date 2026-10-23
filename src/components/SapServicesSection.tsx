@@ -154,32 +154,32 @@ export const platformPills = [
 export const methodologySteps = [
   {
     step: '01',
-    title: 'Review the Legacy ERP',
-    desc: 'Siloed, complex systems are mapped and assessed.',
+    title: 'Discover & Landscape Assessment',
+    desc: 'Comprehensive code remediation audits, data profiling, and dependency mapping of your legacy landscape.',
     icon: SearchIcon,
   },
   {
     step: '02',
-    title: 'Transformation Roadmap',
-    desc: 'Strategy, assessment and plan.',
+    title: 'Strategic Roadmapping & Architecture',
+    desc: 'Defining business value cases, target operating models, and clear phased cutover schedules.',
     icon: Compass,
   },
   {
     step: '03',
-    title: 'Process Reengineering',
-    desc: 'Optimize and standardize the processes.',
+    title: 'Process Reengineering & Clean Core',
+    desc: 'Standardizing core finance and supply chain workflows while decoupling custom extensions.',
     icon: Workflow,
   },
   {
     step: '04',
-    title: 'Cloud ERP Migration',
-    desc: 'Migrate and integrate.',
+    title: 'Data Migration & Hybrid Cutover',
+    desc: 'Validated data transformation, automated testing suites, and seamless transition with minimal business interruption.',
     icon: Cloud,
   },
   {
     step: '05',
-    title: 'Intelligent Enterprise',
-    desc: 'Innovate, scale and grow on the new platform.',
+    title: 'Hypercare & Continuous Innovation',
+    desc: 'SLA-backed stabilization, telemetry monitoring, and value realization via continuous platform enhancements.',
     icon: Rocket,
   },
 ];
@@ -339,7 +339,7 @@ export const timelineMilestones = [
   {
     year: '2020–23',
     title: 'BRIM & Analytics Practice',
-    desc: 'Data Analytics and BRIM staffing introduced.',
+    desc: 'Data Analytics and BRIM talent solutions introduced.',
   },
   {
     year: '2023–25',
@@ -379,7 +379,7 @@ export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContac
 
   // Set document title & metadata
   useEffect(() => {
-    document.title = 'SAP Consulting, Implementation & Support Services | Clyptus';
+    document.title = 'Enterprise ERP Solutions & Services | Clyptus';
   }, []);
 
   // 9. FREQUENTLY ASKED QUESTIONS
@@ -439,19 +439,16 @@ export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContac
 
           {/* H1 Headline */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] max-w-4xl">
-            SAP & ERP Implementation and{' '}
+            End-to-End Enterprise{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              Consulting Services
+              Modernization
             </span>
           </h1>
 
           {/* Introduction Copy */}
           <div className="space-y-3 max-w-3xl text-slate-600 text-sm sm:text-base lg:text-lg font-medium leading-relaxed">
             <p>
-              Clyptus helps enterprises plan, implement and support ERP systems. SAP is our deepest practice: S/4HANA, SAP Cloud, BTP, HCM and BRIM, delivered by more than 250 SAP consultants. We also work on Oracle Cloud ERP and Microsoft Dynamics 365.
-            </p>
-            <p className="text-slate-800 font-semibold">
-              Since 2014 we have delivered SAP projects from Hyderabad to clients in India and the UAE.
+              With over a decade of domain leadership, Clyptus enables enterprises to transition from legacy infrastructure to intelligent ERP ecosystems. Backed by 250+ certified consultants across India, the UAE, and the USA, our practice specializes in high-complexity SAP S/4HANA migrations, SAP BTP extensions, and SAP BRIM monetization platforms, alongside multi-cloud ERP delivery across Oracle and Microsoft Dynamics 365.
             </p>
           </div>
 

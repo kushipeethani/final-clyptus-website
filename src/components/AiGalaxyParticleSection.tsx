@@ -372,7 +372,7 @@ export const AiGalaxyParticleSection: React.FC<AiGalaxyParticleSectionProps> = (
               onClick={onNavigateContact}
               className="group relative flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all duration-300 mt-2"
             >
-              <span>Talk to our AI team</span>
+              <span>Talk to an Expert</span>
               <ArrowRight className="w-4 h-4 stroke-[3] group-hover:translate-x-1 transition-transform" />
             </button>
           )}

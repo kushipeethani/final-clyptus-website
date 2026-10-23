@@ -22,7 +22,7 @@ const SERVICES_DATA: ServiceCategory[] = [
   {
     id: 'sap',
     number: '01',
-    title: 'SAP Services',
+    title: 'ERP Services',
     tagline: 'Enterprise Cloud & S/4HANA',
     badge: 'ENTERPRISE PRACTICE',
     icon: Database,

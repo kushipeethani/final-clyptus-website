@@ -366,27 +366,23 @@ export const SpiralSlider: React.FC<SpiralSliderProps> = ({
                         alt={card.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 via-40% to-transparent" />
                     </div>
 
                     <div className="flex-1" />
 
                     <div className="relative z-10 flex flex-col gap-1 text-left">
-                      <h3 className="text-sm font-bold text-slate-900 tracking-tight leading-snug group-hover:text-sky-600 transition-colors">
+                      <div className="flex items-center gap-1.5">
+                        <span className="text-[10px] font-mono font-black text-sky-700 bg-sky-50/95 border border-sky-200/90 px-1.5 py-0.2 rounded shadow-xs">
+                          {card.num || (i + 1 < 10 ? `0${i + 1}` : `${i + 1}`)}
+                        </span>
+                      </div>
+                      <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 tracking-tight leading-snug group-hover:text-sky-600 transition-colors">
                         {card.title}
                       </h3>
-                      <p className="text-[11px] text-slate-600 line-clamp-1 leading-relaxed font-medium">
+                      <p className="text-[10px] sm:text-[11px] text-slate-600 line-clamp-2 leading-relaxed font-medium">
                         {card.subtitle}
                       </p>
-
-                      <div className="flex flex-wrap gap-1 mt-0.5">
-                        {card.tags.slice(0, 2).map((tag, tIdx) => (
-                          <span key={tIdx} className="text-[9px] px-1.5 py-0.2 rounded bg-slate-100 text-slate-600 border border-slate-200">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
                     </div>
                   </div>
                 </div>

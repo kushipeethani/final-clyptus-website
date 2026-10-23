@@ -49,7 +49,7 @@ const ScrollAnimatedHeroTitle: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="inline-block"
         >
-          IT &amp; SAP
+          Talent
         </motion.span>{' '}
         <motion.span
           initial={{ opacity: 30, y: 170 }}
@@ -58,7 +58,7 @@ const ScrollAnimatedHeroTitle: React.FC = () => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="inline-block"
         >
-          Recruitment and
+          Acquisition &amp;
         </motion.span>{' '}
         <motion.span
           initial={{ opacity: 0, scale: 0.88 }}
@@ -67,7 +67,7 @@ const ScrollAnimatedHeroTitle: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 drop-shadow-sm"
         >
-          Staffing Services
+          Workforce Solutions
         </motion.span>
       </motion.h1>
     </motion.div>
@@ -112,7 +112,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
     },
     {
       id: 'roles-ai',
-      area: 'AI & GenAI',
+      area: 'AI & Data',
       badge: 'EMERGING TECH',
       roles: 'AI developers, GraphRAG, graph databases with Python on AWS.',
     },
@@ -171,13 +171,13 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
     {
       step: '01',
       title: 'Requirement Deep Dive',
-      details: 'Architecture sessions and process mapping, billing volume and SLA analysis, integration landscape review, gap identification and resource specification.',
+      details: 'Architecture sessions and process mapping, billing volume and SLA analysis, integration landscape review, gap identification and talent specification.',
       icon: Search,
     },
     {
       step: '02',
       title: 'Architect-Level Screening',
-      details: 'Scenario-based evaluations, rating, invoicing and FI-CA tests, integration and performance validation. Only top candidates move forward.',
+      details: 'Scenario-based evaluations, rating, invoicing and FI-CA tests, integration and performance validation. Only top professionals move forward.',
       icon: UserCheck,
     },
     {
@@ -215,9 +215,9 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
       highlight: 'Best of cost efficiency & local presence',
     },
     {
-      title: 'Individual Niche Consultants',
+      title: 'Specialist Talent Deployment',
       badge: 'ON-DEMAND EXPERTS',
-      desc: 'On-demand experts in CC, CI and RAR, placed directly into your project on contract or contract-to-hire terms.',
+      desc: 'On-demand experts in CC, CI and RAR, deployed directly into your project on contract or contract-to-hire terms.',
       highlight: 'Rapid insertion into active projects',
     },
   ];
@@ -271,7 +271,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
 
           {/* Hero Meta Description Paragraph */}
           <p className="text-base sm:text-lg lg:text-xl font-medium text-slate-600 max-w-3xl leading-relaxed mb-8">
-            Hire SAP, ERP and IT talent faster. Clyptus offers leadership hiring, contract and permanent staffing, and RPO with global delivery from India and offices in the UAE and USA.
+            Onboard SAP, ERP and IT talent faster. Clyptus offers executive search, flexible and permanent talent acquisition, and RPO with global delivery from India and offices in the UAE and USA.
           </p>
 
           {/* Hero Primary Action CTA Button (SAP Page Blue-Indigo-Orange Gradient Style) */}
@@ -280,7 +280,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
               onClick={handleContactClick}
               className="group relative flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 text-white font-extrabold text-sm uppercase tracking-wider shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <span>Talk to Our Hiring Team</span>
+              <span>Talk to an Expert</span>
               <ArrowRight className="w-4 h-4 stroke-[2.5] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -303,7 +303,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
                 </span>
               </h2>
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
-                Clyptus helps enterprises hire SAP and ERP specialists, IT engineers and senior leaders. We run permanent hiring, contract staffing, contract-to-hire and full recruitment process outsourcing, with delivery from India and offices in the UAE and USA.
+                Clyptus helps enterprises deploy SAP and ERP specialists, IT engineers and senior leaders. We deliver flexible and permanent talent acquisition, contract-to-hire and full recruitment process outsourcing, with global delivery from India and offices in the UAE and USA.
               </p>
             </div>
 
@@ -323,7 +323,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
                     <div className="w-5 h-5 rounded-full bg-blue-100 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0">
                       <CheckCircle2 className="w-3.5 h-3.5 stroke-[2.5]" />
                     </div>
-                    <span>Contract Staffing</span>
+                    <span>Flexible Talent Acquisition</span>
                   </li>
                   <li className="flex items-center gap-2.5">
                     <div className="w-5 h-5 rounded-full bg-blue-100 border border-blue-200 text-blue-600 flex items-center justify-center shrink-0">
@@ -344,7 +344,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
                 onClick={handleContactClick}
                 className="mt-6 w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 hover:scale-[1.02] text-white font-extrabold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-xl"
               >
-                <span>Request Talent</span>
+                <span>Talk to an Expert</span>
                 <ArrowRight className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
@@ -426,14 +426,14 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
               </span>
             </h2>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-medium">
-              We recruit for IT services companies, and also for product companies. We hire permanent staff and contract staff for both.
+              We deploy talent for IT services companies and product engineering companies, delivering both flexible and permanent talent solutions.
             </p>
           </div>
 
           <div className="relative z-10 flex flex-wrap gap-4 shrink-0">
             <div className="px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 text-left">
               <span className="text-xs font-mono font-bold text-blue-600 uppercase block mb-0.5">Engagement Types</span>
-              <span className="text-sm font-extrabold text-slate-900">Permanent & Contract Staffing</span>
+              <span className="text-sm font-extrabold text-slate-900">Flexible & Permanent Talent Acquisition</span>
             </div>
             <div className="px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 text-left">
               <span className="text-xs font-mono font-bold text-orange-600 uppercase block mb-0.5">Target Enterprises</span>
@@ -562,14 +562,14 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
               </span>
             </h2>
             <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed mb-10 max-w-2xl mx-auto">
-              Contact our talent acquisition leaders today to discuss your permanent, contract, or RPO staffing requirements.
+              Contact our talent acquisition leaders today to discuss your flexible, permanent, or RPO talent requirements.
             </p>
 
             <button
               onClick={handleContactClick}
               className="group inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 text-white font-extrabold text-sm uppercase tracking-wider shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <span>Talk to Our Hiring Team</span>
+              <span>Talk to an Expert</span>
               <ArrowRight className="w-4 h-4 stroke-[2.5] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import type { SliderCard } from '../data/sliderData';
-import { X, ShieldCheck, Zap, Cpu, Database, Heart } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { X, ShieldCheck, Zap, Cpu, Database } from 'lucide-react';
 
 interface CardDetailModalProps {
   card: SliderCard | null;
@@ -14,21 +13,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
   onClose,
   onNavigate,
 }) => {
-  const [liked, setLiked] = React.useState(false);
-
   if (!card) return null;
-
-  const handleLike = () => {
-    setLiked(!liked);
-    if (!liked) {
-      confetti({
-        particleCount: 40,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ['#ec4899', '#0284c7', '#6366f1']
-      });
-    }
-  };
 
   const handleGoToDetails = () => {
     if (onNavigate && card.pageRoute) {
@@ -51,38 +36,25 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-          
-          <div className="absolute top-4 left-4 flex items-center gap-2">
-            <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase bg-white/90 text-sky-700 border border-sky-300 backdrop-blur-md shadow-sm">
-              {card.category}
-            </span>
-          </div>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleLike();
-            }}
-            className={`absolute bottom-4 left-4 p-2.5 rounded-full border backdrop-blur-md transition-all shadow-sm ${
-              liked 
-                ? 'bg-pink-500 text-white border-pink-400 shadow-[0_4px_15px_rgba(236,72,153,0.4)]' 
-                : 'bg-white/90 text-slate-700 border-slate-200 hover:text-pink-600'
-            }`}
-          >
-            <Heart className={`w-4 h-4 ${liked ? 'fill-current' : ''}`} />
-          </button>
         </div>
 
         {/* Right Side: Details & Practice Highlights */}
         <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-sky-600 font-bold uppercase tracking-wider">
-                {card.subtitle}
-              </span>
+              <div className="flex items-center gap-2">
+                {card.num && (
+                  <span className="text-xs font-mono font-black text-sky-700 bg-sky-50 border border-sky-200 px-2 py-0.5 rounded">
+                    {card.num}
+                  </span>
+                )}
+                <span className="text-xs font-medium text-slate-500">
+                  {card.subtitle}
+                </span>
+              </div>
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all"
+                className="p-1.5 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 transition-all cursor-pointer"
                 title="Close"
               >
                 <X className="w-5 h-5" />
@@ -137,7 +109,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
                 <div>
                   <div className="text-[10px] text-slate-500 uppercase font-mono">Support SLA</div>
                   <div className="text-xs font-bold text-slate-900 line-clamp-1">
-                    {card.pageRoute === 'SAP' ? '24/7 Managed AMS' : card.pageRoute === 'AI' ? 'Real-Time Pipelines' : '48-Hr Shortlist'}
+                    {card.pageRoute === 'SAP' ? '24/7 Managed AMS' : card.pageRoute === 'AI' ? 'Real-Time Pipelines' : 'Vetted Shortlist'}
                   </div>
                 </div>
               </div>
@@ -160,7 +132,7 @@ export const CardDetailModal: React.FC<CardDetailModalProps> = ({
                 onClick={handleGoToDetails}
                 className="w-full flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white font-extrabold text-xs transition-all shadow-[0_4px_15px_rgba(2,132,199,0.3)] hover:scale-[1.01]"
               >
-                View Full {card.pageRoute === 'AI' ? 'AI Innovations' : card.pageRoute === 'SAP' ? 'SAP Enterprise' : 'IT Recruiting'} Page Details →
+                View Full {card.pageRoute === 'AI' ? 'AI Innovations' : card.pageRoute === 'SAP' ? 'Enterprise Applications' : 'Talent Acquisition'} Page Details →
               </button>
             )}
           </div>

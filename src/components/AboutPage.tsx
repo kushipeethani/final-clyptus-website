@@ -206,7 +206,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       title: 'Analytics & SAP Silver Partner',
       image: '/milestone_2020_2023.jpg',
       points: [
-        'Introduced Data Analytics & BRIM Staffing',
+        'Introduced Data Platforms & BRIM Solutions',
         'Achieved SAP Partner Silver Certification',
         'Scaled to 120+ team strength & 110+ customer base'
       ]
@@ -264,16 +264,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 {/* Unified, Consistent Narrative Typography */}
                 <div className="space-y-4 text-base sm:text-lg text-slate-600 font-normal leading-relaxed mb-8">
                   <p className="text-[#14243B] font-semibold text-lg sm:text-xl">
-                    Clyptus Software Solutions helps organizations navigate enterprise technology, intelligent solutions, and talent transformation to support business growth.
+                    Clyptus is an AI-native technology partner delivering end-to-end IT — consulting, engineering, enterprise applications, cloud, data, security, managed services and talent acquisition — with AI built into every engagement.
                   </p>
                   <p>
-                    We specialize in SAP and Oracle ERP services, supporting businesses across their technology lifecycle from ERP implementation and migration to rollout, integration, and ongoing application support.
+                    We specialize in enterprise application solutions, supporting businesses across their technology lifecycle from implementation and migration to rollout, integration, and ongoing application support.
                   </p>
                   <p>
                     Our expertise spans SAP S/4HANA, SuccessFactors, HCM, BRIM, and BTP, along with Oracle ERP Cloud, EBS, Financials, HCM, and PeopleSoft.
                   </p>
                   <p>
-                    Beyond ERP, we deliver the modern foundations that connect the enterprise: cloud architectures, data &amp; analytics, AI integration, managed AMS, and specialized IT staffing.
+                    Beyond enterprise applications, we deliver the modern foundations that connect the enterprise: digital engineering, cloud architectures, data &amp; analytics, cybersecurity, managed services, and talent acquisition.
                   </p>
                   <p className="border-l-2 border-[#3478F6] pl-4 py-1 text-[#14243B] font-semibold text-base sm:text-lg leading-relaxed">
                     At Clyptus, we focus on practical solutions that fit the way businesses operate — helping organizations manage complex technology today while preparing for what comes next.
@@ -656,7 +656,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             {/* Header */}
             <div className="text-center max-w-3xl mx-auto mb-16">
               <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight mb-4">
-                Meet Our CEO &amp; <span className="text-blue-600">Leadership</span>
+                Leadership <span className="text-blue-600">Team</span>
               </h2>
               <p className="text-sm sm:text-base text-slate-600 font-medium">
                 Guided by vision, integrity, and deep enterprise expertise to drive global digital transformation.
@@ -700,7 +700,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   </p>
 
                   <p className="text-sm sm:text-base text-[#586477] font-normal leading-relaxed mb-6">
-                    Vamsi Krishna leads Clyptus Software Solutions with a strategic commitment to enterprise excellence. Under his guidance, Clyptus has grown into a trusted SAP ERP, AI intelligent engineering, and specialized IT talent partner for global enterprises across the USA, UAE, and India.
+                    Vamsi Krishna leads Clyptus Software Solutions' strategic direction, client relationships and technology services, delivering AI-native digital engineering, enterprise applications, and talent solutions for global enterprises across the USA, UAE, and India.
                   </p>
 
                   {/* Refined Quote Card */}
@@ -815,7 +815,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   </h3>
 
                   <p className="text-sm text-[#586477] leading-relaxed mb-6 font-normal">
-                    Customizable delivery frameworks with innovative assets and client-centric teams tailored to your business needs — whether on-demand expert augmentation, dedicated CoE units, or full turn-key execution.
+                    Customizable delivery frameworks with innovative assets and client-centric teams tailored to your business needs — whether talent-on-demand, dedicated CoE units, or full turn-key execution.
                   </p>
                 </div>
 
@@ -1032,7 +1032,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold text-[#14243B] flex items-center justify-between">
-                              <span>SAP</span>
+                              <span>Enterprise Applications</span>
                               <ArrowRight className="w-3.5 h-3.5 text-[#2563EB] opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                             </div>
                             <p className="text-xs text-[#586477] truncate">S/4HANA, BTP, Cloud ERP & AMS</p>
@@ -1052,10 +1052,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="text-sm font-bold text-[#14243B] flex items-center justify-between">
-                              <span>IT Recruiting</span>
+                              <span>Talent Acquisition</span>
                               <ArrowRight className="w-3.5 h-3.5 text-[#FF7138] opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
                             </div>
-                            <p className="text-xs text-[#586477] truncate">Talent Staffing & Specialized CoE</p>
+                            <p className="text-xs text-[#586477] truncate">Specialist Talent &amp; GCC Build-Out</p>
                           </div>
                         </button>
 

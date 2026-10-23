@@ -94,15 +94,20 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
 
   const navLinks = [
-    { name: 'Home', icon: Home },
-    { name: 'Projects', icon: Briefcase },
-    { name: 'Industries', icon: Factory },
-    { name: 'About', icon: Info },
-    { name: 'HR Policies', icon: ShieldCheck },
-    { name: 'Blogs', icon: BookOpen },
-    { name: 'Careers', icon: Users },
-    { name: 'Contact', icon: Mail },
+    { id: 'Home', label: 'Home', icon: Home },
+    { id: 'Projects', label: 'Case Studies', icon: Briefcase },
+    { id: 'Industries', label: 'Industries', icon: Factory },
+    { id: 'About', label: 'About', icon: Info },
+    { id: 'HR Policies', label: 'HR Policies', icon: ShieldCheck },
+    { id: 'Blogs', label: 'Insights', icon: BookOpen },
+    { id: 'Careers', label: 'Careers', icon: Users },
+    { id: 'Contact', label: 'Talk to an Expert', icon: Mail },
   ];
+
+  const getNavDisplayLabel = (page: string) => {
+    const found = navLinks.find((l) => l.id === page || l.label === page);
+    return found ? found.label : page;
+  };
 
   const handleMobileNav = (pageName: string) => {
     setIsMobileMenuOpen(false);
@@ -153,7 +158,7 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Toggle Navigation Menu"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
-            <span className="text-slate-900 font-extrabold max-w-[85px] truncate">{activePage}</span>
+            <span className="text-slate-900 font-extrabold max-w-[85px] truncate">{getNavDisplayLabel(activePage)}</span>
             <span className="text-slate-300 font-normal">|</span>
             <span className="text-sky-600 font-bold flex items-center gap-0.5">
               Menu <ChevronRight className="w-3.5 h-3.5 text-sky-600" />
@@ -189,7 +194,7 @@ export const Header: React.FC<HeaderProps> = ({
                 {/* Active Page Pill */}
                 <div className="px-3.5 py-1.5 rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.08),0_1px_2px_rgba(0,0,0,0.04)] border border-slate-200/90 text-xs font-bold text-slate-900 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse" />
-                  <span>{activePage}</span>
+                  <span>{getNavDisplayLabel(activePage)}</span>
                 </div>
 
                 {/* Right Arrow Interactive Hover Trigger */}
@@ -223,18 +228,17 @@ export const Header: React.FC<HeaderProps> = ({
                 className="flex items-center gap-0.5"
               >
                 {navLinks.map((item) => {
-                  const link = item.name;
-                  const isActive = activePage === link;
-                  const isHovered = hoveredLink === link;
+                  const isActive = activePage === item.id || activePage === item.label;
+                  const isHovered = hoveredLink === item.id;
 
                   return (
                     <motion.button
-                      key={link}
+                      key={item.id}
                       onClick={() => {
-                        onNavigate(link);
+                        onNavigate(item.id);
                         handleNavMouseLeave();
                       }}
-                      onMouseEnter={() => setHoveredLink(link)}
+                      onMouseEnter={() => setHoveredLink(item.id)}
                       whileHover={reduceMotion ? undefined : { y: -0.5 }}
                       whileTap={reduceMotion ? undefined : { scale: 0.98 }}
                       transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -273,7 +277,7 @@ export const Header: React.FC<HeaderProps> = ({
                             : 'text-slate-600 hover:text-slate-950 font-medium'
                         }`}
                       >
-                        {link}
+                        {item.label}
                       </span>
                     </motion.button>
                   );
@@ -346,17 +350,16 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Navigation Links Grid */}
             <div className="grid grid-cols-2 gap-2">
               {navLinks.map((item, idx) => {
-                const link = item.name;
                 const Icon = item.icon;
-                const isActive = activePage === link;
+                const isActive = activePage === item.id || activePage === item.label;
 
                 return (
                   <motion.button
-                    key={link}
+                    key={item.id}
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.04 * idx }}
-                    onClick={() => handleMobileNav(link)}
+                    onClick={() => handleMobileNav(item.id)}
                     className={`flex items-center gap-2.5 px-3.5 py-3 rounded-2xl text-xs font-bold transition-all text-left cursor-pointer ${
                       isActive
                         ? 'bg-sky-600 text-white shadow-md shadow-sky-500/25 border border-sky-500'
@@ -364,7 +367,7 @@ export const Header: React.FC<HeaderProps> = ({
                     }`}
                   >
                     <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-slate-500'}`} />
-                    <span className="truncate">{link}</span>
+                    <span className="truncate">{item.label}</span>
                   </motion.button>
                 );
               })}

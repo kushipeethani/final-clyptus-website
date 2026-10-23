@@ -194,9 +194,9 @@ export const SapCapabilitiesHelixSlider: React.FC<SapCapabilitiesHelixSliderProp
         {/* Section Heading */}
         <div className="text-center flex flex-col items-center gap-2 mb-3">
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-            Core ERP &{' '}
+            Core{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              SAP Capabilities
+              ERP Capabilities
             </span>
           </h2>
         </div>

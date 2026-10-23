@@ -14,7 +14,7 @@ interface ServiceItem {
 const SERVICES_LIST: ServiceItem[] = [
   {
     id: 'sap',
-    title: 'SAP Services',
+    title: 'ERP Services',
     badge: 'S/4HANA & BTP',
     icon: Database,
     brandColor: 'text-sky-600',
@@ -163,14 +163,14 @@ export const ServicesBottomLeftWidget: React.FC<ServicesBottomLeftWidgetProps> =
                   : 'opacity-0 pointer-events-none group-hover/main:opacity-100 group-hover/main:pointer-events-auto sm:group-hover/main:opacity-0 sm:group-hover/main:pointer-events-none sm:group-hover/item:opacity-100 sm:group-hover/item:pointer-events-auto'
               }`}
             >
-              SAP Services
+              ERP Services
             </button>
 
             {/* Circular Icon Button */}
             <button
               onClick={() => handleServiceClick(SERVICES_LIST[0])}
               className={`w-12 h-12 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-sky-600 transition-all duration-300 ${SERVICES_LIST[0].hoverBg} active:scale-95 cursor-pointer`}
-              title="SAP Services"
+              title="ERP Services"
             >
               <Database className="w-5 h-5 stroke-[2.2]" />
             </button>

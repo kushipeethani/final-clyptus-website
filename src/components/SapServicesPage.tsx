@@ -204,7 +204,7 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200/80 shadow-xs mb-6 animate-in fade-in slide-in-from-bottom-2">
             <span className="w-2 h-2 rounded-full bg-sky-600 animate-ping" />
             <span className="text-xs font-mono font-extrabold tracking-widest uppercase text-sky-700">
-              SAP SERVICES <span className="text-sky-500 mx-1.5">•</span> SILVER PARTNER
+              ERP SERVICES <span className="text-sky-500 mx-1.5">•</span> SILVER PARTNER
             </span>
           </div>
 
@@ -215,7 +215,7 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
 
           {/* Hero Description */}
           <p className="text-base sm:text-lg lg:text-xl font-medium text-slate-600 max-w-3xl leading-relaxed mb-10">
-            Clyptus helps businesses plan, implement, convert, develop and support SAP S/4HANA environments, from strategy through post-go-live operations.
+            Architecting resilient, future-ready enterprise systems. We deliver end-to-end SAP S/4HANA migrations, custom BTP innovations, and full-lifecycle ERP support for global enterprises.
           </p>
 
           {/* Hero CTA Button (Home Page Warm Gold / Amber Consultation Style) */}
@@ -224,7 +224,7 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
               onClick={handleContactClick}
               className="group relative flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all duration-300"
             >
-              <span>Talk to Our SAP Team</span>
+              <span>Talk to an Expert</span>
               <ArrowRight className="w-4 h-4 stroke-[3] group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
@@ -241,7 +241,7 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
             PRACTICE CAPABILITIES
           </span>
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900">
-            End-to-End SAP S/4HANA Services
+            End-to-End ERP Services
           </h2>
         </div>
 

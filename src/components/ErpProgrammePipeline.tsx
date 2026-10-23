@@ -12,32 +12,32 @@ export interface MethodologyStep {
 export const METHODOLOGY_STEPS: MethodologyStep[] = [
   {
     step: '01',
-    title: 'Review the Legacy ERP',
-    desc: 'Siloed, complex systems are mapped and assessed.',
+    title: 'Discover & Landscape Assessment',
+    desc: 'Comprehensive code remediation audits, data profiling, and dependency mapping of your legacy landscape.',
     icon: Search,
   },
   {
     step: '02',
-    title: 'Transformation Roadmap',
-    desc: 'Strategy, assessment and plan.',
+    title: 'Strategic Roadmapping & Architecture',
+    desc: 'Defining business value cases, target operating models, and clear phased cutover schedules.',
     icon: Compass,
   },
   {
     step: '03',
-    title: 'Process Reengineering',
-    desc: 'Optimize and standardize the processes.',
+    title: 'Process Reengineering & Clean Core',
+    desc: 'Standardizing core finance and supply chain workflows while decoupling custom extensions.',
     icon: Workflow,
   },
   {
     step: '04',
-    title: 'Cloud ERP Migration',
-    desc: 'Migrate and integrate.',
+    title: 'Data Migration & Hybrid Cutover',
+    desc: 'Validated data transformation, automated testing suites, and seamless transition with minimal business interruption.',
     icon: Cloud,
   },
   {
     step: '05',
-    title: 'Intelligent Enterprise',
-    desc: 'Innovate, scale and grow on the new platform.',
+    title: 'Hypercare & Continuous Innovation',
+    desc: 'SLA-backed stabilization, telemetry monitoring, and value realization via continuous platform enhancements.',
     icon: Rocket,
   },
 ];

@@ -121,9 +121,9 @@ export const SapProjectsLedger: React.FC = () => {
       {/* Section Header */}
       <div className="text-center flex flex-col items-center gap-3 mb-16">
         <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-          SAP{' '}
+          ERP{' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-            PROJECTS
+            CASE STUDIES
           </span>
         </h2>
         <p className="text-slate-600 text-sm sm:text-base max-w-2xl font-medium">

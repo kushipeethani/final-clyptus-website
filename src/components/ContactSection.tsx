@@ -275,7 +275,7 @@ export const ContactSection: React.FC = () => {
                     Start a Conversation
                   </h3>
                   <p className="text-xs text-slate-500 font-normal mt-0.5">
-                    Our technical and staffing consultants respond within 24 business hours.
+                    Our technology and talent acquisition advisors respond within 24 business hours.
                   </p>
                 </div>
                 <div className="p-2.5 rounded-xl bg-sky-50 text-sky-600 border border-sky-100 shadow-xs">
@@ -385,7 +385,7 @@ export const ContactSection: React.FC = () => {
                       >
                         <option value="AI Solutions & Agentic Pipelines">AI Solutions & Agentic Pipelines</option>
                         <option value="SAP Consulting, BRIM & S/4HANA">SAP Consulting, BRIM & S/4HANA</option>
-                        <option value="IT Staffing & Global Recruitment">IT Staffing & Global Recruitment</option>
+                        <option value="Talent Acquisition & Global Recruitment">Talent Acquisition & Global Recruitment</option>
                         <option value="Cloud Architecture & DevOps">Cloud Architecture & DevOps</option>
                         <option value="Custom Enterprise Development">Custom Enterprise Development</option>
                         <option value="General Inquiry & Leadership Contact">General Inquiry & Leadership Contact</option>
@@ -403,7 +403,7 @@ export const ContactSection: React.FC = () => {
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Outline your timeline, current software ecosystem, or headcount requirements (min 10 characters)..."
+                      placeholder="Outline your timeline, current software ecosystem, or talent requirements (min 10 characters)..."
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50/70 hover:bg-white focus:bg-white text-xs font-normal text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-sky-500/30 focus:border-sky-500 outline-none resize-none transition-all shadow-xs"
                     />
                   </div>

@@ -5,32 +5,37 @@ interface AiImpactSectionProps {
   onSelectService?: (serviceId: string) => void;
 }
 
-// Character component that renders individual letters with organic giggle / jiggle animation
+// Character component that renders individual letters with organic giggle / jiggle animation,
+// wrapping words cleanly to prevent mid-word hyphenation or character wrapping
 const GiggleText: React.FC<{ text: string; baseDelay?: number; className?: string }> = ({
   text,
   baseDelay = 0,
   className = '',
 }) => {
+  const words = text.split(' ');
+  let globalCharIdx = 0;
+
   return (
-    <span className={`inline-flex flex-wrap justify-center ${className}`}>
-      {text.split('').map((char, idx) => {
-        if (char === ' ') {
-          return <span key={idx} className="w-[0.25em] inline-block">&nbsp;</span>;
-        }
-        // Staggered giggle animation delay per letter
-        const delay = (baseDelay + idx * 0.18) % 4.2;
-        return (
-          <span
-            key={idx}
-            className="animate-giggle inline-block hover:scale-125 hover:text-sky-500 transition-transform cursor-pointer"
-            style={{
-              animationDelay: `${delay}s`,
-            }}
-          >
-            {char}
-          </span>
-        );
-      })}
+    <span className={`inline-flex flex-wrap justify-center gap-x-[0.28em] ${className}`}>
+      {words.map((word, wIdx) => (
+        <span key={wIdx} className="inline-block whitespace-nowrap">
+          {word.split('').map((char) => {
+            const delay = (baseDelay + globalCharIdx * 0.18) % 4.2;
+            globalCharIdx++;
+            return (
+              <span
+                key={globalCharIdx}
+                className="animate-giggle inline-block hover:scale-125 hover:text-sky-500 transition-transform cursor-pointer"
+                style={{
+                  animationDelay: `${delay}s`,
+                }}
+              >
+                {char}
+              </span>
+            );
+          })}
+        </span>
+      ))}
     </span>
   );
 };
@@ -173,7 +178,7 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
 
   const isMobileScreen = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
-  // Stage 1: "SMART IT SERVICES TO ELEVATE YOUR BUSINESS SUCCESS." (progress 0.0 -> 0.42)
+  // Stage 1: "INTELLIGENT TECHNOLOGY. GLOBAL DELIVERY. MEASURABLE OUTCOMES." (progress 0.0 -> 0.42)
   const stage1Scale = isMobileScreen 
     ? 1.0 + Math.pow(Math.min(1, progress / 0.40), 1.2) * 0.08 
     : 1.0 + Math.pow(Math.min(1, progress / 0.40), 1.2) * 0.25;
@@ -206,10 +211,10 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
           className="absolute inset-0 pointer-events-none z-0"
         />
 
-        {/* STAGE 1: Scroll-Driven Zooming Typography with Giggle/Jiggle Effect ("SMART IT SERVICES TO ELEVATE YOUR BUSINESS SUCCESS.") */}
+        {/* STAGE 1: Scroll-Driven Zooming Typography with Giggle/Jiggle Effect ("INTELLIGENT TECHNOLOGY. GLOBAL DELIVERY. MEASURABLE OUTCOMES.") */}
         {stage1Opacity > 0 && (
           <div
-            className="absolute z-10 flex flex-col items-center justify-center text-center px-4 w-full max-w-5xl transition-transform duration-75 ease-out"
+            className="absolute z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 w-full max-w-6xl transition-transform duration-75 ease-out"
             style={{
               transform: `scale3d(${stage1Scale}, ${stage1Scale}, 1)`,
               opacity: stage1Opacity,
@@ -217,25 +222,20 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
               willChange: 'transform, opacity, filter',
             }}
           >
-            <div className="flex flex-col items-center justify-center leading-[1.05] sm:leading-[0.95] tracking-tight uppercase font-black text-slate-950 text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.5rem] max-w-xs sm:max-w-none">
-              {/* Line 1: SMART IT */}
+            <div className="flex flex-col items-center justify-center leading-[1.12] sm:leading-[1.04] tracking-tight uppercase font-black text-slate-950 text-2xl sm:text-4xl md:text-5xl lg:text-[3.6rem] xl:text-[4.4rem] w-full">
+              {/* Line 1: INTELLIGENT TECHNOLOGY. */}
               <div className="text-slate-950 font-black">
-                <GiggleText text="SMART IT" baseDelay={0} />
+                <GiggleText text="INTELLIGENT TECHNOLOGY." baseDelay={0} />
               </div>
 
-              {/* Line 2: SERVICES (Electric Royal Blue with Giggle Effect) */}
-              <div className="font-black text-[#2563eb] my-1">
-                <GiggleText text="SERVICES" baseDelay={0.3} />
+              {/* Line 2: GLOBAL DELIVERY. (Electric Royal Blue with Giggle Effect) */}
+              <div className="font-black text-[#2563eb] my-1 sm:my-2">
+                <GiggleText text="GLOBAL DELIVERY." baseDelay={0.3} />
               </div>
 
-              {/* Line 3: TO ELEVATE YOUR */}
+              {/* Line 3: MEASURABLE OUTCOMES. */}
               <div className="text-slate-950 font-black">
-                <GiggleText text="TO ELEVATE YOUR" baseDelay={0.6} />
-              </div>
-
-              {/* Line 4: BUSINESS SUCCESS. */}
-              <div className="text-slate-950 font-black">
-                <GiggleText text="BUSINESS SUCCESS." baseDelay={0.9} />
+                <GiggleText text="MEASURABLE OUTCOMES." baseDelay={0.6} />
               </div>
             </div>
           </div>
@@ -288,17 +288,17 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
                       <Database className="w-5 h-5 sm:w-7 sm:h-7" />
                     </div>
                     <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-blue-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
-                      ENTERPRISE ERP
+                      ERP &amp; ENTERPRISE SYSTEMS
                     </span>
                     <h3 className="text-lg sm:text-2xl font-black text-slate-900 mb-1.5 sm:mb-3 group-hover:text-blue-600 transition-colors">
-                      SAP Solutions
+                      ERP Solutions
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-none">
-                      S/4HANA migration, custom ABAP & Fiori engineering, and full-spectrum SAP ecosystem transformation.
+                      Enterprise ERP consulting and implementation support across SAP S/4HANA, SAP BRIM, SAP BTP, system integration, and enterprise application modernization.
                     </p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors pt-2.5 sm:pt-4 border-t border-slate-100">
-                    <span>EXPLORE SAP SERVICES</span>
+                    <span>EXPLORE ERP SOLUTIONS</span>
                     <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </div>
@@ -318,13 +318,13 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
                       <Users className="w-5 h-5 sm:w-7 sm:h-7" />
                     </div>
                     <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-indigo-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
-                      TALENT & STAFFING
+                      TECHNOLOGY TALENT
                     </span>
                     <h3 className="text-lg sm:text-2xl font-black text-slate-900 mb-1.5 sm:mb-3 group-hover:text-indigo-600 transition-colors">
                       IT Recruiting
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-none">
-                      Specialized tech recruitment, dedicated engineering pods, and executive technical leadership placement.
+                      Technology talent acquisition, permanent recruitment, contract staffing, and candidate sourcing for specialized IT and ERP roles.
                     </p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors pt-2.5 sm:pt-4 border-t border-slate-100">
@@ -348,13 +348,13 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
                       <Cpu className="w-5 h-5 sm:w-7 sm:h-7" />
                     </div>
                     <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-sky-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
-                      INTELLIGENT SYSTEMS
+                      ARTIFICIAL INTELLIGENCE
                     </span>
                     <h3 className="text-lg sm:text-2xl font-black text-slate-900 mb-1.5 sm:mb-3 group-hover:text-sky-600 transition-colors">
                       AI Solutions
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-none">
-                      Autonomous AI agents, enterprise GenAI architectures, machine learning models & predictive analytics.
+                      AI-powered applications, intelligent agents, large language models, retrieval-augmented generation, and business workflow automation.
                     </p>
                   </div>
                   <div className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors pt-2.5 sm:pt-4 border-t border-slate-100">

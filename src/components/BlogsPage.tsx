@@ -1720,7 +1720,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search blog stories, topics, authors..."
+                placeholder="Search insights, topics, authors..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-11 pr-4 py-3 bg-white/90 border border-slate-300 rounded-full text-sm font-medium text-slate-800 placeholder-slate-400 shadow-xs focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-sky-500 transition-all"
@@ -1734,12 +1734,12 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
               {isAuthenticated ? (
                 <>
                   <PenTool className="w-4 h-4" />
-                  <span>Create New Blog</span>
+                  <span>Create New Insight</span>
                 </>
               ) : (
                 <>
                   <Lock className="w-4 h-4" />
-                  <span>Manage / Create Blogs</span>
+                  <span>Manage / Create Insights</span>
                 </>
               )}
             </button>

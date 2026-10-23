@@ -32,7 +32,7 @@ export const ResourceModal: React.FC<ResourceModalProps> = ({ type, onClose, onN
                 {type === 'terms' && 'Terms & Conditions'}
                 {type === 'cookies' && 'Cookie Policy'}
                 {type === 'faqs' && 'Frequently Asked Questions (FAQs)'}
-                {type === 'insights' && 'Enterprise Insights & Tech Blog'}
+                {type === 'insights' && 'Enterprise Insights'}
               </h3>
               <p className="text-[11px] sm:text-xs text-slate-400 font-medium">
                 Clyptus Enterprise Legal & Resource Center
@@ -140,7 +140,7 @@ export const ResourceModal: React.FC<ResourceModalProps> = ({ type, onClose, onN
               </div>
 
               <div className="p-5 rounded-2xl bg-slate-800/40 border border-slate-700/60">
-                <h4 className="text-base font-extrabold text-white mb-2">Q: What is Clyptus IT Talent Deployment model?</h4>
+                <h4 className="text-base font-extrabold text-white mb-2">Q: What is the Clyptus Talent Acquisition model?</h4>
                 <p className="text-slate-300 text-sm">
                   We offer flexible contract, contract-to-hire, and dedicated offshore/on-site team deployments with over 330+ vetted SAP consultants, AI engineers, and Cloud architects ready for rapid onboarding.
                 </p>

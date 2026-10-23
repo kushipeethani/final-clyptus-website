@@ -30,27 +30,27 @@ const SERVICES_DATA: ServiceItem[] = [
   },
   {
     id: 2,
-    title: 'Leadership Hiring',
+    title: 'Executive Search & Leadership Advisory',
     desc: 'Executive search for CXOs, VP Engineering, Enterprise Architects & SAP Program Directors.',
     icon: Award,
     badge: 'EXECUTIVE',
-    tagline: 'C-Suite & Director Placements',
+    tagline: 'C-Suite & Executive Advisory',
   },
   {
     id: 3,
-    title: 'IT & SAP Staffing',
-    desc: 'Niche technology placement covering full-stack, cloud engineers & SAP ERP practitioners.',
+    title: 'Specialist Talent Deployment',
+    desc: 'Specialist technology deployment covering full-stack, cloud engineers & enterprise practitioners.',
     icon: Cpu,
     badge: 'TECHNICAL',
-    tagline: 'Certified SAP & Engineering Pods',
+    tagline: 'Enterprise Engineering Pods',
   },
   {
     id: 4,
-    title: 'Contract & Permanent Staffing',
-    desc: 'Flexible hiring agreements tailored for short-term project demands or permanent hires.',
+    title: 'Flexible & Permanent Talent Acquisition',
+    desc: 'Flexible talent agreements tailored for agile project demands or permanent team expansion.',
     icon: Briefcase,
     badge: 'FLEXIBLE',
-    tagline: 'Custom Contingent & Direct Placements',
+    tagline: 'Flexible & Direct Deployments',
   },
   {
     id: 5,
@@ -79,7 +79,7 @@ const SERVICES_DATA: ServiceItem[] = [
   {
     id: 8,
     title: 'Talent Intelligence & Analytics',
-    desc: 'Real-time compensation benchmarks, candidate availability indexes, and skill metrics.',
+    desc: 'Real-time compensation benchmarks, talent availability indexes, and skill metrics.',
     icon: FileCheck,
     badge: 'INSIGHTS',
     tagline: 'Real-time Compensation & Skill Data',
@@ -139,13 +139,13 @@ export const ArcCarouselStaffingServices: React.FC<ArcCarouselProps> = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto z-20">
           <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 mb-2">
-            Recruitment &{' '}
+            Talent Acquisition &{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              Staffing Services
+              Workforce Solutions
             </span>
           </h2>
           <p className="text-xs sm:text-base text-slate-600 font-medium">
-            Scroll down or up to automatically rotate through our enterprise staffing capabilities.
+            Scroll down or up to automatically rotate through our enterprise talent capabilities.
           </p>
         </div>
 

@@ -72,7 +72,6 @@ export const SpiralSliderPreset = ({ cards }) => {
                 <div className="w-full h-full rounded-2xl bg-white border border-slate-200 p-4 shadow-md backdrop-blur-md">
                   <img src={card.imageUrl} alt={card.title} className="w-full h-48 object-cover rounded-xl" />
                   <h3 className="mt-3 text-slate-900 font-bold">{card.title}</h3>
-                  <p className="text-xs text-slate-600 mt-1">{card.subtitle}</p>
                 </div>
               </div>
             );
