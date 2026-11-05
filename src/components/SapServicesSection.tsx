@@ -9,28 +9,25 @@ import {
   ShieldCheck,
   Zap,
   ChevronDown,
-  Building2,
   Cpu,
   Brain,
   Rocket,
-  Award,
   Users,
-  Calendar,
   CreditCard,
   BarChart,
-  Globe,
   Clock,
   Workflow,
   AlertCircle,
 } from 'lucide-react';
 import { DigiLabSapEngine } from './DigiLabSapEngine';
 import { SapCapabilitiesHelixSlider } from './SapCapabilitiesHelixSlider';
+import { SapComprehensiveServicesSection } from './SapComprehensiveServicesSection';
+import { Dynamics365Section } from './Dynamics365Section';
 import { CapabilitiesMarqueeBanner } from './CapabilitiesMarqueeBanner';
 import { ErpProgrammePipeline } from './ErpProgrammePipeline';
 import { ProblemsWeSolveDiagnostics } from './ProblemsWeSolveDiagnostics';
 import { BrimLifecycleMatrix } from './BrimLifecycleMatrix';
 import { BrimCoeLabConsole } from './BrimCoeLabConsole';
-import { SapProjectsLedger } from './SapProjectsLedger';
 
 export const containerVariants = {
   hidden: { opacity: 0 },
@@ -256,124 +253,6 @@ export const brimCoePills = [
   'Performance tuning toolkit with benchmarking, database tuning scripts and monitoring dashboards.',
 ];
 
-// 5. CASE STUDY: Airline Usage Billing
-export const airlineChallenges = [
-  {
-    challenge: 'Very high volume of usage transactions that needed raw-data preprocessing.',
-    solution: 'Mediation pipelines enriched the records before they reached SAP Convergent Charging.',
-  },
-  {
-    challenge: 'Varied revenue-share rules.',
-    solution: 'Configurable revenue-share logic in SAP Convergent Charging.',
-  },
-  {
-    challenge: 'Dynamic, tier-based pricing.',
-    solution: 'Cumulative tier calculation in SAP Convergent Charging.',
-  },
-  {
-    challenge: 'Multiple agreements and duplicated charge plans.',
-    solution: 'A master agreement approach, with mapping tables for common pricing parameters.',
-  },
-];
-
-// Sector Highlights
-export const sectorHighlights = [
-  {
-    sector: 'Insurance',
-    desc: 'SAP BRIM for automated premiums from live data, flexible risk-based pricing and integrated billing across Fiori, SOM, CI and CC.',
-  },
-  {
-    sector: 'Telecom Enterprise Billing',
-    desc: 'Subscription billing with SAP BRIM and automated contract management.',
-  },
-  {
-    sector: 'High-Tech',
-    desc: 'Transformed the subscription billing model with SAP BRIM, modernized BRM processes and automated order-to-cash operations.',
-  },
-  {
-    sector: 'Utilities',
-    desc: 'SAP BRIM for real-time revenue recognition, unified billing and invoicing and better cash flow; work order management and revenue processes for integrated utilities solutions.',
-  },
-];
-
-// 6. TARGET INDUSTRIES
-export const brimFocusSectors = [
-  'Insurance',
-  'Telecommunications (usage-based billing for voice, data, IoT)',
-  'Utilities (meter-to-cash)',
-  'High-tech',
-  'SaaS & subscription businesses',
-  'Digital platforms (API monetization)',
-  'Media & OTT',
-];
-
-export const enterpriseErpSectors = [
-  'Healthcare',
-  'Banking & financial services',
-  'Retail & e-commerce',
-  'Manufacturing',
-  'Energy & utilities',
-  'Logistics & transportation',
-  'Pharma & life sciences',
-  'Automotive',
-  'Technology & consulting',
-];
-
-// 7. COMPANY TIMELINE
-export const timelineMilestones = [
-  {
-    year: '2014–16',
-    title: 'Founding & HCM Practice',
-    desc: 'Company founded. SAP and HCM practice launched. First international SAP project delivered in Dubai.',
-  },
-  {
-    year: '2016–18',
-    title: 'Global Delivery Expansion',
-    desc: 'SAP delivery expanded to 3+ countries. Major SAP implementations in the UAE and India.',
-  },
-  {
-    year: '2018–20',
-    title: 'Cloud & S/4HANA Practice',
-    desc: 'SAP Cloud Services introduced. SAP S/4HANA practice launched.',
-  },
-  {
-    year: '2020–23',
-    title: 'BRIM & Analytics Practice',
-    desc: 'Data Analytics and BRIM talent solutions introduced.',
-  },
-  {
-    year: '2023–25',
-    title: 'SAP BTP, AI & 250+ Practice',
-    desc: 'SAP BTP practice introduced. SAP add-on solutions built. SAP AI capabilities integrated. 250+ SAP consultants.',
-  },
-];
-
-// 8. ENGAGEMENT MODELS
-export const engagementModels = [
-  {
-    title: 'Contract and contract-to-hire',
-    desc: 'Flexible deployment of certified SAP functional and technical consultants.',
-    badge: 'FLEXIBLE TALENT',
-  },
-  {
-    title: 'Dedicated offshore development center',
-    desc: 'Managed project delivery out of our Hyderabad delivery center.',
-    badge: 'HYDERABAD ODC',
-  },
-  {
-    title: 'Managed service team',
-    desc: 'SLA-driven L2/L3 support, maintenance, and enhancement squads.',
-    badge: 'SLA AMS',
-  },
-  {
-    title: 'Hybrid onsite-offshore',
-    desc: 'Balanced architecture combining onsite leadership with cost-effective offshore execution.',
-    badge: 'HYBRID DELIVERY',
-  },
-];
-
-
-
 export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContactClick }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
@@ -385,29 +264,30 @@ export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContac
   // 9. FREQUENTLY ASKED QUESTIONS
   const faqs = [
     {
-      question: 'What is SAP BRIM?',
+      question: 'Which ERP platforms does Clyptus work on?',
       answer:
-        "SAP BRIM is SAP's suite for subscription billing, usage-based charging, invoicing and revenue management. Clyptus covers its main parts: Subscription Order Management, Convergent Charging, Convergent Invoicing, Convergent Mediation, FI-CA and Revenue Accounting and Reporting.",
+        'We work on SAP (S/4HANA, ECC, BRIM, ABAP, FICO, MM, HCM, SD), Oracle (Financials, Procurement, Supply Chain, Manufacturing and Risk, EPM, Project Management, Fusion Cloud ERP) and Microsoft Dynamics 365 (Finance, SCM, Commerce, Project Operations, Business Central, HR).',
     },
     {
-      question: 'Which ERP systems does Clyptus work on?',
+      question: 'Can you move us from SAP ECC to SAP S/4HANA?',
       answer:
-        'SAP (S/4HANA, SAP Cloud, BTP, HCM and BRIM), Oracle Cloud ERP and Microsoft Dynamics 365.',
+        'Yes. We assess your current system and custom code, then recommend the right path: new implementation, system conversion or selective transition. We handle code remediation, data migration, testing and go-live support with minimal disruption to your daily operations.',
     },
     {
-      question: 'Can you move us from a legacy ERP to SAP S/4HANA?',
+      question:
+        'We use Oracle E-Business Suite or JD Edwards. Can you help us move to Oracle Fusion Cloud ERP?',
       answer:
-        'Yes. We run greenfield implementations, migrations and upgrades, and manage the application after go-live.',
+        'Yes. We run a fit-gap analysis, design your cloud processes, migrate your data and set up integrations with your other systems. After go-live, we also help you test and adopt Oracle’s regular cloud updates.',
+    },
+    {
+      question: 'Which Dynamics 365 product is right for our business?',
+      answer:
+        'It depends on your size and how you work. Business Central suits small and mid-sized companies, Finance and SCM suit larger operations, Commerce suits retail, Project Operations suits project-based firms and HR suits people teams. We review your processes before recommending.',
     },
     {
       question: 'What support do you offer after go-live?',
       answer:
-        'SAP application management and support, including L2 and L3 support, enhancements and SLA-driven managed service teams.',
-    },
-    {
-      question: 'How can we work with Clyptus?',
-      answer:
-        'Through contract or contract-to-hire consultants, a dedicated offshore development center, a managed service team or a hybrid onsite-offshore model.',
+        'We stay with you after go-live with incident and change handling, enhancements, user training and regular updates for your SAP, Oracle or Dynamics 365 system. You can choose a support plan or add services as your business grows.',
     },
   ];
 
@@ -417,62 +297,10 @@ export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContac
       {/* ================= 3-STAGE SCROLLED DIGILAB ENGINE ================= */}
       <DigiLabSapEngine onContactClick={onContactClick} />
 
-      {/* ================= 1. PAGE METADATA & HERO SECTION ================= */}
-      <section className="py-20 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-b border-slate-200/80">
-        <div className="flex flex-col items-center text-center gap-6">
-          
-          {/* Practice Highlights */}
-          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm font-bold tracking-wide">
-            <span className="inline-flex items-center gap-2 text-blue-600">
-              <Award className="w-4 h-4 text-blue-600" />
-              <span>250+ SAP Consultants</span>
-            </span>
-            <span className="inline-flex items-center gap-2 text-[#FF7138]">
-              <Calendar className="w-4 h-4 text-[#FF7138]" />
-              <span>Since 2014</span>
-            </span>
-            <span className="inline-flex items-center gap-2 text-indigo-600">
-              <Globe className="w-4 h-4 text-indigo-600" />
-              <span>Offices in India, UAE & USA</span>
-            </span>
-          </div>
+      {/* ================= 2. 8 COMPREHENSIVE SAP SERVICES ================= */}
+      <SapComprehensiveServicesSection onContactClick={onContactClick} />
 
-          {/* H1 Headline */}
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] max-w-4xl">
-            End-to-End Enterprise{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              Modernization
-            </span>
-          </h1>
-
-          {/* Introduction Copy */}
-          <div className="space-y-3 max-w-3xl text-slate-600 text-sm sm:text-base lg:text-lg font-medium leading-relaxed">
-            <p>
-              With over a decade of domain leadership, Clyptus enables enterprises to transition from legacy infrastructure to intelligent ERP ecosystems. Backed by 250+ certified consultants across India, the UAE, and the USA, our practice specializes in high-complexity SAP S/4HANA migrations, SAP BTP extensions, and SAP BRIM monetization platforms, alongside multi-cloud ERP delivery across Oracle and Microsoft Dynamics 365.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================= 2. WHAT WE DO (9 CORE SERVICES & MARQUEE) ================= */}
-      <section className="w-full">
-        {/* Interactive 3D Helix / Spiral Capabilities Sticky Scroll Slider */}
-        <SapCapabilitiesHelixSlider onContactClick={onContactClick} />
-
-        {/* Capabilities Across Every Platform Infinite Marquee Banner */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 pt-6 pb-16">
-          <CapabilitiesMarqueeBanner />
-        </div>
-      </section>
-
-      {/* ================= 3. HOW AN ERP PROGRAMME RUNS (CONNECTED STEPPER PIPELINE) ================= */}
-      <ErpProgrammePipeline />
-
-      {/* ================= 4. PROBLEMS WE SOLVE (2-COLUMN DIAGNOSTIC STACK) ================= */}
-      <ProblemsWeSolveDiagnostics />
-
-      {/* ================= 5. SAP BRIM EXPERTISE & INNOVATION LAB CONSOLE ================= */}
+      {/* ================= SAP BRIM EXPERTISE & INNOVATION LAB CONSOLE ================= */}
       <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80">
         <div className="text-center flex flex-col items-center gap-3 mb-16">
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
@@ -493,133 +321,24 @@ export const SapServicesSection: React.FC<SapServicesSectionProps> = ({ onContac
         <BrimCoeLabConsole />
       </section>
 
-      {/* ================= 6. SAP PROJECTS EDITORIAL LEDGER (#sap-projects) ================= */}
-      <SapProjectsLedger />
+      {/* ================= 3. CORE ORACLE CAPABILITIES ================= */}
+      <SapCapabilitiesHelixSlider onContactClick={onContactClick} />
 
-      {/* ================= 7. TARGET INDUSTRIES ================= */}
-      <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80">
-        <div className="text-center flex flex-col items-center gap-3 mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-            Target{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              Industries
-            </span>
-          </h2>
-        </div>
+      {/* ================= 4. CORE MICROSOFT DYNAMICS 365 CAPABILITIES ================= */}
+      <Dynamics365Section onContactClick={onContactClick} />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* SAP BRIM Focus Sectors */}
-          <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-md">
-            <h3 className="text-lg font-extrabold text-slate-900 mb-6 flex items-center gap-2">
-              <CreditCard className="w-5 h-5 text-blue-600" />
-              SAP BRIM Focus Sectors
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {brimFocusSectors.map((sec) => (
-                <span
-                  key={sec}
-                  className="px-3.5 py-2 rounded-xl bg-blue-50 border border-blue-200 text-xs font-semibold text-blue-900"
-                >
-                  {sec}
-                </span>
-              ))}
-            </div>
-          </div>
+      {/* Capabilities Across Every Platform Infinite Marquee Banner */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 pt-4 pb-16">
+        <CapabilitiesMarqueeBanner />
+      </div>
 
-          {/* Enterprise ERP Sectors */}
-          <div className="p-8 rounded-3xl bg-white border border-slate-200 shadow-md">
-            <h3 className="text-lg font-extrabold text-slate-900 mb-6 flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-orange-500" />
-              Enterprise ERP Sectors
-            </h3>
-            <div className="flex flex-wrap gap-2.5">
-              {enterpriseErpSectors.map((sec) => (
-                <span
-                  key={sec}
-                  className="px-3.5 py-2 rounded-xl bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800"
-                >
-                  {sec}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ================= 3. HOW AN ERP PROGRAMME RUNS (CONNECTED STEPPER PIPELINE) ================= */}
+      <ErpProgrammePipeline />
 
-      {/* ================= 8. COMPANY TIMELINE ================= */}
-      <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80 overflow-hidden">
-        <div className="text-center flex flex-col items-center gap-3 mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-            Company{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              Timeline
-            </span>
-          </h2>
-        </div>
+      {/* ================= 4. PROBLEMS WE SOLVE (2-COLUMN DIAGNOSTIC STACK) ================= */}
+      <ProblemsWeSolveDiagnostics />
 
-        {/* Vertical Timeline */}
-        <div className="relative border-l-2 border-slate-200 ml-4 sm:ml-32 space-y-12 py-4">
-          {timelineMilestones.map((m) => (
-            <motion.div
-              key={m.year}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{
-                duration: 0.5,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="relative pl-8 sm:pl-10"
-            >
-              <div className="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-blue-600 border-4 border-white shadow-sm" />
-              <span className="sm:absolute sm:-left-32 sm:top-1 text-sm font-mono font-extrabold text-orange-600 block mb-1 sm:mb-0">
-                {m.year}
-              </span>
-              <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 max-w-2xl">
-                <h3 className="text-base font-extrabold text-slate-900 mb-2">
-                  {m.title}
-                </h3>
-                <p className="text-xs font-medium text-slate-600 leading-relaxed">
-                  {m.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ================= 9. ENGAGEMENT MODELS ================= */}
-      <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80">
-        <div className="text-center flex flex-col items-center gap-3 mb-16">
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
-            Flexible{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
-              Engagement Models
-            </span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {engagementModels.map((eng) => (
-            <div
-              key={eng.title}
-              className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:border-blue-400 transition-all flex flex-col justify-between"
-            >
-              <div>
-                <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 block w-fit mb-3">
-                  {eng.badge}
-                </span>
-                <h3 className="text-base font-extrabold text-slate-900 mb-2 leading-snug">
-                  {eng.title}
-                </h3>
-                <p className="text-xs font-medium text-slate-600 leading-relaxed">
-                  {eng.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       {/* ================= 10. FREQUENTLY ASKED QUESTIONS ================= */}
       <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-5xl mx-auto border-t border-slate-200/80">

@@ -11,7 +11,7 @@ import {
   BookOpen, 
   Users, 
   Mail,
-  ChevronRight 
+  ChevronRight
 } from 'lucide-react';
 import { ClyptusLogo } from './ClyptusLogo';
 
@@ -105,6 +105,15 @@ export const Header: React.FC<HeaderProps> = ({
   ];
 
   const getNavDisplayLabel = (page: string) => {
+    if (page === 'Services' || page === 'services') return 'Services';
+    if (page === 'Cloud' || page === 'cloud' || page === 'cloud-services') return 'Cloud';
+    if (page === 'DataEngineering' || page === 'data-engineering') return 'Data Engineering';
+    if (page === 'Security' || page === 'security' || page === 'CyberSecurity' || page === 'cybersecurity' || page === 'cyber-security') return 'Cyber Security';
+    if (page === 'SAP' || page === 'sap' || page === 'ERP' || page === 'erp' || page === 'erp-services') return 'ERP';
+    if (page === 'CRM' || page === 'crm' || page === 'crm-services') return 'CRM';
+    if (page === 'Salesforce' || page === 'salesforce' || page === 'salesforce-services') return 'Salesforce';
+    if (page === 'AI' || page === 'ai' || page === 'ai-services') return 'AI';
+    if (page === 'Recruiting' || page === 'recruiting' || page === 'staffing') return 'IT Recruiting';
     const found = navLinks.find((l) => l.id === page || l.label === page);
     return found ? found.label : page;
   };

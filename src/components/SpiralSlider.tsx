@@ -4,14 +4,11 @@ import type { SliderCard, SpiralConfig } from '../data/sliderData';
 interface SpiralSliderProps {
   cards: SliderCard[];
   config: SpiralConfig;
-  onSelectCard?: (card: SliderCard) => void;
-  onOpenPromptModal?: (card: SliderCard) => void;
 }
 
 export const SpiralSlider: React.FC<SpiralSliderProps> = ({
   cards,
   config,
-  onSelectCard,
 }) => {
   const [rotationOffset, setRotationOffset] = useState<number>(0);
   const targetOffsetRef = useRef<number>(0);
@@ -218,9 +215,9 @@ export const SpiralSlider: React.FC<SpiralSliderProps> = ({
               }}
             >
               <h2 className="text-xl sm:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tighter leading-[1.05] text-slate-900 uppercase drop-shadow-sm">
-                DESIGNED FOR <br />
+                SMARTER BUSINESS <br />
                 <span className="bg-gradient-to-r from-sky-600 via-indigo-600 to-cyan-500 bg-clip-text text-transparent">
-                  CHANGE.
+                  SOLUTIONS.
                 </span>
               </h2>
             </div>
@@ -346,9 +343,6 @@ export const SpiralSlider: React.FC<SpiralSliderProps> = ({
                   onClick={(e) => {
                     e.stopPropagation();
                     snapToCard(i);
-                    if (onSelectCard) {
-                      onSelectCard(card);
-                    }
                   }}
                 >
                   <div 

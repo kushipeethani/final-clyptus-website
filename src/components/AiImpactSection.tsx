@@ -1,50 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Database, Users, Cpu, ArrowUpRight } from 'lucide-react';
 
 interface AiImpactSectionProps {
   onSelectService?: (serviceId: string) => void;
 }
-
-// Character component that renders individual letters with organic giggle / jiggle animation,
-// wrapping words cleanly to prevent mid-word hyphenation or character wrapping
-const GiggleText: React.FC<{ text: string; baseDelay?: number; className?: string }> = ({
-  text,
-  baseDelay = 0,
-  className = '',
-}) => {
-  const words = text.split(' ');
-  let globalCharIdx = 0;
-
-  return (
-    <span className={`inline-flex flex-wrap justify-center gap-x-[0.28em] ${className}`}>
-      {words.map((word, wIdx) => (
-        <span key={wIdx} className="inline-block whitespace-nowrap">
-          {word.split('').map((char) => {
-            const delay = (baseDelay + globalCharIdx * 0.18) % 4.2;
-            globalCharIdx++;
-            return (
-              <span
-                key={globalCharIdx}
-                className="animate-giggle inline-block hover:scale-125 hover:text-sky-500 transition-transform cursor-pointer"
-                style={{
-                  animationDelay: `${delay}s`,
-                }}
-              >
-                {char}
-              </span>
-            );
-          })}
-        </span>
-      ))}
-    </span>
-  );
-};
 
 export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectService }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [progress, setProgress] = useState<number>(0);
   const mouseRef = useRef<{ x: number; y: number }>({ x: -1000, y: -1000 });
+
+  // Helper to split and render headings with Clyptus brand styling (Black + Blue-Indigo-Orange gradient)
+  const renderStyledHeading = (text: string) => {
+    const words = text.split(' ');
+    if (words.length <= 1) {
+      return (
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
+          {text}
+        </span>
+      );
+    }
+    const splitIndex = Math.ceil(words.length / 2);
+    const firstPart = words.slice(0, splitIndex).join(' ');
+    const secondPart = words.slice(splitIndex).join(' ');
+    return (
+      <>
+        <span className="text-slate-950">{firstPart} </span>
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500">
+          {secondPart}
+        </span>
+      </>
+    );
+  };
 
   // RAF scroll progress sampling for zero lag
   useEffect(() => {
@@ -222,21 +209,33 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
               willChange: 'transform, opacity, filter',
             }}
           >
-            <div className="flex flex-col items-center justify-center leading-[1.12] sm:leading-[1.04] tracking-tight uppercase font-black text-slate-950 text-2xl sm:text-4xl md:text-5xl lg:text-[3.6rem] xl:text-[4.4rem] w-full">
-              {/* Line 1: INTELLIGENT TECHNOLOGY. */}
-              <div className="text-slate-950 font-black">
-                <GiggleText text="INTELLIGENT TECHNOLOGY." baseDelay={0} />
-              </div>
+            {/* Ambient Radial Colored Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[540px] h-[300px] bg-gradient-to-r from-blue-400/20 via-indigo-400/15 to-orange-400/20 rounded-full blur-[110px] pointer-events-none" />
 
-              {/* Line 2: GLOBAL DELIVERY. (Electric Royal Blue with Giggle Effect) */}
-              <div className="font-black text-[#2563eb] my-1 sm:my-2">
-                <GiggleText text="GLOBAL DELIVERY." baseDelay={0.3} />
-              </div>
+            {/* Main Headline: 'Intelligence Meets Innovation' */}
+            <h2 className="relative font-black tracking-tight leading-[1.04] sm:leading-[0.98] text-4xl sm:text-6xl md:text-7xl lg:text-[5.4rem] xl:text-[6.4rem]">
+              <span className="text-slate-950 block">Intelligence</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 block mt-1 sm:mt-2">
+                Meets Innovation.
+              </span>
+            </h2>
 
-              {/* Line 3: MEASURABLE OUTCOMES. */}
-              <div className="text-slate-950 font-black">
-                <GiggleText text="MEASURABLE OUTCOMES." baseDelay={0.6} />
-              </div>
+            {/* Sub-Headline */}
+            <p className="relative mt-5 sm:mt-7 text-sm sm:text-lg md:text-xl text-slate-600 font-medium max-w-2xl leading-relaxed">
+              Unifying enterprise architecture, autonomous AI agents, and resilient cloud systems into one cohesive growth engine.
+            </p>
+
+            {/* Enterprise Highlights Strip */}
+            <div className="relative flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 mt-6 sm:mt-8 pt-6 border-t border-slate-200/80">
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-slate-200/80 text-xs sm:text-sm font-semibold text-slate-700 shadow-2xs">
+                Autonomous AI Systems
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-slate-200/80 text-xs sm:text-sm font-semibold text-slate-700 shadow-2xs">
+                Clean-Core Architecture
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-white/80 border border-slate-200/80 text-xs sm:text-sm font-semibold text-slate-700 shadow-2xs">
+                Global 24/7 Delivery
+              </span>
             </div>
           </div>
         )}
@@ -271,96 +270,69 @@ export const AiImpactSection: React.FC<AiImpactSectionProps> = ({ onSelectServic
                 willChange: 'transform, opacity',
               }}
             >
-              {/* 3 Cards Grid */}
+              {/* 3 Cards Grid: Our Vision, Our Mission, Life at Clyptus */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 sm:gap-6 w-full text-left">
-                {/* Card 1: SAP */}
+                {/* Card 1: Our Vision */}
                 <div 
-                  onClick={() => onSelectService?.('sap')}
+                  onClick={() => onSelectService?.('about')}
                   style={{
                     opacity: p1,
                     transform: `translate3d(0, ${(1 - p1) * (isMobileScreen ? 20 : 45)}px, 0) scale(${0.96 + p1 * 0.04})`,
                     transition: 'opacity 0.15s ease-out, transform 0.15s ease-out',
                   }}
-                  className="group relative p-3.5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-blue-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                  className="group relative p-5 sm:p-7 lg:p-9 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-blue-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-start"
                 >
-                  <div>
-                    <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-blue-600 text-white flex items-center justify-center mb-3 sm:mb-6 shadow-md shadow-blue-500/20 group-hover:scale-110 transition-transform">
-                      <Database className="w-5 h-5 sm:w-7 sm:h-7" />
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-blue-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
-                      ERP &amp; ENTERPRISE SYSTEMS
-                    </span>
-                    <h3 className="text-lg sm:text-2xl font-black text-slate-900 mb-1.5 sm:mb-3 group-hover:text-blue-600 transition-colors">
-                      ERP Solutions
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-none">
-                      Enterprise ERP consulting and implementation support across SAP S/4HANA, SAP BRIM, SAP BTP, system integration, and enterprise application modernization.
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors pt-2.5 sm:pt-4 border-t border-slate-100">
-                    <span>EXPLORE ERP SOLUTIONS</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
+                  <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-blue-600 uppercase tracking-wider block mb-2 sm:mb-2.5">
+                    OUR VISION
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-black mb-2 sm:mb-3 leading-tight">
+                    {renderStyledHeading("Shaping Tomorrow Through Innovation.")}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                    To become a trusted global technology partner, empowering businesses through innovation, intelligent solutions, and digital transformation. We envision a future where technology creates limitless opportunities, drives sustainable growth, and connects businesses with possibilities.
+                  </p>
                 </div>
 
-                {/* Card 2: IT Recruiting */}
+                {/* Card 2: Our Mission */}
                 <div 
-                  onClick={() => onSelectService?.('recruiting')}
+                  onClick={() => onSelectService?.('about')}
                   style={{
                     opacity: p2,
                     transform: `translate3d(0, ${(1 - p2) * 45}px, 0) scale(${0.95 + p2 * 0.05})`,
                     transition: 'opacity 0.15s ease-out, transform 0.15s ease-out',
                   }}
-                  className="group relative p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                  className="group relative p-5 sm:p-7 lg:p-9 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-indigo-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-start"
                 >
-                  <div>
-                    <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-indigo-600 text-white flex items-center justify-center mb-3 sm:mb-6 shadow-md shadow-indigo-500/20 group-hover:scale-110 transition-transform">
-                      <Users className="w-5 h-5 sm:w-7 sm:h-7" />
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-indigo-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
-                      TECHNOLOGY TALENT
-                    </span>
-                    <h3 className="text-lg sm:text-2xl font-black text-slate-900 mb-1.5 sm:mb-3 group-hover:text-indigo-600 transition-colors">
-                      IT Recruiting
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-none">
-                      Technology talent acquisition, permanent recruitment, contract staffing, and candidate sourcing for specialized IT and ERP roles.
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 group-hover:text-indigo-600 transition-colors pt-2.5 sm:pt-4 border-t border-slate-100">
-                    <span>EXPLORE IT RECRUITING</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
+                  <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-indigo-600 uppercase tracking-wider block mb-2 sm:mb-2.5">
+                    OUR MISSION
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-black mb-2 sm:mb-3 leading-tight">
+                    {renderStyledHeading("Turning Ideas Into Impact.")}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                    Our mission is to deliver innovative, reliable, and scalable technology solutions that help businesses overcome challenges and achieve their goals. Through technical excellence, collaboration, and continuous innovation, we strive to create meaningful value for every client and partner.
+                  </p>
                 </div>
 
-                {/* Card 3: AI */}
+                {/* Card 3: Life at Clyptus */}
                 <div 
-                  onClick={() => onSelectService?.('ai')}
+                  onClick={() => onSelectService?.('careers')}
                   style={{
                     opacity: p3,
                     transform: `translate3d(0, ${(1 - p3) * 45}px, 0) scale(${0.95 + p3 * 0.05})`,
                     transition: 'opacity 0.15s ease-out, transform 0.15s ease-out',
                   }}
-                  className="group relative p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-sky-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                  className="group relative p-5 sm:p-7 lg:p-9 rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-md hover:shadow-xl hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-300 cursor-pointer flex flex-col justify-start"
                 >
-                  <div>
-                    <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-sky-500 text-white flex items-center justify-center mb-3 sm:mb-6 shadow-md shadow-sky-500/20 group-hover:scale-110 transition-transform">
-                      <Cpu className="w-5 h-5 sm:w-7 sm:h-7" />
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-sky-600 uppercase tracking-wider block mb-1.5 sm:mb-2">
-                      ARTIFICIAL INTELLIGENCE
-                    </span>
-                    <h3 className="text-lg sm:text-2xl font-black text-slate-900 mb-1.5 sm:mb-3 group-hover:text-sky-600 transition-colors">
-                      AI Solutions
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium mb-3 sm:mb-6 line-clamp-2 sm:line-clamp-none">
-                      AI-powered applications, intelligent agents, large language models, retrieval-augmented generation, and business workflow automation.
-                    </p>
-                  </div>
-                  <div className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors pt-2.5 sm:pt-4 border-t border-slate-100">
-                    <span>EXPLORE AI SOLUTIONS</span>
-                    <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </div>
+                  <span className="text-[10px] sm:text-[11px] font-mono font-extrabold text-orange-600 uppercase tracking-wider block mb-2 sm:mb-2.5">
+                    LIFE AT CLYPTUS
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-black mb-2 sm:mb-3 leading-tight">
+                    {renderStyledHeading("Where People Create Possibilities.")}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-medium">
+                    At Clyptus, we believe great ideas begin with great people. We foster a collaborative and inclusive workplace where creativity, continuous learning, innovation, and teamwork come together. We encourage individuals to explore their potential, share ideas, embrace challenges, and grow together while building meaningful technology solutions.
+                  </p>
                 </div>
               </div>
             </div>

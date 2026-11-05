@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Database, Users, Cpu, Send, ArrowUpRight, X } from 'lucide-react';
+import { Database, Users, Cpu, LayoutGrid, ArrowUpRight, X } from 'lucide-react';
 
 interface ServiceItem {
   id: string;
@@ -14,8 +14,8 @@ interface ServiceItem {
 const SERVICES_LIST: ServiceItem[] = [
   {
     id: 'sap',
-    title: 'ERP Services',
-    badge: 'S/4HANA & BTP',
+    title: 'Services',
+    badge: 'Enterprise Solutions',
     icon: Database,
     brandColor: 'text-sky-600',
     hoverBg: 'hover:bg-sky-600 hover:text-white hover:border-sky-600 shadow-sky-500/30',
@@ -163,14 +163,14 @@ export const ServicesBottomLeftWidget: React.FC<ServicesBottomLeftWidgetProps> =
                   : 'opacity-0 pointer-events-none group-hover/main:opacity-100 group-hover/main:pointer-events-auto sm:group-hover/main:opacity-0 sm:group-hover/main:pointer-events-none sm:group-hover/item:opacity-100 sm:group-hover/item:pointer-events-auto'
               }`}
             >
-              ERP Services
+              Services
             </button>
 
             {/* Circular Icon Button */}
             <button
               onClick={() => handleServiceClick(SERVICES_LIST[0])}
               className={`w-12 h-12 rounded-full bg-white border border-slate-200 shadow-lg flex items-center justify-center text-sky-600 transition-all duration-300 ${SERVICES_LIST[0].hoverBg} active:scale-95 cursor-pointer`}
-              title="ERP Services"
+              title="Services"
             >
               <Database className="w-5 h-5 stroke-[2.2]" />
             </button>
@@ -257,11 +257,11 @@ export const ServicesBottomLeftWidget: React.FC<ServicesBottomLeftWidgetProps> =
             isExpanded ? 'opacity-0' : 'opacity-30 group-hover/main:opacity-0'
           }`} />
 
-          {/* Main Icon (Send or Close X) */}
+          {/* Main Icon (Services Grid or Close X) */}
           {isExpanded ? (
             <X className="relative z-10 w-6 h-6 text-sky-600 stroke-[2.5] transition-all" />
           ) : (
-            <Send className="relative z-10 w-5 h-5 sm:w-6 sm:h-6 text-white group-hover/main:text-sky-600 group-hover/main:rotate-45 transition-all duration-500 stroke-[2.2]" />
+            <LayoutGrid className="relative z-10 w-5 h-5 sm:w-6 sm:h-6 text-white group-hover/main:text-sky-600 group-hover/main:scale-110 transition-all duration-300 stroke-[2.2]" />
           )}
         </button>
 

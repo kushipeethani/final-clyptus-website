@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import {
-  Compass,
   Layers,
-  RefreshCw,
+  CreditCard,
+  BarChart3,
   Code,
-  ShieldCheck,
-  ArrowRight,
+  TrendingUp,
+  RefreshCw,
+  Package,
+  Users,
+  ChevronDown,
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +19,7 @@ interface DigiLabSapEngineProps {
   onContactClick: () => void;
 }
 
-export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactClick }) => {
+export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactClick: _onContactClick }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const heroRef = useRef<HTMLDivElement>(null);
@@ -30,52 +33,86 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
   const scrollProgressRef = useRef<number>(0);
   const scrollStageRef = useRef<number>(1);
 
-  // 5 SAP Phases with deliverable metrics
+  const handleScrollDown = () => {
+    window.scrollBy({
+      top: window.innerHeight * 0.9,
+      behavior: 'smooth',
+    });
+  };
+
+  // 8 SAP Core Modules
   const phases = [
     {
       id: 1,
       num: '01',
-      title: 'ERP Strategy',
-      metric: 'ERP Transformation Roadmap',
+      title: 'S/4 HANA',
+      metric: 'Next-Gen Digital ERP Core',
       color: '#EA580C',
-      icon: Compass,
-      desc: 'Current landscape assessment, business case definition & sequence planning.',
+      icon: Layers,
+      desc: 'Modern cloud ERP with real-time analytics, streamlined processes & intelligent automation.',
     },
     {
       id: 2,
       num: '02',
-      title: 'ERP Migration',
-      metric: 'SAP ECC to S/4HANA Migration',
+      title: 'SAP ECC',
+      metric: 'Enterprise Suite 6.0 Support & Migration',
       color: '#2563EB',
       icon: RefreshCw,
-      desc: 'Brownfield conversion, custom-code remediation & data cleansing.',
+      desc: 'ECC 6.0 maintenance, functional enhancement, optimization & S/4HANA migration roadmaps.',
     },
     {
       id: 3,
       num: '03',
-      title: 'ERP Implementation',
-      metric: 'Core Finance & Supply Chain',
-      color: '#0284C7',
-      icon: Layers,
-      desc: 'Greenfield S/4HANA deployment across enterprise core processes.',
+      title: 'SAP BRIM',
+      metric: 'Billing & Revenue Innovation',
+      color: '#F59E0B',
+      icon: CreditCard,
+      desc: 'High-volume subscription billing, usage charging, invoicing & monetization.',
     },
     {
       id: 4,
       num: '04',
-      title: 'ERP Development',
-      metric: 'ABAP & SAP Fiori Development',
-      color: '#8B5CF6',
+      title: 'SAP ABAP',
+      metric: 'Core & Cloud ABAP Development',
+      color: '#7C3AED',
       icon: Code,
-      desc: 'Custom SAP extensions, Fiori UX apps and analytics integrations.',
+      desc: 'Custom extensions, RESTful RAP model, CDS views & cloud integrations.',
     },
     {
       id: 5,
       num: '05',
-      title: 'ERP Support',
-      metric: 'Application Management Services (AMS)',
+      title: 'SAP FICO',
+      metric: 'Financial Accounting & Controlling',
       color: '#10B981',
-      icon: ShieldCheck,
-      desc: 'Post go-live application management, enhancements & release updates.',
+      icon: BarChart3,
+      desc: 'General ledger, accounts payable/receivable, asset accounting & profit analysis.',
+    },
+    {
+      id: 6,
+      num: '06',
+      title: 'SAP MM',
+      metric: 'Materials Management & Procurement',
+      color: '#6366F1',
+      icon: Package,
+      desc: 'Procure-to-pay workflows, inventory tracking, vendor management & warehouse logistics.',
+    },
+    {
+      id: 7,
+      num: '07',
+      title: 'SAP HCM',
+      metric: 'Human Capital Management & Payroll',
+      color: '#06B6D4',
+      icon: Users,
+      desc: 'Core HR operations, global payroll processing, talent management & organizational workflows.',
+    },
+    {
+      id: 8,
+      num: '08',
+      title: 'SAP SD',
+      metric: 'Sales & Distribution Logistics',
+      color: '#0284C7',
+      icon: TrendingUp,
+      desc: 'Order-to-cash lifecycle, dynamic pricing, shipping execution & billing automation.',
     },
   ];
 
@@ -120,7 +157,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
     }));
 
     // Cinematic Bubble Burst Particles (40 floating orbs for Hub Detonation)
-    const burstColors = ['#EA580C', '#2563EB', '#0284C7', '#7C3AED', '#10B981'];
+    const burstColors = ['#EA580C', '#2563EB', '#F59E0B', '#7C3AED', '#10B981', '#6366F1', '#06B6D4', '#0284C7'];
     const burstParticleCount = 42;
     const burstParticles = Array.from({ length: burstParticleCount }, () => ({
       angle: Math.random() * Math.PI * 2,
@@ -198,11 +235,14 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
         const targetY = height * 0.52; // Central circle position
 
         const streamConfigs = [
-          { startX: width * 0.1, color: '#EA580C', ctrlX: width * 0.2 },
-          { startX: width * 0.3, color: '#2563EB', ctrlX: width * 0.35 },
-          { startX: width * 0.5, color: '#0284C7', ctrlX: width * 0.5 },
-          { startX: width * 0.7, color: '#8B5CF6', ctrlX: width * 0.65 },
-          { startX: width * 0.9, color: '#10B981', ctrlX: width * 0.8 },
+          { startX: width * 0.08, color: '#EA580C', ctrlX: width * 0.18 },
+          { startX: width * 0.20, color: '#2563EB', ctrlX: width * 0.28 },
+          { startX: width * 0.32, color: '#F59E0B', ctrlX: width * 0.38 },
+          { startX: width * 0.44, color: '#7C3AED', ctrlX: width * 0.46 },
+          { startX: width * 0.56, color: '#10B981', ctrlX: width * 0.54 },
+          { startX: width * 0.68, color: '#6366F1', ctrlX: width * 0.62 },
+          { startX: width * 0.80, color: '#06B6D4', ctrlX: width * 0.72 },
+          { startX: width * 0.92, color: '#0284C7', ctrlX: width * 0.82 },
         ];
 
         // Draw Bezier streams only if before burst disappearance
@@ -422,7 +462,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
             newStage = 2;
           } else {
             newStage = 3;
-            const phaseIndex = Math.min(4, Math.floor(((p - 0.45) / 0.55) * 5));
+            const phaseIndex = Math.min(phases.length - 1, Math.floor(((p - 0.45) / 0.55) * phases.length));
             setActivePhaseIndex((prev) => (prev !== phaseIndex ? phaseIndex : prev));
           }
 
@@ -474,11 +514,11 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
 
             {/* Exact CTA Button */}
             <button
-              onClick={onContactClick}
-              className="flex items-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 via-sky-600 to-indigo-600 text-white font-extrabold text-sm shadow-xl hover:shadow-2xl transition-all"
+              onClick={handleScrollDown}
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-slate-400 hover:text-slate-600 cursor-pointer transition-all duration-300 opacity-80 hover:opacity-100 select-none group pt-2 bg-transparent border-0 shadow-none p-0"
             >
-              <span>Talk to Our ERP Team</span>
-              <ArrowRight className="w-4 h-4 stroke-[2.5]" />
+              <span className="font-medium tracking-wide">Scroll down</span>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600 group-hover:translate-y-0.5 transition-transform animate-bounce" />
             </button>
           </div>
 
@@ -503,11 +543,8 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
               className="absolute top-[52%] left-1/2 w-28 h-28 rounded-full bg-white border-2 border-sky-500 shadow-[0_0_30px_rgba(234,88,12,0.4)] flex flex-col items-center justify-center text-center p-2 transition-transform duration-200"
             >
               <span className="w-2 h-2 rounded-full bg-orange-500 animate-ping mb-1" />
-              <span className="text-[10px] font-mono font-black text-slate-900 leading-tight">
-                SAP S/4HANA
-              </span>
-              <span className="text-[9px] font-mono font-bold text-sky-600 uppercase tracking-widest mt-0.5">
-                HUB
+              <span className="text-base font-mono font-black text-slate-900 leading-tight tracking-wider">
+                SAP
               </span>
             </div>
 
@@ -526,25 +563,26 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
               scrollProgress >= 0.45 ? 'pointer-events-auto' : 'pointer-events-none'
             }`}
           >
-            {/* Center Technical Hub (Clean SAP S/4HANA Badge) */}
-            <div className="absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 px-5 py-2.5 rounded-2xl bg-white/95 border-2 border-sky-500 text-center shadow-xl backdrop-blur-xl pointer-events-auto flex items-center justify-center gap-2 whitespace-nowrap">
-              <span className="text-xs font-mono font-black text-slate-900 tracking-wider">
-                SAP S/4HANA
+            {/* Center Technical Hub (Clean SAP Badge) */}
+            <div className="absolute top-[52%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 px-6 py-2.5 rounded-2xl bg-white/95 border-2 border-sky-500 text-center shadow-xl backdrop-blur-xl pointer-events-auto flex items-center justify-center gap-2 whitespace-nowrap">
+              <span className="text-sm font-mono font-black text-slate-900 tracking-widest">
+                SAP
               </span>
             </div>
 
-            {/* 5 Orbiting Active Phase Targets along Outer Radar Ring (Clean Non-Overlapping Orbit) */}
-            <div className="relative w-full max-w-5xl h-[620px] flex items-center justify-center">
+            {/* 8 Orbiting Active Phase Targets along Outer Radar Ring (Clean Non-Overlapping Orbit) */}
+            <div className="relative w-full max-w-6xl h-[640px] flex items-center justify-center">
               
               {/* SVG Connecting Spoke Lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 1000 620">
+              <svg className="absolute inset-0 w-full h-full pointer-events-none z-10" viewBox="0 0 1000 640">
                 {phases.map((ph, idx) => {
-                  const angle = (idx / 5) * Math.PI * 2 - Math.PI / 2;
-                  const radius = 295;
+                  const angle = (idx / phases.length) * Math.PI * 2 - Math.PI / 2;
+                  const radiusX = 340;
+                  const radiusY = 220;
                   const cx = 500;
-                  const cy = 310;
-                  const targetX = cx + Math.cos(angle) * radius;
-                  const targetY = cy + Math.sin(angle) * radius;
+                  const cy = 320;
+                  const targetX = cx + Math.cos(angle) * radiusX;
+                  const targetY = cy + Math.sin(angle) * radiusY;
                   const isActive = activePhaseIndex === idx;
 
                   return (
@@ -575,12 +613,12 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
               </svg>
               {phases.map((ph, idx) => {
                 const isActive = activePhaseIndex === idx;
-                // Calculate 5 equidistant angles around the circle
-                const angle = (idx / 5) * Math.PI * 2 - Math.PI / 2;
-                // Expanded radius (295px) ensures complete separation from center box
-                const radius = 295;
-                const tx = Math.cos(angle) * radius;
-                const ty = Math.sin(angle) * radius;
+                // Calculate 8 equidistant angles around the circle
+                const angle = (idx / phases.length) * Math.PI * 2 - Math.PI / 2;
+                const radiusX = 340;
+                const radiusY = 220;
+                const tx = Math.cos(angle) * radiusX;
+                const ty = Math.sin(angle) * radiusY;
                 const IconComp = ph.icon;
 
                 return (
@@ -589,7 +627,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
                     style={{
                       transform: `translate(${tx}px, ${ty}px)`,
                     }}
-                    className={`absolute p-3 rounded-2xl border transition-all duration-500 backdrop-blur-xl w-52 sm:w-56 pointer-events-auto ${
+                    className={`absolute p-2.5 sm:p-3 rounded-2xl border transition-all duration-500 backdrop-blur-xl w-48 sm:w-52 pointer-events-auto ${
                       isActive
                         ? 'bg-white text-slate-900 border-orange-500 shadow-[0_12px_35px_rgba(242,92,5,0.25)] scale-105 z-40 ring-2 ring-orange-400/40'
                         : 'bg-white/95 text-slate-700 border-slate-200/90 shadow-md scale-95 opacity-85 hover:opacity-100'
@@ -607,7 +645,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
                       </span>
                     </div>
 
-                    <span className="text-[10px] font-mono font-extrabold text-sky-600 block mb-1">
+                    <span className="text-[10px] font-mono font-extrabold text-sky-600 block mb-0.5">
                       {ph.metric}
                     </span>
 
@@ -635,10 +673,11 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
           </p>
 
           <button
-            onClick={onContactClick}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-orange-500 to-sky-600 text-white font-extrabold text-xs shadow-md"
+            onClick={handleScrollDown}
+            className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-600 cursor-pointer transition-all duration-300 opacity-80 hover:opacity-100 select-none group pt-1 bg-transparent border-0 shadow-none p-0"
           >
-            Talk to Our ERP Team →
+            <span className="font-medium tracking-wide">Scroll down</span>
+            <ChevronDown className="w-3 h-3 text-slate-400 group-hover:text-slate-600 animate-bounce" />
           </button>
 
           {/* Mobile Vertical Timeline */}

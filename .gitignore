@@ -32,3 +32,4 @@ dist-ssr
 *.exe
 cloudflared.exe
 .tools/
+scratch/

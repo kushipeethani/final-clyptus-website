@@ -3,9 +3,13 @@ import { motion } from 'framer-motion';
 import { SLIDER_CARDS, DEFAULT_SPIRAL_CONFIG } from './data/sliderData';
 import type { SliderCard, SpiralConfig } from './data/sliderData';
 import { Header } from './components/Header';
+import { ServicesPage } from './components/ServicesPage';
+import { CloudServicesPage } from './components/CloudServicesPage';
+import { CyberSecurityPage } from './components/CyberSecurityPage';
+import { CrmServicesPage } from './components/CrmServicesPage';
+import { DataEngineeringPage } from './components/DataEngineeringPage';
+import { SalesforcePage } from './components/SalesforcePage';
 import { SpiralSlider } from './components/SpiralSlider';
-import { CodePromptModal } from './components/CodePromptModal';
-import { CardDetailModal } from './components/CardDetailModal';
 import { CinematicIntro } from './components/CinematicIntro';
 import { AiImpactSection } from './components/AiImpactSection';
 import { MetricsCounterSection } from './components/MetricsCounterSection';
@@ -33,7 +37,13 @@ const getInitialPage = (): string => {
   const path = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '');
   const hash = window.location.hash.replace('#', '').toLowerCase();
   const token = path || hash;
-  if (token === 'sap') return 'SAP';
+  if (token === 'services') return 'Services';
+  if (token === 'cloud' || token === 'cloud-services') return 'Cloud';
+  if (token === 'security' || token === 'cybersecurity' || token === 'cyber-security') return 'Security';
+  if (token === 'crm' || token === 'crm-services') return 'CRM';
+  if (token === 'data-engineering' || token === 'data' || token === 'dataengineering') return 'DataEngineering';
+  if (token === 'salesforce' || token === 'salesforce-services') return 'Salesforce';
+  if (token === 'sap' || token === 'erp' || token === 'erp-services') return 'SAP';
   if (token === 'ai') return 'AI';
   if (token === 'recruiting' || token === 'it-recruiting' || token === 'staffing') return 'Recruiting';
   if (token === 'contact') return 'Contact';
@@ -83,8 +93,6 @@ export function App() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [config] = useState<SpiralConfig>(DEFAULT_SPIRAL_CONFIG);
   const [is3dServicesOpen, setIs3dServicesOpen] = useState<boolean>(false);
-  const [selectedCard, setSelectedCard] = useState<SliderCard | null>(null);
-  const [codeModalCard, setCodeModalCard] = useState<SliderCard | null>(null);
   const [activeResourceModal, setActiveResourceModal] = useState<'privacy' | 'terms' | 'cookies' | 'faqs' | 'insights' | null>(null);
 
   // Sync hash and pathname routing with currentPage
@@ -108,6 +116,12 @@ export function App() {
 
     const pathMap: Record<string, string> = {
       Home: '/',
+      Services: '/services',
+      Cloud: '/cloud',
+      Security: '/security',
+      CRM: '/crm',
+      DataEngineering: '/data-engineering',
+      Salesforce: '/salesforce',
       SAP: '/sap',
       AI: '/ai',
       Recruiting: '/recruiting',
@@ -219,11 +233,8 @@ export function App() {
       {!showIntro && (
         <Header
           activePage={currentPage}
-          onNavigate={(page) => {
+          onNavigate={(page: string) => {
             setCurrentPage(page);
-            if (page === 'Services') {
-              setIs3dServicesOpen(true);
-            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
           onPlayIntro={() => setShowIntro(true)}
@@ -236,6 +247,70 @@ export function App() {
         /* SEPARATE DEDICATED CONTACT US PAGE */
         <main className="w-full flex-1 flex flex-col items-center">
           <ContactSection />
+        </main>
+      ) : currentPage === 'Services' ? (
+        /* DEDICATED SERVICES PAGE (4 CARDS: ERP, CRM, DATA & CLOUD, HCM) */
+        <main className="w-full flex-1 flex flex-col items-center">
+          <ServicesPage
+            onNavigate={(page) => {
+              setCurrentPage(page);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onNavigateContact={() => {
+              setCurrentPage('Contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        </main>
+      ) : currentPage === 'Cloud' ? (
+        /* DEDICATED CLOUD & DATA SERVICES PAGE */
+        <main className="w-full flex-1 flex flex-col items-center">
+          <CloudServicesPage
+            onNavigateContact={() => {
+              setCurrentPage('Contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        </main>
+      ) : currentPage === 'Security' || currentPage === 'CyberSecurity' ? (
+        /* DEDICATED CYBERSECURITY SERVICES PAGE */
+        <main className="w-full flex-1 flex flex-col items-center">
+          <CyberSecurityPage
+            onNavigateContact={() => {
+              setCurrentPage('Contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        </main>
+      ) : currentPage === 'CRM' ? (
+        /* DEDICATED CRM SERVICES PAGE */
+        <main className="w-full flex-1 flex flex-col items-center">
+          <CrmServicesPage
+            onNavigateContact={() => {
+              setCurrentPage('Contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        </main>
+      ) : currentPage === 'DataEngineering' ? (
+        /* DEDICATED DATA ENGINEERING SERVICES PAGE */
+        <main className="w-full flex-1 flex flex-col items-center">
+          <DataEngineeringPage
+            onNavigateContact={() => {
+              setCurrentPage('Contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        </main>
+      ) : currentPage === 'Salesforce' ? (
+        /* DEDICATED SALESFORCE SERVICES PAGE */
+        <main className="w-full flex-1 flex flex-col items-center">
+          <SalesforcePage
+            onNavigateContact={() => {
+              setCurrentPage('Contact');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
         </main>
       ) : currentPage === 'Projects' ? (
         /* DEDICATED PROJECTS & CASE STUDIES PAGE */
@@ -331,8 +406,6 @@ export function App() {
               <SpiralSlider
                 cards={filteredCards}
                 config={config}
-                onSelectCard={(card) => setSelectedCard(card)}
-                onOpenPromptModal={(card) => setCodeModalCard(card)}
               />
             ) : (
               <div className="h-[400px] flex flex-col items-center justify-center gap-3 text-slate-400">
@@ -362,6 +435,12 @@ export function App() {
               } else if (serviceId === 'recruiting' || serviceId === 'staffing') {
                 setCurrentPage('Recruiting');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (serviceId === 'about' || serviceId === 'vision' || serviceId === 'mission') {
+                setCurrentPage('About');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (serviceId === 'careers' || serviceId === 'life') {
+                setCurrentPage('Careers');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
           />
@@ -383,14 +462,20 @@ export function App() {
               if (serviceId === 'home' || serviceId === 'Home') {
                 setCurrentPage('Home');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-              } else if (serviceId === 'sap') {
-                setCurrentPage('SAP');
+              } else if (serviceId === 'sap' || serviceId === 'erp' || serviceId === 'services') {
+                setCurrentPage('Services');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               } else if (serviceId === 'ai') {
                 setCurrentPage('AI');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               } else if (serviceId === 'recruiting' || serviceId === 'staffing') {
                 setCurrentPage('Recruiting');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (serviceId === 'about' || serviceId === 'vision' || serviceId === 'mission') {
+                setCurrentPage('About');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else if (serviceId === 'careers' || serviceId === 'life') {
+                setCurrentPage('Careers');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
@@ -431,12 +516,12 @@ export function App() {
       />
 
       {/* Brand Footer: Mountain Sunset Footer on SAP, IT Recruiting, and AI pages; Ember Glow Footer on other pages */}
-      {currentPage === 'SAP' || currentPage === 'AI' || currentPage === 'Recruiting' || currentPage === 'IT Recruiting' ? (
+      {currentPage === 'Services' || currentPage === 'Cloud' || currentPage === 'SAP' || currentPage === 'AI' || currentPage === 'Recruiting' || currentPage === 'IT Recruiting' || currentPage === 'Salesforce' ? (
         <MountainFooter
           onNavigate={(page, sectionId) => {
             setCurrentPage(page);
             if (page === 'Services') {
-              setIs3dServicesOpen(true);
+              setCurrentPage('Services');
             }
             if (sectionId) {
               let attempts = 0;
@@ -463,9 +548,7 @@ export function App() {
         <Footer
           onNavigate={(page, sectionId) => {
             setCurrentPage(page);
-            if (page === 'Services') {
-              setIs3dServicesOpen(true);
-            }
+            // regular navigation
             setTimeout(() => {
               if (sectionId) {
                 const el = document.getElementById(sectionId);
@@ -492,28 +575,7 @@ export function App() {
         }}
       />
 
-      {/* Card Detail Modal */}
-      {selectedCard && (
-        <CardDetailModal
-          card={selectedCard}
-          onClose={() => setSelectedCard(null)}
-          onNavigate={(page) => {
-            setSelectedCard(null);
-            setCurrentPage(page);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
-      )}
-
-      {/* AI Prompt & Code Generator Modal */}
-      {codeModalCard && (
-        <CodePromptModal
-          card={codeModalCard}
-          config={config}
-          onClose={() => setCodeModalCard(null)}
-        />
-      )}
-    </div>
+      </div>
   );
 }
 

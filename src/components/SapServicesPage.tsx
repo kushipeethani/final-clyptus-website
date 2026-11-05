@@ -130,13 +130,13 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
   const sapProjects = [
     {
       clientName: 'Hume Cement',
-      locationIndustry: 'Malaysia · Manufacturing',
+      locationIndustry: 'Malaysia Â· Manufacturing',
       description: 'SAP migration delivered close to completion in record time, with a joint project-manager and technical-lead team supported by senior consultants.',
       badge: 'MANUFACTURING SAP MIGRATION',
     },
     {
       clientName: 'Sapura Energy Berhad',
-      locationIndustry: 'Malaysia · Energy services',
+      locationIndustry: 'Malaysia Â· Energy services',
       description: 'High-volume ERP data was hard to analyse. Clyptus assessed the need, recommended Zoho Analytics and delivered dashboards with live filtering.',
       badge: 'ENERGY ERP ANALYTICS',
     },
@@ -199,18 +199,9 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-400/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto flex flex-col items-center text-center">
-          
-          {/* SAP Silver Partner Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200/80 shadow-xs mb-6 animate-in fade-in slide-in-from-bottom-2">
-            <span className="w-2 h-2 rounded-full bg-sky-600 animate-ping" />
-            <span className="text-xs font-mono font-extrabold tracking-widest uppercase text-sky-700">
-              ERP SERVICES <span className="text-sky-500 mx-1.5">•</span> SILVER PARTNER
-            </span>
-          </div>
-
           {/* Hero Headline (Home Page Sky -> Indigo -> Purple Gradient) */}
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-slate-900 mb-6 max-w-4xl">
-            Plan, move and run <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">SAP S/4HANA</span> — with an SAP Silver Partner.
+            Plan, move and run <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600">SAP S/4HANA</span> â€” with an SAP Silver Partner.
           </h1>
 
           {/* Hero Description */}
@@ -280,7 +271,7 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
                 {/* Explore Service Link */}
                 <div className="relative z-10 pt-4 border-t border-slate-100 flex items-center justify-between">
                   <span className={`text-xs font-mono font-bold tracking-wider uppercase ${srv.accentColor} group-hover:translate-x-1 transition-transform flex items-center gap-1.5`}>
-                    Explore Service →
+                    Explore Service â†’
                   </span>
                 </div>
               </div>
