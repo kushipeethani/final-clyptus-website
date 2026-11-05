@@ -1,9 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Globe, TrendingUp, Cpu } from 'lucide-react';
 
-// Dynamically import all partner logos from src/assets/logos/
-const logoModules = import.meta.glob<{ default: string }>('../assets/logos/*.{jpeg,jpg,png,svg}', { eager: true });
-const logoUrls = Object.values(logoModules).map((mod) => mod.default);
+// Enterprise Client & Partner Company Names (Normal Text, No Image Logos)
+const PARTNER_COMPANIES = [
+  'Oracle',
+  'Deloitte',
+  'Panasonic',
+  'NTT DATA',
+  'HCL Tech',
+  'LTIMindtree',
+  'Hexaware',
+  'CtrlS',
+  'Welspun',
+  'Saudia Cargo',
+  'Greenko',
+  'Hume Cement',
+  'Lumut Port',
+  'Penang Port',
+  'ThingsAlive',
+  'Al Nasser Group',
+  'Al Nasir Company',
+  'Artwright',
+  'neev SYSTEMS',
+  'DGSOFT Technologies',
+  'MLE Systems',
+];
 
 interface MetricItem {
   id: number;
@@ -190,45 +211,41 @@ export const MetricsCounterSection: React.FC = () => {
             })}
           </div>
 
-          {/* Infinite Horizontal Logo Marquee (Right-to-Left, Half-Inch Gap, Transparent, No Borders) */}
-          {logoUrls.length > 0 && (
-            <div className="w-full mt-16 sm:mt-20 overflow-hidden select-none relative pt-4">
-              {/* Header Label above Logo Scrolling */}
-              <div className="text-center mb-8">
-                <span className="text-xs font-mono font-extrabold text-blue-600 uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 shadow-xs">
-                  OUR TRUSTED PARTNERS
-                </span>
-              </div>
-
-              {/* Soft Gradient Fade Out Edges */}
-              <div className="absolute left-0 top-12 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-              <div className="absolute right-0 top-12 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
-
-              <div className="flex items-center gap-12 sm:gap-16 animate-marquee whitespace-nowrap">
-                {/* Primary set of logos (Original Full Colors, No Grayscale Filter) */}
-                {logoUrls.map((url, i) => (
-                  <div key={`primary-${i}`} className="shrink-0 flex items-center justify-center p-2">
-                    <img
-                      src={url}
-                      alt={`Enterprise Client Partner ${i + 1}`}
-                      className="h-12 sm:h-16 w-auto object-contain max-w-[170px] hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
-                    />
-                  </div>
-                ))}
-
-                {/* Duplicated set for seamless loop (Original Full Colors) */}
-                {logoUrls.map((url, i) => (
-                  <div key={`duplicate-${i}`} className="shrink-0 flex items-center justify-center p-2">
-                    <img
-                      src={url}
-                      alt={`Enterprise Client Partner ${i + 1}`}
-                      className="h-12 sm:h-16 w-auto object-contain max-w-[170px] hover:scale-105 transition-transform duration-300 pointer-events-auto cursor-pointer"
-                    />
-                  </div>
-                ))}
-              </div>
+          {/* Infinite Horizontal Company Names Marquee (Normal Text Only, No Image Logos) */}
+          <div className="w-full mt-16 sm:mt-20 overflow-hidden select-none relative pt-4">
+            {/* Header Label above Company Scrolling */}
+            <div className="text-center mb-8">
+              <span className="text-xs font-mono font-extrabold text-blue-600 uppercase tracking-widest bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 shadow-xs">
+                OUR TRUSTED PARTNERS
+              </span>
             </div>
-          )}
+
+            {/* Soft Gradient Fade Out Edges */}
+            <div className="absolute left-0 top-12 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-12 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+
+            <div className="flex items-center gap-10 sm:gap-14 animate-marquee whitespace-nowrap py-3">
+              {/* Primary set of company names */}
+              {PARTNER_COMPANIES.map((company, i) => (
+                <div key={`primary-${i}`} className="shrink-0 flex items-center gap-10 sm:gap-14">
+                  <span className="text-base sm:text-xl font-bold tracking-tight text-slate-700 hover:text-blue-600 transition-colors cursor-default select-none">
+                    {company}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 select-none" />
+                </div>
+              ))}
+
+              {/* Duplicated set for seamless loop */}
+              {PARTNER_COMPANIES.map((company, i) => (
+                <div key={`duplicate-${i}`} className="shrink-0 flex items-center gap-10 sm:gap-14">
+                  <span className="text-base sm:text-xl font-bold tracking-tight text-slate-700 hover:text-blue-600 transition-colors cursor-default select-none">
+                    {company}
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 select-none" />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
   );
