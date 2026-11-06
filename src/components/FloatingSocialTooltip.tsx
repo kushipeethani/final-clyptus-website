@@ -75,7 +75,7 @@ export const FloatingSocialTooltip: React.FC = () => {
   ];
 
   return (
-    <div ref={containerRef} className="fixed bottom-4 right-20 sm:bottom-6 sm:right-24 z-40 group flex items-center justify-center select-none">
+    <div ref={containerRef} className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 group flex items-center justify-center select-none">
       
       {/* Invisible Hover Helper Region (.tooltip9) - Prevents hover flicker when moving mouse to floating icons */}
       <div className="absolute w-44 h-44 rounded-full -inset-14 opacity-0 group-hover:pointer-events-auto pointer-events-none z-0" />
