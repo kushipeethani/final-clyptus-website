@@ -118,18 +118,90 @@ Over a decade of scaling enterprise architectures and delivering digital transfo
     ]
   },
 
-  // 3. GLOBAL LOCATIONS & OFFICE ADDRESSES
+  // 3. CORE ENTERPRISE SERVICES & PRACTICE AREAS (ALL OFFERINGS)
+  {
+    category: 'services',
+    keywords: [
+      'services', 'service', 'services providing', 'services you are providing',
+      'what services', 'what do you do', 'what do you provide', 'offerings', 
+      'solutions', 'capabilities', 'what we do', 'practice areas', 'portfolio',
+      'digital services', 'technology services', 'what does clyptus do', 'what can you do',
+      'all services', 'list services', 'what are your services'
+    ],
+    patterns: [
+      /\bservices?\b/i,
+      /\bwhat (services?|solutions?|offerings?) (do you|does clyptus|are provided|are you providing)\b/i,
+      /\bservices? (you are|you|clyptus is) providing\b/i,
+      /\bwhat (does|can) clyptus do\b/i,
+      /\bwhat (do you|can you) (offer|provide|do for clients)\b/i,
+      /\b(all |our )?offerings\b/i,
+      /\b(core )?practice areas\b/i
+    ],
+    answer: `**Clyptus Enterprise Services & Practice Areas**
+
+We deliver end-to-end digital engineering and technology transformation across 8 core practices:
+
+1. **ERP & SAP Services (SAP Silver Partner)**: S/4HANA migrations, SAP BRIM billing, SAP BTP integrations, ECC transformations, and 24/7 AMS support.
+2. **Artificial Intelligence & GenAI**: Custom enterprise LLMs, Agentic AI workflows, predictive analytics, computer vision, and autonomous copilots.
+3. **Multi-Cloud Architecture & DevOps**: AWS, Microsoft Azure, and GCP migrations, Kubernetes containerization, CI/CD automation, and cloud security governance.
+4. **Cyber Security & Zero Trust**: Threat detection, SOC 2 / ISO compliance, endpoint defense, vulnerability management, and IAM security.
+5. **CRM Services**: Customer journey orchestration, revenue operations, omnichannel workflows, and Zoho/HubSpot/Dynamics implementations.
+6. **Salesforce Consulting**: Sales & Service Cloud customization, Lightning development, MuleSoft integrations, and managed support.
+7. **Data Engineering & Big Data**: Real-time streaming ETL/ELT pipelines, Snowflake, Databricks, enterprise data warehouses, and Power BI analytics.
+8. **IT Staffing & Global Talent Recruitment**: Specialized engineering squads, contract-to-hire, executive search, and onshore/offshore delivery.`,
+    quickActions: [
+      { label: 'Browse All Services', pageTarget: 'Services' },
+      { label: 'ERP & SAP', pageTarget: 'SAP' },
+      { label: 'AI Solutions', pageTarget: 'AI' },
+      { label: 'Cloud Services', pageTarget: 'Cloud' },
+      { label: 'Official Emails', chatQuery: 'What are your official emails?' }
+    ]
+  },
+
+  // 4. CURRENT PROJECTS & CLIENT ENGAGEMENTS
+  {
+    category: 'projects',
+    keywords: [
+      'project', 'projects', 'current project', 'current projects', 'current project clyptus doing',
+      'what is the current project', 'what projects', 'what is clyptus doing', 'active projects',
+      'case studies', 'client work', 'client engagements', 'what are you working on', 'portfolio',
+      'current work', 'ongoing projects', 'recent projects'
+    ],
+    patterns: [
+      /\b(current |active |ongoing |recent )?projects?\b/i,
+      /\bwhat (is|are) (the )?(current |active )?projects?\b/i,
+      /\bwhat (is|are) (clyptus|you) (working on|doing currently|doing|building)\b/i,
+      /\b(case studies|client engagements?|past work|deliveries)\b/i
+    ],
+    answer: `**Current Projects & Client Engagements at Clyptus**
+
+Clyptus is actively delivering high-impact enterprise transformations globally:
+
+• **SAP S/4HANA & BRIM Transformations**: Delivering end-to-end subscription billing, revenue recognition, and clean-core S/4HANA migrations for telecom and retail enterprises in UAE and North America.
+• **Agentic AI & Generative AI Copilots**: Building bespoke enterprise AI workflows, LLM fine-tuning, and document intelligence pipelines for financial and supply-chain clients.
+• **Enterprise Multi-Cloud Modernization**: Architecting zero-downtime cloud migrations to AWS and Azure with automated Kubernetes containerization for healthcare organizations.
+• **Real-Time Data Lakehouse Pipelines**: Deploying scalable Databricks and Snowflake engineering infrastructure for predictive analytics and real-time business intelligence.
+• **Zero-Trust Cybersecurity Hardening**: Implementing 24/7 managed detection, response (MDR), and identity access management (IAM) across hybrid enterprise environments.`,
+    quickActions: [
+      { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
+      { label: 'Browse Services', pageTarget: 'Services' },
+      { label: 'Official Emails', chatQuery: 'What are your official emails?' },
+      { label: 'Contact Us', pageTarget: 'Contact' }
+    ]
+  },
+
+  // 5. GLOBAL LOCATIONS & OFFICE ADDRESSES
   {
     category: 'locations',
     keywords: [
-      'locations', 'offices', 'address', 'where are you', 'headquarters', 
+      'locations', 'offices', 'address', 'office address', 'headquarters', 
       'hyderabad', 'dubai', 'california', 'temecula', 'india', 'uae', 'usa', 
-      'branches', 'visit', 'directions', 'map', 'phone', 'phone number', 'call',
-      'telephone', 'contact number'
+      'branches', 'office locations', 'delivery centers', 'directions', 'map', 
+      'phone', 'phone number', 'call', 'telephone', 'contact number'
     ],
     patterns: [
       /\b(locations?|offices?|address(es)?|headquarters|branches?)\b/i,
-      /where (are you|is clyptus|are the offices|are you located)/i,
+      /where (is clyptus|are the offices|are you located)/i,
       /\b(phone|call|telephone|contact number)\b/i,
       /\b(hyderabad|dubai|california|temecula)\b/i
     ],
@@ -247,11 +319,16 @@ We are continuously hiring experienced developers, enterprise consultants, and t
     ]
   },
 
-  // 7. GREETINGS & INTRO / KEVA IDENTITY
+  // 9. GREETINGS & INTRO / KEVA IDENTITY
   {
     category: 'greetings',
-    keywords: ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what is keva', 'keva', 'who is keva', 'what is clyptus ai', 'help me', 'start'],
-    patterns: [/^(hi|hello|hey|hola|greetings)/i, /who are you/i, /what (can you do|is keva|is clyptus ai)/i, /(who|what) is keva/i, /your name/i],
+    keywords: ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what is keva', 'who is keva', 'your name'],
+    patterns: [
+      /^(hi|hello|hey|hola|greetings|good (morning|afternoon|evening))\b/i, 
+      /^who are you\b/i, 
+      /^what is (keva|your name)\b/i, 
+      /^who is keva\b/i
+    ],
     answer: `Hello! 👋 Welcome to Clyptus Software Solutions. I'm **Keva**.
 
 I'm here to help you explore our enterprise services, company journey since 2014, global offices, or direct email channels.
@@ -260,9 +337,8 @@ How can I assist you today?`,
     quickActions: [
       { label: 'Official Emails', chatQuery: 'What are your official emails?' },
       { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
-      { label: 'ERP & SAP Services', pageTarget: 'SAP' },
-      { label: 'AI Engineering', pageTarget: 'AI' },
-      { label: 'Contact Us', pageTarget: 'Contact' }
+      { label: 'All Services', chatQuery: 'What services are you providing?' },
+      { label: 'Current Projects', chatQuery: 'What is the current project Clyptus is doing?' }
     ]
   },
 
@@ -503,6 +579,20 @@ Fill out our interactive form on the Contact page for a response within 24 hours
   }
 ];
 
+// Stopwords that shouldn't inflate keyword matches or mislead category selection
+const STOP_WORDS = new Set([
+  'a', 'about', 'above', 'after', 'again', 'against', 'all', 'am', 'an', 'and', 'any', 'are', 'as', 'at',
+  'be', 'because', 'been', 'before', 'being', 'below', 'between', 'both', 'by',
+  'can', 'clyptus', 'could', 'did', 'do', 'does', 'doing', 'down', 'during',
+  'each', 'few', 'for', 'from', 'further', 'had', 'has', 'have', 'having', 'he', 'her', 'here', 'hers', 'herself',
+  'him', 'himself', 'his', 'how', 'i', 'if', 'in', 'into', 'is', 'it', 'its', 'itself',
+  'just', 'me', 'more', 'most', 'my', 'myself', 'no', 'nor', 'not', 'now', 'of', 'off', 'on', 'once', 'only',
+  'or', 'other', 'our', 'ours', 'ourselves', 'out', 'over', 'own', 'same', 'she', 'should', 'so', 'some', 'such',
+  'than', 'that', 'the', 'their', 'theirs', 'them', 'themselves', 'then', 'there', 'these', 'they', 'this', 'those',
+  'through', 'to', 'too', 'under', 'until', 'up', 'very', 'was', 'we', 'were', 'what', 'when', 'where', 'which',
+  'while', 'who', 'whom', 'why', 'will', 'with', 'you', 'your', 'yours', 'yourself', 'yourselves', 'please', 'tell', 'show'
+]);
+
 export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
@@ -624,23 +714,44 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       }
     }
 
-    // 2. Keyword Scoring Match
-    const queryTokens = cleanQuery.split(/[\s,?.!]+/).filter(Boolean);
+    // 2. Keyword Scoring Match with Stopword Filtering
+    const rawTokens = cleanQuery.split(/[\s,?.!'"()]+/).filter(Boolean);
+    const meaningfulTokens = rawTokens.filter((token) => !STOP_WORDS.has(token) && token.length > 2);
+
     let bestMatch: KnowledgeArticle | null = null;
     let highestScore = 0;
 
     for (const item of KNOWLEDGE_BASE) {
       let score = 0;
+
       for (const kw of item.keywords) {
-        const lowerKw = kw.toLowerCase();
+        const lowerKw = kw.toLowerCase().trim();
+        
+        // Exact full query matches a keyword
         if (cleanQuery === lowerKw) {
-          score += 15;
-        } else if (cleanQuery.includes(lowerKw)) {
-          score += lowerKw.split(' ').length * 4;
+          score += 30;
+          continue;
         }
-        for (const token of queryTokens) {
-          if (token.length > 2 && lowerKw.includes(token)) {
-            score += 1;
+
+        // Multi-word keyword phrase match (e.g. "office locations", "current project", "sap services")
+        if (lowerKw.includes(' ') && cleanQuery.includes(lowerKw)) {
+          score += lowerKw.split(' ').length * 12;
+          continue;
+        }
+
+        // Single keyword exact match in cleanQuery as a whole word
+        const wordRegex = new RegExp(`\\b${lowerKw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+        if (wordRegex.test(cleanQuery)) {
+          score += 10;
+          continue;
+        }
+
+        // Meaningful token overlap with keyword
+        for (const token of meaningfulTokens) {
+          if (lowerKw === token) {
+            score += 8;
+          } else if (lowerKw.length >= 4 && token.length >= 4 && (lowerKw.includes(token) || token.includes(lowerKw))) {
+            score += 3;
           }
         }
       }
@@ -651,25 +762,27 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       }
     }
 
-    if (bestMatch && highestScore >= 1) {
+    // High confidence threshold (prevents weak coincidences from picking the wrong topic)
+    if (bestMatch && highestScore >= 8) {
       return { text: bestMatch.answer, quickActions: bestMatch.quickActions };
     }
 
-    // 3. Fallback Smart Response
+    // 3. Fallback when no match is found (Clean, helpful guide to website topics)
     return {
-      text: `Thank you for asking! While I don't have an exact match for that specific inquiry, Clyptus provides comprehensive enterprise technology solutions:
+      text: `I couldn't find a direct match for that question.
 
-• **Contact & Emails**: Sales@clyptus.com | hr.india@clyptus.com | +91 77999 88139
-• **Company Journey**: Founded in 2014, official SAP Silver Partner, 10+ years experience, 250+ consultants across USA, UAE, and India.
-• **Enterprise Practices**: SAP S/4HANA & BRIM, Artificial Intelligence, Multi-Cloud, Cybersecurity, CRM, Salesforce, and Data Engineering.
-
-Would you like to connect directly with our solution architects or explore our journey?`,
+Please ask something related to Clyptus Software Solutions and our website:
+• **Our Services**: SAP ERP, AI & GenAI, Cloud Architecture, Cybersecurity, CRM, Salesforce, Data Engineering, and IT Recruitment
+• **Company Journey**: Founded in 2014, SAP Silver Partner, and 10+ years milestones
+• **Current Projects**: Active enterprise transformations and client implementations
+• **Office Locations**: Hyderabad (HQ), Dubai (DIFC), and California
+• **Official Contacts**: Sales proposals, HR emails, and office phone numbers`,
       quickActions: [
-        { label: 'View All Emails', chatQuery: 'What are your official emails?' },
+        { label: 'All Services', chatQuery: 'What services are you providing?' },
+        { label: 'Current Projects', chatQuery: 'What is the current project Clyptus is doing?' },
+        { label: 'Official Emails', chatQuery: 'What are your official emails?' },
         { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
-        { label: 'Office Locations', chatQuery: 'Where are your office locations?' },
-        { label: 'Browse All Services', pageTarget: 'Services' },
-        { label: 'Contact Form', pageTarget: 'Contact' }
+        { label: 'Office Locations', chatQuery: 'Where are your office locations?' }
       ]
     };
   };
