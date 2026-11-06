@@ -286,7 +286,35 @@ export function applySeoForPage(pageName: string) {
   updateMetaTag('twitter:title', meta.twitterTitle || meta.title);
   updateMetaTag('twitter:description', meta.twitterDescription || meta.description);
   updateMetaTag('twitter:url', meta.ogUrl || meta.canonicalUrl);
-  if (meta.twitterImage || meta.ogImage) {
-    updateMetaTag('twitter:image', meta.twitterImage || meta.ogImage || '');
+  // Robots & Googlebot Directives
+  updateMetaTag('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+  updateMetaTag('googlebot', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
+
+  // Dynamic JSON-LD Breadcrumb Schema for Google Rich Results
+  const breadcrumbId = 'dynamic-breadcrumb-schema';
+  let scriptEl = document.getElementById(breadcrumbId) as HTMLScriptElement | null;
+  if (!scriptEl) {
+    scriptEl = document.createElement('script');
+    scriptEl.id = breadcrumbId;
+    scriptEl.type = 'application/ld+json';
+    document.head.appendChild(scriptEl);
   }
+  scriptEl.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://clyptus.com/'
+      },
+      ...(pageName !== 'Home' ? [{
+        '@type': 'ListItem',
+        position: 2,
+        name: meta.title.split('|')[0].trim(),
+        item: meta.canonicalUrl
+      }] : [])
+    ]
+  });
 }

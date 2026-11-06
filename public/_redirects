@@ -1,9 +1,18 @@
-# Cloudflare Pages Redirects & Rewrites
-# Multi-page application route mappings
-/sap         /sap/index.html        200
-/ai          /ai/index.html         200
-/recruiting  /recruiting/index.html 200
-/contact     /contact/index.html    200
+# Cloudflare / Netlify Route Mappings
+/sap               /sap/index.html              200
+/ai                /ai/index.html               200
+/recruiting        /recruiting/index.html        200
+/contact           /contact/index.html           200
+/cloud             /cloud/index.html             200
+/security          /security/index.html          200
+/crm               /crm/index.html               200
+/salesforce        /salesforce/index.html        200
+/data-engineering  /data-engineering/index.html 200
+/services          /services/index.html          200
+/about             /about/index.html             200
+/careers           /careers/index.html           200
+/industries        /industries/index.html        200
+/blogs             /blogs/index.html             200
 
 # SPA fallback for client-side routing
-/*           /index.html            200
+/*                 /index.html                  200
