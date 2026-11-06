@@ -520,15 +520,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       id: 'welcome',
       sender: 'ai',
       text: `Hello! 👋 Welcome to Clyptus Software Solutions. I'm Keva`,
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      quickActions: [
-        { label: 'Official Emails', chatQuery: 'What are your official emails?' },
-        { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
-        { label: 'ERP & SAP Services', pageTarget: 'SAP' },
-        { label: 'AI Solutions', pageTarget: 'AI' },
-        { label: 'Office Locations', chatQuery: 'Where are your office locations?' },
-        { label: 'Contact Us', pageTarget: 'Contact' }
-      ]
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     }
   ]);
 
@@ -721,15 +713,7 @@ Would you like to connect directly with our solution architects or explore our j
         id: 'welcome-reset',
         sender: 'ai',
         text: `Hello! 👋 Welcome to Clyptus Software Solutions. I'm Keva`,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        quickActions: [
-          { label: 'Official Emails', chatQuery: 'What are your official emails?' },
-          { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
-          { label: 'ERP & SAP Services', pageTarget: 'SAP' },
-          { label: 'AI Solutions', pageTarget: 'AI' },
-          { label: 'Office Locations', chatQuery: 'Where are your office locations?' },
-          { label: 'Contact Us', pageTarget: 'Contact' }
-        ]
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       }
     ]);
   };
@@ -1007,8 +991,8 @@ Would you like to connect directly with our solution architects or explore our j
                       </div>
                     </div>
 
-                    {/* Quick Interactive Suggestions after any AI response */}
-                    {msg.sender === 'ai' && (
+                    {/* Quick Interactive Suggestions after any AI response (hidden on 1st initial greeting) */}
+                    {msg.sender === 'ai' && msg.id !== 'welcome' && msg.id !== 'welcome-reset' && (
                       <div className="flex flex-wrap gap-1.5 mt-2 ml-8 max-w-[92%]">
                         {(msg.quickActions && msg.quickActions.length > 0 
                           ? msg.quickActions 
