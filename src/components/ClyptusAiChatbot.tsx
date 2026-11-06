@@ -253,16 +253,11 @@ We are continuously hiring experienced developers, enterprise consultants, and t
     category: 'greetings',
     keywords: ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what is keva', 'keva', 'who is keva', 'what is clyptus ai', 'help me', 'start'],
     patterns: [/^(hi|hello|hey|hola|greetings)/i, /who are you/i, /what (can you do|is keva|is clyptus ai)/i, /(who|what) is keva/i, /your name/i],
-    answer: `Hello! I'm **Keva**, your virtual guide for Clyptus Software Solutions.
+    answer: `Hello! 👋 Welcome to Clyptus Software Solutions. I'm **Keva**.
 
-I can help you explore everything about our company and services:
-• **Contact & Emails**: Departmental emails, phones, and global delivery centers.
-• **Company Journey**: Founded in 2014, milestones, growth, and official SAP Silver Partnership.
-• **Enterprise Services**: SAP & ERP, Artificial Intelligence, Multi-Cloud, Cybersecurity, CRM, Salesforce, and Data Engineering.
-• **Key Metrics**: 10+ years experience, 250+ consultants, 50+ global enterprise projects across 30+ countries.
-• **Careers**: Active job openings and direct HR contacts.
+I'm here to help you explore our enterprise services, company journey since 2014, global offices, or direct email channels.
 
-How may I assist you today?`,
+How can I assist you today?`,
     quickActions: [
       { label: 'Official Emails', chatQuery: 'What are your official emails?' },
       { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
@@ -524,23 +519,18 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
     {
       id: 'welcome',
       sender: 'ai',
-      text: `Hello! 👋 I'm **Keva**, your intelligent assistant for Clyptus Software Solutions.
+      text: `Hello! 👋 Welcome to Clyptus Software Solutions. I'm **Keva**.
 
-I can provide quick, clear answers on our **official emails & contact channels**, our **company journey (2014–Present)**, our **SAP Silver Partnership**, and our core practices:
-• **ERP & SAP** (S/4HANA, BRIM, BTP)
-• **Artificial Intelligence & GenAI**
-• **Multi-Cloud & DevOps** (AWS, Azure, GCP)
-• **Cybersecurity & Compliance** (24/7 SOC, ISO 27001)
-• **CRM, Salesforce & Data Engineering**
+I'm here to help you explore our enterprise services, company journey since 2014, official contacts, or schedule an architectural consultation.
 
-How can I assist you today?`,
+How can I help you today?`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       quickActions: [
         { label: 'Official Emails', chatQuery: 'What are your official emails?' },
-        { label: 'Company Journey & Milestones', chatQuery: 'Tell me about Clyptus journey and history' },
-        { label: 'Global Office Locations', chatQuery: 'Where are your office locations?' },
+        { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
+        { label: 'Office Locations', chatQuery: 'Where are your office locations?' },
         { label: 'ERP & SAP Services', pageTarget: 'SAP' },
-        { label: 'AI & GenAI Solutions', pageTarget: 'AI' },
+        { label: 'AI Solutions', pageTarget: 'AI' },
         { label: 'Contact Us', pageTarget: 'Contact' }
       ]
     }
@@ -734,7 +724,7 @@ Would you like to connect directly with our solution architects or explore our j
       {
         id: 'welcome-reset',
         sender: 'ai',
-        text: `Conversation refreshed. How else can I assist you with Clyptus's emails, company journey, architectures, or services?`,
+        text: `Hello again! 👋 How can I help you today?`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         quickActions: [
           { label: 'Official Emails', chatQuery: 'What are your official emails?' },
@@ -1093,13 +1083,6 @@ Would you like to connect directly with our solution architects or explore our j
                     <Send className="w-3.5 h-3.5 ml-0.5" />
                   </button>
                 </form>
-
-                <div className="flex items-center justify-between px-2 pt-0.5 text-[9px] text-slate-400 font-medium">
-                  <span>Press Enter to send</span>
-                  <span className="text-slate-400">
-                    Clyptus Intelligence
-                  </span>
-                </div>
               </div>
             </>
           )}
