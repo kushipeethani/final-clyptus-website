@@ -832,10 +832,9 @@ Would you like to connect directly with our solution architects or explore our j
             {/* Pulsing Colored Aura */}
             <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-orange-500 blur-md opacity-40 group-hover:opacity-75 transition-opacity animate-pulse" />
 
-            {/* Sparkles / Bot Icon */}
+            {/* Bot Icon */}
             <div className="relative z-10 flex items-center justify-center">
               <Bot className="w-7 h-7 text-white stroke-[2.2] group-hover:scale-110 transition-transform" />
-              <Sparkles className="absolute -top-1 -right-1 w-3.5 h-3.5 text-amber-300 animate-bounce" />
             </div>
           </button>
         </div>
