@@ -3,7 +3,6 @@ import {
   Send, 
   X, 
   RotateCcw, 
-  ChevronDown, 
   ArrowRight, 
   Bot
 } from 'lucide-react';
@@ -506,7 +505,6 @@ Fill out our interactive form on the Contact page for a response within 24 hours
 
 export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isMinimized, setIsMinimized] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [dimensions, setDimensions] = useState<{ width: number; height: number }>({
@@ -533,11 +531,11 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
   };
 
   useEffect(() => {
-    if (isOpen && !isMinimized) {
+    if (isOpen) {
       scrollToBottom();
       inputRef.current?.focus();
     }
-  }, [messages, isOpen, isMinimized, isTyping]);
+  }, [messages, isOpen, isTyping]);
 
   // Window resize handler to maintain responsive bounds
   useEffect(() => {
@@ -850,10 +848,7 @@ Would you like to connect directly with our solution architects or explore our j
         <div className="fixed top-3.5 right-14 sm:top-3.5 sm:right-16 lg:top-3.5 lg:right-8 z-50 flex items-center gap-2">
           {/* Elegant Top-Right Pill Trigger Button */}
           <button
-            onClick={() => {
-              setIsOpen(true);
-              setIsMinimized(false);
-            }}
+            onClick={() => setIsOpen(true)}
             className="group relative flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 border border-slate-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(37,99,235,0.12)] backdrop-blur-md transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer text-xs font-semibold select-none"
             title="Chat with Keva"
             aria-label="Chat with Keva"
@@ -874,47 +869,41 @@ Would you like to connect directly with our solution architects or explore our j
       {isOpen && (
         <div 
           style={{
-            width: isMinimized ? undefined : `${dimensions.width}px`,
-            height: isMinimized ? '56px' : `${dimensions.height}px`
+            width: `${dimensions.width}px`,
+            height: `${dimensions.height}px`
           }}
           className={`fixed top-3.5 right-4 sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] max-w-[calc(100vw-32px)] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 ${
             isResizing ? 'transition-none select-none' : 'transition-all duration-300 ease-out'
-          } ${
-            isMinimized ? 'w-[180px] h-14' : ''
           }`}
         >
           {/* Edge Drag Handles for Resizing (Left & Bottom) */}
-          {!isMinimized && (
-            <>
-              {/* Left edge drag handle */}
-              <div
-                onMouseDown={(e) => startResize(e, 'left')}
-                onTouchStart={(e) => startResize(e, 'left')}
-                className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
-                title="Drag to resize width"
-              />
-              {/* Bottom edge drag handle */}
-              <div
-                onMouseDown={(e) => startResize(e, 'bottom')}
-                onTouchStart={(e) => startResize(e, 'bottom')}
-                className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
-                title="Drag to resize height"
-              />
-              {/* Bottom-Left corner drag handle */}
-              <div
-                onMouseDown={(e) => startResize(e, 'bottom-left')}
-                onTouchStart={(e) => startResize(e, 'bottom-left')}
-                className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-blue-500/20 active:bg-blue-500/30 rounded-bl-3xl transition-colors z-40 group"
-                title="Drag edge to resize"
-              >
-                <div className="w-2.5 h-2.5 flex flex-col justify-end items-start gap-[2px] opacity-40 group-hover:opacity-100 transition-opacity">
-                  <div className="w-1 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
-                  <div className="w-2 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
-                  <div className="w-2.5 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
-                </div>
-              </div>
-            </>
-          )}
+          {/* Left edge drag handle */}
+          <div
+            onMouseDown={(e) => startResize(e, 'left')}
+            onTouchStart={(e) => startResize(e, 'left')}
+            className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
+            title="Drag to resize width"
+          />
+          {/* Bottom edge drag handle */}
+          <div
+            onMouseDown={(e) => startResize(e, 'bottom')}
+            onTouchStart={(e) => startResize(e, 'bottom')}
+            className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
+            title="Drag to resize height"
+          />
+          {/* Bottom-Left corner drag handle */}
+          <div
+            onMouseDown={(e) => startResize(e, 'bottom-left')}
+            onTouchStart={(e) => startResize(e, 'bottom-left')}
+            className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-blue-500/20 active:bg-blue-500/30 rounded-bl-3xl transition-colors z-40 group"
+            title="Drag edge to resize"
+          >
+            <div className="w-2.5 h-2.5 flex flex-col justify-end items-start gap-[2px] opacity-40 group-hover:opacity-100 transition-opacity">
+              <div className="w-1 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+              <div className="w-2 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+              <div className="w-2.5 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+            </div>
+          </div>
 
           {/* Header Bar */}
           <div className="relative px-5 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-between border-b border-slate-800">
@@ -931,7 +920,7 @@ Would you like to connect directly with our solution architects or explore our j
               </div>
             </div>
 
-            {/* Action Buttons: Reset, Minimize, Close */}
+            {/* Action Buttons: Reset, Close */}
             <div className="flex items-center gap-1 relative z-10">
               <button
                 onClick={handleClearChat}
@@ -940,14 +929,6 @@ Would you like to connect directly with our solution architects or explore our j
                 aria-label="Restart conversation"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-              </button>
-              <button
-                onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors cursor-pointer"
-                title={isMinimized ? 'Expand' : 'Minimize'}
-                aria-label={isMinimized ? 'Expand' : 'Minimize'}
-              >
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isMinimized ? 'rotate-180' : ''}`} />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
@@ -960,10 +941,8 @@ Would you like to connect directly with our solution architects or explore our j
             </div>
           </div>
 
-          {/* Chat Messages Body (Hidden when minimized) */}
-          {!isMinimized && (
-            <>
-              <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-slate-50/60 text-left">
+          {/* Chat Messages Body */}
+          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-slate-50/60 text-left">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
@@ -1073,8 +1052,6 @@ Would you like to connect directly with our solution architects or explore our j
                   </button>
                 </form>
               </div>
-            </>
-          )}
         </div>
       )}
     </div>
