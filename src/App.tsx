@@ -495,7 +495,7 @@ export function App() {
         </motion.div>
       )}
 
-      {/* Clyptus AI Intelligent Virtual Assistant */}
+      {/* Keva Intelligent Virtual Assistant */}
       {!showIntro && (
         <ClyptusAiChatbot
           onNavigate={(page) => {

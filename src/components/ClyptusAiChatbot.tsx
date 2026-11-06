@@ -265,9 +265,9 @@ We are continuously hiring exceptional developers, enterprise consultants, and t
   // 7. GREETINGS & INTRO
   {
     category: 'greetings',
-    keywords: ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what is clyptus ai', 'help me', 'start'],
-    patterns: [/^(hi|hello|hey|hola|greetings)/i, /who are you/i, /what (can you do|is clyptus ai)/i],
-    answer: `Hello! I'm **Clyptus AI**, your virtual guide to Clyptus Software Solutions.
+    keywords: ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what is keva', 'keva', 'who is keva', 'what is clyptus ai', 'help me', 'start'],
+    patterns: [/^(hi|hello|hey|hola|greetings)/i, /who are you/i, /what (can you do|is keva|is clyptus ai)/i, /(who|what) is keva/i, /your name/i],
+    answer: `Hello! I'm **Keva**, your virtual guide to Clyptus Software Solutions.
 
 I can help you explore everything about our company, including:
 • ✉️ **Contact & Emails**: Departmental emails, phones, and global delivery centers.
@@ -534,7 +534,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
     {
       id: 'welcome',
       sender: 'ai',
-      text: `Hello! 👋 I'm **Clyptus AI**, your intelligent assistant for Clyptus Software Solutions.
+      text: `Hello! 👋 I'm **Keva**, your intelligent assistant for Clyptus Software Solutions.
 
 I can provide instant details on our **official emails & contact info**, our **company journey (2014–Present)**, our **SAP Silver Partnership**, and our 7 core practices:
 • 💼 **ERP & SAP** (S/4HANA, BRIM, BTP)
@@ -814,7 +814,7 @@ Would you like to connect directly with our solution architects or explore our j
               className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white border border-slate-200/90 shadow-xl text-xs font-bold text-slate-800 hover:text-blue-600 transition-all cursor-pointer animate-in fade-in slide-in-from-right-3 duration-500 hover:scale-105"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Ask Clyptus AI</span>
+              <span>Ask Keva</span>
               <Sparkles className="w-3.5 h-3.5 text-orange-500 animate-spin" style={{ animationDuration: '4s' }} />
             </div>
           )}
@@ -826,8 +826,8 @@ Would you like to connect directly with our solution architects or explore our j
               setIsMinimized(false);
             }}
             className="group relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-orange-500 text-white shadow-[0_10px_30px_rgba(37,99,235,0.38)] hover:shadow-[0_15px_40px_rgba(249,115,22,0.45)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center cursor-pointer border-2 border-white/60"
-            title="Chat with Clyptus AI"
-            aria-label="Chat with Clyptus AI"
+            title="Chat with Keva"
+            aria-label="Chat with Keva"
           >
             {/* Pulsing Colored Aura */}
             <span className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 via-indigo-500 to-orange-500 blur-md opacity-40 group-hover:opacity-75 transition-opacity animate-pulse" />
@@ -862,7 +862,7 @@ Would you like to connect directly with our solution architects or explore our j
               </div>
               <div className="flex flex-col text-left">
                 <div className="flex items-center gap-1.5">
-                  <h3 className="font-black text-sm text-white tracking-tight">Clyptus AI</h3>
+                  <h3 className="font-black text-sm text-white tracking-tight">Keva</h3>
                   <span className="px-1.5 py-0.5 rounded-full bg-gradient-to-r from-blue-500 to-orange-500 text-[9px] font-mono font-bold uppercase tracking-wider text-white">
                     PRO
                   </span>
@@ -1002,7 +1002,7 @@ Would you like to connect directly with our solution architects or explore our j
                     type="text"
                     value={inputQuery}
                     onChange={(e) => setInputQuery(e.target.value)}
-                    placeholder="Ask about emails, company journey, ERP, AI..."
+                    placeholder="Ask Keva about emails, company journey, ERP, AI..."
                     className="flex-1 px-4 py-2.5 rounded-full bg-slate-100/90 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-inner"
                   />
                   <button
@@ -1020,7 +1020,7 @@ Would you like to connect directly with our solution architects or explore our j
                   <span>Press Enter to send</span>
                   <span className="flex items-center gap-1 text-slate-500">
                     <Sparkles className="w-2.5 h-2.5 text-orange-500" />
-                    Powered by Clyptus Intelligence
+                    Powered by Keva Intelligence
                   </span>
                 </div>
               </div>
