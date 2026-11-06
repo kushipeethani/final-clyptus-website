@@ -514,6 +514,11 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
   const [isMinimized, setIsMinimized] = useState<boolean>(false);
   const [inputQuery, setInputQuery] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);
+  const [dimensions, setDimensions] = useState<{ width: number; height: number }>({
+    width: typeof window !== 'undefined' ? Math.min(420, window.innerWidth - 32) : 420,
+    height: 580
+  });
+  const [isResizing, setIsResizing] = useState<boolean>(false);
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -555,6 +560,80 @@ How can I assist you today?`,
       inputRef.current?.focus();
     }
   }, [messages, isOpen, isMinimized, isTyping]);
+
+  // Window resize handler to maintain responsive bounds
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setDimensions((prev) => ({
+        width: Math.min(prev.width, window.innerWidth - 32),
+        height: Math.min(prev.height, window.innerHeight - 40)
+      }));
+    };
+    window.addEventListener('resize', handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
+  }, []);
+
+  // Drag at edge or corner to resize chat window
+  const startResize = (
+    e: React.MouseEvent | React.TouchEvent, 
+    direction: 'left' | 'bottom' | 'bottom-left'
+  ) => {
+    e.preventDefault();
+    setIsResizing(true);
+
+    const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+    const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+
+    const startX = clientX;
+    const startY = clientY;
+    const startWidth = dimensions.width;
+    const startHeight = dimensions.height;
+
+    const onMove = (moveEvent: MouseEvent | TouchEvent) => {
+      const currentX = 'touches' in moveEvent ? moveEvent.touches[0].clientX : moveEvent.clientX;
+      const currentY = 'touches' in moveEvent ? moveEvent.touches[0].clientY : moveEvent.clientY;
+
+      const maxWidth = typeof window !== 'undefined' ? Math.min(window.innerWidth - 32, 850) : 850;
+      const maxHeight = typeof window !== 'undefined' ? Math.min(window.innerHeight - 40, 900) : 900;
+      const minWidth = 320;
+      const minHeight = 360;
+
+      let newWidth = startWidth;
+      let newHeight = startHeight;
+
+      if (direction === 'left' || direction === 'bottom-left') {
+        newWidth = startWidth + (startX - currentX);
+      }
+      if (direction === 'bottom' || direction === 'bottom-left') {
+        newHeight = startHeight + (currentY - startY);
+      }
+
+      setDimensions({
+        width: Math.max(minWidth, Math.min(maxWidth, newWidth)),
+        height: Math.max(minHeight, Math.min(maxHeight, newHeight))
+      });
+    };
+
+    const onEnd = () => {
+      setIsResizing(false);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onEnd);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onEnd);
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    };
+
+    document.body.style.userSelect = 'none';
+    if (direction === 'left') document.body.style.cursor = 'w-resize';
+    else if (direction === 'bottom') document.body.style.cursor = 's-resize';
+    else if (direction === 'bottom-left') document.body.style.cursor = 'sw-resize';
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onEnd);
+    document.addEventListener('touchmove', onMove);
+    document.addEventListener('touchend', onEnd);
+  };
 
   // Answer matching engine
   const findAnswer = (query: string): { text: string; quickActions?: QuickAction[] } => {
@@ -823,10 +902,49 @@ Would you like to connect directly with our solution architects or explore our j
       {/* ---------------------------------------------------- */}
       {isOpen && (
         <div 
-          className={`fixed top-3.5 right-4 sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] w-[calc(100vw-32px)] sm:w-[420px] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden transition-all duration-300 ease-out animate-in fade-in slide-in-from-top-4 ${
-            isMinimized ? 'h-14' : 'h-[580px] max-h-[86vh]'
+          style={{
+            width: isMinimized ? undefined : `${dimensions.width}px`,
+            height: isMinimized ? '56px' : `${dimensions.height}px`
+          }}
+          className={`fixed top-3.5 right-4 sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] max-w-[calc(100vw-32px)] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 ${
+            isResizing ? 'transition-none select-none' : 'transition-all duration-300 ease-out'
+          } ${
+            isMinimized ? 'w-[180px] h-14' : ''
           }`}
         >
+          {/* Edge Drag Handles for Resizing (Left & Bottom) */}
+          {!isMinimized && (
+            <>
+              {/* Left edge drag handle */}
+              <div
+                onMouseDown={(e) => startResize(e, 'left')}
+                onTouchStart={(e) => startResize(e, 'left')}
+                className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
+                title="Drag to resize width"
+              />
+              {/* Bottom edge drag handle */}
+              <div
+                onMouseDown={(e) => startResize(e, 'bottom')}
+                onTouchStart={(e) => startResize(e, 'bottom')}
+                className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
+                title="Drag to resize height"
+              />
+              {/* Bottom-Left corner drag handle */}
+              <div
+                onMouseDown={(e) => startResize(e, 'bottom-left')}
+                onTouchStart={(e) => startResize(e, 'bottom-left')}
+                className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-blue-500/20 active:bg-blue-500/30 rounded-bl-3xl transition-colors z-40 group"
+                title="Drag edge to resize"
+              >
+                <div className="w-2.5 h-2.5 flex flex-col justify-end items-start gap-[2px] opacity-40 group-hover:opacity-100 transition-opacity">
+                  <div className="w-1 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                  <div className="w-2 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                  <div className="w-2.5 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                </div>
+              </div>
+            </>
+          )}
+
           {/* Header Bar */}
           <div className="relative px-5 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-between border-b border-slate-800">
             {/* Subtle ambient light */}
@@ -837,16 +955,8 @@ Would you like to connect directly with our solution architects or explore our j
                 <Bot className="w-4 h-4 stroke-[2.2]" />
                 <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border-2 border-slate-900" />
               </div>
-              <div className="flex flex-col text-left">
-                <div className="flex items-center gap-1.5">
-                  <h3 className="font-bold text-sm text-white tracking-tight">Keva</h3>
-                  <span className="px-1.5 py-0.2 rounded-full bg-slate-800 text-[9px] font-mono font-medium uppercase tracking-wider text-slate-300 border border-slate-700">
-                    AI Assistant
-                  </span>
-                </div>
-                <span className="text-[10px] font-medium text-slate-400">
-                  Online • Clyptus Virtual Guide
-                </span>
+              <div className="flex items-center text-left">
+                <h3 className="font-bold text-sm text-white tracking-tight">Keva</h3>
               </div>
             </div>
 
