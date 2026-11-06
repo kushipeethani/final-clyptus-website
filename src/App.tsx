@@ -27,6 +27,7 @@ import { RisingSlideCardsSection } from './components/RisingSlideCardsSection';
 import { Services3dOrbUniverse } from './components/Services3dOrbUniverse';
 import { ServicesBottomLeftWidget } from './components/ServicesBottomLeftWidget';
 import { FloatingSocialTooltip } from './components/FloatingSocialTooltip';
+import ClyptusAiChatbot from './components/ClyptusAiChatbot';
 import { Footer } from './components/Footer';
 import { MountainFooter } from './components/MountainFooter';
 import { ResourceModal } from './components/ResourceModal';
@@ -492,6 +493,16 @@ export function App() {
         >
           <FloatingSocialTooltip />
         </motion.div>
+      )}
+
+      {/* Clyptus AI Intelligent Virtual Assistant */}
+      {!showIntro && (
+        <ClyptusAiChatbot
+          onNavigate={(page) => {
+            setCurrentPage(page);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
       )}
 
       {/* 3D Services Universe Full-Screen Cinematic Modal */}
