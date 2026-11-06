@@ -4,7 +4,8 @@ import {
   TrendingUp,
   Lock,
   Zap,
-  DollarSign
+  DollarSign,
+  ArrowRight
 } from 'lucide-react';
 
 interface CloudServicesPageProps {
@@ -13,6 +14,7 @@ interface CloudServicesPageProps {
 
 export const CloudServicesPage: React.FC<CloudServicesPageProps> = ({ onNavigateContact }) => {
   const [selectedPlatform, setSelectedPlatform] = useState<string>('aws');
+  const [activeCardIndex, setActiveCardIndex] = useState<number | null>(null);
 
   useEffect(() => {
     document.title = 'Cloud & Data Services | Clyptus';
@@ -34,6 +36,10 @@ export const CloudServicesPage: React.FC<CloudServicesPageProps> = ({ onNavigate
         contactEl.scrollIntoView({ behavior: 'smooth' });
       }
     }
+  };
+
+  const handleCardToggle = (idx: number) => {
+    setActiveCardIndex(prev => (prev === idx ? null : idx));
   };
 
   const heroPlatforms = [
@@ -372,6 +378,16 @@ export const CloudServicesPage: React.FC<CloudServicesPageProps> = ({ onNavigate
             <p className="text-sm sm:text-base text-slate-500 font-medium leading-relaxed">
               We help organizations build secure, scalable, and reliable cloud environments using leading platforms: AWS, Microsoft Azure, Google Cloud, and Databricks.
             </p>
+
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                onClick={handleContactClick}
+                className="group relative flex items-center gap-3 px-7 py-3.5 rounded-full bg-gradient-to-r from-blue-600 via-indigo-600 to-orange-500 text-white font-extrabold text-sm uppercase tracking-wider shadow-md hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
+              >
+                <span>Consult Cloud Architects</span>
+                <ArrowRight className="w-4 h-4 stroke-[2.5] group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </div>
 
           {/* Right Hero Platforms Cards with Hover Sync */}
@@ -439,37 +455,34 @@ export const CloudServicesPage: React.FC<CloudServicesPageProps> = ({ onNavigate
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-            {coreServices.map((s) => (
-              <div
-                key={s.title}
-                onClick={handleContactClick}
-                className="group relative h-[480px] sm:h-[510px] rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer"
-              >
-                {/* Header info - Clean Title Only */}
-                <div className="p-6 sm:p-8 pb-3 z-10">
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug group-hover:text-blue-600 transition-colors">
-                    {s.title}
-                  </h3>
-                </div>
-
-                {/* Body Area with Video Reference Animation */}
-                <div className="relative flex-1 w-full mx-auto px-6 sm:px-8 pb-7 overflow-hidden flex flex-col justify-end">
-                  
-                  {/* Default State: Clean Image at bottom (slides down on hover with NO text overlay) */}
-                  <div className="absolute inset-x-6 sm:inset-x-8 bottom-7 top-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-inner border border-slate-100 transition-all duration-500 ease-out transform translate-y-0 opacity-100 group-hover:translate-y-full group-hover:opacity-0 group-hover:pointer-events-none">
-                    <img
-                      src={s.image}
-                      alt={s.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      loading="lazy"
-                    />
+            {coreServices.map((s, idx) => {
+              const isFlipped = activeCardIndex === idx;
+              return (
+                <div
+                  key={s.title}
+                  onClick={() => handleCardToggle(idx)}
+                  className="group relative rounded-2xl sm:rounded-3xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between overflow-hidden cursor-pointer"
+                >
+                  {/* Header info - Clean Title */}
+                  <div className="p-6 sm:p-8 pb-3 z-10">
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight leading-snug group-hover:text-blue-600 transition-colors">
+                      {s.title}
+                    </h3>
                   </div>
 
-                  {/* Hover State: Sub-services with zero scrollbar */}
-                  <div className="relative h-full flex flex-col justify-center py-2 transition-all duration-500 ease-out transform translate-y-6 opacity-0 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto overflow-hidden">
-                    <div className="space-y-3 overflow-hidden">
-                      {s.subs.map((t, idx) => (
-                        <div key={idx} className="flex items-start gap-2.5 text-sm sm:text-[15px] text-slate-800 font-semibold leading-snug">
+                  {/* Mobile View (< sm): Both Image Preview & Matter clearly displayed */}
+                  <div className="block sm:hidden px-6 pb-6 pt-1">
+                    <div className="w-full h-44 rounded-2xl overflow-hidden shadow-inner border border-slate-100 mb-4">
+                      <img
+                        src={s.image}
+                        alt={s.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="space-y-2.5">
+                      {s.subs.map((t, sIdx) => (
+                        <div key={sIdx} className="flex items-start gap-2.5 text-sm text-slate-800 font-semibold leading-snug">
                           <span className="w-2 h-2 rounded-full bg-sky-500 mt-1.5 shrink-0" />
                           <span>{t}</span>
                         </div>
@@ -477,9 +490,48 @@ export const CloudServicesPage: React.FC<CloudServicesPageProps> = ({ onNavigate
                     </div>
                   </div>
 
+                  {/* Desktop / Tablet View (sm and above): Smooth Sliding Animation on Hover / Click */}
+                  <div className="hidden sm:flex relative flex-1 h-[420px] w-full mx-auto px-6 sm:px-8 pb-7 overflow-hidden flex-col justify-end">
+                    
+                    {/* Image State */}
+                    <div
+                      className={`absolute inset-x-6 sm:inset-x-8 bottom-7 top-1 rounded-xl sm:rounded-2xl overflow-hidden shadow-inner border border-slate-100 transition-all duration-500 ease-out transform ${
+                        isFlipped
+                          ? 'translate-y-full opacity-0 pointer-events-none'
+                          : 'translate-y-0 opacity-100 group-hover:translate-y-full group-hover:opacity-0 group-hover:pointer-events-none'
+                      }`}
+                    >
+                      <img
+                        src={s.image}
+                        alt={s.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Sub-services Matter State */}
+                    <div
+                      className={`relative h-full flex flex-col justify-center py-2 transition-all duration-500 ease-out transform overflow-hidden ${
+                        isFlipped
+                          ? 'translate-y-0 opacity-100 pointer-events-auto'
+                          : 'translate-y-6 opacity-0 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto'
+                      }`}
+                    >
+                      <div className="space-y-3 overflow-hidden">
+                        {s.subs.map((t, sIdx) => (
+                          <div key={sIdx} className="flex items-start gap-2.5 text-sm sm:text-[15px] text-slate-800 font-semibold leading-snug">
+                            <span className="w-2 h-2 rounded-full bg-sky-500 mt-1.5 shrink-0" />
+                            <span>{t}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                  </div>
+
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
         </div>
