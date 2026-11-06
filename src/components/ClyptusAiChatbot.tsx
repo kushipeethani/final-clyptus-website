@@ -4,7 +4,7 @@ import {
   X, 
   RotateCcw, 
   ArrowRight, 
-  Bot
+  BotMessageSquare
 } from 'lucide-react';
 
 interface ClyptusAiChatbotProps {
@@ -958,25 +958,25 @@ Please ask something related to Clyptus Software Solutions and our website:
       {/* FLOATING TRIGGER BUTTON (TOP RIGHT CORNER)           */}
       {/* ---------------------------------------------------- */}
       {!isOpen && (
-        <div className="fixed top-3 sm:top-3.5 right-4 sm:right-6 lg:top-3.5 lg:right-8 z-50 flex items-center">
-          {/* Mobile: Circle Chatbot Logo Button; Desktop: Pill Trigger with 'Keva' label */}
+        <div className="fixed top-2.5 sm:top-3 right-3 sm:right-5 lg:top-3 lg:right-7 z-50 flex items-center">
+          {/* Mobile: Circle Chatbot Logo Button; Desktop: Pill Trigger with 'Ask Keva' label */}
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative flex items-center justify-center rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 border border-slate-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(37,99,235,0.14)] backdrop-blur-md transition-all duration-200 hover:scale-[1.04] active:scale-95 cursor-pointer select-none
-                       w-10 h-10 p-0
-                       lg:w-auto lg:h-auto lg:px-3.5 lg:py-1.5 lg:gap-2"
-            title="Chat with Keva"
-            aria-label="Chat with Keva"
+            className="group relative flex items-center justify-center rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 border border-slate-200/90 shadow-[0_3px_14px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.18)] backdrop-blur-md transition-all duration-200 hover:scale-[1.04] active:scale-95 cursor-pointer select-none
+                       w-12 h-12 p-0
+                       lg:w-auto lg:h-auto lg:px-4 lg:py-2 lg:gap-2.5"
+            title="Ask Keva"
+            aria-label="Ask Keva"
           >
-            {/* Circle Chatbot Logo with Gradient & Bot Icon */}
-            <div className="w-7 h-7 lg:w-5 lg:h-5 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shrink-0 shadow-2xs relative">
-              <Bot className="w-4 h-4 lg:w-3 lg:h-3 stroke-[2.2]" />
-              <span className="w-2 h-2 rounded-full bg-emerald-500 border border-white absolute -bottom-0.5 -right-0.5 animate-pulse" />
+            {/* Modern AI Chatbot Logo Badge */}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-400 text-white flex items-center justify-center shrink-0 shadow-sm relative">
+              <BotMessageSquare className="w-5 h-5 stroke-[2.2]" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white absolute -bottom-0.5 -right-0.5 animate-pulse" />
             </div>
 
-            {/* Desktop Label (Hidden on Mobile) */}
-            <span className="hidden lg:inline font-bold text-xs text-slate-800 group-hover:text-blue-600 transition-colors">
-              Keva
+            {/* Desktop Label: Ask Keva */}
+            <span className="hidden lg:inline font-bold text-sm tracking-tight text-slate-800 group-hover:text-blue-600 transition-colors">
+              Ask Keva
             </span>
           </button>
         </div>
@@ -1030,12 +1030,12 @@ Please ask something related to Clyptus Software Solutions and our website:
             <div className="absolute top-0 right-1/4 w-32 h-6 bg-blue-500/15 blur-lg pointer-events-none" />
 
             <div className="flex items-center gap-2.5 relative z-10">
-              <div className="relative w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-orange-500 flex items-center justify-center text-white shadow-sm">
-                <Bot className="w-4 h-4 stroke-[2.2]" />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 border-2 border-slate-900" />
+              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 flex items-center justify-center text-white shadow-sm">
+                <BotMessageSquare className="w-5 h-5 stroke-[2.2]" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-slate-900" />
               </div>
               <div className="flex items-center text-left">
-                <h3 className="font-bold text-sm text-white tracking-tight">Keva</h3>
+                <h3 className="font-bold text-[15px] text-white tracking-tight">Ask Keva</h3>
               </div>
             </div>
 
@@ -1069,8 +1069,8 @@ Please ask something related to Clyptus Software Solutions and our website:
                   >
                     <div className="flex items-end gap-2 max-w-[92%]">
                       {msg.sender === 'ai' && (
-                        <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 mb-1 shadow-2xs">
-                          <Bot className="w-3.5 h-3.5 stroke-[2.2]" />
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shrink-0 mb-1 shadow-2xs">
+                          <BotMessageSquare className="w-4 h-4 stroke-[2.2]" />
                         </div>
                       )}
 
@@ -1129,8 +1129,8 @@ Please ask something related to Clyptus Software Solutions and our website:
                 {/* Animated Typing Indicator */}
                 {isTyping && (
                   <div className="flex items-center gap-2 text-slate-500 animate-in fade-in">
-                    <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0">
-                      <Bot className="w-3 h-3" />
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shrink-0">
+                      <BotMessageSquare className="w-4 h-4 stroke-[2.2]" />
                     </div>
                     <div className="px-3 py-2 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex items-center gap-1.5">
                       <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '0ms' }} />
