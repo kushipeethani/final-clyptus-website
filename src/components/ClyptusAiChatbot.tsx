@@ -983,49 +983,51 @@ Please ask something related to Clyptus Software Solutions and our website:
       )}
 
       {/* ---------------------------------------------------- */}
-      {/* EXPANDABLE CHATBOT WINDOW (TOP RIGHT CORNER)         */}
+      {/* EXPANDABLE CHATBOT WINDOW                            */}
       {/* ---------------------------------------------------- */}
       {isOpen && (
         <div 
           style={{
-            width: `${dimensions.width}px`,
-            height: `${dimensions.height}px`
+            width: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.width}px`,
+            height: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.height}px`
           }}
-          className={`fixed top-3.5 right-4 sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] max-w-[calc(100vw-32px)] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 ${
+          className={`fixed inset-x-2.5 top-2.5 bottom-2.5 sm:inset-auto sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] sm:max-w-[calc(100vw-32px)] sm:max-h-[calc(100dvh-32px)] bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 ${
             isResizing ? 'transition-none select-none' : 'transition-all duration-300 ease-out'
           }`}
         >
-          {/* Edge Drag Handles for Resizing (Left & Bottom) */}
-          {/* Left edge drag handle */}
-          <div
-            onMouseDown={(e) => startResize(e, 'left')}
-            onTouchStart={(e) => startResize(e, 'left')}
-            className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
-            title="Drag to resize width"
-          />
-          {/* Bottom edge drag handle */}
-          <div
-            onMouseDown={(e) => startResize(e, 'bottom')}
-            onTouchStart={(e) => startResize(e, 'bottom')}
-            className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
-            title="Drag to resize height"
-          />
-          {/* Bottom-Left corner drag handle */}
-          <div
-            onMouseDown={(e) => startResize(e, 'bottom-left')}
-            onTouchStart={(e) => startResize(e, 'bottom-left')}
-            className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-blue-500/20 active:bg-blue-500/30 rounded-bl-3xl transition-colors z-40 group"
-            title="Drag edge to resize"
-          >
-            <div className="w-2.5 h-2.5 flex flex-col justify-end items-start gap-[2px] opacity-40 group-hover:opacity-100 transition-opacity">
-              <div className="w-1 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
-              <div className="w-2 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
-              <div className="w-2.5 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+          {/* Edge Drag Handles for Resizing (Desktop Only) */}
+          <div className="hidden sm:block">
+            {/* Left edge drag handle */}
+            <div
+              onMouseDown={(e) => startResize(e, 'left')}
+              onTouchStart={(e) => startResize(e, 'left')}
+              className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
+              title="Drag to resize width"
+            />
+            {/* Bottom edge drag handle */}
+            <div
+              onMouseDown={(e) => startResize(e, 'bottom')}
+              onTouchStart={(e) => startResize(e, 'bottom')}
+              className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
+              title="Drag to resize height"
+            />
+            {/* Bottom-Left corner drag handle */}
+            <div
+              onMouseDown={(e) => startResize(e, 'bottom-left')}
+              onTouchStart={(e) => startResize(e, 'bottom-left')}
+              className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-blue-500/20 active:bg-blue-500/30 rounded-bl-3xl transition-colors z-40 group"
+              title="Drag edge to resize"
+            >
+              <div className="w-2.5 h-2.5 flex flex-col justify-end items-start gap-[2px] opacity-40 group-hover:opacity-100 transition-opacity">
+                <div className="w-1 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                <div className="w-2 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                <div className="w-2.5 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+              </div>
             </div>
           </div>
 
           {/* Header Bar */}
-          <div className="relative px-5 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-between border-b border-slate-800">
+          <div className="shrink-0 relative px-4 sm:px-5 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-between border-b border-slate-800">
             {/* Subtle ambient light */}
             <div className="absolute top-0 right-1/4 w-32 h-6 bg-blue-500/15 blur-lg pointer-events-none" />
 
@@ -1060,8 +1062,8 @@ Please ask something related to Clyptus Software Solutions and our website:
             </div>
           </div>
 
-          {/* Chat Messages Body */}
-          <div className="flex-1 p-4 overflow-y-auto space-y-3.5 bg-slate-50/60 text-left">
+          {/* Chat Messages Body - min-h-0 ensures container scrolls and never pushes input off-screen */}
+          <div className="flex-1 min-h-0 p-3.5 sm:p-4 overflow-y-auto space-y-3.5 bg-slate-50/60 text-left">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
@@ -1143,8 +1145,8 @@ Please ask something related to Clyptus Software Solutions and our website:
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Input Control Bar */}
-              <div className="p-3 bg-white border-t border-slate-200/80 flex flex-col gap-1.5">
+              {/* Input Control Bar - shrink-0 ensures input is always fixed and visible */}
+              <div className="shrink-0 p-3 bg-white border-t border-slate-200/80 flex flex-col gap-1.5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
