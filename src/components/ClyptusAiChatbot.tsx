@@ -1059,7 +1059,7 @@ Would you like to connect directly with our solution architects or explore our j
                     type="text"
                     value={inputQuery}
                     onChange={(e) => setInputQuery(e.target.value)}
-                    placeholder="Ask Keva about emails, journey, services..."
+                    placeholder="Ask Keva..."
                     className="flex-1 px-4 py-2.5 rounded-full bg-slate-100/90 border border-slate-200 text-sm sm:text-[15px] text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-inner"
                   />
                   <button
