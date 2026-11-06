@@ -958,20 +958,26 @@ Please ask something related to Clyptus Software Solutions and our website:
       {/* FLOATING TRIGGER BUTTON (TOP RIGHT CORNER)           */}
       {/* ---------------------------------------------------- */}
       {!isOpen && (
-        <div className="fixed top-3.5 right-14 sm:top-3.5 sm:right-16 lg:top-3.5 lg:right-8 z-50 flex items-center gap-2">
-          {/* Elegant Top-Right Pill Trigger Button */}
+        <div className="fixed top-3 sm:top-3.5 right-4 sm:right-6 lg:top-3.5 lg:right-8 z-50 flex items-center">
+          {/* Mobile: Circle Chatbot Logo Button; Desktop: Pill Trigger with 'Keva' label */}
           <button
             onClick={() => setIsOpen(true)}
-            className="group relative flex items-center gap-2 px-3 py-1.5 sm:px-3.5 sm:py-1.5 rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 border border-slate-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(37,99,235,0.12)] backdrop-blur-md transition-all duration-200 hover:scale-[1.02] active:scale-95 cursor-pointer text-xs font-semibold select-none"
+            className="group relative flex items-center justify-center rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 border border-slate-200/90 shadow-[0_2px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_4px_16px_rgba(37,99,235,0.14)] backdrop-blur-md transition-all duration-200 hover:scale-[1.04] active:scale-95 cursor-pointer select-none
+                       w-10 h-10 p-0
+                       lg:w-auto lg:h-auto lg:px-3.5 lg:py-1.5 lg:gap-2"
             title="Chat with Keva"
             aria-label="Chat with Keva"
           >
-            {/* Small Glowing Dot / Status */}
-            <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-2xs">
-              <Bot className="w-3 h-3 stroke-[2.2]" />
+            {/* Circle Chatbot Logo with Gradient & Bot Icon */}
+            <div className="w-7 h-7 lg:w-5 lg:h-5 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shrink-0 shadow-2xs relative">
+              <Bot className="w-4 h-4 lg:w-3 lg:h-3 stroke-[2.2]" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 border border-white absolute -bottom-0.5 -right-0.5 animate-pulse" />
             </div>
-            <span className="font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Keva</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+
+            {/* Desktop Label (Hidden on Mobile) */}
+            <span className="hidden lg:inline font-bold text-xs text-slate-800 group-hover:text-blue-600 transition-colors">
+              Keva
+            </span>
           </button>
         </div>
       )}

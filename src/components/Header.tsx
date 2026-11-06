@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { 
-  Menu, 
-  X, 
   Home, 
   Briefcase, 
   Factory, 
@@ -308,39 +306,9 @@ export const Header: React.FC<HeaderProps> = ({
           </motion.nav>
         </div>
 
-        {/* Right Action Controls */}
+        {/* Right Action Controls: Spacer maintains header symmetry on mobile while circle chatbot logo sits in top-right */}
         <div className="flex items-center gap-2 sm:gap-3 shrink-0 z-10">
-          {/* Mobile Glassy Hamburger Menu Button */}
-          <motion.button
-            whileTap={reduceMotion ? undefined : { scale: 0.92 }}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/80 text-slate-800 shadow-xs backdrop-blur-md transition-colors focus:outline-none"
-            aria-label="Toggle Navigation Menu"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {isMobileMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <X className="w-5 h-5 text-slate-900" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 0, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Menu className="w-5 h-5 text-slate-900" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
+          <div className="w-10 h-10 lg:hidden pointer-events-none" aria-hidden="true" />
         </div>
       </div>
 
