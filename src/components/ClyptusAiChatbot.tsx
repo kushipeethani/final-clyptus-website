@@ -6,11 +6,19 @@ import {
   RotateCcw, 
   ChevronDown, 
   ArrowRight, 
-  Bot
+  Bot,
+  Mail,
+  Phone
 } from 'lucide-react';
 
 interface ClyptusAiChatbotProps {
   onNavigate?: (page: string) => void;
+}
+
+interface QuickAction {
+  label: string;
+  pageTarget?: string;
+  chatQuery?: string;
 }
 
 interface Message {
@@ -18,11 +26,7 @@ interface Message {
   sender: 'ai' | 'user';
   text: string;
   timestamp: string;
-  quickActions?: {
-    label: string;
-    pageTarget?: string;
-    actionType?: 'navigate' | 'contact' | 'custom';
-  }[];
+  quickActions?: QuickAction[];
 }
 
 interface KnowledgeArticle {
@@ -30,11 +34,235 @@ interface KnowledgeArticle {
   keywords: string[];
   patterns: RegExp[];
   answer: string;
-  quickActions?: { label: string; pageTarget: string }[];
+  quickActions?: QuickAction[];
 }
 
 const KNOWLEDGE_BASE: KnowledgeArticle[] = [
-  // 1. GREETINGS & INTRO
+  // 1. OFFICIAL EMAILS & DIRECT CONTACT CHANNELS
+  {
+    category: 'emails',
+    keywords: [
+      'email', 'mail', 'emails', 'e-mail', 'contact email', 'sales email', 
+      'hr email', 'support email', 'corporate email', 'email address', 
+      'how to email', 'inbox', 'reach via email', 'where to mail', 'send email'
+    ],
+    patterns: [
+      /\b(e-?mails?|mailbox|inbox)\b/i,
+      /what (is|are) (the|your) e-?mails?/i,
+      /send (an? )?e-?mail/i,
+      /how (to|can i) e-?mail/i,
+      /give me (the )?e-?mail/i
+    ],
+    answer: `**Official Clyptus Contact & Email Channels:**
+
+You can reach our leadership, sales, and HR teams directly via our dedicated corporate email addresses:
+
+• 💼 **Sales & Enterprise Proposals**: Sales@clyptus.com
+  *For project scoping, RFPs, pricing quotes, and enterprise architecture consultations.*
+  *Direct Line: +91 77999 88139*
+
+• 🌐 **General Corporate & Business Inquiries**: info@clyptus.com / contact@clyptus.com
+  *For strategic alliances, general communications, and client support.*
+
+• 👥 **Careers & HR (India & APAC Delivery Center)**: hr.india@clyptus.com
+  *For job openings, resume submissions, campus drives, and recruiter inquiries.*
+
+• 🇦🇪 **Careers & HR (UAE & Middle East Regional Hub)**: hr.uae@clyptus.com
+  *DIFC Operations | Direct Line: +971 52 350 3297*
+
+• 🇺🇸 **Careers & HR (USA & North America Hub)**: hr.usa@clyptus.com
+  *California Operations | Direct Line: +1 (480) 427-6373*
+
+You can also submit an inquiry directly using our website contact form!`,
+    quickActions: [
+      { label: '📝 Open Contact Form', pageTarget: 'Contact' },
+      { label: '🚀 Company Journey & Milestones', chatQuery: 'Tell me about Clyptus journey and history' },
+      { label: '👥 Explore Careers & Jobs', pageTarget: 'Careers' },
+      { label: '🏢 Global Office Locations', chatQuery: 'Where are your office locations?' }
+    ]
+  },
+
+  // 2. COMPANY JOURNEY & MILESTONES (2014 - PRESENT)
+  {
+    category: 'journey',
+    keywords: [
+      'journey', 'history', 'story', 'milestones', 'timeline', 'founded', 
+      'founding', 'evolution', 'growth', 'years', 'origin', 'how it started', 
+      'past', 'background', 'milestone', 'decade', 'when started', 'established'
+    ],
+    patterns: [
+      /\b(journey|milestones?|timeline|evolution|history|story)\b/i,
+      /when was clyptus (founded|started|created|established)/i,
+      /how did clyptus (start|begin|grow|evolve)/i,
+      /company (history|journey|story|background)/i,
+      /how many years (in business|operating)/i
+    ],
+    answer: `**The Clyptus Journey & Milestones (2014 – Present):**
+
+Over a decade of engineering mission-critical architectures, scaling global teams, and delivering digital transformation:
+
+1. 🚀 **2014 – 2016: Foundation & Initial Expansion**
+   • Founded in 2014 with a core SAP ERP & HCM consulting practice.
+   • Delivered our first international enterprise SAP project in Dubai, UAE.
+   • Established our high-velocity ERP delivery center in Hyderabad, India.
+
+2. 🌐 **2016 – 2018: Global Footprint Growth**
+   • Expanded international SAP delivery operations across 3+ countries.
+   • Successfully served 15+ large enterprise clients with major UAE and India rollouts.
+   • Scaled consulting squad to 65+ senior enterprise consultants.
+
+3. ☁️ **2018 – 2020: S/4HANA & Cloud Leadership**
+   • Launched comprehensive SAP Cloud Services & multi-cloud migration portfolio.
+   • Scaled consulting team to 87+ senior SAP engineers and architects.
+   • Established dedicated SAP S/4HANA migration & clean-core modernization practice.
+
+4. 🥈 **2020 – 2022: Analytics & Official SAP Silver Partner**
+   • Introduced Enterprise Data Platforms & SAP BRIM (Billing & Revenue Innovation Management) practices.
+   • Achieved prestigious **SAP Silver Partner** official certification.
+   • Scaled to 120+ team strength and expanded to a 110+ customer base.
+
+5. 🤖 **2022 – Present: BTP, AI & Next-Gen Innovation**
+   • Introduced SAP BTP (Business Technology Platform) & Clean-Core extensions practice.
+   • Built proprietary SAP add-on assets and integrated Agentic AI & Generative AI capabilities.
+   • Expanded global squad to 250+ consultants across India, UAE, and North America.`,
+    quickActions: [
+      { label: '📖 Read About Us Page', pageTarget: 'About' },
+      { label: '✉️ Official Emails & Contact', chatQuery: 'What are your official emails?' },
+      { label: '💼 Our SAP & ERP Practice', pageTarget: 'SAP' },
+      { label: '🤖 AI & GenAI Solutions', pageTarget: 'AI' }
+    ]
+  },
+
+  // 3. GLOBAL LOCATIONS & OFFICE ADDRESSES
+  {
+    category: 'locations',
+    keywords: [
+      'locations', 'offices', 'address', 'where are you', 'headquarters', 
+      'hyderabad', 'dubai', 'california', 'temecula', 'india', 'uae', 'usa', 
+      'branches', 'visit', 'directions', 'map', 'phone', 'phone number', 'call',
+      'telephone', 'contact number'
+    ],
+    patterns: [
+      /\b(locations?|offices?|address(es)?|headquarters|branches?)\b/i,
+      /where (are you|is clyptus|are the offices|are you located)/i,
+      /\b(phone|call|telephone|contact number)\b/i,
+      /\b(hyderabad|dubai|california|temecula)\b/i
+    ],
+    answer: `**Clyptus Global Delivery Centers & Office Locations:**
+
+We operate 3 strategic regional hubs delivering 24/7 enterprise engineering and consulting:
+
+🇮🇳 **Hyderabad, India (Global Headquarters & Delivery Center)**
+• **Address**: 12A01A, 13th Floor, Manjeera Trinity Corporate, JNTU–Hitech City Road, Kukatpally, Hyderabad, Telangana 500072
+• **Emails**: Sales@clyptus.com | hr.india@clyptus.com
+• **Phone**: +91 77999 88139 (Sales & Enterprise Delivery)
+
+🇦🇪 **Dubai, UAE (Middle East Regional Center & DIFC Operations)**
+• **Address**: 101 Sheikh Zayed Rd, Trade Centre, DIFC, Dubai, UAE
+• **Email**: hr.uae@clyptus.com
+• **Phone**: +971 52 350 3297
+
+🇺🇸 **California, USA (North America Business Hub)**
+• **Address**: 45627 Basswood Ct, Temecula, California 92592
+• **Email**: hr.usa@clyptus.com
+• **Phone**: +1 (480) 427-6373`,
+    quickActions: [
+      { label: '🌍 View Interactive Globe', pageTarget: 'Contact' },
+      { label: '✉️ View Official Emails', chatQuery: 'What are your official emails?' },
+      { label: '🚀 Company Journey', chatQuery: 'Tell me about the company journey' }
+    ]
+  },
+
+  // 4. KEY STATS & METRICS
+  {
+    category: 'stats',
+    keywords: [
+      'stats', 'statistics', 'numbers', 'metrics', 'track record', 
+      'how many', 'experience', 'projects count', 'consultants count', 'scale'
+    ],
+    patterns: [
+      /\b(stats|statistics|numbers|metrics|track record)\b/i,
+      /how many (projects|consultants|clients|countries|years)/i,
+      /years of experience/i
+    ],
+    answer: `**Clyptus at a Glance (Key Enterprise Metrics):**
+
+• 🏆 **10+ Years of Experience**: Delivering mission-critical enterprise engineering since 2014.
+• 👥 **250+ Global Consultants**: Elite squad including 120+ certified SAP & cloud specialists.
+• 🌐 **50+ Global Enterprise Projects**: Delivered across North America, EMEA, and APAC regions.
+• 🗺️ **30+ Country Localizations**: Supporting cross-border operations and tax/statutory compliances.
+• 🚀 **330+ Tech Professionals Deployed**: Specialized talent matched with enterprise transformation programs.
+• 📦 **5+ Pre-Built RDS Packages**: Rapid deployment packages reducing enterprise go-live lead times.
+• 🧩 **50+ Add-on Assets**: Ready-to-use software components for SAP, cloud, and data integration.
+• 🥈 **Official SAP Silver Partner**: Certified partner for S/4HANA, BRIM, and BTP delivery.`,
+    quickActions: [
+      { label: '🚀 Company Journey & History', chatQuery: 'Tell me about Clyptus journey and history' },
+      { label: '📁 Verified Case Studies', pageTarget: 'Projects' },
+      { label: '✉️ Contact Sales', chatQuery: 'What are your official emails?' }
+    ]
+  },
+
+  // 5. COMPANY LEADERSHIP & FOUNDER
+  {
+    category: 'leadership',
+    keywords: [
+      'leadership', 'founder', 'ceo', 'vamsi', 'vamsi krishna', 
+      'management', 'executive', 'who runs', 'who leads', 'owner', 'director'
+    ],
+    patterns: [
+      /\b(founder|ceo|vamsi|vamsi krishna|leadership|executive|director)\b/i,
+      /who (runs|leads|founded) clyptus/i
+    ],
+    answer: `**Clyptus Leadership & Vision:**
+
+• **Founder & Strategic Leader**: **Vamsi Krishna** guides Clyptus's strategic vision, global partnerships, and technology innovation across the USA, UAE, and India.
+• **Vision**: *"Shaping Tomorrow Through Innovation"* — Empowering enterprises to thrive in an AI-first, cloud-native world through scalable intelligence and technical agility.
+• **Mission**: *"Turning Ideas Into Impact"* — Transforming complex enterprise challenges into resilient, high-performance systems with clear business ROI.
+• **Core Philosophy**: A commitment to technical rigor, clean-core architectures, transparent client relationships, and proactive innovation.`,
+    quickActions: [
+      { label: '🏢 About Clyptus Page', pageTarget: 'About' },
+      { label: '🚀 Company Journey & Story', chatQuery: 'Tell me about the company journey' },
+      { label: '✉️ Contact Leadership', pageTarget: 'Contact' }
+    ]
+  },
+
+  // 6. CAREERS & JOB OPENINGS
+  {
+    category: 'careers',
+    keywords: [
+      'careers', 'jobs', 'hiring', 'openings', 'vacancies', 'apply', 
+      'interview', 'resume', 'cv', 'work at clyptus', 'positions', 'recruitment for me'
+    ],
+    patterns: [
+      /\b(careers?|jobs?|hiring|openings?|vacanc(y|ies)|positions?|apply|resume|cv)\b/i,
+      /work at clyptus/i,
+      /how to apply/i
+    ],
+    answer: `**Careers at Clyptus Software Solutions:**
+
+We are continuously hiring exceptional developers, enterprise consultants, and tech leaders:
+
+• **Hot Job Openings**:
+  1. SAP S/4HANA Functional & Technical Consultants (3–6 yrs)
+  2. Cloud Solutions Architects (AWS / Azure / OCI, 5–10 yrs)
+  3. Generative AI & LLM Engineers (Python, PyTorch, Azure AI, 3–5 yrs)
+  4. SAP BRIM / Billing Consultants (Convergent Invoicing, FI-CA, 3–7 yrs)
+  5. SAP SuccessFactors & HCM Specialists (2–5 yrs)
+  6. Power BI & Enterprise Data Engineers (2–5 yrs)
+
+• **How to Apply**:
+  Send your resume directly to our regional talent acquisition team:
+  📧 **hr.india@clyptus.com** (India & APAC)
+  📧 **hr.uae@clyptus.com** (UAE & Middle East)
+  📧 **hr.usa@clyptus.com** (USA & Americas)`,
+    quickActions: [
+      { label: '💼 View All Job Openings', pageTarget: 'Careers' },
+      { label: '📜 HR Policy & Culture', pageTarget: 'HrPolicy' },
+      { label: '✉️ Email HR Team', chatQuery: 'What are your official emails?' }
+    ]
+  },
+
+  // 7. GREETINGS & INTRO
   {
     category: 'greetings',
     keywords: ['hi', 'hello', 'hey', 'greetings', 'who are you', 'what is clyptus ai', 'help me', 'start'],
@@ -42,46 +270,27 @@ const KNOWLEDGE_BASE: KnowledgeArticle[] = [
     answer: `Hello! I'm **Clyptus AI**, your virtual guide to Clyptus Software Solutions.
 
 I can help you explore everything about our company, including:
-• **Enterprise Services**: SAP & ERP, Artificial Intelligence, Multi-Cloud, Cybersecurity, CRM, Salesforce, and Data Engineering.
-• **Company Background**: Our mission, vision, leadership, and global delivery centers.
-• **Client Partnerships & Case Studies**: Enterprise implementations across BFSI, Healthcare, Retail, and Logistics.
-• **Consultations & Careers**: How to get in touch with our solution architects or explore open positions.
+• ✉️ **Contact & Emails**: Departmental emails, phones, and global delivery centers.
+• 🚀 **Company Journey**: Founded in 2014, milestones, expansion, and SAP Silver Partnership.
+• 💼 **Enterprise Practices**: SAP & ERP, Artificial Intelligence, Multi-Cloud, Cybersecurity, CRM, Salesforce, and Data Engineering.
+• 🏆 **Key Metrics**: 10+ years experience, 250+ consultants, 50+ global projects across 30+ countries.
+• 👥 **Careers**: Open roles and direct HR application emails.
 
-What would you like to know today?`,
+What would you like to explore today?`,
     quickActions: [
-      { label: 'Explore All Services', pageTarget: 'Services' },
-      { label: 'Our SAP & ERP Practice', pageTarget: 'SAP' },
-      { label: 'AI & GenAI Solutions', pageTarget: 'AI' },
-      { label: 'Talk to an Expert', pageTarget: 'Contact' }
+      { label: '✉️ Official Emails', chatQuery: 'What are your official emails?' },
+      { label: '🚀 Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
+      { label: '💼 ERP & SAP Services', pageTarget: 'SAP' },
+      { label: '🤖 AI Engineering', pageTarget: 'AI' },
+      { label: '📞 Contact Us', pageTarget: 'Contact' }
     ]
   },
 
-  // 2. COMPANY OVERVIEW & LEADERSHIP
-  {
-    category: 'company',
-    keywords: ['about', 'company', 'clyptus', 'who is', 'founder', 'ceo', 'vamsi', 'vamsi krishna', 'history', 'locations', 'offices', 'headquarters', 'vision', 'mission'],
-    patterns: [/about (clyptus|the company)/i, /(who is|founder|ceo|leader|vamsi)/i, /(where is|locations|offices|headquarters)/i, /(vision|mission)/i],
-    answer: `**About Clyptus Software Solutions:**
-
-Clyptus is an AI-native enterprise technology consulting and software engineering partner. We engineer mission-critical enterprise systems that unify enterprise architecture, autonomous AI agents, and resilient cloud systems.
-
-• **Leadership**: Led by **Vamsi Krishna**, who directs our strategic vision, client engagements, and delivery capabilities across the USA, UAE, and India.
-• **Our Vision**: *"Shaping Tomorrow Through Innovation."* Empowering businesses through digital transformation, intelligence, and sustainable growth.
-• **Our Mission**: *"Turning Ideas Into Impact."* Delivering innovative, reliable, and scalable technology solutions with technical excellence.
-• **Official Partnership**: Clyptus is an official **SAP Silver Partner** and certified enterprise delivery organization.
-• **Global Reach**: We operate 24/7 delivery hubs serving clients across North America, EMEA, and APAC.`,
-    quickActions: [
-      { label: 'Learn More About Us', pageTarget: 'About' },
-      { label: 'Explore Our Vision & Story', pageTarget: 'About' },
-      { label: 'Contact Clyptus Leadership', pageTarget: 'Contact' }
-    ]
-  },
-
-  // 3. ERP & SAP SERVICES
+  // 8. ERP & SAP SERVICES
   {
     category: 'erp',
     keywords: ['sap', 'erp', 's4hana', 's/4hana', 'hana', 'brim', 'btp', 'clean core', 'migration', 'oracle erp', 'dynamics 365', 'ams', 'silver partner'],
-    patterns: [/sap/i, /s\/?4hana/i, /erp/i, /brim/i, /btp/i, /clean core/i, /oracle erp/i, /dynamics 365/i],
+    patterns: [/sap/i, /s\/4hana/i, /erp/i, /brim/i, /btp/i, /clean core/i, /oracle erp/i, /dynamics 365/i],
     answer: `**Clyptus ERP & SAP Practice (SAP Silver Partner):**
 
 We provide complete enterprise ERP strategy, implementations, migrations, and ongoing management:
@@ -94,11 +303,12 @@ We provide complete enterprise ERP strategy, implementations, migrations, and on
 6. **24/7 AMS & Managed Support**: Post go-live stabilization, hypercare, and proactive SLA-backed support.`,
     quickActions: [
       { label: 'View ERP Services Page', pageTarget: 'SAP' },
-      { label: 'Request ERP Assessment', pageTarget: 'Contact' }
+      { label: 'Request ERP Assessment', pageTarget: 'Contact' },
+      { label: '✉️ Email Sales Team', chatQuery: 'What are your official emails?' }
     ]
   },
 
-  // 4. ARTIFICIAL INTELLIGENCE & GENAI
+  // 9. ARTIFICIAL INTELLIGENCE & GENAI
   {
     category: 'ai',
     keywords: ['ai', 'genai', 'generative ai', 'llm', 'rag', 'agentforce', 'agents', 'machine learning', 'ml', 'computer vision', 'predictive', 'copilot', 'automation'],
@@ -114,11 +324,12 @@ Clyptus builds enterprise-grade AI applications and autonomous workflow engines 
 • **MLOps & Enterprise Governance**: Zero-data-leakage guardrails, drift monitoring, latency optimization, and continuous retraining pipelines.`,
     quickActions: [
       { label: 'Open AI Solutions Page', pageTarget: 'AI' },
-      { label: 'Schedule an AI Discovery Session', pageTarget: 'Contact' }
+      { label: 'Schedule an AI Discovery Session', pageTarget: 'Contact' },
+      { label: '✉️ Email AI Squad', chatQuery: 'What are your official emails?' }
     ]
   },
 
-  // 5. CLOUD & DEVOPS
+  // 10. MULTI-CLOUD & DEVOPS
   {
     category: 'cloud',
     keywords: ['cloud', 'aws', 'azure', 'gcp', 'google cloud', 'kubernetes', 'eks', 'aks', 'gke', 'devops', 'microservices', 'serverless', 'lambda', 'migration'],
@@ -134,112 +345,112 @@ We architect resilient, cost-optimized, and elastic cloud foundations across all
 • **DevSecOps & Automation**: Automated CI/CD pipelines, Infrastructure as Code (Terraform, Ansible), and 24/7 cloud infrastructure monitoring.`,
     quickActions: [
       { label: 'Visit Cloud Services Page', pageTarget: 'Cloud' },
-      { label: 'Request Cloud Infrastructure Review', pageTarget: 'Contact' }
+      { label: 'Request Cloud Architecture Review', pageTarget: 'Contact' }
     ]
   },
 
-  // 6. CYBERSECURITY
+  // 11. CYBERSECURITY & COMPLIANCE
   {
     category: 'security',
-    keywords: ['security', 'cybersecurity', 'cyber', 'soc', 'iso 27001', 'soc 2', 'gdpr', 'hipaa', 'nist', 'pci dss', 'zero trust', 'pen testing', 'iam', 'firewall'],
-    patterns: [/security/i, /cyber/i, /soc/i, /iso 27001|soc 2|gdpr|hipaa/i, /zero trust/i, /penetration test/i],
-    answer: `**Cybersecurity Services & Compliance:**
+    keywords: ['security', 'cybersecurity', 'cyber', 'soc', 'compliance', 'iso 27001', 'soc 2', 'hipaa', 'gdpr', 'nist', 'pentest', 'vulnerability', 'zero trust', 'siem', 'soar'],
+    patterns: [/security/i, /cyber/i, /soc/i, /iso\s?27001/i, /soc\s?2/i, /hipaa/i, /gdpr/i, /zero trust/i, /pen(etration)?\s?test/i],
+    answer: `**Cybersecurity & Regulatory Compliance:**
 
-Clyptus protects every digital asset with multi-layered defense and governance:
+Our defense-in-depth security practice protects your intellectual property, infrastructure, and reputation:
 
-• **24/7 Managed SOC**: Real-time telemetry monitoring, intrusion detection, SIEM/SOAR incident response, and active threat hunting.
-• **Cloud & Network Security**: Cloud Security Posture Management (CSPM), perimeter defense, encrypted VPNs, and micro-segmentation.
-• **Identity & Access Management (IAM)**: Multi-Factor Authentication (MFA), role-based access controls, and privileged access management (PAM).
-• **Penetration Testing & Audits**: Vulnerability scanning, red teaming, ethical hacking, and source-code security reviews.
-• **Compliance & Standards Frameworks**: End-to-end audit readiness for **ISO 27001**, **SOC 2**, **GDPR**, **NIST CSF**, **PCI DSS**, and **HIPAA**.`,
+• **24/7 Managed SOC**: Real-time SIEM/SOAR incident detection, automated containment, and threat intelligence.
+• **Compliance & Governance**: ISO/IEC 27001, SOC 2 Type II, HIPAA, GDPR, PCI DSS, and NIST CSF audit readiness.
+• **Offensive Security & Pen Testing**: Web app, cloud infrastructure, and internal network penetration testing with remediation roadmaps.
+• **Zero-Trust Architecture**: Identity & Access Management (IAM), micro-segmentation, and least-privilege enforcement.
+• **Cloud Security Posture (CSPM)**: Automated compliance scanning across AWS, Azure, and Google Cloud workloads.`,
     quickActions: [
       { label: 'Explore Cybersecurity Page', pageTarget: 'Security' },
-      { label: 'Book a Security Audit', pageTarget: 'Contact' }
+      { label: 'Request Security Assessment', pageTarget: 'Contact' }
     ]
   },
 
-  // 7. CRM SERVICES
+  // 12. CRM SERVICES (SAP CX, ORACLE CX, DYNAMICS)
   {
     category: 'crm',
-    keywords: ['crm', 'customer relationship', 'sap cx', 'oracle cx', 'dynamics crm', 'sales cloud', 'service cloud', 'commerce cloud', 'cdp', 'emarsys'],
-    patterns: [/\bcrm\b/i, /customer relationship/i, /sap cx/i, /oracle cx/i],
-    answer: `**Comprehensive CRM Services:**
+    keywords: ['crm', 'customer', 'sap cx', 'sales cloud', 'service cloud', 'commerce cloud', 'oracle cx', 'dynamics 365 crm', 'cpq', 'emarsys'],
+    patterns: [/crm/i, /sap cx/i, /sales cloud/i, /service cloud/i, /oracle cx/i, /customer relationship/i],
+    answer: `**CRM & Customer Experience Engineering:**
 
-Clyptus unifies customer touchpoints across the world's top three enterprise CRM suites:
+Clyptus unifies front-office engagement with back-office execution across industry-leading CRM platforms:
 
-1. **SAP Customer Experience (SAP CX)**: SAP Sales Cloud, Service Cloud, Commerce Cloud, Customer Data Platform (CDP), Emarsys Customer Engagement, CPQ, and Subscription Billing.
-2. **Oracle Fusion Cloud CX**: Oracle Sales, B2B/B2C Service, Marketing automation, CPQ, Field Service, and Partner Relationship Management.
-3. **Microsoft Dynamics 365 CRM**: Dynamics 365 Sales, Customer Service, Field Service, Customer Insights (Journeys), and Power Platform integration.
-
-We handle business process analysis, configuration, ERP back-end integration, data deduplication, and user adoption.`,
+• **SAP Customer Experience (SAP CX)**: SAP Sales Cloud, SAP Service Cloud, SAP Commerce Cloud, Customer Data Platform (CDP), and Emarsys Marketing Automation.
+• **SAP CPQ & Subscription Billing**: Fast product configuration, complex tiered pricing, and quoting engines.
+• **Oracle CX & Salesforce Integrations**: Enterprise-wide pipeline visibility and synchronized master customer records.
+• **Microsoft Dynamics 365 CRM**: Connected sales, customer care, and automated field services.`,
     quickActions: [
-      { label: 'Visit CRM Services Page', pageTarget: 'CRM' },
-      { label: 'Inquire About CRM Platforms', pageTarget: 'Contact' }
+      { label: 'Explore CRM Services', pageTarget: 'CRM' },
+      { label: 'Request CRM Architecture Session', pageTarget: 'Contact' }
     ]
   },
 
-  // 8. SALESFORCE SERVICES
+  // 13. SALESFORCE & AGENTFORCE
   {
     category: 'salesforce',
-    keywords: ['salesforce', 'agentforce', 'sales cloud', 'service cloud', 'lightning', 'apex', 'lwc', 'marketing cloud', 'commerce cloud', 'tableau', 'revenue cloud'],
-    patterns: [/salesforce/i, /agentforce/i, /lightning|apex|lwc/i],
-    answer: `**Full-Lifecycle Salesforce Practice:**
+    keywords: ['salesforce', 'agentforce', 'sfdc', 'apex', 'lwc', 'lightning', 'flow', 'experience cloud', 'marketing cloud', 'einstein'],
+    patterns: [/salesforce/i, /agentforce/i, /sfdc/i, /apex/i, /lwc/i],
+    answer: `**Salesforce Solutions & Agentforce AI:**
 
-From strategic consulting to custom Lightning development and managed operations:
+Accelerate revenue pipelines with customized Salesforce ecosystems and autonomous AI agents:
 
-• **Core Clouds**: Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud, Experience Cloud, and Data Cloud.
-• **Next-Gen Agentforce**: Building autonomous AI agents that resolve customer inquiries, draft communications, and trigger automated CRM actions.
-• **Custom Engineering**: Complex Apex controllers, triggers, Lightning Web Components (LWC), and REST/SOAP enterprise integrations.
-• **Revenue Cloud & Analytics**: CPQ pricing engines, subscription billing workflows, and interactive Tableau business intelligence dashboards.`,
+• **Salesforce Agentforce**: Deploying autonomous AI agents that handle service inquiries, qualify sales leads, and execute business actions.
+• **Core Cloud Deployments**: Sales Cloud, Service Cloud, Experience Cloud (Community), and Marketing Cloud.
+• **Custom Development**: Apex architecture, Lightning Web Components (LWC), and complex third-party ERP integrations.
+• **Omnichannel Automation**: Flow orchestration, automated SLAs, and unified customer 360-degree views.`,
     quickActions: [
-      { label: 'View Salesforce Services Page', pageTarget: 'Salesforce' },
-      { label: 'Discuss Salesforce Project', pageTarget: 'Contact' }
+      { label: 'Open Salesforce Page', pageTarget: 'Salesforce' },
+      { label: 'Talk to Salesforce Specialist', pageTarget: 'Contact' }
     ]
   },
 
-  // 9. DATA ENGINEERING
+  // 14. DATA ENGINEERING & LAKEHOUSES
   {
     category: 'data',
-    keywords: ['data engineering', 'data', 'etl', 'elt', 'kafka', 'spark', 'snowflake', 'databricks', 'data warehouse', 'data lake', 'pipeline', 'streaming'],
-    patterns: [/data engineering/i, /etl|elt/i, /snowflake|databricks/i, /kafka|spark/i, /data lake|data warehouse/i],
-    answer: `**Modern Data Engineering & Analytics:**
+    keywords: ['data', 'data engineering', 'analytics', 'snowflake', 'databricks', 'kafka', 'spark', 'etl', 'elt', 'dbt', 'lakehouse', 'bi', 'bigquery'],
+    patterns: [/data/i, /analytics/i, /snowflake/i, /databricks/i, /kafka/i, /spark/i, /lakehouse/i, /bigquery/i],
+    answer: `**Data Engineering & Modern Lakehouse Architectures:**
 
-We turn raw, disparate data streams into trusted, real-time enterprise intelligence:
+We transform fragmented enterprise data silos into clean, real-time analytics engines:
 
-• **Streaming & Ingestion**: High-throughput distributed pipelines built with Apache Kafka, Spark, and cloud event buses.
-• **Data Warehousing & Lakehouses**: Production architectures on Snowflake, Databricks Lakehouse, AWS Redshift, and Google BigQuery.
-• **Data Quality & Governance**: Data lineage, automated reconciliation, anomaly detection, cataloging, and compliance frameworks.
-• **Enterprise BI & Dashboards**: Executive telemetry and real-time operational reporting powered by Tableau, Power BI, and Looker.`,
+• **Modern Data Lakehouses**: Snowflake, Databricks, and Google Cloud BigQuery implementations.
+• **Streaming Data Pipelines**: Real-time event streaming architectures using Apache Kafka and Apache Spark.
+• **Automated ETL/ELT**: Scalable data transformations with dbt, Airflow, and Azure Data Factory.
+• **Data Governance & Quality**: Automated data lineage, cataloging, schema validation, and GDPR masking.
+• **Enterprise BI**: High-performance executive dashboards in Power BI, Tableau, and Looker.`,
     quickActions: [
-      { label: 'Open Data Engineering Page', pageTarget: 'DataEngineering' },
-      { label: 'Talk to Data Architects', pageTarget: 'Contact' }
+      { label: 'View Data Engineering Services', pageTarget: 'DataEngineering' },
+      { label: 'Book Data Discovery Workshop', pageTarget: 'Contact' }
     ]
   },
 
-  // 10. IT RECRUITING & TALENT ACQUISITION
+  // 15. IT RECRUITMENT & TALENT DELIVERY
   {
     category: 'recruiting',
-    keywords: ['recruiting', 'staffing', 'talent', 'hire', 'contract', 'executive search', 'jobs', 'careers', 'vacancies', 'apply', 'openings', 'interview'],
-    patterns: [/recruit(ing|ment)/i, /staffing/i, /talent/i, /hire|hiring/i, /career|jobs|opening/i],
-    answer: `**IT Recruiting & Talent Solutions:**
+    keywords: ['recruitment', 'recruiting', 'staffing', 'talent', 'hire', 'contractors', 'placement', 'developers', 'consultants'],
+    patterns: [/recruitment/i, /recruiting/i, /staffing/i, /hire talent/i, /contractors/i],
+    answer: `**IT Recruiting & Specialized Talent Delivery:**
 
-Clyptus provides precision technology staffing and executive search across the globe:
+Rapid deployment of rigorously vetted enterprise technology talent:
 
-• **Top 1% Specialized Talent**: Senior SAP Architects, Cloud Specialists, AI/ML Engineers, Full-Stack Developers, and Cybersecurity Consultants.
-• **Flexible Staffing Models**: Contract staffing, permanent recruitment, contract-to-hire, and dedicated offshore/nearshore Center of Excellence (CoE) units.
+• **Flexible Models**: Contract staffing, permanent placement, contract-to-hire, and dedicated offshore squads.
+• **Specializations**: Certified SAP functional/technical consultants, Cloud Architects, AI Engineers, Cybersecurity Analysts, and Salesforce Developers.
 • **Technical Vetting**: Every candidate is evaluated by Clyptus practicing solution architects before submission.
-• **Looking to Join Clyptus?**: We are always hiring passionate developers, engineers, and consultants!`,
+• **Looking to Join Clyptus?**: Send your resume to hr.india@clyptus.com or explore our Careers page!`,
     quickActions: [
       { label: 'View IT Recruiting Services', pageTarget: 'Recruiting' },
       { label: 'Explore Clyptus Careers', pageTarget: 'Careers' },
-      { label: 'Submit Resume / Contact', pageTarget: 'Contact' }
+      { label: '✉️ Send Resume via Email', chatQuery: 'What are your official emails?' }
     ]
   },
 
-  // 11. INDUSTRIES SERVED
+  // 16. INDUSTRIES TRANSFORMED
   {
     category: 'industries',
-    keywords: ['industries', 'sectors', 'clients', 'banking', 'healthcare', 'retail', 'manufacturing', 'ports', 'logistics', 'energy', 'telecom'],
+    keywords: ['industries', 'sectors', 'banking', 'healthcare', 'retail', 'manufacturing', 'ports', 'logistics', 'energy', 'telecom'],
     patterns: [/industr(ies|y)/i, /sectors?/i, /who do you serve/i],
     answer: `**Industries We Transform:**
 
@@ -257,7 +468,7 @@ Clyptus delivers domain-tailored software and architectures across major global 
     ]
   },
 
-  // 12. CLIENTS & PARTNERS
+  // 17. CLIENTS & PARTNERS
   {
     category: 'clients',
     keywords: ['clients', 'customers', 'partners', 'deloitte', 'panasonic', 'ntt data', 'hcl', 'hexaware', 'ctrls', 'welspun', 'saudia cargo', 'greenko'],
@@ -278,23 +489,36 @@ We are also an official **SAP Silver Partner**.`,
     ]
   },
 
-  // 13. CONTACT & ENGAGEMENT
+  // 18. GENERAL CONTACT & CONSULTATION
   {
     category: 'contact',
-    keywords: ['contact', 'email', 'phone', 'call', 'reach', 'talk', 'consultation', 'quote', 'pricing', 'cost', 'inquire', 'address', 'support'],
-    patterns: [/contact/i, /email|phone|call/i, /consultation|quote|pricing|cost/i, /how (to|can I) (reach|connect)/i],
-    answer: `**Connect with Clyptus:**
+    keywords: ['contact', 'reach', 'talk', 'consultation', 'quote', 'pricing', 'cost', 'inquire', 'support', 'get in touch', 'book call', 'schedule meeting'],
+    patterns: [/contact/i, /consultation|quote|pricing|cost/i, /how (to|can I) (reach|connect)/i, /get in touch/i],
+    answer: `**Get in Touch with Clyptus Software Solutions:**
 
-Ready to kick off a project or schedule a technical consultation? We'd love to hear from you!
+We are here to assist you with technical assessments, architecture roadmaps, or project staffing:
 
-• **Website Form**: Fill out our quick project inquiry form on the Contact page.
-• **Services Consultation**: Free architectural assessment for ERP, AI, Cloud, Cybersecurity, or CRM programs.
-• **Global Delivery**: Serving clients across USA, UAE, and India with 24/7 availability.
+• ✉️ **Primary Email Contacts**:
+  - Sales & Client Proposals: Sales@clyptus.com
+  - General Inquiries: info@clyptus.com / contact@clyptus.com
+  - Talent & HR: hr.india@clyptus.com
 
-Click below to navigate directly to our contact form or let me know what specific solution you need!`,
+• 📞 **Direct Regional Phone Lines**:
+  - India: +91 77999 88139
+  - UAE: +971 52 350 3297
+  - USA: +1 (480) 427-6373
+
+• 🏢 **Corporate Hubs**:
+  - Hyderabad: Manjeera Trinity Corporate, JNTU-Hitech City Rd
+  - Dubai: 101 Sheikh Zayed Rd, DIFC
+  - California: 45627 Basswood Ct, Temecula, CA
+
+Click below to fill out our interactive form or browse our services!`,
     quickActions: [
-      { label: 'Go to Contact Page', pageTarget: 'Contact' },
-      { label: 'Browse Our Services', pageTarget: 'Services' }
+      { label: '📝 Open Contact Form', pageTarget: 'Contact' },
+      { label: '✉️ View All Emails', chatQuery: 'What are your official emails?' },
+      { label: '🚀 Company Journey', chatQuery: 'Tell me about the company journey' },
+      { label: '💼 Browse Services', pageTarget: 'Services' }
     ]
   }
 ];
@@ -310,18 +534,24 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
     {
       id: 'welcome',
       sender: 'ai',
-      text: `Hello! 👋 I'm **Clyptus AI**, your intelligent assistant.
+      text: `Hello! 👋 I'm **Clyptus AI**, your intelligent assistant for Clyptus Software Solutions.
 
-Ask me anything about **Clyptus Software Solutions**, our services (**SAP & ERP, AI, Cloud, Cybersecurity, CRM, Salesforce, Data Engineering**), our clients, or how to work with us.
+I can provide instant details on our **official emails & contact info**, our **company journey (2014–Present)**, our **SAP Silver Partnership**, and our 7 core practices:
+• 💼 **ERP & SAP** (S/4HANA, BRIM, BTP)
+• 🤖 **Artificial Intelligence & GenAI**
+• ☁️ **Multi-Cloud & DevOps**
+• 🔒 **Cybersecurity & Compliance**
+• 📈 **CRM, Salesforce & Data Engineering**
 
 How can I help you today?`,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       quickActions: [
+        { label: '✉️ Official Emails', chatQuery: 'What are your official emails?' },
+        { label: '🚀 Company Journey & Milestones', chatQuery: 'Tell me about Clyptus journey and history' },
+        { label: '🏢 Global Office Locations', chatQuery: 'Where are your office locations?' },
         { label: '💼 ERP & SAP Services', pageTarget: 'SAP' },
-        { label: '🤖 AI & GenAI Capabilities', pageTarget: 'AI' },
-        { label: '🔒 Cybersecurity Solutions', pageTarget: 'Security' },
-        { label: '🏢 About Clyptus Leadership', pageTarget: 'About' },
-        { label: '📞 Talk to an Expert', pageTarget: 'Contact' }
+        { label: '🤖 AI & GenAI Solutions', pageTarget: 'AI' },
+        { label: '📝 Contact Us', pageTarget: 'Contact' }
       ]
     }
   ]);
@@ -342,7 +572,7 @@ How can I help you today?`,
   }, [messages, isOpen, isMinimized, isTyping]);
 
   // Answer matching engine
-  const findAnswer = (query: string): { text: string; quickActions?: { label: string; pageTarget: string }[] } => {
+  const findAnswer = (query: string): { text: string; quickActions?: QuickAction[] } => {
     const cleanQuery = query.toLowerCase().trim();
 
     // 1. Direct Regex Pattern Matching
@@ -362,11 +592,14 @@ How can I help you today?`,
     for (const item of KNOWLEDGE_BASE) {
       let score = 0;
       for (const kw of item.keywords) {
-        if (cleanQuery.includes(kw)) {
-          score += kw.split(' ').length * 2;
+        const lowerKw = kw.toLowerCase();
+        if (cleanQuery === lowerKw) {
+          score += 15;
+        } else if (cleanQuery.includes(lowerKw)) {
+          score += lowerKw.split(' ').length * 4;
         }
         for (const token of queryTokens) {
-          if (token.length > 2 && kw.includes(token)) {
+          if (token.length > 2 && lowerKw.includes(token)) {
             score += 1;
           }
         }
@@ -378,25 +611,25 @@ How can I help you today?`,
       }
     }
 
-    if (bestMatch && highestScore >= 2) {
+    if (bestMatch && highestScore >= 1) {
       return { text: bestMatch.answer, quickActions: bestMatch.quickActions };
     }
 
     // 3. Fallback Smart Response
     return {
-      text: `Thank you for asking! While I don't have an exact match for that specific inquiry, Clyptus provides comprehensive end-to-end IT services:
+      text: `Thank you for asking! While I don't have an exact match for that specific inquiry, Clyptus provides complete enterprise technology services:
 
-• **ERP & Enterprise Solutions**: SAP S/4HANA, SAP BRIM, BTP, Oracle Cloud, and Dynamics 365.
-• **Artificial Intelligence**: Custom GenAI models, autonomous AI agents, computer vision, and predictive ML.
-• **Cloud & Data Engineering**: Multi-cloud infrastructure (AWS, Azure, GCP), lakehouses, and real-time streaming pipelines.
-• **Cybersecurity & Compliance**: 24/7 SOC, zero-trust defenses, pen testing, and ISO 27001/SOC 2 compliance.
-• **CRM & Salesforce**: Omnichannel CRM architectures and next-gen Agentforce integrations.
+• ✉️ **Contact & Emails**: Sales@clyptus.com | hr.india@clyptus.com | +91 77999 88139
+• 🚀 **Company Journey**: Founded in 2014, official SAP Silver Partner, 10+ years experience, 250+ consultants across USA, UAE, and India.
+• 💼 **Enterprise Practices**: SAP S/4HANA & BRIM, Artificial Intelligence, Multi-Cloud, Cybersecurity, CRM, Salesforce, and Data Engineering.
 
-Would you like to speak directly with a Clyptus technology consultant or explore one of our practices?`,
+Would you like to connect directly with our solution architects or explore our journey?`,
       quickActions: [
-        { label: 'Browse All Services', pageTarget: 'Services' },
-        { label: 'Talk to an Expert', pageTarget: 'Contact' },
-        { label: 'About Company & Team', pageTarget: 'About' }
+        { label: '✉️ View All Emails', chatQuery: 'What are your official emails?' },
+        { label: '🚀 Company Journey & Milestones', chatQuery: 'Tell me about Clyptus journey and history' },
+        { label: '🏢 Global Office Locations', chatQuery: 'Where are your office locations?' },
+        { label: '💼 Browse All Services', pageTarget: 'Services' },
+        { label: '📝 Contact Form', pageTarget: 'Contact' }
       ]
     };
   };
@@ -418,7 +651,7 @@ Would you like to speak directly with a Clyptus technology consultant or explore
     setInputQuery('');
     setIsTyping(true);
 
-    // Realistic typing delay (350ms - 700ms)
+    // Realistic typing delay
     setTimeout(() => {
       const response = findAnswer(text);
       const aiMessage: Message = {
@@ -439,12 +672,13 @@ Would you like to speak directly with a Clyptus technology consultant or explore
       {
         id: 'welcome-reset',
         sender: 'ai',
-        text: `Conversation refreshed! How else can I assist you with Clyptus's technology services, architectures, or company details?`,
+        text: `Conversation refreshed! How else can I assist you with Clyptus's emails, company journey, architectures, or services?`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         quickActions: [
+          { label: '✉️ Official Emails', chatQuery: 'What are your official emails?' },
+          { label: '🚀 Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
           { label: '💼 ERP Services', pageTarget: 'SAP' },
           { label: '🤖 AI Engineering', pageTarget: 'AI' },
-          { label: '🔒 Cybersecurity', pageTarget: 'Security' },
           { label: '📞 Contact Us', pageTarget: 'Contact' }
         ]
       }
@@ -458,48 +692,109 @@ Would you like to speak directly with a Clyptus technology consultant or explore
     }
   };
 
-  // Format bold and list text cleanly
+  // Helper to parse bold, emails, phones, and italics inline
+  const renderInlineContent = (text: string) => {
+    // Regex matches: bold (**...**), email address, phone number (+...), italic (*...*)
+    const pattern = /(\*\*.*?\*\*|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|\+\d[\d\s()-]{8,}\d|\*.*?\*)/g;
+    const parts = text.split(pattern);
+
+    return parts.map((part, pIdx) => {
+      if (!part) return null;
+
+      // Bold
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return (
+          <strong key={pIdx} className="font-extrabold text-slate-900">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+
+      // Email address
+      if (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(part)) {
+        return (
+          <a
+            key={pIdx}
+            href={`mailto:${part}`}
+            className="font-bold text-blue-600 hover:text-blue-800 underline decoration-blue-300 hover:decoration-blue-600 inline-flex items-center gap-1 bg-blue-50/90 hover:bg-blue-100/90 px-1.5 py-0.5 rounded-md border border-blue-200/70 transition-colors cursor-pointer select-text"
+            title={`Send email to ${part}`}
+          >
+            <Mail className="w-3 h-3 text-blue-500 inline shrink-0" />
+            <span>{part}</span>
+          </a>
+        );
+      }
+
+      // Phone number
+      if (/^\+\d[\d\s()-]{8,}\d$/.test(part)) {
+        const cleanPhone = part.replace(/[^+\d]/g, '');
+        return (
+          <a
+            key={pIdx}
+            href={`tel:${cleanPhone}`}
+            className="font-semibold text-slate-800 hover:text-blue-600 underline decoration-slate-300 hover:decoration-blue-500 inline-flex items-center gap-1 bg-slate-100/80 hover:bg-slate-200/80 px-1.5 py-0.5 rounded-md border border-slate-200 transition-colors cursor-pointer select-text"
+            title={`Call ${part}`}
+          >
+            <Phone className="w-3 h-3 text-slate-500 inline shrink-0" />
+            <span>{part}</span>
+          </a>
+        );
+      }
+
+      // Italic
+      if (part.startsWith('*') && part.endsWith('*')) {
+        return (
+          <em key={pIdx} className="italic text-slate-600">
+            {part.slice(1, -1)}
+          </em>
+        );
+      }
+
+      return part;
+    });
+  };
+
+  // Format bold, numbered milestones, and list text cleanly
   const renderFormattedText = (rawText: string) => {
     const lines = rawText.split('\n');
     return lines.map((line, idx) => {
       if (!line.trim()) {
-        return <div key={idx} className="h-2" />;
+        return <div key={idx} className="h-1.5" />;
       }
 
-      // Format bold markdown (**text**)
-      const parts = line.split(/(\*\*.*?\*\*)/g);
-      const renderedLine = parts.map((part, pIdx) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-          return (
-            <strong key={pIdx} className="font-extrabold text-slate-900">
-              {part.slice(2, -2)}
-            </strong>
-          );
-        }
-        if (part.startsWith('*') && part.endsWith('*')) {
-          return (
-            <em key={pIdx} className="italic text-slate-700">
-              {part.slice(1, -1)}
-            </em>
-          );
-        }
-        return part;
-      });
-
-      if (line.trim().startsWith('•') || line.trim().startsWith('-')) {
+      // Numbered items (e.g. "1. ", "2. ")
+      const numberedMatch = line.match(/^(\d+)\.\s+(.*)$/);
+      if (numberedMatch) {
+        const num = numberedMatch[1];
+        const rest = numberedMatch[2];
         return (
-          <div key={idx} className="flex items-start gap-2 my-1 pl-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-1.5 shrink-0" />
-            <span className="flex-1 text-slate-700 leading-relaxed text-xs sm:text-sm">
-              {renderedLine}
+          <div key={idx} className="flex items-start gap-2 my-1.5 pl-1">
+            <span className="w-5 h-5 rounded-md bg-gradient-to-tr from-blue-600 to-indigo-600 text-white font-mono font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+              {num}
             </span>
+            <div className="flex-1 text-slate-800 leading-relaxed text-xs sm:text-sm">
+              {renderInlineContent(rest)}
+            </div>
+          </div>
+        );
+      }
+
+      // Bullet items (e.g. "• ", "- ")
+      if (line.trim().startsWith('•') || line.trim().startsWith('-')) {
+        const bulletText = line.replace(/^[\s•-]+/, '');
+        return (
+          <div key={idx} className="flex items-start gap-2 my-1 pl-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 mt-2 shrink-0" />
+            <div className="flex-1 text-slate-800 leading-relaxed text-xs sm:text-sm">
+              {renderInlineContent(bulletText)}
+            </div>
           </div>
         );
       }
 
       return (
-        <p key={idx} className="text-xs sm:text-sm text-slate-700 leading-relaxed my-1">
-          {renderedLine}
+        <p key={idx} className="text-xs sm:text-sm text-slate-800 leading-relaxed my-1">
+          {renderInlineContent(line)}
         </p>
       );
     });
@@ -551,8 +846,8 @@ Would you like to speak directly with a Clyptus technology consultant or explore
       {/* ---------------------------------------------------- */}
       {isOpen && (
         <div 
-          className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100vw-32px)] sm:w-[420px] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden transition-all duration-300 ease-out animate-in fade-in slide-in-from-bottom-5 ${
-            isMinimized ? 'h-16' : 'h-[580px] max-h-[86vh]'
+          className={`fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[60] w-[calc(100vw-32px)] sm:w-[440px] bg-white rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden transition-all duration-300 ease-out animate-in fade-in slide-in-from-bottom-5 ${
+            isMinimized ? 'h-16' : 'h-[600px] max-h-[88vh]'
           }`}
         >
           {/* Header Bar */}
@@ -575,7 +870,7 @@ Would you like to speak directly with a Clyptus technology consultant or explore
                 </div>
                 <span className="text-[11px] font-medium text-slate-300 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Online • Company Assistant
+                  Online • Company & Journey Assistant
                 </span>
               </div>
             </div>
@@ -618,24 +913,22 @@ Would you like to speak directly with a Clyptus technology consultant or explore
                     key={msg.id}
                     className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'} animate-in fade-in duration-200`}
                   >
-                    <div className="flex items-end gap-2 max-w-[88%]">
+                    <div className="flex items-end gap-2 max-w-[90%]">
                       {msg.sender === 'ai' && (
-                        <div className="w-6 h-6 rounded-lg bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 mb-1 shadow-2xs">
-                          <Bot className="w-3.5 h-3.5" />
+                        <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white flex items-center justify-center shrink-0 mb-1 shadow-sm">
+                          <Bot className="w-4 h-4 stroke-[2.2]" />
                         </div>
                       )}
 
                       <div
-                        className={`rounded-2xl px-4 py-3 text-left shadow-xs ${
+                        className={`rounded-2xl px-4 py-3 text-xs sm:text-sm shadow-xs ${
                           msg.sender === 'user'
-                            ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white rounded-br-xs'
-                            : 'bg-white border border-slate-200/90 text-slate-800 rounded-bl-xs'
+                            ? 'bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white rounded-br-none shadow-blue-500/10'
+                            : 'bg-white text-slate-800 border border-slate-200/90 rounded-bl-none shadow-slate-100'
                         }`}
                       >
                         {msg.sender === 'user' ? (
-                          <p className="text-xs sm:text-sm font-medium leading-relaxed whitespace-pre-wrap">
-                            {msg.text}
-                          </p>
+                          <p className="whitespace-pre-wrap font-medium">{msg.text}</p>
                         ) : (
                           <div>{renderFormattedText(msg.text)}</div>
                         )}
@@ -644,15 +937,29 @@ Would you like to speak directly with a Clyptus technology consultant or explore
 
                     {/* Quick Interactive Actions inside AI message */}
                     {msg.sender === 'ai' && msg.quickActions && msg.quickActions.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 mt-2 ml-8 max-w-[85%]">
+                      <div className="flex flex-wrap gap-1.5 mt-2 ml-9 max-w-[90%]">
                         {msg.quickActions.map((action, aIdx) => (
                           <button
                             key={aIdx}
-                            onClick={() => handleActionClick(action.pageTarget)}
-                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-blue-50 text-blue-700 hover:text-blue-900 border border-blue-200/80 text-[11px] font-bold shadow-2xs transition-all hover:scale-102 cursor-pointer active:scale-95"
+                            onClick={() => {
+                              if (action.chatQuery) {
+                                handleSendMessage(action.chatQuery);
+                              } else if (action.pageTarget) {
+                                handleActionClick(action.pageTarget);
+                              }
+                            }}
+                            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold shadow-2xs transition-all hover:scale-102 cursor-pointer active:scale-95 ${
+                              action.chatQuery
+                                ? 'bg-gradient-to-r from-amber-50 to-orange-50 text-amber-900 hover:text-amber-950 border border-amber-200/90 hover:border-amber-300'
+                                : 'bg-white hover:bg-blue-50 text-blue-700 hover:text-blue-900 border border-blue-200/80'
+                            }`}
                           >
                             <span>{action.label}</span>
-                            <ArrowRight className="w-3 h-3 text-blue-600" />
+                            {action.chatQuery ? (
+                              <Sparkles className="w-3 h-3 text-orange-500" />
+                            ) : (
+                              <ArrowRight className="w-3 h-3 text-blue-600" />
+                            )}
                           </button>
                         ))}
                       </div>
@@ -696,7 +1003,7 @@ Would you like to speak directly with a Clyptus technology consultant or explore
                     type="text"
                     value={inputQuery}
                     onChange={(e) => setInputQuery(e.target.value)}
-                    placeholder="Ask Clyptus AI about our services or company..."
+                    placeholder="Ask about emails, company journey, ERP, AI..."
                     className="flex-1 px-4 py-2.5 rounded-full bg-slate-100/90 border border-slate-200 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-inner"
                   />
                   <button
@@ -725,4 +1032,5 @@ Would you like to speak directly with a Clyptus technology consultant or explore
     </div>
   );
 };
+
 export default ClyptusAiChatbot;
