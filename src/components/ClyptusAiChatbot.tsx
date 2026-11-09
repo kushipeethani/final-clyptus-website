@@ -442,6 +442,771 @@ We provide complete enterprise ERP strategy, implementations, migrations, and on
     ]
   },
 
+  // -------------------------------------------------------------
+  // GRANULAR AI PAGE SUB-TOPICS & CAPABILITIES
+  // -------------------------------------------------------------
+
+  // AI.1 DATA SCIENCE & ANALYTICS
+  {
+    category: 'ai-datascience-analytics',
+    keywords: [
+      'data science', 'analytics', 'predictive models', 'dashboards', 
+      'data science and analytics', 'data science & analytics', 'operational data',
+      'predictive dashboards', 'bi models', 'what is data science and analytics'
+    ],
+    patterns: [
+      /\bdata science(&| and)? analytics\b/i,
+      /\bdata science\b/i,
+      /\bpredictive models?( and dashboards?)?\b/i,
+      /\bpredictive analytics dashboards?\b/i
+    ],
+    answer: `**Clyptus Data Science & Analytics (AI Practice)**
+
+Our Data Science & Analytics practice turns raw ERP, operational, and customer data into real-time decision intelligence:
+
+• **Key Capabilities**:
+  • **Predictive Forecasting Models**: Algorithmic forecasting for sales, inventory turnover, and cash-flow trajectories.
+  • **Executive KPI Dashboards**: Interactive, high-performance dashboards that eliminate manual report compilation.
+  • **Actionable Pattern Discovery**: Machine learning models identifying operational bottlenecks and supply chain risks before they impact P&L.
+  • **ERP Integration**: Embedded analytics directly integrated into SAP S/4HANA, Dynamics 365, and modern cloud warehouses.
+
+Click below to explore our AI Solutions page or Data Engineering practice.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Data Engineering', pageTarget: 'DataEngineering' },
+      { label: 'Browse All Services', pageTarget: 'Services' }
+    ]
+  },
+
+  // AI.2 INTELLIGENT PROCESS AUTOMATION (IPA)
+  {
+    category: 'ai-process-automation',
+    keywords: [
+      'intelligent process automation', 'ipa', 'erp workflow automation', 'workflow automation',
+      'approvals automation', 'document handling', 'master data checks', 'reconciliation automation',
+      'automate erp processes', 'what is intelligent process automation'
+    ],
+    patterns: [
+      /\b(intelligent process automation|ipa)\b/i,
+      /\b(erp workflow automation|automate repetitive business processes)\b/i,
+      /\b(master(-|\s+)data checks?|reconciliation automation|automated approvals?)\b/i
+    ],
+    answer: `**Intelligent Process Automation (IPA) at Clyptus**
+
+We eliminate friction across core enterprise workflows by combining algorithmic logic with generative intelligence:
+
+• **What We Automate**:
+  • **Automated Document Ingestion**: Ingesting, parsing, and verifying multi-format supplier invoices, bills of lading, and POs with zero manual data entry.
+  • **Master-Data Hygiene**: Real-time cross-system validation checks across customer, vendor, and material master records.
+  • **Automated 3-Way Reconciliation**: High-speed matching of purchase orders, receiving slips, and invoices with automatic exception routing.
+  • **Intelligent Approval Chains**: Routing requests dynamically based on dollar thresholds, compliance risk scores, and department hierarchies.
+
+Click below to visit the AI Solutions page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'Talk to an AI Expert', pageTarget: 'Contact' }
+    ]
+  },
+
+  // AI.3 AI INSIDE SAP S/4HANA
+  {
+    category: 'ai-sap-s4hana',
+    keywords: [
+      'ai inside sap', 'ai inside sap s4hana', 'ai inside s/4hana', 'embedded sap ml',
+      'embedded machine learning', 'sap ai', 'sap machine learning', 'ai in sap',
+      'machine learning in sap', 's/4hana ai', 'what is ai inside sap'
+    ],
+    patterns: [
+      /\bai inside (sap|s\/?4hana)\b/i,
+      /\bembedded (sap )?(machine learning|ml)\b/i,
+      /\b(sap ai|ai in sap|machine learning in sap)\b/i
+    ],
+    answer: `**AI Inside SAP S/4HANA — Embedded Enterprise Intelligence**
+
+Clyptus activates native and extended Machine Learning algorithms directly within the SAP S/4HANA digital core:
+
+• **Core Implementations**:
+  • **Intelligent Cash Management**: Automated bank reconciliation and cash application using historical matching heuristics.
+  • **Predictive Contract Consumption**: Anticipating quota exhaustion across procurement contracts to secure volume discounts.
+  • **Material Requirements Planning (MRP) Optimization**: Self-adjusting safety stock levels based on lead-time volatility and supplier performance.
+  • **SAP BTP Extension Swarms**: Side-by-side agentic workflows that enhance standard SAP transactions without touching the clean core.
+
+Click below to jump directly to our ERP & SAP or AI practice.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'Request ERP Review', pageTarget: 'SAP' }
+    ]
+  },
+
+  // AI.4 5-STEP AI PROJECT DELIVERY LIFECYCLE
+  {
+    category: 'ai-project-steps',
+    keywords: [
+      'ai project steps', 'ai delivery steps', 'how an ai project runs', 'ai lifecycle', 
+      '5 steps', 'ai methodology', 'how does an ai project run', 'ai implementation steps',
+      'ai process', 'ai project stages', '5 delivery steps'
+    ],
+    patterns: [
+      /\b(ai project steps?|how (an|does an) ai project runs?|5 steps?|ai delivery (steps?|methodology|lifecycle|stages?))\b/i,
+      /\bhow do you deliver ai\b/i
+    ],
+    answer: `**How an AI Project Runs at Clyptus (5-Step Delivery Lifecycle)**
+
+We follow a rigorous, enterprise-tested methodology to take AI from concept to mission-critical production:
+
+1. **Step 01 — Data Audit & Pipeline Readiness**: Ingesting, profiling, cleansing, and structuring enterprise feeds for algorithmic consumption.
+2. **Step 02 — Architecture & Model Selection**: Selecting, fine-tuning, or engineering bespoke neural architectures and enterprise RAG frameworks.
+3. **Step 03 — Validation & Guardrail Benchmarking**: Rigorous testing for latency, hallucination mitigation, token efficiency, and business-metric thresholds.
+4. **Step 04 — Production Deployment & Integration**: Secure API integration with core ERP, CRM, and databases via resilient MLOps infrastructure.
+5. **Step 05 — Continuous Monitoring & Drift Mitigation**: Automated evaluation loops detecting data drift and adapting to evolving business patterns.
+
+Click below to see the complete lifecycle on our AI Solutions page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Case Studies', pageTarget: 'Projects' },
+      { label: 'Contact AI Practice', pageTarget: 'Contact' }
+    ]
+  },
+
+  // AI.5 CONTINUOUS MONITORING & DRIFT MITIGATION
+  {
+    category: 'ai-drift-mitigation',
+    keywords: [
+      'drift mitigation', 'data drift', 'model drift', 'drift monitoring', 
+      'continuous monitoring', 'concept drift', 'model retraining', 'drift',
+      'what is drift mitigation'
+    ],
+    patterns: [
+      /\b(drift mitigation|data drift|model drift|drift monitoring|concept drift)\b/i,
+      /\bcontinuous monitoring and drift\b/i
+    ],
+    answer: `**Continuous Monitoring & Drift Mitigation (MLOps)**
+
+In enterprise environments, model performance degrades over time as business patterns change. Clyptus provides proactive drift defense:
+
+• **How We Protect AI Accuracy**:
+  • **Covariate & Data Drift Detection**: Monitoring statistical distributions of incoming features compared to training baselines.
+  • **Concept Drift Alarms**: Tracking ground-truth model outputs against actual business outcomes to catch metric decay early.
+  • **Automated Retraining Triggers**: Orchestrating automated retraining pipelines on Kubernetes when confidence scores cross thresholds.
+  • **Audit Trails & Version Rollback**: Zero-downtime canary deployments with instant rollback guarantees.
+
+Explore this on the AI Solutions page below.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Data Engineering', pageTarget: 'DataEngineering' }
+    ]
+  },
+
+  // AI.6 VALIDATION & GUARDRAIL BENCHMARKING
+  {
+    category: 'ai-guardrails-validation',
+    keywords: [
+      'guardrails', 'guardrail benchmarking', 'ai safety', 'validation', 
+      'zero data leakage', 'data leakage', 'hallucination prevention', 'pii redaction',
+      'what is guardrail benchmarking'
+    ],
+    patterns: [
+      /\b(guardrails?|guardrail benchmarking|ai safety|zero(-|\s+)data(-|\s+)leakage|hallucination mitigation)\b/i,
+      /\bvalidation and guardrail\b/i
+    ],
+    answer: `**Validation & Guardrail Benchmarking**
+
+Enterprise AI must be safe, deterministic, and compliant. Clyptus implements enterprise-grade guardrails:
+
+• **Key Security & Quality Controls**:
+  • **PII & Sensitive Data Redaction**: Automatic scrubbing of personal and financial information before tokenization.
+  • **Hallucination Prevention**: Deterministic ground-truth citation frameworks and strict confidence boundaries.
+  • **Zero-Data Leakage**: Private tenant model hosting (Azure OpenAI, AWS Bedrock, GCP Vertex) ensuring customer data is never used for public training.
+  • **Latency & Token Benchmarking**: Optimizing TTFT (Time to First Token) and throughput for sub-second user responsiveness.
+
+Click below to open our AI Solutions page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Cybersecurity', pageTarget: 'Security' }
+    ]
+  },
+
+  // AI.7 AUTONOMOUS AI AGENT SWARMS
+  {
+    category: 'ai-agents-swarms',
+    keywords: [
+      'ai agents', 'autonomous agents', 'agent swarms', 'multi agent', 
+      'agentic', 'autonomous multi-agent', 'agentic ai', 'swarms', 'multi-agent swarms',
+      'what are ai agents', 'tell me about agent swarms'
+    ],
+    patterns: [
+      /\b(ai agents?|autonomous agents?|agent swarms?|multi(-|\s+)agent(s)?|agentic ai)\b/i,
+      /\bautonomous multi(-|\s+)agent swarms?\b/i
+    ],
+    answer: `**Autonomous AI Agent Swarms (Clyptus Innovation Lab)**
+
+Rather than single chatbots, Clyptus deploys specialized multi-agent swarms that autonomously collaborate to execute complex, multi-step business missions:
+
+• **How Agent Swarms Operate**:
+  • **Role Specialization**: Different agents act as Researcher, Verifier, Executor, and Auditor within the swarm.
+  • **Cross-System Execution**: Agents query databases, draft enterprise emails, trigger SAP transactions, and update Salesforce records.
+  • **Self-Correction & Human-in-the-Loop**: Built-in verification loops validate intermediate outputs; exceptions are escalated to humans seamlessly.
+  • **Enterprise Connectors**: Native interfaces into SAP BTP, Salesforce Agentforce, ServiceNow, and SQL lakehouses.
+
+Learn more on our AI Solutions page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Salesforce Agentforce', pageTarget: 'Salesforce' },
+      { label: 'ERP & SAP Services', pageTarget: 'SAP' }
+    ]
+  },
+
+  // AI.8 DIGITAL TWINS
+  {
+    category: 'ai-digital-twins',
+    keywords: [
+      'digital twins', 'digital twin', 'process simulation', 'real time simulation', 
+      'manufacturing twin', 'asset simulation', 'digital mirroring', 'what is digital twins'
+    ],
+    patterns: [
+      /\bdigital twins?\b/i,
+      /\breal(-|\s+)time process simulation\b/i
+    ],
+    answer: `**Digital Twins & Real-Time Process Simulation**
+
+Clyptus engineers Digital Twins that mirror complex physical environments, production lines, and supply chains:
+
+• **Key Capabilities**:
+  • **Asset Mirroring**: Continuous ingestion of IoT telemetry to model machinery wear, temperature, and vibration.
+  • **Predictive Bottleneck Modeling**: Simulating line speed adjustments and maintenance schedules to eliminate downtime.
+  • **What-If Scenario Simulation**: Testing supply disruption impacts and warehouse layouts virtually before physical implementation.
+  • **Operational Optimization**: Direct integration with Industry 4.0 analytics and enterprise ERP plant maintenance modules.
+
+Click below to explore our AI and Industries hubs.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Explore Industries', pageTarget: 'Industries' },
+      { label: 'Client Case Studies', pageTarget: 'Projects' }
+    ]
+  },
+
+  // AI.9 COMPUTER VISION
+  {
+    category: 'ai-computer-vision',
+    keywords: [
+      'computer vision', 'visual inspection', 'quality inspection', 'defect detection', 
+      'workplace safety', 'video analytics', 'visual quality inspection', 'tell me about computer vision'
+    ],
+    patterns: [
+      /\bcomputer vision\b/i,
+      /\bvisual (quality|safety) inspection\b/i,
+      /\bdefect detection\b/i
+    ],
+    answer: `**Computer Vision & Visual Quality Inspection**
+
+Our Computer Vision solutions deliver millisecond optical intelligence directly to shop floors, distribution yards, and ports:
+
+• **Enterprise Applications**:
+  • **Sub-Millimeter Defect Detection**: High-speed camera inspection identifying surface fractures, print flaws, and assembly defects.
+  • **Workplace Safety & PPE Compliance**: Automated monitoring for hard hats, high-vis vests, and unauthorized zone entry.
+  • **Document & Optical Character Recognition (OCR)**: Ingestion of complex multilingual shipping labels, stamped metal tags, and handwritten manifests.
+  • **Edge Deployment**: Optimized for low-latency inference on NVIDIA Jetson and edge gateway appliances.
+
+Explore our AI practice below.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Case Studies', pageTarget: 'Projects' }
+    ]
+  },
+
+  // AI.10 RPA + GENAI (HYPERAUTOMATION)
+  {
+    category: 'ai-rpa-genai',
+    keywords: [
+      'rpa + genai', 'rpa genai', 'hyperautomation', 'robotic process automation', 
+      'hyper automated workflows', 'rpa and genai', 'hyper-automated workflows', 'what is rpa + genai'
+    ],
+    patterns: [
+      /\b(rpa \+ genai|rpa genai|hyper(-|\s+)?automation|hyper(-|\s+)?automated workflows?)\b/i,
+      /\brpa and genai\b/i
+    ],
+    answer: `**RPA + GenAI: Hyper-Automated Workflows**
+
+Traditional RPA handles deterministic repetitive clicks, while GenAI handles reasoning and comprehension. Clyptus combines them into unified Hyperautomation:
+
+• **Key Advantages**:
+  • **Parsing Unstructured Inputs**: GenAI interprets unstructured emails, scanned receipts, and PDFs, converting them into structured JSON.
+  • **Deterministic Execution**: RPA bots take the structured JSON and execute transactions across legacy green-screen apps and modern ERPs.
+  • **Exception Handling**: When workflows hit edge cases, conversational GenAI can prompt human operators for specific missing details.
+  • **80%+ Cycle Time Reductions**: Drastically reduces days of manual back-office reconciliations to minutes.
+
+Click below to explore our AI Solutions page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Browse All Services', pageTarget: 'Services' }
+    ]
+  },
+
+  // AI.11 ENTERPRISE RAG & CUSTOM LLM FINE-TUNING
+  {
+    category: 'ai-rag-finetuning',
+    keywords: [
+      'rag', 'retrieval augmented generation', 'fine tuning', 'custom llm', 
+      'bespoke llm', 'vector database', 'embeddings', 'enterprise rag', 'rag architecture',
+      'what is rag'
+    ],
+    patterns: [
+      /\brag\b/i,
+      /\bretrieval(-|\s+)augmented generation\b/i,
+      /\bfine(-|\s+)tuning\b/i,
+      /\b(custom|bespoke) llms?\b/i,
+      /\benterprise rag\b/i
+    ],
+    answer: `**Enterprise RAG (Retrieval-Augmented Generation) & LLM Fine-Tuning**
+
+Clyptus equips global enterprises with bespoke language models that securely tap into proprietary internal knowledge:
+
+• **Our Architecture**:
+  • **Hybrid Dense & Sparse Search**: Advanced vector indexing (Pinecone, Qdrant, Azure AI Search, pgvector) with reciprocal rank fusion.
+  • **Contextual Chunking & Metadata Filtering**: Preserving document hierarchy and role-based access permissions.
+  • **Domain Fine-Tuning (PEFT / LoRA)**: Custom fine-tuning open-source and proprietary foundation models on specialized terminology (SAP ABAP, legal, medical, accounting).
+  • **Zero-Training Guarantee**: Your corporate IP remains strictly isolated within your private tenant.
+
+Click below to visit our AI Solutions hub.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Data Engineering', pageTarget: 'DataEngineering' }
+    ]
+  },
+
+  // AI.12 6 CORE MODEL ARCHITECTURES
+  {
+    category: 'ai-model-types',
+    keywords: [
+      'model types', 'model architectures', 'nlp', 'natural language processing', 
+      'time series forecasting', 'recommendation systems', 'forecasting models',
+      'what models do you use', 'supported models'
+    ],
+    patterns: [
+      /\b(model types?|model architectures?|natural language processing|time series forecasting|recommendation systems?)\b/i,
+      /\bwhat models do you (use|support)\b/i
+    ],
+    answer: `**Clyptus Model Architectures & Algorithmic Capabilities**
+
+We design, train, and deploy across 6 primary model families:
+
+1. **Natural Language Processing (NLP)**: Large language models, transformer embeddings, semantic search, and document summarization.
+2. **Computer Vision**: Convolutional neural networks (CNNs), vision transformers (ViT), object detection, and OCR.
+3. **Predictive Analytics**: Gradient-boosted decision trees (XGBoost, LightGBM), classification, and risk scoring.
+4. **Generative AI & Copilots**: Multi-agent LLM systems, custom RAG pipelines, and enterprise code copilots.
+5. **Recommendation Systems**: Collaborative filtering, matrix factorization, and deep retrieval for customer personalization.
+6. **Time Series Forecasting**: Temporal fusion transformers (TFT), DeepAR, and ARIMA for demand and price forecasting.
+
+Click below to view the AI Solutions page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Data Engineering', pageTarget: 'DataEngineering' }
+    ]
+  },
+
+  // AI.13 INDUSTRY PROJECT: RETAIL DEMAND FORECASTING
+  {
+    category: 'ai-industry-retail',
+    keywords: [
+      'retail ai', 'demand forecasting', 'ai native demand forecasting', 
+      'inventory optimization', 'retail forecasting', 'omni channel fulfillment'
+    ],
+    patterns: [
+      /\b(retail ai|demand forecasting|ai(-|\s+)native demand forecasting)\b/i,
+      /\bretail inventory optimization\b/i
+    ],
+    answer: `**Retail Case Study: AI-Native Demand Forecasting**
+
+• **Challenge**: Retailers often suffer from seasonal stockouts, excess inventory write-offs, and fragmented multi-store replenishment planning.
+• **Clyptus Solution**:
+  • Deployed neural demand forecasting models analyzing historical POS data, promotional calendars, regional weather, and local events.
+  • Integrated predictions directly into warehouse inventory management systems for dynamic reorder points.
+• **Impact**: Slashed out-of-stock incidents by 27%, reduced carrying costs by 18%, and enabled automated daily replenishment.
+
+Explore our AI solutions and verified case studies below.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Explore Industries', pageTarget: 'Industries' },
+      { label: 'Case Studies', pageTarget: 'Projects' }
+    ]
+  },
+
+  // AI.14 INDUSTRY PROJECT: LOGISTICS AUTOMATION
+  {
+    category: 'ai-industry-logistics',
+    keywords: [
+      'logistics ai', 'shipping automation', 'manifest validation', 
+      'route dispatch optimization', 'fleet ai', 'intelligent logistics'
+    ],
+    patterns: [
+      /\b(logistics ai|shipping manifest|route dispatch optimization|intelligent automation with ai)\b/i,
+      /\blogistics automation\b/i
+    ],
+    answer: `**Logistics Case Study: Intelligent Automation with AI**
+
+• **Challenge**: Manual verification of complex ocean freight manifests, bills of lading, and dispatch routing created severe port and terminal delays.
+• **Clyptus Solution**:
+  • Automated manifest ingestion and multi-point customs validation using OCR and LLM reasoning.
+  • Built algorithmic dispatch schedulers that balance route topology, toll costs, and real-time traffic telemetry.
+• **Impact**: Eliminated manual document bottlenecks with 99.4% extraction accuracy, accelerating container turnaround times by 35%.
+
+Click below to learn more on our AI or Industries page.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Explore Industries', pageTarget: 'Industries' }
+    ]
+  },
+
+  // AI.15 INDUSTRY PROJECT: HEALTHCARE DATA LAKE
+  {
+    category: 'ai-industry-healthcare',
+    keywords: [
+      'healthcare ai', 'healthcare data lake', 'clinical insights', 
+      'patient analytics', 'hipaa data platform', 'healthcare analytics'
+    ],
+    patterns: [
+      /\b(healthcare (ai|data lake)|clinical insights|patient analytics|hipaa data platform)\b/i,
+      /\bhealthcare analytics\b/i
+    ],
+    answer: `**Healthcare Case Study: Data Lake & Analytics Platform**
+
+• **Challenge**: Clinical patient records, diagnostic imaging, and hospital operational data existed in siloed legacy systems that hindered research.
+• **Clyptus Solution**:
+  • Architected a HIPAA-compliant, zero-trust cloud data lake unifying EHR feeds, telemetry, and administrative records.
+  • Implemented predictive models forecasting ICU bed occupancy and automated clinical trial patient stratification.
+• **Impact**: Unified clinical views across hospital networks while ensuring full HIPAA/HITECH compliance.
+
+Click below to view our AI and Data Engineering hubs.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Data Engineering', pageTarget: 'DataEngineering' }
+    ]
+  },
+
+  // AI.16 INDUSTRY PROJECT: BANKING DATA WAREHOUSE
+  {
+    category: 'ai-industry-banking',
+    keywords: [
+      'banking ai', 'banking warehouse', 'fraud detection', 
+      'regulatory reporting', 'bfsi data warehouse', 'banking modernization'
+    ],
+    patterns: [
+      /\b(banking (ai|warehouse|data warehouse)|fraud detection|regulatory reporting|data warehouse modernization)\b/i,
+      /\bbfsi data\b/i
+    ],
+    answer: `**Banking Case Study: Data Warehouse Modernization**
+
+• **Challenge**: Legacy mainframe batch processing delayed fraud identification and caused manual reconciliation overhead for regulatory reporting.
+• **Clyptus Solution**:
+  • Modernized to a high-throughput Snowflake/Databricks streaming warehouse ingesting millions of daily card transactions in real-time.
+  • Built ML fraud scoring engines operating under 40ms latency and automated compliance filing pipelines.
+• **Impact**: Prevented millions in fraudulent transactions and reduced quarterly compliance audit prep from weeks to hours.
+
+Explore Data Engineering and AI solutions below.`,
+    quickActions: [
+      { label: 'Go to AI Solutions', pageTarget: 'AI' },
+      { label: 'Data Engineering', pageTarget: 'DataEngineering' }
+    ]
+  },
+
+  // -------------------------------------------------------------
+  // GRANULAR SERVICES PRACTICE SUB-TOPICS
+  // -------------------------------------------------------------
+
+  // SRV.1 SAP BRIM (BILLING & REVENUE INNOVATION MANAGEMENT)
+  {
+    category: 'service-sap-brim',
+    keywords: [
+      'sap brim', 'brim', 'som', 'convergent charging', 'convergent invoicing', 
+      'fi-ca', 'fica', 'rar', 'subscription billing', 'convergent mediation', 'revenue recognition',
+      'what is sap brim'
+    ],
+    patterns: [
+      /\b(sap\s+)?brim\b/i,
+      /\b(subscription order management|convergent charging|convergent invoicing|convergent mediation|fi-ca|fica|revenue recognition)\b/i
+    ],
+    answer: `**SAP BRIM (Billing & Revenue Innovation Management) — Clyptus Practice**
+
+Clyptus is an established authority in high-volume, consumption-based subscription and monetization architectures:
+
+• **Core BRIM Components**:
+  • **SAP SOM (Subscription Order Management)**: Product catalog modeling, subscription lifecycle, and partner revenue sharing.
+  • **SAP CC (Convergent Charging)**: Ultra-high-speed real-time rating and charging engine processing millions of consumption events per second.
+  • **SAP CI (Convergent Invoicing)**: Aggregating diverse billable items into unified invoices with cross-currency discounting.
+  • **SAP CM (Convergent Mediation)**: Ingesting raw network and usage data from edge devices with CDR deduplication.
+  • **SAP FI-CA & RAR (IFRS 15)**: Contract accounts receivable and automated revenue recognition compliance.
+
+Click below to navigate directly to our ERP & SAP services page.`,
+    quickActions: [
+      { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'Browse All Services', pageTarget: 'Services' },
+      { label: 'Talk to an ERP Specialist', pageTarget: 'Contact' }
+    ]
+  },
+
+  // SRV.2 SAP CLEAN CORE ARCHITECTURE
+  {
+    category: 'service-sap-clean-core',
+    keywords: [
+      'clean core', 'clean-core', 'decoupled architecture', 
+      'sap btp extensions', 'zero downtime upgrades', 'clean core strategy',
+      'what is clean core'
+    ],
+    patterns: [
+      /\bclean(-|\s+)core\b/i,
+      /\bdecoupled (erp|sap) architecture\b/i
+    ],
+    answer: `**SAP Clean Core Strategy & Decoupled Architecture**
+
+The Clean Core methodology is essential for enterprises migrating to SAP S/4HANA Cloud without inheriting technical debt:
+
+• **Clyptus Clean Core Principles**:
+  • **Zero Modifications to Standard Core**: Keeping the S/4HANA core pristine to enable seamless, automated SAP release upgrades.
+  • **Side-by-Side Extensions on SAP BTP**: Building bespoke enterprise logic, portals, and AI workflows decoupled on SAP Business Technology Platform.
+  • **Standard Public APIs**: Interfacing via standard OData, REST, and RFC APIs rather than direct table writes.
+  • **Future-Proof TCO**: Slashes maintenance costs and ensures long-term system agility.
+
+Click below to explore our SAP practice.`,
+    quickActions: [
+      { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'Case Studies', pageTarget: 'Projects' }
+    ]
+  },
+
+  // SRV.3 SAP BTP (BUSINESS TECHNOLOGY PLATFORM)
+  {
+    category: 'service-sap-btp',
+    keywords: [
+      'sap btp', 'btp', 'business technology platform', 'sap cpi', 
+      'fiori', 'abap cloud', 'sap integration suite', 'what is sap btp'
+    ],
+    patterns: [
+      /\b(sap\s+)?btp\b/i,
+      /\bbusiness technology platform\b/i,
+      /\b(sap cpi|sap integration suite|sap fiori)\b/i
+    ],
+    answer: `**SAP BTP (Business Technology Platform) Solutions**
+
+Clyptus leverages SAP BTP as the digital fabric connecting SAP systems with multi-cloud workloads:
+
+• **Our BTP Specializations**:
+  • **Integration Suite (CPI)**: Seamless hybrid integrations connecting S/4HANA with Salesforce, Workday, and banking gateways.
+  • **SAP Build & Fiori UX**: Modern responsive mobile and desktop user interfaces replacing legacy SAP GUI screens.
+  • **ABAP Cloud**: Cloud-ready ABAP development conforming strictly to clean-core guidelines.
+  • **AI Foundation on BTP**: Deploying machine learning models directly accessible within business transactions.
+
+Click below to visit the ERP & SAP Services page.`,
+    quickActions: [
+      { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'Browse All Services', pageTarget: 'Services' }
+    ]
+  },
+
+  // SRV.4 24/7 MANAGED SOC (SECURITY OPERATIONS CENTER)
+  {
+    category: 'service-security-soc',
+    keywords: [
+      'managed soc', 'soc', 'siem', 'soar', '24/7 soc', 
+      'security operations center', 'incident response', 'soc as a service',
+      'what is managed soc'
+    ],
+    patterns: [
+      /\b(managed\s+soc|24\/7\s+soc|security operations center|siem|soar)\b/i,
+      /\bsoc as a service\b/i
+    ],
+    answer: `**24/7 Managed SOC & Threat Intelligence**
+
+Clyptus operates an enterprise Security Operations Center providing around-the-clock defense:
+
+• **Key Capabilities**:
+  • **Continuous Telemetry Monitoring**: Ingesting logs from endpoints, cloud infrastructure (AWS/Azure), and firewalls.
+  • **Next-Gen SIEM & SOAR**: AI-powered behavioral correlation and automated containment playbooks.
+  • **SLA-Backed Response**: 15-minute mean time to acknowledge (MTTA) and rapid quarantine of compromised hosts.
+  • **Threat Hunting**: Proactive reconnaissance tracking global threat feeds and zero-day vulnerabilities.
+
+Click below to navigate to the Cybersecurity page.`,
+    quickActions: [
+      { label: 'Go to Cybersecurity', pageTarget: 'Security' },
+      { label: 'Cloud Services', pageTarget: 'Cloud' }
+    ]
+  },
+
+  // SRV.5 ZERO-TRUST ARCHITECTURE
+  {
+    category: 'service-security-zerotrust',
+    keywords: [
+      'zero trust', 'zero-trust', 'microsegmentation', 'iam', 
+      'identity access management', 'least privilege', 'zero trust architecture',
+      'what is zero trust'
+    ],
+    patterns: [
+      /\bzero(-|\s+)trust\b/i,
+      /\bmicro(-|\s+)?segmentation\b/i,
+      /\bleast privilege\b/i
+    ],
+    answer: `**Zero-Trust Enterprise Architecture**
+
+Clyptus implements strict *"Never Trust, Always Verify"* security frameworks across hybrid enterprise environments:
+
+• **Pillars of Our Zero-Trust Practice**:
+  • **Identity-Centric Access (IAM)**: Conditional access policies, Multi-Factor Authentication (MFA), and single sign-on (SSO).
+  • **Software-Defined Microsegmentation**: Isolating database, application, and web tiers to prevent lateral attacker movement.
+  • **Continuous Posture Assessment**: Verifying device health and compliance before granting application session tokens.
+  • **Encrypted Transit & Storage**: End-to-end mTLS encryption for inter-service communication and AES-256 for data at rest.
+
+Click below to view our Cybersecurity page.`,
+    quickActions: [
+      { label: 'Go to Cybersecurity', pageTarget: 'Security' },
+      { label: 'Cloud Services', pageTarget: 'Cloud' }
+    ]
+  },
+
+  // SRV.6 REGULATORY COMPLIANCE (ISO 27001, SOC 2, HIPAA, GDPR)
+  {
+    category: 'service-security-compliance',
+    keywords: [
+      'iso 27001', 'soc 2', 'hipaa', 'gdpr', 'pci dss', 'nist', 
+      'compliance audit', 'security compliance', 'soc 2 type ii', 'compliance frameworks'
+    ],
+    patterns: [
+      /\b(iso\s?27001|soc\s?2(\s+type\s+ii)?|hipaa|gdpr|pci\s?dss|nist(\s+csf)?)\b/i,
+      /\bsecurity compliance\b/i
+    ],
+    answer: `**Enterprise Regulatory Compliance & Audit Readiness**
+
+We guide global enterprises through audit preparation, control implementation, and continuous compliance verification:
+
+• **Supported Frameworks**:
+  • **ISO/IEC 27001:2022**: Information security management system (ISMS) controls.
+  • **SOC 2 Type II**: Trust Services Criteria (Security, Availability, Confidentiality).
+  • **HIPAA & HITECH**: Protected Health Information (PHI) encryption and access governance.
+  • **GDPR & Regional Privacy**: Data residency, subject access request automation, and consent workflows.
+  • **PCI DSS v4.0**: Cardholder data environment (CDE) tokenization and network segmentation.
+
+Click below to open our Cybersecurity page.`,
+    quickActions: [
+      { label: 'Go to Cybersecurity', pageTarget: 'Security' },
+      { label: 'HR Policies Portal', pageTarget: 'HR Policies' }
+    ]
+  },
+
+  // SRV.7 MODERN DATA LAKEHOUSES (SNOWFLAKE, DATABRICKS, BIGQUERY)
+  {
+    category: 'service-data-lakehouse',
+    keywords: [
+      'lakehouse', 'snowflake', 'databricks', 'bigquery', 
+      'modern data platform', 'data lake', 'medallion architecture', 'what is snowflake', 'what is databricks'
+    ],
+    patterns: [
+      /\b(lakehouses?|snowflake|databricks|bigquery)\b/i,
+      /\bmodern data platforms?\b/i
+    ],
+    answer: `**Modern Data Lakehouse Architectures (Snowflake & Databricks)**
+
+Clyptus replaces brittle legacy warehouses with unified, high-concurrency cloud data lakehouses:
+
+• **Our Architecture Framework**:
+  • **Medallion Data Architecture**: Structuring data into Bronze (raw ingestion), Silver (cleansed/joined), and Gold (business aggregates).
+  • **Snowflake & Databricks Deployments**: Auto-scaling compute clusters separating storage from processing for maximum cost efficiency.
+  • **Enterprise Data Governance**: Centralized metadata tagging, lineage tracking, and granular row/column access policies.
+  • **Direct BI & AI Readiness**: Feeding clean tables directly into Power BI, Tableau, and custom AI models.
+
+Click below to explore our Data Engineering page.`,
+    quickActions: [
+      { label: 'Go to Data Engineering', pageTarget: 'DataEngineering' },
+      { label: 'Go to AI Solutions', pageTarget: 'AI' }
+    ]
+  },
+
+  // SRV.8 REAL-TIME STREAMING & ETL PIPELINES (KAFKA, SPARK, DBT)
+  {
+    category: 'service-data-streaming',
+    keywords: [
+      'kafka', 'apache kafka', 'apache spark', 'spark streaming', 
+      'real-time streaming', 'dbt', 'etl', 'elt', 'streaming pipelines', 'what is kafka'
+    ],
+    patterns: [
+      /\b(kafka|apache kafka|spark streaming|apache spark|dbt)\b/i,
+      /\breal(-|\s+)time streaming( pipelines)?\b/i
+    ],
+    answer: `**Real-Time Streaming Pipelines (Kafka, Spark & dbt)**
+
+We engineer distributed event-driven pipelines capable of handling millions of transactions per second:
+
+• **Technologies We Deploy**:
+  • **Apache Kafka**: High-throughput distributed message bus connecting edge IoT, webhooks, and transactional databases.
+  • **Apache Spark**: Distributed memory computing for high-speed streaming joins and transformations.
+  • **dbt (data build tool)**: Version-controlled, modular SQL transformations with automated testing and documentation.
+  • **Sub-Second Latency**: Pushing operational telemetry into executive dashboards and fraud models in near real-time.
+
+Click below to visit the Data Engineering page.`,
+    quickActions: [
+      { label: 'Go to Data Engineering', pageTarget: 'DataEngineering' },
+      { label: 'Browse All Services', pageTarget: 'Services' }
+    ]
+  },
+
+  // SRV.9 IT RECRUITING & ENGAGEMENT MODELS
+  {
+    category: 'service-recruiting-models',
+    keywords: [
+      'contract staffing', 'contract to hire', 'permanent staffing', 
+      'offshore coe', 'staff augmentation', 'hire developers', 'recruiting models',
+      'what is contract staffing'
+    ],
+    patterns: [
+      /\b(contract staffing|contract(-|\s+)to(-|\s+)hire|permanent (staffing|placement)|offshore coe|staff augmentation)\b/i,
+      /\bhire (developers|engineers|consultants)\b/i
+    ],
+    answer: `**IT Staffing & Global Talent Delivery Models**
+
+Clyptus provides flexible talent solutions to rapidly staff critical enterprise technology programs:
+
+• **Engagement Models**:
+  • **Contract Staffing**: Rapid on-demand scaling of niche specialists (SAP S/4HANA, Cloud, GenAI) for specific project phases.
+  • **Contract-to-Hire**: Evaluate engineering performance and cultural fit on-site before extending permanent offers.
+  • **Permanent Placement**: Executive search and senior talent acquisition for long-term technology leadership.
+  • **Dedicated Offshore CoE Units**: Cost-optimized dedicated engineering pods working exclusively on your product roadmaps.
+• **Vetting Standards**: 330+ enterprise-tested consultants rigorously screened by practicing principal architects.
+
+Click below to visit our Talent Acquisition hub.`,
+    quickActions: [
+      { label: 'Go to Talent Acquisition', pageTarget: 'Recruiting' },
+      { label: 'Explore Careers', pageTarget: 'Careers' }
+    ]
+  },
+
+  // SRV.10 SALESFORCE AGENTFORCE & CRM
+  {
+    category: 'service-salesforce-agentforce',
+    keywords: [
+      'agentforce', 'salesforce agentforce', 'salesforce agents', 
+      'autonomous salesforce', 'lwc', 'lightning web components', 'mulesoft',
+      'what is agentforce'
+    ],
+    patterns: [
+      /\b(agentforce|salesforce agentforce|salesforce agents?)\b/i,
+      /\b(lightning web components|lwc|mulesoft)\b/i
+    ],
+    answer: `**Salesforce Solutions & Agentforce AI**
+
+Clyptus helps enterprises unlock autonomous customer engagement and pipeline acceleration within Salesforce:
+
+• **Key Capabilities**:
+  • **Salesforce Agentforce Deployments**: Autonomous agents resolving customer service inquiries, drafting sales responses, and updating CRM records.
+  • **Sales & Service Cloud Modernization**: Streamlining lead-to-opportunity conversions and omni-channel contact center routing.
+  • **Custom Lightning Web Components (LWC)**: Bespoke, responsive interfaces built to exact operational workflows.
+  • **MuleSoft Enterprise Integrations**: Bi-directional data synchronization connecting Salesforce with SAP ERP and core databases.
+
+Click below to jump to our Salesforce page.`,
+    quickActions: [
+      { label: 'Go to Salesforce Solutions', pageTarget: 'Salesforce' },
+      { label: 'Go to AI Solutions', pageTarget: 'AI' }
+    ]
+  },
+
   // 9. ARTIFICIAL INTELLIGENCE & GENAI
   {
     category: 'ai',
