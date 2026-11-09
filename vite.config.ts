@@ -37,4 +37,10 @@ export default defineConfig({
     strictPort: false,
     allowedHosts: true,
   },
+  preview: {
+    host: '0.0.0.0',
+    port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
+    strictPort: false,
+    allowedHosts: true,
+  },
 })
