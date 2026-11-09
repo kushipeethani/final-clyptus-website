@@ -7,8 +7,7 @@
     "types": ["node"],
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
-    "verbatimModuleSyntax": false,
-    "noEmit": true
+    "verbatimModuleSyntax": false
   },
   "files": [],
   "references": [

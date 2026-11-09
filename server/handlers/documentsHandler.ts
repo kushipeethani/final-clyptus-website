@@ -137,8 +137,21 @@ export async function handleDocumentsRequest(req: IncomingMessage, res: ServerRe
 
   const policy = POLICY_FILE_MAP[docId];
 
-  // Resolve file safely inside server/protected-documents
-  const protectedDir = path.resolve(process.cwd(), 'server', 'protected-documents');
+  // Resolve file safely inside server/protected-documents with fallbacks for serverless runtimes
+  let protectedDir = path.resolve(process.cwd(), 'server', 'protected-documents');
+  if (!fs.existsSync(protectedDir)) {
+    const candidateDirs = [
+      path.resolve(import.meta.dirname, '..', 'protected-documents'),
+      path.resolve(import.meta.dirname, '..', '..', 'server', 'protected-documents'),
+      path.resolve(process.cwd(), 'public', 'documents'),
+    ];
+    for (const d of candidateDirs) {
+      if (fs.existsSync(d)) {
+        protectedDir = d;
+        break;
+      }
+    }
+  }
   const filePath = path.resolve(protectedDir, policy.fileName);
 
   // Strict path traversal defense: ensure resolved path is inside protectedDir

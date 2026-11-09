@@ -183,7 +183,7 @@ export function extractSessionFromRequest(cookieHeader?: string, authHeader?: st
 export function serializeSessionCookie(token: string, isSecure = false): string {
   const maxAge = 24 * 60 * 60; // 24 hours in seconds
   let cookie = `clyptus_session=${token}; Path=/; Max-Age=${maxAge}; HttpOnly; SameSite=Lax`;
-  if (isSecure || process.env.NODE_ENV === 'production') {
+  if (isSecure || process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL)) {
     cookie += '; Secure';
   }
   return cookie;
@@ -194,7 +194,7 @@ export function serializeSessionCookie(token: string, isSecure = false): string 
  */
 export function serializeClearSessionCookie(isSecure = false): string {
   let cookie = 'clyptus_session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax';
-  if (isSecure || process.env.NODE_ENV === 'production') {
+  if (isSecure || process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL)) {
     cookie += '; Secure';
   }
   return cookie;

@@ -244,6 +244,7 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
   }
 
   const sendJson = (status: number, data: any) => {
+    if (res.headersSent) return;
     res.writeHead(status, {
       'Content-Type': 'application/json',
       'X-Content-Type-Options': 'nosniff',

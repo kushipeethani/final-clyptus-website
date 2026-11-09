@@ -1,5 +1,10 @@
 {
   "cleanUrls": true,
+  "functions": {
+    "api/documents.ts": {
+      "includeFiles": "server/protected-documents/**"
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
@@ -30,6 +35,6 @@
     { "source": "/careers", "destination": "/careers/index.html" },
     { "source": "/blogs", "destination": "/blogs/index.html" },
     { "source": "/contact", "destination": "/contact/index.html" },
-    { "source": "/((?!api/|.*\\..*).*)", "destination": "/index.html" }
+    { "source": "/hr-policies", "destination": "/index.html" }
   ]
 }

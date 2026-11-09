@@ -9,14 +9,28 @@ import {
   extractSessionFromRequest,
 } from '../auth';
 
-// Helper to send CORS preflight responses
-function handleCorsPreflight(res: ServerResponse, allowedMethods = 'POST, OPTIONS'): boolean {
-  res.writeHead(204, {
-    'Access-Control-Allow-Origin': '*',
+// Helper to get CORS headers compatible with credentials and cookies
+function getCorsHeaders(req: IncomingMessage, allowedMethods = 'GET, POST, OPTIONS'): Record<string, string> {
+  const origin = (req.headers.origin as string) || '';
+  const headers: Record<string, string> = {
     'Access-Control-Allow-Methods': allowedMethods,
     'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
     'Access-Control-Max-Age': '86400',
-  });
+  };
+
+  if (origin) {
+    headers['Access-Control-Allow-Origin'] = origin;
+    headers['Access-Control-Allow-Credentials'] = 'true';
+  } else {
+    headers['Access-Control-Allow-Origin'] = '*';
+  }
+
+  return headers;
+}
+
+// Helper to send CORS preflight responses
+function handleCorsPreflight(req: IncomingMessage, res: ServerResponse, allowedMethods = 'POST, OPTIONS'): boolean {
+  res.writeHead(204, getCorsHeaders(req, allowedMethods));
   res.end();
   return true;
 }
@@ -72,21 +86,22 @@ async function readJsonBody(req: IncomingMessage): Promise<any> {
 export async function handleLoginRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const method = req.method || 'GET';
   if (method === 'OPTIONS') {
-    handleCorsPreflight(res, 'POST, OPTIONS');
+    handleCorsPreflight(req, res, 'POST, OPTIONS');
     return;
   }
 
-  const isSecure = req.headers['x-forwarded-proto'] === 'https';
+  const isSecure = req.headers['x-forwarded-proto'] === 'https' || Boolean(process.env.VERCEL);
   const clientIp =
     (req.headers['x-forwarded-for'] as string)?.split(',')[0].trim() ||
     req.socket?.remoteAddress ||
     '127.0.0.1';
 
   const sendJson = (status: number, data: any, headers?: Record<string, string | string[]>) => {
+    if (res.headersSent) return;
     res.writeHead(status, {
       'Content-Type': 'application/json',
       'X-Content-Type-Options': 'nosniff',
-      'Access-Control-Allow-Origin': '*',
+      ...getCorsHeaders(req, 'POST, OPTIONS'),
       ...(headers || {}),
     });
     res.end(JSON.stringify(data));
@@ -144,17 +159,18 @@ export async function handleLoginRequest(req: IncomingMessage, res: ServerRespon
 export async function handleLogoutRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const method = req.method || 'GET';
   if (method === 'OPTIONS') {
-    handleCorsPreflight(res, 'POST, OPTIONS');
+    handleCorsPreflight(req, res, 'POST, OPTIONS');
     return;
   }
 
-  const isSecure = req.headers['x-forwarded-proto'] === 'https';
+  const isSecure = req.headers['x-forwarded-proto'] === 'https' || Boolean(process.env.VERCEL);
   const clearCookie = serializeClearSessionCookie(isSecure);
 
+  if (res.headersSent) return;
   res.writeHead(200, {
     'Content-Type': 'application/json',
     'X-Content-Type-Options': 'nosniff',
-    'Access-Control-Allow-Origin': '*',
+    ...getCorsHeaders(req, 'POST, OPTIONS'),
     'Set-Cookie': clearCookie,
   });
   res.end(JSON.stringify({ success: true }));
@@ -166,15 +182,16 @@ export async function handleLogoutRequest(req: IncomingMessage, res: ServerRespo
 export async function handleSessionRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const method = req.method || 'GET';
   if (method === 'OPTIONS') {
-    handleCorsPreflight(res, 'GET, OPTIONS');
+    handleCorsPreflight(req, res, 'GET, OPTIONS');
     return;
   }
 
   const session = extractSessionFromRequest(req.headers.cookie, req.headers.authorization);
+  if (res.headersSent) return;
   res.writeHead(200, {
     'Content-Type': 'application/json',
     'X-Content-Type-Options': 'nosniff',
-    'Access-Control-Allow-Origin': '*',
+    ...getCorsHeaders(req, 'GET, OPTIONS'),
   });
 
   if (!session) {

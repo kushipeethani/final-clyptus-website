@@ -143,7 +143,7 @@ export function App() {
     }
   }, [currentPage]);
 
-  // HR Policies Authentication State (Transient, strictly scoped to active HR Policies view)
+  // HR Policies Authentication State
   const [isHrAuthenticated, setIsHrAuthenticated] = useState<boolean>(false);
   const [authenticatedUser, setAuthenticatedUser] = useState<string | null>(null);
 
@@ -152,6 +152,7 @@ export function App() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
         body: JSON.stringify({ username: u, password: p }),
       });
       let data: any = null;
@@ -180,39 +181,23 @@ export function App() {
 
   const handleHrLogout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
     } catch {}
     setIsHrAuthenticated(false);
     setAuthenticatedUser(null);
   };
 
-  // Sign out whenever user navigates away from HR Policies
+  // Restore authenticated HR session on initial mount / page refresh
   useEffect(() => {
-    if (currentPage !== 'HR Policies' && isHrAuthenticated) {
-      handleHrLogout();
-    }
-  }, [currentPage, isHrAuthenticated]);
-
-  // Always ensure fresh signout on initial mount or page refresh
-  useEffect(() => {
-    // Explicitly invalidate session on fresh mount/refresh
-    fetch('/api/auth/logout', { method: 'POST' }).catch(() => {});
-    setIsHrAuthenticated(false);
-    setAuthenticatedUser(null);
-
-    // Invalidate session on window unload / refresh
-    const handleUnload = () => {
-      try {
-        navigator.sendBeacon('/api/auth/logout');
-      } catch {}
-    };
-
-    window.addEventListener('beforeunload', handleUnload);
-    window.addEventListener('pagehide', handleUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleUnload);
-      window.removeEventListener('pagehide', handleUnload);
-    };
+    fetch('/api/auth/session', { credentials: 'same-origin' })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data && data.authenticated && data.user?.username) {
+          setIsHrAuthenticated(true);
+          setAuthenticatedUser(data.user.username);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   // Filter cards by search term

@@ -384,11 +384,14 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
           {/* Form */}
           <form onSubmit={handleLoginSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1.5">
+              <label htmlFor="hr-username" className="block text-xs font-bold text-slate-800 mb-1.5">
                 Username
               </label>
               <input
+                id="hr-username"
+                name="username"
                 type="text"
+                autoComplete="username"
                 required
                 placeholder="Enter username"
                 value={usernameInput}
@@ -398,12 +401,15 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-800 mb-1.5">
+              <label htmlFor="hr-password" className="block text-xs font-bold text-slate-800 mb-1.5">
                 Password
               </label>
               <div className="relative">
                 <input
+                  id="hr-password"
+                  name="password"
                   type={showPassword ? 'text' : 'password'}
+                  autoComplete="current-password"
                   required
                   placeholder="Enter password"
                   value={passwordInput}

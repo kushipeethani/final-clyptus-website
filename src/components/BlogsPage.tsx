@@ -950,7 +950,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
 
   // Restore session from server if already authenticated as Audit
   useEffect(() => {
-    fetch('/api/auth/session')
+    fetch('/api/auth/session', { credentials: 'same-origin' })
       .then((res) => (res.ok ? res.json() : { authenticated: false }))
       .then((data) => {
         if (data.authenticated && data.user?.role === 'audit') {
@@ -1364,6 +1364,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
         body: JSON.stringify({ username: authUsername.trim(), password: authPassword }),
       });
       const data = await res.json();
@@ -1390,7 +1391,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch('/api/auth/logout', { method: 'POST', credentials: 'same-origin' });
     } catch {}
     setIsAuthenticated(false);
     try {
@@ -1404,7 +1405,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
       setIsCreateModalOpen(true);
     } else {
       setAuthError('');
-      setAuthUsername('Audit');
+      setAuthUsername('');
       setAuthPassword('');
       setIsAuthModalOpen(true);
     }
