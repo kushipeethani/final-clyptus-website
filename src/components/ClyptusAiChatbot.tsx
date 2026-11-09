@@ -2067,7 +2067,7 @@ Use any of the buttons below to jump directly to that page:`,
     };
   };
 
-  const handleSendMessage = (textToSend?: string) => {
+  const handleSendMessage = async (textToSend?: string) => {
     const text = (textToSend || inputQuery).trim();
     if (!text) return;
 
@@ -2082,7 +2082,77 @@ Use any of the buttons below to jump directly to that page:`,
     setInputQuery('');
     setIsTyping(true);
 
-    // Realistic typing delay
+    const cleanQuery = text.toLowerCase().trim();
+
+    // 0. Fast-path check: Direct Page Navigation queries (e.g. "where is insights", "show carrers page")
+    let directNavMatch = null;
+    for (const nav of PAGE_NAV_DIRECTORY) {
+      for (const pattern of nav.patterns) {
+        if (pattern.test(cleanQuery)) {
+          directNavMatch = {
+            text: nav.answer,
+            quickActions: [
+              { label: nav.buttonLabel, pageTarget: nav.pageTarget },
+              ...nav.secondaryActions
+            ]
+          };
+          break;
+        }
+      }
+      if (directNavMatch) break;
+    }
+
+    if (directNavMatch) {
+      setTimeout(() => {
+        const aiMessage: Message = {
+          id: `ai-${Date.now()}`,
+          sender: 'ai',
+          text: directNavMatch.text,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          quickActions: directNavMatch.quickActions
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+        setIsTyping(false);
+      }, 250);
+      return;
+    }
+
+    // 1. Query Groq AI through secure serverless backend endpoint (/api/chat)
+    try {
+      const historyPayload = messages.slice(-6).map((m) => ({
+        sender: m.sender,
+        text: m.text
+      }));
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: historyPayload
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && !data.useFallback && data.text) {
+          const aiMessage: Message = {
+            id: `ai-${Date.now()}`,
+            sender: 'ai',
+            text: data.text,
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            quickActions: data.quickActions
+          };
+          setMessages((prev) => [...prev, aiMessage]);
+          setIsTyping(false);
+          return;
+        }
+      }
+    } catch (err) {
+      console.warn('API Chat call failed, using local knowledge engine fallback:', err);
+    }
+
+    // 2. High-speed local knowledge engine fallback
     setTimeout(() => {
       const response = findAnswer(text);
       const aiMessage: Message = {
@@ -2095,7 +2165,7 @@ Use any of the buttons below to jump directly to that page:`,
 
       setMessages((prev) => [...prev, aiMessage]);
       setIsTyping(false);
-    }, 400);
+    }, 350);
   };
 
   const handleClearChat = () => {

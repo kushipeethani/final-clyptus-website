@@ -2,6 +2,7 @@ import type { Plugin } from 'vite';
 import { handleAuthRequest } from './handlers/authHandler.ts';
 import { handleContactRequest } from './handlers/contactHandler.ts';
 import { handleDocumentsRequest } from './handlers/documentsHandler.ts';
+import { handleChatRequest } from './handlers/chatHandler.ts';
 
 export function viteApiServerPlugin(): Plugin {
   return {
@@ -9,6 +10,15 @@ export function viteApiServerPlugin(): Plugin {
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = req.url || '';
+
+        if (url.startsWith('/api/chat')) {
+          handleChatRequest(req, res).catch((err) => {
+            console.error('API Chat Handler Error:', err);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Internal server error in chat' }));
+          });
+          return;
+        }
 
         if (url.startsWith('/api/auth')) {
           handleAuthRequest(req, res).catch((err) => {
@@ -43,6 +53,14 @@ export function viteApiServerPlugin(): Plugin {
     configurePreviewServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = req.url || '';
+
+        if (url.startsWith('/api/chat')) {
+          handleChatRequest(req, res).catch(() => {
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ error: 'Internal server error' }));
+          });
+          return;
+        }
 
         if (url.startsWith('/api/auth')) {
           handleAuthRequest(req, res).catch(() => {
