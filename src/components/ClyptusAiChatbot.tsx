@@ -2248,7 +2248,72 @@ Use any of the buttons below to jump directly to that page:`,
 
   // Format bold, numbered milestones, and clean readable text
   const renderFormattedText = (rawText: string) => {
-    const lines = rawText.split('\n');
+    // 1. Pre-process to eliminate raw <br> tags and convert markdown tables into clean bullet structures
+    const rawLines = rawText.split('\n');
+    const processedLines: string[] = [];
+
+    for (const rawLine of rawLines) {
+      const line = rawLine.trim();
+      if (!line) {
+        processedLines.push('');
+        continue;
+      }
+
+      // Skip table header divider rows like |---|---| or |:---|:---|
+      if (/^\|[\s:-|-]+\|$/.test(line)) {
+        continue;
+      }
+
+      // Match table rows: | Col1 | Col2 | Col3? |
+      if (line.startsWith('|') && line.endsWith('|')) {
+        const cells = line
+          .slice(1, -1)
+          .split('|')
+          .map((c) => c.trim())
+          .filter(Boolean);
+
+        // Skip generic table header row
+        if (
+          cells.some((c) =>
+            /^(#|practice|area|service|what we do|category|key offerings|highlights|domain)$/i.test(c)
+          )
+        ) {
+          continue;
+        }
+
+        if (cells.length === 1) {
+          const subItems = cells[0].split(/<br\s*\/?>/gi).map((s) => s.trim()).filter(Boolean);
+          for (const sub of subItems) {
+            processedLines.push(sub.startsWith('•') || sub.startsWith('-') ? sub : '• ' + sub);
+          }
+        } else if (cells.length >= 2) {
+          const title = cells[0].replace(/^(\d+\.?\s*|\*+)/g, '').replace(/\*+$/g, '').trim();
+          const descRaw = cells.slice(1).join(' — ').trim();
+          const subItems = descRaw.split(/<br\s*\/?>/gi).map((s) => s.trim()).filter(Boolean);
+
+          if (subItems.length === 1) {
+            const cleanDesc = subItems[0].replace(/^[•-]\s*/, '').trim();
+            processedLines.push(`• **${title}**: ${cleanDesc}`);
+          } else {
+            processedLines.push(`• **${title}**:`);
+            for (const sub of subItems) {
+              const cleanSub = sub.replace(/^[•-]\s*/, '').trim();
+              processedLines.push(`  - ${cleanSub}`);
+            }
+          }
+        }
+        continue;
+      }
+
+      // Normal line: split any embedded <br> into separate lines
+      const subs = line.split(/<br\s*\/?>/gi);
+      for (const sub of subs) {
+        if (sub.trim()) processedLines.push(sub.trim());
+      }
+    }
+
+    const lines = processedLines;
+
     return lines.map((line, idx) => {
       if (!line.trim()) {
         return <div key={idx} className="h-2" />;
@@ -2276,6 +2341,20 @@ Use any of the buttons below to jump directly to that page:`,
             </span>
             <div className="flex-1 text-slate-700 leading-relaxed text-sm sm:text-[15px]">
               {renderInlineContent(rest)}
+            </div>
+          </div>
+        );
+      }
+
+      // Nested sub-bullets (e.g. "  - " or "  • ")
+      const isSubBullet = line.startsWith('  ') || line.startsWith('\t');
+      if (isSubBullet && (line.trim().startsWith('•') || line.trim().startsWith('-'))) {
+        const bulletText = line.trim().replace(/^[\s•-]+/, '');
+        return (
+          <div key={idx} className="flex items-start gap-2 my-0.5 pl-5">
+            <span className="w-1.5 h-1.5 rounded-full border border-blue-400 bg-white mt-2 shrink-0" />
+            <div className="flex-1 text-slate-600 leading-relaxed text-xs sm:text-[14px]">
+              {renderInlineContent(bulletText)}
             </div>
           </div>
         );

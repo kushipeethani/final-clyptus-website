@@ -117,10 +117,87 @@ PAGE NAVIGATION TARGETS:
 When a user asks to see, open, visit, or navigate to a page, identify the exact target page:
 'Home', 'Services', 'SAP', 'AI', 'Cloud', 'Security', 'CRM', 'Salesforce', 'DataEngineering', 'Recruiting', 'Projects', 'Industries', 'About', 'Careers', 'HR Policies', 'Contact', 'Blogs'.
 
-RESPONSE GUIDELINES:
-- Format answers with clean Markdown, bold headers, and concise bullet points.
-- Be factual, helpful, and concise (under 200 words unless in-depth detail is requested).
-- If the question relates to an enterprise page, mention that you can take them there.`;
+CRITICAL FORMATTING INSTRUCTIONS (STRICT):
+• NEVER output Markdown tables with pipes '|'. Chat windows are narrow, and tables break readability.
+• NEVER output raw HTML tags like <br>, <p>, <div>, or <span>. Use clean double newlines for line breaks.
+• Always format lists, metrics, and comparisons as clean bullet points:
+  • **Category / Practice**: Description of key offerings and achievements.
+• Be factual, helpful, and concise (under 200 words unless in-depth detail is requested).
+• If the question relates to an enterprise page, mention that you can take them there.`;
+
+export function sanitizeAndFormatChat(text: string): string {
+  if (!text) return '';
+
+  const rawLines = text.split('\n');
+  const processedLines: string[] = [];
+
+  for (const rawLine of rawLines) {
+    const line = rawLine.trim();
+    if (!line) {
+      processedLines.push('');
+      continue;
+    }
+
+    // Skip table header divider rows like |---|---| or |:---|:---|
+    if (/^\|[\s:-|-]+\|$/.test(line)) {
+      continue;
+    }
+
+    // Match table rows: | Col1 | Col2 | Col3? |
+    if (line.startsWith('|') && line.endsWith('|')) {
+      const cells = line
+        .slice(1, -1)
+        .split('|')
+        .map((c) => c.trim())
+        .filter(Boolean);
+
+      // If it looks like a generic header row (e.g. # | Practice | Highlights)
+      if (
+        cells.some((c) =>
+          /^(#|practice|area|service|what we do|category|key offerings|highlights|domain)$/i.test(c)
+        )
+      ) {
+        continue;
+      }
+
+      if (cells.length === 1) {
+        const subItems = cells[0].split(/<br\s*\/?>/gi).map((s) => s.trim()).filter(Boolean);
+        for (const sub of subItems) {
+          processedLines.push(sub.startsWith('•') || sub.startsWith('-') ? sub : '• ' + sub);
+        }
+      } else if (cells.length >= 2) {
+        // Strip numbering like 1, 2 or markdown bold
+        const title = cells[0].replace(/^(\d+\.?\s*|\*+)/g, '').replace(/\*+$/g, '').trim();
+        const descRaw = cells.slice(1).join(' — ').trim();
+        const subItems = descRaw.split(/<br\s*\/?>/gi).map((s) => s.trim()).filter(Boolean);
+
+        if (subItems.length === 1) {
+          const cleanDesc = subItems[0].replace(/^[•-]\s*/, '').trim();
+          processedLines.push(`• **${title}**: ${cleanDesc}`);
+        } else {
+          processedLines.push(`• **${title}**:`);
+          for (const sub of subItems) {
+            const cleanSub = sub.replace(/^[•-]\s*/, '').trim();
+            processedLines.push(`  - ${cleanSub}`);
+          }
+        }
+      }
+      continue;
+    }
+
+    // Normal non-table line: split any <br> into separate lines
+    const subs = line.split(/<br\s*\/?>/gi);
+    for (const sub of subs) {
+      if (sub.trim()) processedLines.push(sub.trim());
+    }
+  }
+
+  // Remove any remaining raw HTML tags
+  let result = processedLines.join('\n');
+  result = result.replace(/<\/?(br|p|div|span|strong|b|em|i)>/gi, '');
+
+  return result.trim();
+}
 
 export async function handleChatRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const method = req.method || 'GET';
@@ -267,6 +344,9 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
   if (!aiText) {
     return sendJson(200, { success: true, useFallback: true, reason: 'No Groq models responded' });
   }
+
+  // Sanitize any raw <br> tags or markdown tables into clean bullet structures
+  aiText = sanitizeAndFormatChat(aiText);
 
   // 6. Infer Navigation & Quick Action Recommendations from Query & Answer
   const lowerQ = message.toLowerCase();
