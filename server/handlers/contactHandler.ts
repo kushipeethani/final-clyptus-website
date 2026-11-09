@@ -1,6 +1,6 @@
-import type { IncomingMessage, ServerResponse } from 'http';
-import fs from 'fs';
-import path from 'path';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
 
 export interface ContactInquiry {
   name: string;

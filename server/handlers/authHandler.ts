@@ -1,4 +1,4 @@
-import type { IncomingMessage, ServerResponse } from 'http';
+import type { IncomingMessage, ServerResponse } from 'node:http';
 import {
   verifyUserCredentials,
   checkLoginRateLimit,
@@ -7,7 +7,7 @@ import {
   serializeSessionCookie,
   serializeClearSessionCookie,
   extractSessionFromRequest,
-} from '../auth.ts';
+} from '../auth';
 
 export async function handleAuthRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = req.url || '';

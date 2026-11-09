@@ -1,8 +1,8 @@
 import type { Plugin } from 'vite';
-import { handleAuthRequest } from './handlers/authHandler.ts';
-import { handleContactRequest } from './handlers/contactHandler.ts';
-import { handleDocumentsRequest } from './handlers/documentsHandler.ts';
-import { handleChatRequest } from './handlers/chatHandler.ts';
+import { handleAuthRequest } from './handlers/authHandler';
+import { handleContactRequest } from './handlers/contactHandler';
+import { handleDocumentsRequest } from './handlers/documentsHandler';
+import { handleChatRequest } from './handlers/chatHandler';
 
 export function viteApiServerPlugin(): Plugin {
   return {

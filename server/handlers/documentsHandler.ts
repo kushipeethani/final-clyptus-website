@@ -1,7 +1,7 @@
-import type { IncomingMessage, ServerResponse } from 'http';
-import fs from 'fs';
-import path from 'path';
-import { extractSessionFromRequest } from '../auth.ts';
+import type { IncomingMessage, ServerResponse } from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import { extractSessionFromRequest } from '../auth';
 
 // Strict mapping of allowed policy IDs to protected PDF filenames
 const POLICY_FILE_MAP: Record<string, { fileName: string; title: string }> = {
