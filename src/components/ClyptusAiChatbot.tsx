@@ -4,7 +4,8 @@ import {
   Send, 
   X, 
   RotateCcw, 
-  ArrowRight 
+  ArrowRight,
+  Compass 
 } from 'lucide-react';
 import { KevaBotLogo } from './KevaBotLogo';
 
@@ -314,8 +315,8 @@ We are continuously hiring experienced developers, enterprise consultants, and t
   • hr.uae@clyptus.com (UAE & Middle East)
   • hr.usa@clyptus.com (USA & Americas)`,
     quickActions: [
-      { label: 'View All Jobs', pageTarget: 'Careers' },
-      { label: 'HR Policy', pageTarget: 'HrPolicy' },
+      { label: 'Go to Careers Page', pageTarget: 'Careers' },
+      { label: 'HR Policies Portal', pageTarget: 'HR Policies' },
       { label: 'Email HR Team', chatQuery: 'What are your official emails?' }
     ]
   },
@@ -577,6 +578,123 @@ Fill out our interactive form on the Contact page for a response within 24 hours
       { label: 'Company Journey', chatQuery: 'Tell me about the company journey' },
       { label: 'Browse Services', pageTarget: 'Services' }
     ]
+  },
+  // 19. INSIGHTS & TECHNICAL BLOGS
+  {
+    category: 'insights',
+    keywords: [
+      'insights', 'insight', 'blogs', 'blog', 'articles', 'article', 'whitepapers', 
+      'technical blog', 'research', 'reads', 'roadmap', 'ecc migration roadmap', 
+      'where is insights', 'where is blogs', 'insights page', 'blogs page'
+    ],
+    patterns: [
+      /\b(insights?|blogs?|articles?|whitepapers?)\b/i,
+      /\bwhere (is|are) (the )?(insights?|blogs?|articles?)\b/i,
+      /\b(open|view|show|see|find|navigate to) (the )?(insights?|blogs?)\b/i
+    ],
+    answer: `**Clyptus Insights & Technical Thought Leadership**
+
+Our Insights hub features deep-dive architectural analyses, migration roadmaps, and enterprise engineering whitepapers:
+
+• **Featured Technical Publications**:
+  1. *Migrating ECC 6.0 to SAP S/4HANA Cloud: A 2026 Strategic Roadmap* — Essential brownfield vs. greenfield conversion frameworks with zero business downtime.
+  2. *Building Agentic Workflows for Automated SAP Financials* — Deploying multi-agent LLM systems that slash invoice reconciliation cycle times by 80%.
+  3. *Cloud-Native Zero-Trust Architecture* — Microsegmentation and least-privilege governance across AWS and Azure workloads.
+
+Click the navigation button below to explore all published insights directly on the website.`,
+    quickActions: [
+      { label: 'Go to Insights Page', pageTarget: 'Blogs' },
+      { label: 'ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'AI Solutions', pageTarget: 'AI' },
+      { label: 'All Services', pageTarget: 'Services' }
+    ]
+  },
+
+  // 20. HR POLICIES & EMPLOYEE COMPLIANCE PORTAL
+  {
+    category: 'hr-policies',
+    keywords: [
+      'hr policies', 'hr policy', 'policies', 'policy', 'employee handbook', 
+      'posh', 'leave policy', 'maternity policy', 'disciplinary policy', 
+      'code of conduct', 'benefits policy', 'compliance portal', 'hr portal',
+      'where is hr policies', 'where is policies', 'where are policies'
+    ],
+    patterns: [
+      /\b(hr\s?policies|employee policies|compliance portal|employee handbook)\b/i,
+      /\b(posh|leave policy|maternity policy|disciplinary policy|code of conduct|benefits policy)\b/i,
+      /\bwhere (is|are) (the )?(hr\s?policies?|policies?)\b/i
+    ],
+    answer: `**Clyptus HR Policies & Employee Compliance Portal**
+
+Our official corporate repository contains all workplace guidelines, employee entitlements, and compliance frameworks:
+
+• **Available Policy Documents (Protected PDF Downloads)**:
+  1. *Code of Conduct & Professional Ethics*
+  2. *Employee Benefits & Healthcare Coverage*
+  3. *Leave, Maternity & Paternity Policy*
+  4. *Disciplinary Policy & Dispute Resolution*
+  5. *Grievance Redressal Procedure*
+  6. *Clyptus Employee Handbook*
+  7. *POSH (Prevention of Sexual Harassment) Policy*
+  8. *Enterprise Data Privacy & Confidentiality Policy*
+  9. *Rejoin & Alumni Rehire Policy*
+
+• **Secure Corporate Access**:
+  The portal is protected for verified employees and authorized compliance auditors with encrypted credential login.`,
+    quickActions: [
+      { label: 'Go to HR Policies Portal', pageTarget: 'HR Policies' },
+      { label: 'Explore Careers', pageTarget: 'Careers' },
+      { label: 'Email HR Team', chatQuery: 'What are your official emails?' }
+    ]
+  },
+
+  // 21. FULL WEBSITE OVERVIEW & SITE DIRECTORY
+  {
+    category: 'website-overview',
+    keywords: [
+      'full website details', 'everything about the website', 'website details', 
+      'tell me about the website', 'website map', 'site map', 'website guide', 
+      'all pages', 'where is everything', 'what is on this website', 'pages on website'
+    ],
+    patterns: [
+      /\b(full website details|everything about the website|tell me about the website)\b/i,
+      /\b(what is on this website|website (details|map|guide|overview)|all pages)\b/i,
+      /\b(where is everything|website directory)\b/i
+    ],
+    answer: `**Clyptus Software Solutions — Complete Website Directory**
+
+Welcome to Clyptus! Here is the complete overview of all sections, pages, and services available on our website:
+
+1. **Company & Leadership**
+   • **Home**: 3D interactive hero, core practice cards, and live enterprise metrics.
+   • **About Us**: Founded in 2014, decade-long milestones, leadership by **Vamsi Krishna**, and global vision.
+
+2. **8 Core Enterprise Services**
+   • **ERP & SAP (SAP Silver Partner)**: S/4HANA migrations, SAP BRIM billing, and SAP BTP clean core.
+   • **Artificial Intelligence**: Bespoke GenAI, LLM fine-tuning, RAG, and autonomous Agentic AI swarms.
+   • **Cloud & DevOps**: Multi-cloud consulting, IaaS/PaaS, Kubernetes, and zero-downtime migrations.
+   • **Cybersecurity**: 24/7 Managed SOC, Zero Trust, ISO 27001, and SOC 2 Type II audit readiness.
+   • **CRM Solutions**: SAP Customer Experience (SAP CX), Microsoft Dynamics 365, and omnichannel CPQ.
+   • **Salesforce**: Sales Cloud, Service Cloud, Lightning Web Components, and Salesforce Agentforce.
+   • **Data Engineering**: Modern Lakehouses on Snowflake, Databricks, BigQuery, and real-time Kafka streaming.
+   • **IT Recruiting**: Specialized tech staffing, contract-to-hire, and 330+ vetted engineers.
+
+3. **Resources & Insights**
+   • **Insights & Blogs**: In-depth technical articles, 2026 SAP migration roadmaps, and AI architecture guides.
+   • **HR Policies**: Secure corporate portal for verified employee handbooks and compliance policies.
+   • **Careers**: Active job vacancies, company culture, employee benefits, and resume submission.
+
+4. **Global Contact & Offices**
+   • **Contact Us**: Interactive 3D globe and offices in **Hyderabad (HQ)**, **Dubai (DIFC)**, and **California (USA)**.
+
+Use any of the buttons below to jump directly to that page!`,
+    quickActions: [
+      { label: 'Browse All Services', pageTarget: 'Services' },
+      { label: 'Go to Insights Page', pageTarget: 'Blogs' },
+      { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
+      { label: 'Go to About Us', pageTarget: 'About' },
+      { label: 'Go to Contact Page', pageTarget: 'Contact' }
+    ]
   }
 ];
 
@@ -702,11 +820,326 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
     document.addEventListener('touchend', onEnd);
   };
 
+  // Dedicated Direct Navigation Matrix for all Pages on Clyptus Website
+  const PAGE_NAV_DIRECTORY: {
+    id: string;
+    pageTarget: string;
+    name: string;
+    buttonLabel: string;
+    patterns: RegExp[];
+    answer: string;
+    secondaryActions: QuickAction[];
+  }[] = [
+    {
+      id: 'insights',
+      pageTarget: 'Blogs',
+      name: 'Insights & Technical Blogs',
+      buttonLabel: 'Go to Insights Page',
+      patterns: [
+        /\bwhere (is|are) (the )?(insights?|blogs?|articles?|whitepapers?)\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(insights?|blogs?|articles?)\b/i,
+        /\b(where can i (find|read|see) (the )?(insights?|blogs?|articles?))\b/i,
+        /\b(insights?|blogs?)(\s+page|\s+section)?$/i
+      ],
+      answer: `**Clyptus Insights & Technical Thought Leadership**\n\nOur Insights hub features deep-dive architectural analyses, migration roadmaps, and enterprise engineering whitepapers:\n\n• **Featured Publications**:\n  1. *Migrating ECC 6.0 to SAP S/4HANA Cloud: A 2026 Strategic Roadmap*\n  2. *Building Agentic Workflows for Automated SAP Financials*\n  3. *Cloud-Native Zero-Trust Architecture across AWS & Azure*\n\nClick the button below to navigate directly to the Insights page.`,
+      secondaryActions: [
+        { label: 'ERP & SAP Services', pageTarget: 'SAP' },
+        { label: 'AI Solutions', pageTarget: 'AI' }
+      ]
+    },
+    {
+      id: 'erp',
+      pageTarget: 'SAP',
+      name: 'ERP & SAP Services',
+      buttonLabel: 'Go to ERP & SAP Services',
+      patterns: [
+        /\bwhere (is|are) (the )?(erp|sap|s4hana|s\/4hana|hana|brim|btp)(\s+services?|\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(erp|sap|s4hana)\b/i,
+        /\b(where can i (find|see) (the )?(erp|sap))\b/i,
+        /\b(erp|sap)(\s+services?|\s+page)?$/i
+      ],
+      answer: `**Clyptus ERP & SAP Practice (SAP Silver Partner)**\n\nWe provide complete enterprise ERP strategy, implementations, migrations, and ongoing management:\n\n• **Core Offerings**:\n  • **SAP S/4HANA**: Greenfield implementations, brownfield system conversions, and RISE with SAP.\n  • **SAP BRIM**: Subscription Order Management (SOM), Convergent Charging (CC), and FI-CA / RAR.\n  • **SAP BTP**: Cloud-native extensions, CPI integrations, and clean-core architecture.\n  • **24/7 Global AMS**: Post go-live stabilization, hypercare, and proactive SLA-backed support.\n\nClick the button below to jump straight to our ERP & SAP services page.`,
+      secondaryActions: [
+        { label: 'Browse All Services', pageTarget: 'Services' },
+        { label: 'Client Case Studies', pageTarget: 'Projects' }
+      ]
+    },
+    {
+      id: 'cloud',
+      pageTarget: 'Cloud',
+      name: 'Cloud & DevOps Services',
+      buttonLabel: 'Go to Cloud Services',
+      patterns: [
+        /\bwhere (is|are) (the )?(cloud|aws|azure|gcp|devops|multi-cloud)(\s+services?|\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(cloud|aws|azure|devops)\b/i,
+        /\b(where can i (find|see) (the )?cloud)\b/i,
+        /\b(cloud|multi-cloud)(\s+services?|\s+page)?$/i
+      ],
+      answer: `**Multi-Cloud & DevOps Engineering**\n\nWe architect resilient, cost-optimized, and elastic cloud foundations across major providers:\n\n• **Cloud Platforms**: AWS, Microsoft Azure, and Google Cloud Platform (GCP).\n• **Capabilities**: Microservices, containerization (Docker, Kubernetes EKS/AKS/GKE), and serverless architectures.\n• **Zero-Downtime Migration**: End-to-end database and application modernization with rollback guarantees.\n\nClick below to navigate directly to the Cloud Services page.`,
+      secondaryActions: [
+        { label: 'Cybersecurity', pageTarget: 'Security' },
+        { label: 'Browse All Services', pageTarget: 'Services' }
+      ]
+    },
+    {
+      id: 'ai',
+      pageTarget: 'AI',
+      name: 'Artificial Intelligence & GenAI',
+      buttonLabel: 'Go to AI Solutions',
+      patterns: [
+        /\bwhere (is|are) (the )?(ai|genai|generative ai|agentforce|agents?)(\s+solutions?|\s+services?|\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(ai|genai|generative ai)\b/i,
+        /\b(where can i (find|see) (the )?(ai|genai))\b/i,
+        /\b(ai|genai|generative ai)(\s+solutions?|\s+services?|\s+page)?$/i
+      ],
+      answer: `**Artificial Intelligence & GenAI Engineering**\n\nClyptus builds enterprise-grade AI applications and autonomous workflow engines:\n\n• **Custom GenAI & Fine-Tuning**: Bespoke enterprise LLMs, secure RAG architectures, and internal copilots.\n• **Autonomous AI Agent Swarms**: Multi-agent systems that autonomously execute multi-step workflows across ERP, CRM, and databases.\n• **MLOps & Governance**: Zero-data-leakage guardrails, drift monitoring, and continuous retraining.\n\nClick below to open our dedicated AI Solutions page.`,
+      secondaryActions: [
+        { label: 'ERP & SAP Services', pageTarget: 'SAP' },
+        { label: 'Data Engineering', pageTarget: 'DataEngineering' }
+      ]
+    },
+    {
+      id: 'security',
+      pageTarget: 'Security',
+      name: 'Cybersecurity & Compliance',
+      buttonLabel: 'Go to Cybersecurity',
+      patterns: [
+        /\bwhere (is|are) (the )?(security|cybersecurity|cyber|zero trust|soc)(\s+services?|\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(security|cybersecurity|cyber)\b/i,
+        /\b(where can i (find|see) (the )?(security|cybersecurity))\b/i,
+        /\b(security|cybersecurity)(\s+services?|\s+page)?$/i
+      ],
+      answer: `**Cybersecurity & Regulatory Compliance**\n\nOur defense-in-depth security practice safeguards enterprise infrastructure and data:\n\n• **24/7 Managed SOC**: Real-time SIEM/SOAR incident detection, automated containment, and threat intelligence.\n• **Compliance Readiness**: ISO/IEC 27001, SOC 2 Type II, HIPAA, GDPR, PCI DSS, and NIST CSF.\n• **Zero-Trust & Pentesting**: Identity & Access Management (IAM), micro-segmentation, and offensive pen testing.\n\nClick below to navigate to the Cybersecurity page.`,
+      secondaryActions: [
+        { label: 'Cloud Services', pageTarget: 'Cloud' },
+        { label: 'Contact Us', pageTarget: 'Contact' }
+      ]
+    },
+    {
+      id: 'crm',
+      pageTarget: 'CRM',
+      name: 'CRM & Customer Experience',
+      buttonLabel: 'Go to CRM Services',
+      patterns: [
+        /\bwhere (is|are) (the )?(crm|dynamics 365|sap cx|customer experience)(\s+services?|\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(crm|dynamics 365)\b/i,
+        /\b(where can i (find|see) (the )?crm)\b/i,
+        /\bcrm(\s+services?|\s+page)?$/i
+      ],
+      answer: `**CRM & Customer Experience Engineering**\n\nClyptus unifies front-office engagement with back-office execution:\n\n• **SAP CX**: Sales Cloud, Service Cloud, Commerce Cloud, Customer Data Platform (CDP), and Emarsys.\n• **Microsoft Dynamics 365**: Connected sales, customer service, and automated field services.\n• **Omnichannel CPQ**: High-speed product configuration and automated subscription pricing.\n\nClick below to open our CRM Services page.`,
+      secondaryActions: [
+        { label: 'Salesforce Solutions', pageTarget: 'Salesforce' },
+        { label: 'Browse All Services', pageTarget: 'Services' }
+      ]
+    },
+    {
+      id: 'salesforce',
+      pageTarget: 'Salesforce',
+      name: 'Salesforce & Agentforce',
+      buttonLabel: 'Go to Salesforce Solutions',
+      patterns: [
+        /\bwhere (is|are) (the )?(salesforce|agentforce|sfdc)(\s+services?|\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(salesforce|agentforce)\b/i,
+        /\b(where can i (find|see) (the )?salesforce)\b/i,
+        /\b(salesforce|agentforce)(\s+services?|\s+page)?$/i
+      ],
+      answer: `**Salesforce Solutions & Agentforce AI**\n\nAccelerate revenue pipelines with customized Salesforce ecosystems and autonomous AI agents:\n\n• **Salesforce Agentforce**: Autonomous AI agents handling customer inquiries, qualifying leads, and taking actions.\n• **Core Cloud Deployments**: Sales Cloud, Service Cloud, Experience Cloud, and Marketing Cloud.\n• **Custom Apex & LWC**: Bespoke Lightning Web Components and MuleSoft enterprise integrations.\n\nClick below to jump to the Salesforce page.`,
+      secondaryActions: [
+        { label: 'CRM Services', pageTarget: 'CRM' },
+        { label: 'Browse All Services', pageTarget: 'Services' }
+      ]
+    },
+    {
+      id: 'data',
+      pageTarget: 'DataEngineering',
+      name: 'Data Engineering & Lakehouses',
+      buttonLabel: 'Go to Data Engineering',
+      patterns: [
+        /\bwhere (is|are) (the )?(data engineering|lakehouses?|snowflake|databricks|bigquery)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(data engineering|lakehouse)\b/i,
+        /\b(where can i (find|see) (the )?data engineering)\b/i,
+        /\bdata engineering(\s+page)?$/i
+      ],
+      answer: `**Data Engineering & Modern Lakehouse Architectures**\n\nWe transform enterprise data silos into clean, real-time analytics engines:\n\n• **Modern Data Lakehouses**: Snowflake, Databricks, and Google Cloud BigQuery implementations.\n• **Real-Time Streaming**: Apache Kafka, Spark, and automated dbt transformations.\n• **Enterprise BI**: High-performance executive dashboards in Power BI, Tableau, and Looker.\n\nClick below to open our Data Engineering page.`,
+      secondaryActions: [
+        { label: 'AI Solutions', pageTarget: 'AI' },
+        { label: 'Cloud Services', pageTarget: 'Cloud' }
+      ]
+    },
+    {
+      id: 'recruiting',
+      pageTarget: 'Recruiting',
+      name: 'IT Staffing & Global Talent',
+      buttonLabel: 'Go to Talent Acquisition',
+      patterns: [
+        /\bwhere (is|are) (the )?(recruiting|recruitment|talent acquisition|staffing|hire talent)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(recruiting|talent acquisition|staffing)\b/i,
+        /\b(where can i (find|see) (the )?(recruiting|staffing|talent))\b/i,
+        /\b(recruiting|talent acquisition|staffing)(\s+page)?$/i
+      ],
+      answer: `**IT Recruiting & Specialized Talent Delivery**\n\nRapid deployment of rigorously vetted enterprise technology talent:\n\n• **Flexible Models**: Contract staffing, contract-to-hire, permanent placement, and offshore squads.\n• **Specializations**: Certified SAP consultants, Cloud Architects, AI Engineers, and Cybersecurity specialists.\n• **Technical Vetting**: Every candidate is screened by practicing solution architects before submission.\n\nClick below to open our Talent Acquisition page.`,
+      secondaryActions: [
+        { label: 'Explore Careers', pageTarget: 'Careers' },
+        { label: 'Contact Us', pageTarget: 'Contact' }
+      ]
+    },
+    {
+      id: 'projects',
+      pageTarget: 'Projects',
+      name: 'Case Studies & Client Projects',
+      buttonLabel: 'Go to Case Studies',
+      patterns: [
+        /\bwhere (is|are) (the )?(case studies|projects|client work|success stories|portfolio)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(case studies|projects|client work)\b/i,
+        /\b(where can i (find|see) (the )?(case studies|projects))\b/i,
+        /\b(case studies|projects)(\s+page)?$/i
+      ],
+      answer: `**Client Case Studies & Enterprise Projects Ledger**\n\nExplore real-world transformation milestones and verified enterprise results:\n\n• **SAP S/4HANA & BRIM Migrations**: Clean-core rollouts for telecom and retail giants in UAE and North America.\n• **Agentic AI & Document Intelligence**: Automated financial audit and invoice reconciliation copilots.\n• **Multi-Cloud Modernization**: Zero-downtime AWS and Azure migrations for healthcare organizations.\n\nClick below to view our Case Studies page.`,
+      secondaryActions: [
+        { label: 'Explore Industries', pageTarget: 'Industries' },
+        { label: 'Browse All Services', pageTarget: 'Services' }
+      ]
+    },
+    {
+      id: 'industries',
+      pageTarget: 'Industries',
+      name: 'Industries Transformed',
+      buttonLabel: 'Explore Industries',
+      patterns: [
+        /\bwhere (is|are) (the )?(industr(ies|y)|sectors?|banking|healthcare|retail|manufacturing|ports)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(industries|sectors)\b/i,
+        /\b(where can i (find|see) (the )?industries)\b/i,
+        /\bindustr(ies|y)(\s+page)?$/i
+      ],
+      answer: `**Industries We Transform**\n\nClyptus delivers domain-tailored software and architectures across major global industries:\n\n• **Manufacturing & Industry 4.0**: Smart shop-floor integration, IoT telemetry, and digital twins.\n• **BFSI (Banking & Insurance)**: Secure transaction engines, fraud mitigation, and compliance.\n• **Healthcare & Life Sciences**: HIPAA-compliant patient platforms and medical imaging AI.\n• **Ports & Logistics**: Terminal operating systems and global supply chain automation.\n\nClick below to explore our Industries page.`,
+      secondaryActions: [
+        { label: 'Case Studies', pageTarget: 'Projects' },
+        { label: 'Browse All Services', pageTarget: 'Services' }
+      ]
+    },
+    {
+      id: 'about',
+      pageTarget: 'About',
+      name: 'About Us & Company Journey',
+      buttonLabel: 'Go to About Us',
+      patterns: [
+        /\bwhere (is|are) (the )?(about us|company journey|our story|history|leadership|founder|vamsi krishna)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(about us|about page|company story)\b/i,
+        /\b(where can i (find|see) (the )?(about us|company journey))\b/i,
+        /\b(about us|about)(\s+page)?$/i
+      ],
+      answer: `**About Clyptus Software Solutions**\n\nDiscover over a decade of enterprise digital transformation and leadership:\n\n• **Foundation**: Founded in 2014; certified **SAP Silver Partner** with 250+ consultants globally.\n• **Founder & Strategic Leader**: **Vamsi Krishna** guides our mission, global alliances, and technological innovation.\n• **Mission**: *"Turning Ideas Into Impact"* | **Vision**: *"Shaping Tomorrow Through Innovation"*.\n• **Global Footprint**: Delivery hubs across Hyderabad (India), Dubai (UAE DIFC), and California (USA).\n\nClick below to navigate to the About Us page.`,
+      secondaryActions: [
+        { label: 'Explore Careers', pageTarget: 'Careers' },
+        { label: 'Contact Us', pageTarget: 'Contact' }
+      ]
+    },
+    {
+      id: 'careers',
+      pageTarget: 'Careers',
+      name: 'Careers & Job Openings',
+      buttonLabel: 'Go to Careers Page',
+      patterns: [
+        /\bwhere (is|are) (the )?(careers?|jobs?|openings?|hiring|vacanc(y|ies))(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(careers?|jobs?)\b/i,
+        /\b(where can i (find|see) (the )?(careers?|jobs?))\b/i,
+        /\b(careers?|jobs?)(\s+page)?$/i
+      ],
+      answer: `**Careers at Clyptus Software Solutions**\n\nJoin our rapidly expanding global engineering and enterprise consulting teams:\n\n• **Active Roles**: SAP S/4HANA Consultants, Cloud Solutions Architects, GenAI Engineers, SAP BRIM Specialists, Power BI Developers.\n• **Workplace Perks**: Hybrid work model, global mobility, competitive compensation, and sponsored certifications.\n• **Direct Application**: Send resumes directly to hr.india@clyptus.com, hr.uae@clyptus.com, or hr.usa@clyptus.com.\n\nClick below to view the Careers page.`,
+      secondaryActions: [
+        { label: 'HR Policies Portal', pageTarget: 'HR Policies' },
+        { label: 'Email HR Team', chatQuery: 'What are your official emails?' }
+      ]
+    },
+    {
+      id: 'hr-policies',
+      pageTarget: 'HR Policies',
+      name: 'HR Policies Portal',
+      buttonLabel: 'Go to HR Policies Portal',
+      patterns: [
+        /\bwhere (is|are) (the )?(hr policies|employee policies|employee handbook|posh policy|leave policy)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(hr policies|policies)\b/i,
+        /\b(where can i (find|see) (the )?(hr policies|policies))\b/i,
+        /\b(hr policies|policies)(\s+page)?$/i
+      ],
+      answer: `**Clyptus HR Policies & Compliance Portal**\n\nOur secure internal repository for company standards, employee entitlements, and compliance:\n\n• **Protected Policy Documents**: Code of Conduct, Employee Benefits, Leave & Maternity Policy, Disciplinary Policy, Grievance Redressal, Employee Handbook, POSH, and Data Privacy.\n• **Secure Login**: Access is protected for verified employees and authorized compliance auditors.\n\nClick below to open the HR Policies Portal.`,
+      secondaryActions: [
+        { label: 'Explore Careers', pageTarget: 'Careers' },
+        { label: 'Contact Us', pageTarget: 'Contact' }
+      ]
+    },
+    {
+      id: 'contact',
+      pageTarget: 'Contact',
+      name: 'Contact Us & Global Offices',
+      buttonLabel: 'Go to Contact Page',
+      patterns: [
+        /\bwhere (is|are) (the )?(contact|contact us|offices?|addresses?|headquarters|phone|call)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(contact|contact us|offices)\b/i,
+        /\b(where can i (find|reach|call) (clyptus|you))\b/i,
+        /\b(contact|contact us)(\s+page)?$/i
+      ],
+      answer: `**Get in Touch with Clyptus Software Solutions**\n\nConnect with our leadership, sales, and engineering teams:\n\n• **Regional Phone Lines**: India: +91 77999 88139 | UAE: +971 52 350 3297 | USA: +1 480 427-6373\n• **Official Emails**: Sales@clyptus.com | hr.india@clyptus.com | contact@clyptus.com\n• **Global Offices**: Hyderabad HQ (Manjeera Trinity), Dubai DIFC (Sheikh Zayed Rd), California (Temecula).\n\nClick below to open our Contact page with interactive 3D globe and inquiry form.`,
+      secondaryActions: [
+        { label: 'View All Emails', chatQuery: 'What are your official emails?' },
+        { label: 'Browse All Services', pageTarget: 'Services' }
+      ]
+    },
+    {
+      id: 'services',
+      pageTarget: 'Services',
+      name: 'All Enterprise Services',
+      buttonLabel: 'Browse All Services',
+      patterns: [
+        /\bwhere (is|are) (the )?(all services|services page|services hub|services overview|what services|offerings)\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(services|services page)\b/i,
+        /\b(where can i (find|see) (all )?services)\b/i,
+        /\bservices(\s+page)?$/i
+      ],
+      answer: `**Clyptus Enterprise Services Portfolio**\n\nWe deliver end-to-end digital transformation across 8 specialized practices:\n\n1. **ERP & SAP (Silver Partner)**: S/4HANA, BRIM, and BTP integrations.\n2. **AI & GenAI**: Agentic swarms, bespoke LLMs, and RAG pipelines.\n3. **Multi-Cloud Architecture**: AWS, Azure, GCP, and Kubernetes.\n4. **Cybersecurity**: 24/7 Managed SOC and Zero-Trust architecture.\n5. **CRM Services**: SAP CX and Microsoft Dynamics 365.\n6. **Salesforce**: Agentforce AI, Sales/Service Cloud, and LWC.\n7. **Data Engineering**: Snowflake, Databricks, and streaming Kafka pipelines.\n8. **IT Staffing**: 330+ vetted tech professionals for rapid deployment.\n\nClick below to view the Services hub.`,
+      secondaryActions: [
+        { label: 'ERP & SAP', pageTarget: 'SAP' },
+        { label: 'AI Solutions', pageTarget: 'AI' }
+      ]
+    },
+    {
+      id: 'home',
+      pageTarget: 'Home',
+      name: 'Home Page',
+      buttonLabel: 'Go to Home Page',
+      patterns: [
+        /\bwhere (is|are) (the )?(home page|main page|landing page)\b/i,
+        /\b(take me to|navigate to|open|show me|view|go to) (the )?(home|home page|main page)\b/i,
+        /\bhome(\s+page)?$/i
+      ],
+      answer: `**Clyptus Home Page**\n\nOur landing page features the 3D spiral slider showcasing our flagship enterprise services, live corporate statistics, and transformation stories.\n\nClick below to return directly to the Home page.`,
+      secondaryActions: [
+        { label: 'Browse All Services', pageTarget: 'Services' },
+        { label: 'Go to Insights Page', pageTarget: 'Blogs' }
+      ]
+    }
+  ];
+
   // Answer matching engine
   const findAnswer = (query: string): { text: string; quickActions?: QuickAction[] } => {
     const cleanQuery = query.toLowerCase().trim();
 
-    // 1. Direct Regex Pattern Matching
+    // 0. Dedicated Direct Page Navigation Engine ("where is...", "go to...", "take me to...", page names)
+    for (const nav of PAGE_NAV_DIRECTORY) {
+      for (const pattern of nav.patterns) {
+        if (pattern.test(cleanQuery)) {
+          return {
+            text: nav.answer,
+            quickActions: [
+              { label: nav.buttonLabel, pageTarget: nav.pageTarget },
+              ...nav.secondaryActions
+            ]
+          };
+        }
+      }
+    }
+
+    // 1. Direct Regex Pattern Matching against Knowledge Base
     for (const item of KNOWLEDGE_BASE) {
       for (const pattern of item.patterns) {
         if (pattern.test(cleanQuery)) {
@@ -768,22 +1201,24 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       return { text: bestMatch.answer, quickActions: bestMatch.quickActions };
     }
 
-    // 3. Fallback when no match is found (Clean, helpful guide to website topics)
+    // 3. Fallback when no match is found (Full, helpful interactive guide to website pages)
     return {
       text: `I couldn't find a direct match for that question.
 
-Please ask something related to Clyptus Software Solutions and our website:
-• **Our Services**: SAP ERP, AI & GenAI, Cloud Architecture, Cybersecurity, CRM, Salesforce, Data Engineering, and IT Recruitment
-• **Company Journey**: Founded in 2014, SAP Silver Partner, and 10+ years milestones
-• **Current Projects**: Active enterprise transformations and client implementations
-• **Office Locations**: Hyderabad (HQ), Dubai (DIFC), and California
-• **Official Contacts**: Sales proposals, HR emails, and office phone numbers`,
+Here are the main pages and services you can explore across the Clyptus website:
+• **ERP & SAP Services**: S/4HANA migrations, SAP BRIM billing, and SAP BTP clean core
+• **AI Solutions**: Custom enterprise LLMs, Agentic AI swarms, and predictive analytics
+• **Cloud & DevOps**: Multi-cloud consulting across AWS, Azure, GCP, and Kubernetes
+• **Insights & Blogs**: 2026 SAP migration roadmaps and technical engineering articles
+• **Global Offices**: Contact our hubs in Hyderabad (HQ), Dubai (DIFC), and California
+
+Use any of the buttons below to jump directly to that page:`,
       quickActions: [
-        { label: 'All Services', chatQuery: 'What services are you providing?' },
-        { label: 'Current Projects', chatQuery: 'What is the current project Clyptus is doing?' },
-        { label: 'Official Emails', chatQuery: 'What are your official emails?' },
-        { label: 'Company Journey', chatQuery: 'Tell me about Clyptus journey and history' },
-        { label: 'Office Locations', chatQuery: 'Where are your office locations?' }
+        { label: 'Go to Insights Page', pageTarget: 'Blogs' },
+        { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
+        { label: 'Go to Cloud Services', pageTarget: 'Cloud' },
+        { label: 'Go to AI Solutions', pageTarget: 'AI' },
+        { label: 'Go to Contact Page', pageTarget: 'Contact' }
       ]
     };
   };
@@ -1141,22 +1576,30 @@ Please ask something related to Clyptus Software Solutions and our website:
                               { label: 'ERP & SAP Services', pageTarget: 'SAP' },
                               { label: 'AI Solutions', pageTarget: 'AI' }
                             ]
-                        ).map((action, aIdx) => (
-                          <button
-                            key={aIdx}
-                            onClick={() => {
-                              if (action.chatQuery) {
-                                handleSendMessage(action.chatQuery);
-                              } else if (action.pageTarget) {
-                                handleActionClick(action.pageTarget);
+                        ).map((action, aIdx) => {
+                          const isPageNav = Boolean(action.pageTarget);
+                          return (
+                            <button
+                              key={aIdx}
+                              onClick={() => {
+                                if (action.chatQuery) {
+                                  handleSendMessage(action.chatQuery);
+                                } else if (action.pageTarget) {
+                                  handleActionClick(action.pageTarget);
+                                }
+                              }}
+                              className={
+                                isPageNav
+                                  ? "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600 text-white shadow-xs hover:shadow-md hover:scale-[1.03] transition-all cursor-pointer active:scale-95 border border-blue-500/30"
+                                  : "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-[13px] font-medium bg-white hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 shadow-2xs transition-all hover:scale-[1.02] cursor-pointer active:scale-95"
                               }
-                            }}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-[13px] font-medium bg-white hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 shadow-2xs transition-all hover:scale-[1.02] cursor-pointer active:scale-95"
-                          >
-                            <span>{action.label}</span>
-                            <ArrowRight className="w-3 h-3 text-slate-400" />
-                          </button>
-                        ))}
+                            >
+                              {isPageNav && <Compass className="w-3.5 h-3.5 text-sky-200 animate-pulse" />}
+                              <span>{action.label}</span>
+                              <ArrowRight className={`w-3 h-3 ${isPageNav ? 'text-white' : 'text-slate-400'}`} />
+                            </button>
+                          );
+                        })}
                       </div>
                     )}
 
