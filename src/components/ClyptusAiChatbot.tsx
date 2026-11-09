@@ -265,23 +265,97 @@ We operate 3 strategic regional hubs delivering 24/7 enterprise engineering and 
   {
     category: 'leadership',
     keywords: [
-      'leadership', 'founder', 'ceo', 'vamsi', 'vamsi krishna', 
-      'management', 'executive', 'who runs', 'who leads', 'owner', 'director'
+      'leadership', 'founder', 'ceo', 'vamsi', 'vamsi krishna', 'vamsi krishna are',
+      'management', 'executive', 'who runs', 'who leads', 'owner', 'director', 
+      'managers', 'management team', 'team leads', 'leadership team'
     ],
     patterns: [
-      /\b(founder|ceo|vamsi|vamsi krishna|leadership|executive|director)\b/i,
-      /who (runs|leads|founded) clyptus/i
+      /\b(founder|ceo|vamsi|vamsi krishna(\s*are)?|leadership|executive|director|management\s*team|leadership\s*team)\b/i,
+      /who (runs|leads|founded|manages) clyptus/i,
+      /\b(clyptus\s+)?(leadership|executives|management)\b/i
     ],
-    answer: `**Clyptus Leadership & Vision**
+    answer: `**Clyptus Executive Leadership & Management Team**
 
-• **Founder & Strategic Leader**: **Vamsi Krishna** guides Clyptus's strategic vision, global partnerships, and technology innovation across the USA, UAE, and India.
-• **Vision**: *"Shaping Tomorrow Through Innovation"* — Empowering enterprises to thrive in an AI-first, cloud-native world through scalable intelligence and technical agility.
-• **Mission**: *"Turning Ideas Into Impact"* — Transforming complex enterprise challenges into resilient, high-performance systems with clear business ROI.
-• **Core Philosophy**: A commitment to technical rigor, clean-core architectures, transparent client relationships, and proactive innovation.`,
+Our leadership team combines deep enterprise architectural expertise, agile execution, and operational rigor:
+
+1. **Chief Executive Officer & Founder**: **Vamsi Krishna Are**
+   - Directs Clyptus's strategic vision, global partnerships (SAP Silver Partner), and technological innovation across USA, UAE, and India.
+   - Core Mission: *"Turning Ideas Into Impact"* | Vision: *"Shaping Tomorrow Through Innovation"*.
+
+2. **Operations Manager**: **Satya Narayana K**
+   - Leads cross-functional engineering teams across SAP, Cloud, and AI practices to ensure seamless project delivery and client satisfaction.
+
+3. **Project Manager**: **Nandhini P**
+   - Heads enterprise project execution, agile sprint delivery, and client engagement for enterprise transformation solutions.`,
     quickActions: [
+      { label: 'Operations Manager Details', chatQuery: 'Who is the Operations Manager?' },
+      { label: 'Project Manager Details', chatQuery: 'Who is the Project Manager?' },
       { label: 'About Clyptus', pageTarget: 'About' },
-      { label: 'Company Journey', chatQuery: 'Tell me about the company journey' },
-      { label: 'Contact Leadership', pageTarget: 'Contact' }
+      { label: 'Company Journey', chatQuery: 'Tell me about the company journey' }
+    ]
+  },
+
+  // 5A. OPERATIONS MANAGER
+  {
+    category: 'operations-manager',
+    keywords: [
+      'manager', 'operations manager', 'satya', 'satya narayana', 'satya narayana k', 
+      'who is manager', 'who is the manager', 'manager details', 'operations lead', 
+      'general manager', 'tell me about manager'
+    ],
+    patterns: [
+      /\b(operations\s*manager|manager\s*details?|satya\s*narayana(\s*k)?)\b/i,
+      /\bwho\s+is\s+(the\s+)?(operations\s+)?manager\b/i,
+      /\b(show|tell\s+me\s+about|details\s+of)\s+(the\s+)?(operations\s+)?manager\b/i,
+      /\bmanager(\s+details)?$/i
+    ],
+    answer: `**Clyptus Management — Operations Manager**
+
+• **Name**: **Satya Narayana K**
+• **Role**: Operations Manager • Clyptus Software Solutions
+• **Key Responsibilities & Focus**:
+  - **Cross-Functional Engineering**: Leads engineering delivery units spanning SAP ERP, Multi-Cloud, and AI practices.
+  - **Operational Governance**: Enforces delivery excellence, SLA compliance, and agile milestones across enterprise clients.
+  - **Client Satisfaction**: Bridges enterprise business requirements with technical execution to ensure seamless delivery and client success.
+
+Click below to learn more about our company on the About Us page or get in touch.`,
+    quickActions: [
+      { label: 'Project Manager Details', chatQuery: 'Tell me about the project manager' },
+      { label: 'Leadership & CEO', chatQuery: 'Who is the CEO of Clyptus?' },
+      { label: 'Read About Us', pageTarget: 'About' },
+      { label: 'Contact Us', pageTarget: 'Contact' }
+    ]
+  },
+
+  // 5B. PROJECT MANAGER
+  {
+    category: 'project-manager',
+    keywords: [
+      'project manager', 'nandhini', 'nandhini p', 'who is project manager', 
+      'who is the project manager', 'pm', 'pm details', 'project manager details', 
+      'project lead', 'project management', 'tell me about project manager'
+    ],
+    patterns: [
+      /\b(project\s*manager|nandhini(\s*p)?|pm\s*details?)\b/i,
+      /\bwho\s+is\s+(the\s+)?project\s+manager\b/i,
+      /\b(show|tell\s+me\s+about|details\s+of)\s+(the\s+)?project\s+manager\b/i,
+      /\bproject\s+management\s+lead\b/i
+    ],
+    answer: `**Clyptus Project Leadership — Project Manager**
+
+• **Name**: **Nandhini P**
+• **Role**: Project Manager • Clyptus Software Solutions
+• **Key Responsibilities & Focus**:
+  - **Enterprise Project Execution**: Directs end-to-end delivery for complex SAP S/4HANA, Cloud, and AI client transformations.
+  - **Agile Governance & Milestones**: Manages sprint planning, scope management, risk mitigation, and timeline tracking.
+  - **Client Stakeholder Engagement**: Leads transparent client communications to guarantee on-time, within-budget implementation.
+
+Click below to explore our verified Case Studies or get in touch with our team.`,
+    quickActions: [
+      { label: 'Operations Manager Details', chatQuery: 'Who is the Operations Manager?' },
+      { label: 'CEO & Founder', chatQuery: 'Who is the CEO of Clyptus?' },
+      { label: 'Client Case Studies', pageTarget: 'Projects' },
+      { label: 'Contact Us', pageTarget: 'Contact' }
     ]
   },
 
@@ -289,13 +363,15 @@ We operate 3 strategic regional hubs delivering 24/7 enterprise engineering and 
   {
     category: 'careers',
     keywords: [
-      'careers', 'jobs', 'hiring', 'openings', 'vacancies', 'apply', 
-      'interview', 'resume', 'cv', 'work at clyptus', 'positions', 'recruitment for me'
+      'careers', 'carrers', 'carreers', 'carrer', 'jobs', 'hiring', 'openings', 'vacancies', 'apply', 
+      'interview', 'resume', 'cv', 'work at clyptus', 'positions', 'recruitment for me',
+      'carrers page', 'careers page', 'show carrers page', 'show careers page'
     ],
     patterns: [
-      /\b(careers?|jobs?|hiring|openings?|vacanc(y|ies)|positions?|apply|resume|cv)\b/i,
+      /\b(careers?|carrers?|carreers?|career|carrer|jobs?|hiring|openings?|vacanc(y|ies)|positions?|apply|resume|cv)\b/i,
       /work at clyptus/i,
-      /how to apply/i
+      /how to apply/i,
+      /\b(show\s+)?(carrers?|carreers?)\b/i
     ],
     answer: `**Careers at Clyptus Software Solutions**
 
@@ -361,7 +437,7 @@ We provide complete enterprise ERP strategy, implementations, migrations, and on
 • **24/7 AMS & Managed Support**: Post go-live stabilization, hypercare, and proactive SLA-backed support.`,
     quickActions: [
       { label: 'ERP Services', pageTarget: 'SAP' },
-      { label: 'Request ERP Review', pageTarget: 'Contact' },
+      { label: 'Request ERP Review', pageTarget: 'SAP' },
       { label: 'Email Sales Team', chatQuery: 'What are your official emails?' }
     ]
   },
@@ -837,7 +913,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Insights Page',
       patterns: [
         /\bwhere (is|are) (the )?(insights?|blogs?|articles?|whitepapers?)\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(insights?|blogs?|articles?)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(insights?|blogs?|articles?)\b/i,
         /\b(where can i (find|read|see) (the )?(insights?|blogs?|articles?))\b/i,
         /\b(insights?|blogs?)(\s+page|\s+section)?$/i
       ],
@@ -854,7 +930,9 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to ERP & SAP Services',
       patterns: [
         /\bwhere (is|are) (the )?(erp|sap|s4hana|s\/4hana|hana|brim|btp)(\s+services?|\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(erp|sap|s4hana)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(erp|sap|s4hana)(\s+services?|\s+page)?\b/i,
+        /\b(request\s+)?erp\s+review\b/i,
+        /\b(review\s+)?erp(\s+services?|\s+review)?\b/i,
         /\b(where can i (find|see) (the )?(erp|sap))\b/i,
         /\b(erp|sap)(\s+services?|\s+page)?$/i
       ],
@@ -871,7 +949,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Cloud Services',
       patterns: [
         /\bwhere (is|are) (the )?(cloud|aws|azure|gcp|devops|multi-cloud)(\s+services?|\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(cloud|aws|azure|devops)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(cloud|aws|azure|devops)(\s+services?|\s+page)?\b/i,
         /\b(where can i (find|see) (the )?cloud)\b/i,
         /\b(cloud|multi-cloud)(\s+services?|\s+page)?$/i
       ],
@@ -888,7 +966,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to AI Solutions',
       patterns: [
         /\bwhere (is|are) (the )?(ai|genai|generative ai|agentforce|agents?)(\s+solutions?|\s+services?|\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(ai|genai|generative ai)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(ai|genai|generative ai)(\s+solutions?|\s+services?|\s+page)?\b/i,
         /\b(where can i (find|see) (the )?(ai|genai))\b/i,
         /\b(ai|genai|generative ai)(\s+solutions?|\s+services?|\s+page)?$/i
       ],
@@ -905,7 +983,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Cybersecurity',
       patterns: [
         /\bwhere (is|are) (the )?(security|cybersecurity|cyber|zero trust|soc)(\s+services?|\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(security|cybersecurity|cyber)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(security|cybersecurity|cyber)(\s+services?|\s+page)?\b/i,
         /\b(where can i (find|see) (the )?(security|cybersecurity))\b/i,
         /\b(security|cybersecurity)(\s+services?|\s+page)?$/i
       ],
@@ -922,7 +1000,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to CRM Services',
       patterns: [
         /\bwhere (is|are) (the )?(crm|dynamics 365|sap cx|customer experience)(\s+services?|\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(crm|dynamics 365)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(crm|dynamics 365)(\s+services?|\s+page)?\b/i,
         /\b(where can i (find|see) (the )?crm)\b/i,
         /\bcrm(\s+services?|\s+page)?$/i
       ],
@@ -939,7 +1017,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Salesforce Solutions',
       patterns: [
         /\bwhere (is|are) (the )?(salesforce|agentforce|sfdc)(\s+services?|\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(salesforce|agentforce)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(salesforce|agentforce)(\s+services?|\s+page)?\b/i,
         /\b(where can i (find|see) (the )?salesforce)\b/i,
         /\b(salesforce|agentforce)(\s+services?|\s+page)?$/i
       ],
@@ -956,7 +1034,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Data Engineering',
       patterns: [
         /\bwhere (is|are) (the )?(data engineering|lakehouses?|snowflake|databricks|bigquery)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(data engineering|lakehouse)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(data engineering|lakehouse)(\s+page)?\b/i,
         /\b(where can i (find|see) (the )?data engineering)\b/i,
         /\bdata engineering(\s+page)?$/i
       ],
@@ -973,7 +1051,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Talent Acquisition',
       patterns: [
         /\bwhere (is|are) (the )?(recruiting|recruitment|talent acquisition|staffing|hire talent)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(recruiting|talent acquisition|staffing)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(recruiting|talent acquisition|staffing)(\s+page)?\b/i,
         /\b(where can i (find|see) (the )?(recruiting|staffing|talent))\b/i,
         /\b(recruiting|talent acquisition|staffing)(\s+page)?$/i
       ],
@@ -990,7 +1068,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Case Studies',
       patterns: [
         /\bwhere (is|are) (the )?(case studies|projects|client work|success stories|portfolio)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(case studies|projects|client work)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(case studies|projects|client work)(\s+page)?\b/i,
         /\b(where can i (find|see) (the )?(case studies|projects))\b/i,
         /\b(case studies|projects)(\s+page)?$/i
       ],
@@ -1007,7 +1085,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Explore Industries',
       patterns: [
         /\bwhere (is|are) (the )?(industr(ies|y)|sectors?|banking|healthcare|retail|manufacturing|ports)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(industries|sectors)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(industries|sectors)(\s+page)?\b/i,
         /\b(where can i (find|see) (the )?industries)\b/i,
         /\bindustr(ies|y)(\s+page)?$/i
       ],
@@ -1023,12 +1101,12 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       name: 'About Us & Company Journey',
       buttonLabel: 'Go to About Us',
       patterns: [
-        /\bwhere (is|are) (the )?(about us|company journey|our story|history|leadership|founder|vamsi krishna)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(about us|about page|company story)\b/i,
-        /\b(where can i (find|see) (the )?(about us|company journey))\b/i,
+        /\bwhere (is|are) (the )?(about us|company journey|our story|history|leadership|founder|vamsi krishna|management|team)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(about us|about page|company story|team|leadership|management)(\s+page)?\b/i,
+        /\b(where can i (find|see) (the )?(about us|company journey|leadership|management))\b/i,
         /\b(about us|about)(\s+page)?$/i
       ],
-      answer: `**About Clyptus Software Solutions**\n\nDiscover over a decade of enterprise digital transformation and leadership:\n\n• **Foundation**: Founded in 2014; certified **SAP Silver Partner** with 250+ consultants globally.\n• **Founder & Strategic Leader**: **Vamsi Krishna** guides our mission, global alliances, and technological innovation.\n• **Mission**: *"Turning Ideas Into Impact"* | **Vision**: *"Shaping Tomorrow Through Innovation"*.\n• **Global Footprint**: Delivery hubs across Hyderabad (India), Dubai (UAE DIFC), and California (USA).\n\nClick below to navigate to the About Us page.`,
+      answer: `**About Clyptus Software Solutions**\n\nDiscover over a decade of enterprise digital transformation and leadership:\n\n• **Foundation**: Founded in 2014; certified **SAP Silver Partner** with 250+ consultants globally.\n• **Leadership & Management**: Guided by Founder & CEO **Vamsi Krishna Are**, Operations Manager **Satya Narayana K**, and Project Manager **Nandhini P**.\n• **Mission**: *"Turning Ideas Into Impact"* | **Vision**: *"Shaping Tomorrow Through Innovation"*.\n• **Global Footprint**: Delivery hubs across Hyderabad (India), Dubai (UAE DIFC), and California (USA).\n\nClick below to navigate to the About Us page.`,
       secondaryActions: [
         { label: 'Explore Careers', pageTarget: 'Careers' },
         { label: 'Contact Us', pageTarget: 'Contact' }
@@ -1040,10 +1118,11 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       name: 'Careers & Job Openings',
       buttonLabel: 'Go to Careers Page',
       patterns: [
-        /\bwhere (is|are) (the )?(careers?|jobs?|openings?|hiring|vacanc(y|ies))(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(careers?|jobs?)\b/i,
-        /\b(where can i (find|see) (the )?(careers?|jobs?))\b/i,
-        /\b(careers?|jobs?)(\s+page)?$/i
+        /\bwhere (is|are) (the )?(careers?|carrers?|carreers?|career|carrer|jobs?|openings?|hiring|vacanc(y|ies))(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(careers?|carrers?|carreers?|career|carrer|jobs?|openings?|hiring)(\s+page)?\b/i,
+        /\b(where can i (find|see) (the )?(careers?|carrers?|carreers?|jobs?))\b/i,
+        /\b(careers?|carrers?|carreers?|career|carrer|jobs?)(\s+page)?$/i,
+        /\b(show\s+)?(carrers?|carreers?)(\s+page)?\b/i
       ],
       answer: `**Careers at Clyptus Software Solutions**\n\nJoin our rapidly expanding global engineering and enterprise consulting teams:\n\n• **Active Roles**: SAP S/4HANA Consultants, Cloud Solutions Architects, GenAI Engineers, SAP BRIM Specialists, Power BI Developers.\n• **Workplace Perks**: Hybrid work model, global mobility, competitive compensation, and sponsored certifications.\n• **Direct Application**: Send resumes directly to hr.india@clyptus.com, hr.uae@clyptus.com, or hr.usa@clyptus.com.\n\nClick below to view the Careers page.`,
       secondaryActions: [
@@ -1058,7 +1137,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to HR Policies Portal',
       patterns: [
         /\bwhere (is|are) (the )?(hr policies|employee policies|employee handbook|posh policy|leave policy)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(hr policies|policies)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(hr policies|policies)(\s+page)?\b/i,
         /\b(where can i (find|see) (the )?(hr policies|policies))\b/i,
         /\b(hr policies|policies)(\s+page)?$/i
       ],
@@ -1075,7 +1154,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Contact Page',
       patterns: [
         /\bwhere (is|are) (the )?(contact|contact us|offices?|addresses?|headquarters|phone|call)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(contact|contact us|offices)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(contact|contact us|offices)(\s+page)?\b/i,
         /\b(where can i (find|reach|call) (clyptus|you))\b/i,
         /\b(contact|contact us)(\s+page)?$/i
       ],
@@ -1092,7 +1171,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Browse All Services',
       patterns: [
         /\bwhere (is|are) (the )?(all services|services page|services hub|services overview|what services|offerings)\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(services|services page)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(services|services page)\b/i,
         /\b(where can i (find|see) (all )?services)\b/i,
         /\bservices(\s+page)?$/i
       ],
@@ -1109,7 +1188,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       buttonLabel: 'Go to Home Page',
       patterns: [
         /\bwhere (is|are) (the )?(home page|main page|landing page)\b/i,
-        /\b(take me to|navigate to|open|show me|view|go to) (the )?(home|home page|main page)\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(home|home page|main page)\b/i,
         /\bhome(\s+page)?$/i
       ],
       answer: `**Clyptus Home Page**\n\nOur landing page features the 3D spiral slider showcasing our flagship enterprise services, live corporate statistics, and transformation stories.\n\nClick below to return directly to the Home page.`,
