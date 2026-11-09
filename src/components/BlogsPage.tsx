@@ -1697,7 +1697,7 @@ export const BlogsPage: React.FC<BlogsPageProps> = ({ onNavigateContact }) => {
       {/* ---------------------------------------------------- */}
       {/* HERO HEADER                                          */}
       {/* ---------------------------------------------------- */}
-      <section className="relative w-full pt-14 pb-14 sm:pt-20 sm:pb-16 px-4 sm:px-8 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-slate-900 select-none">
+      <section className="relative w-full pt-14 pb-14 sm:pt-20 sm:pb-16 px-4 sm:px-8 lg:px-16 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-slate-900">
         {/* Soft Ambient Background Glows */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-400/15 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-400/15 rounded-full blur-[140px] pointer-events-none" />

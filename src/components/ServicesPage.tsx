@@ -90,7 +90,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onNavigate, onNaviga
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-start py-8 sm:py-12 px-4 sm:px-6 lg:px-8 font-sans select-none">
+    <div className="w-full min-h-[calc(100vh-68px)] bg-slate-50 flex flex-col justify-start py-8 sm:py-12 px-4 sm:px-6 lg:px-8 font-sans">
       {/* Top Banner / Heading (Clearly separated above the cards with ample margin) */}
       <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12 shrink-0">
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">

@@ -50,7 +50,7 @@ export const DIAGNOSTIC_PROBLEMS: DiagnosticProblem[] = [
 
 export const ProblemsWeSolveDiagnostics: React.FC = () => {
   return (
-    <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80 select-none">
+    <section className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80">
       <div className="flex flex-col md:flex-row gap-12 items-start justify-between">
         
         {/* LEFT COLUMN: STICKY BRAND & DIAGNOSTICS INTRO (w-full md:w-1/3) */}

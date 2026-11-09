@@ -193,7 +193,7 @@ export const SapServicesPage: React.FC<SapServicesPageProps> = ({ onNavigateCont
       {/* ---------------------------------------------------- */}
       {/* HERO SECTION (HOME PAGE COLOUR SYSTEM)               */}
       {/* ---------------------------------------------------- */}
-      <section className="relative w-full pt-16 pb-20 sm:pt-24 sm:pb-28 px-4 sm:px-6 lg:px-10 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-slate-900 select-none">
+      <section className="relative w-full pt-16 pb-20 sm:pt-24 sm:pb-28 px-4 sm:px-6 lg:px-10 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-slate-900">
         {/* Subtle Ambient Soft Glows (Home Page Sky & Indigo) */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-sky-400/10 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-400/10 rounded-full blur-[140px] pointer-events-none" />

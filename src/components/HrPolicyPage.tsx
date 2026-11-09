@@ -461,7 +461,7 @@ export const HrPolicyPage: React.FC<HrPolicyPageProps> = ({
       <div className="absolute bottom-1/3 left-10 w-[500px] h-[500px] bg-indigo-100/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* HERO HEADER SECTION */}
-      <section className="relative w-full pt-14 pb-12 sm:pt-20 sm:pb-16 px-4 sm:px-8 lg:px-16 border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50/50 to-slate-50 select-none">
+      <section className="relative w-full pt-14 pb-12 sm:pt-20 sm:pb-16 px-4 sm:px-8 lg:px-16 border-b border-slate-200/80 bg-gradient-to-b from-white via-slate-50/50 to-slate-50">
         <div className="relative max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white shadow-xs border border-slate-200 text-xs font-bold text-slate-800 mb-3">

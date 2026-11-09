@@ -482,7 +482,7 @@ export const DigiLabSapEngine: React.FC<DigiLabSapEngineProps> = ({ onContactCli
   }, [isMobile]);
 
   return (
-    <div className="w-full bg-slate-50 text-slate-900 select-none">
+    <div className="w-full bg-slate-50 text-slate-900">
       {/* ================= 3-STAGE PINNED DIGILAB SCROLLYTELLING CONTAINER ================= */}
       {!isMobile ? (
         <div ref={containerRef} className="relative w-full h-screen overflow-hidden bg-slate-50">

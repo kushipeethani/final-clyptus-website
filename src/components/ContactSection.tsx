@@ -104,7 +104,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="w-full min-h-screen bg-gradient-to-b from-white via-slate-50 to-sky-50/30 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 select-none relative overflow-hidden font-sans antialiased"
+      className="w-full min-h-screen bg-gradient-to-b from-white via-slate-50 to-sky-50/30 py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden font-sans antialiased"
     >
       {/* Background Soft Atmospheric Glow Gradients */}
       <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-sky-200/25 rounded-full blur-3xl pointer-events-none -z-10" />

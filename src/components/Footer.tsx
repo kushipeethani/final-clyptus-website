@@ -70,7 +70,7 @@ export const Footer: React.FC<FooterProps> = ({
     <footer
       ref={footerRef}
       onMouseMove={handleMouseMove}
-      className="relative w-full bg-[#140e0c] text-slate-300 font-sans border-t border-white/[0.08] overflow-hidden select-none min-h-[440px] sm:min-h-[480px] flex flex-col justify-between transition-colors duration-200"
+      className="relative w-full bg-[#140e0c] text-slate-300 font-sans border-t border-white/[0.08] overflow-hidden min-h-[440px] sm:min-h-[480px] flex flex-col justify-between transition-colors duration-200"
       style={{
         // The dual-stage Schmidt Studio fiery ember glow that responds to mouse position
         background: `

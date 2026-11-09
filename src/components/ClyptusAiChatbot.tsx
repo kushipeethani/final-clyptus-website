@@ -953,7 +953,7 @@ Please ask something related to Clyptus Software Solutions and our website:
   };
 
   return (
-    <div className="select-none font-sans">
+    <div className="font-sans">
       {/* ---------------------------------------------------- */}
       {/* FLOATING TRIGGER BUTTON (TOP RIGHT CORNER)           */}
       {/* ---------------------------------------------------- */}

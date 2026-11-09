@@ -40,7 +40,7 @@ const ScrollAnimatedHeroTitle: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-slate-900 select-none text-center"
+        className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.08] text-slate-900 text-center"
       >
         <motion.span
           initial={{ opacity: 30, y: 170 }}
@@ -254,7 +254,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
       {/* ---------------------------------------------------- */}
       {/* HERO SECTION (SAP BRAND COLOUR & GRADIENT SYSTEM)    */}
       {/* ---------------------------------------------------- */}
-      <section className="relative w-full min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-68px)] flex flex-col justify-center items-center py-16 sm:py-24 px-4 sm:px-6 lg:px-10 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-slate-900 select-none">
+      <section className="relative w-full min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-68px)] flex flex-col justify-center items-center py-16 sm:py-24 px-4 sm:px-6 lg:px-10 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 text-slate-900">
         {/* Ambient Soft Glows (SAP Blue & Orange Palette) */}
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-blue-400/15 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-orange-400/15 rounded-full blur-[140px] pointer-events-none" />
@@ -546,7 +546,7 @@ export const ItRecruitmentPage: React.FC<ItRecruitmentPageProps> = ({ onNavigate
       {/* ---------------------------------------------------- */}
       {/* FINAL CTA (SAP SIGNATURE THEME)                      */}
       {/* ---------------------------------------------------- */}
-      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-10 max-w-6xl mx-auto select-none">
+      <section className="py-20 sm:py-28 px-4 sm:px-6 lg:px-10 max-w-6xl mx-auto">
         <div className="relative rounded-3xl p-10 sm:p-16 bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-orange-500/10 border border-blue-200/80 text-center shadow-xl overflow-hidden">
           <div className="absolute top-0 right-1/3 w-[300px] h-[300px] bg-blue-400/20 rounded-full blur-[100px] pointer-events-none" />
           <div className="absolute bottom-0 left-1/3 w-[300px] h-[300px] bg-orange-400/20 rounded-full blur-[100px] pointer-events-none" />

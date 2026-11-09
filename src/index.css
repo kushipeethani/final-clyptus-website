@@ -42,7 +42,6 @@
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-    user-select: none;
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "zero" 0;
   }

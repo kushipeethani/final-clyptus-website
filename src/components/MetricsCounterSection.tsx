@@ -137,7 +137,7 @@ export const MetricsCounterSection: React.FC = () => {
 
   return (
     /* Clean, tight responsive section without fade-in/fade-out opacity hiding or large scroll gaps */
-    <section id="metrics" ref={containerRef} className="w-full py-16 sm:py-24 bg-white select-none border-y border-slate-100 relative overflow-hidden">
+    <section id="metrics" ref={containerRef} className="w-full py-16 sm:py-24 bg-white border-y border-slate-100 relative overflow-hidden">
       {/* Background Soft Ambient Glow Accents */}
       <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-blue-50/70 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-indigo-50/70 rounded-full blur-3xl pointer-events-none" />

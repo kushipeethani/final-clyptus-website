@@ -526,7 +526,7 @@ export const AiServicesPage: React.FC<AiServicesPageProps> = ({ onNavigateContac
       {/* ---------------------------------------------------- */}
       <section
         id="clyptus-logo-assemble-target"
-        className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto overflow-hidden bg-transparent select-none text-center"
+        className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 lg:px-10 max-w-7xl mx-auto overflow-hidden bg-transparent text-center"
       >
         {/* Target Stage Box where background particles coalesce into the official Clyptus logo */}
         <div className="relative w-full h-[320px] sm:h-[400px] md:h-[450px] mx-auto flex items-center justify-center pointer-events-auto" />

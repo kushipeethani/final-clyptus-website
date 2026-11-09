@@ -116,7 +116,7 @@ export const SapProjectsLedger: React.FC = () => {
   return (
     <section
       id="sap-projects"
-      className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80 scroll-mt-24 select-none bg-white"
+      className="py-24 px-4 sm:px-8 lg:px-16 max-w-7xl mx-auto border-t border-slate-200/80 scroll-mt-24 bg-white"
     >
       {/* Section Header */}
       <div className="text-center flex flex-col items-center gap-3 mb-16">

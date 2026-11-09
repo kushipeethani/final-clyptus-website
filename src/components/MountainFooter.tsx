@@ -56,7 +56,7 @@ export const MountainFooter: React.FC<FooterProps> = ({ onNavigate, onOpenResour
   return (
     <footer
       ref={footerRef}
-      className="relative w-full min-h-[440px] sm:min-h-[480px] overflow-hidden bg-[#111A2E] text-slate-200 font-sans flex flex-col justify-between select-none"
+      className="relative w-full min-h-[440px] sm:min-h-[480px] overflow-hidden bg-[#111A2E] text-slate-200 font-sans flex flex-col justify-between"
     >
       {/* ----------------------------------------------------------- */}
       {/* LAYER 1: 4K SKY & SUNSET BACKGROUND                         */}
