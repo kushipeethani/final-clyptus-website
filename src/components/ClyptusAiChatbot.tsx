@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Send, 
   X, 
@@ -957,55 +958,84 @@ Please ask something related to Clyptus Software Solutions and our website:
       {/* ---------------------------------------------------- */}
       {/* FLOATING TRIGGER BUTTON (TOP RIGHT CORNER)           */}
       {/* ---------------------------------------------------- */}
-      {!isOpen && (
-        <div className="fixed top-2.5 sm:top-3 right-3 sm:right-5 lg:top-3 lg:right-7 z-50 flex items-center">
-          {/* Rotating Glowing Orange Border Effect Container (Clockwise) */}
-          <div className="relative group p-[2px] rounded-full overflow-hidden flex items-center justify-center shadow-[0_2px_14px_rgba(255,113,56,0.28)] hover:shadow-[0_4px_24px_rgba(255,113,56,0.55)] transition-all duration-300 hover:scale-[1.05] active:scale-95">
-            
-            {/* Clockwise Rotating Conic Orange Glow Beam */}
-            <div
-              className="absolute inset-[-200%] animate-spin-clockwise pointer-events-none"
-              style={{
-                background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #ff9800 310deg, #ff5722 340deg, #ff3d00 360deg)'
-              }}
-            />
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.div
+            key="keva-trigger-btn"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.75, transition: { duration: 0.15 } }}
+            transition={{ type: 'spring', stiffness: 420, damping: 25 }}
+            className="fixed top-2.5 sm:top-3 right-3 sm:right-5 lg:top-3 lg:right-7 z-50 flex items-center"
+          >
+            {/* Rotating Glowing Orange Border Effect Container (Clockwise) */}
+            <div className="relative group p-[2px] rounded-full overflow-hidden flex items-center justify-center shadow-[0_2px_14px_rgba(255,113,56,0.28)] hover:shadow-[0_4px_24px_rgba(255,113,56,0.55)] transition-all duration-300 hover:scale-[1.05] active:scale-95">
+              
+              {/* Clockwise Rotating Conic Orange Glow Beam */}
+              <div
+                className="absolute inset-[-200%] animate-spin-clockwise pointer-events-none"
+                style={{
+                  background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #ff9800 310deg, #ff5722 340deg, #ff3d00 360deg)'
+                }}
+              />
 
-            {/* Ambient Blurred Orange Halo Behind the Border */}
-            <div
-              className="absolute inset-[-200%] animate-spin-clockwise blur-sm opacity-75 pointer-events-none"
-              style={{
-                background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #ff9800 310deg, #ff5722 340deg, #ff3d00 360deg)'
-              }}
-            />
+              {/* Ambient Blurred Orange Halo Behind the Border */}
+              <div
+                className="absolute inset-[-200%] animate-spin-clockwise blur-sm opacity-75 pointer-events-none"
+                style={{
+                  background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #ff9800 310deg, #ff5722 340deg, #ff3d00 360deg)'
+                }}
+              />
 
-            {/* Inner Pill Button (Icon Removed, Text 'Ask Keva') */}
-            <button
-              onClick={() => setIsOpen(true)}
-              className="relative z-10 flex items-center justify-center rounded-full bg-white text-slate-900 px-4 py-1.5 sm:px-5 sm:py-2 transition-all cursor-pointer select-none"
-              title="Ask Keva"
-              aria-label="Ask Keva"
-            >
-              <span className="font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 group-hover:text-orange-600 transition-colors whitespace-nowrap">
-                Ask Keva
-              </span>
-            </button>
-          </div>
-        </div>
-      )}
+              {/* Inner Pill Button (Icon Removed, Text 'Ask Keva') */}
+              <button
+                onClick={() => setIsOpen(true)}
+                className="relative z-10 flex items-center justify-center rounded-full bg-white text-slate-900 px-4 py-1.5 sm:px-5 sm:py-2 transition-all cursor-pointer select-none"
+                title="Ask Keva"
+                aria-label="Ask Keva"
+              >
+                <span className="font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 group-hover:text-orange-600 transition-colors whitespace-nowrap">
+                  Ask Keva
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ---------------------------------------------------- */}
-      {/* EXPANDABLE CHATBOT WINDOW                            */}
+      {/* EXPANDABLE CHATBOT WINDOW (STYLE #1: CORNER SPRING)  */}
       {/* ---------------------------------------------------- */}
-      {isOpen && (
-        <div 
-          style={{
-            width: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.width}px`,
-            height: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.height}px`
-          }}
-          className={`fixed inset-x-2.5 top-2.5 bottom-2.5 sm:inset-auto sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] sm:max-w-[calc(100vw-32px)] sm:max-h-[calc(100dvh-32px)] bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200/90 flex flex-col overflow-hidden animate-in fade-in slide-in-from-top-4 ${
-            isResizing ? 'transition-none select-none' : 'transition-all duration-300 ease-out'
-          }`}
-        >
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            key="keva-chat-window"
+            initial={{ opacity: 0, scale: 0.65, x: 20, y: -20 }}
+            animate={{ 
+              opacity: 1, 
+              scale: 1, 
+              x: 0, 
+              y: 0,
+              transition: isResizing 
+                ? { duration: 0 } 
+                : { type: 'spring', stiffness: 380, damping: 28, mass: 0.85 }
+            }}
+            exit={{ 
+              opacity: 0, 
+              scale: 0.65, 
+              x: 20, 
+              y: -20,
+              transition: { duration: 0.22, ease: [0.32, 0, 0.67, 0] } 
+            }}
+            style={{
+              width: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.width}px`,
+              height: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.height}px`,
+              transformOrigin: 'top right'
+            }}
+            className={`fixed inset-x-2.5 top-2.5 bottom-2.5 sm:inset-auto sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] sm:max-w-[calc(100vw-32px)] sm:max-h-[calc(100dvh-32px)] bg-white rounded-2xl sm:rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3),0_0_25px_rgba(255,113,56,0.18)] border border-slate-200/90 flex flex-col overflow-hidden origin-top-right will-change-transform ${
+              isResizing ? 'transition-none select-none' : ''
+            }`}
+          >
           {/* Edge Drag Handles for Resizing (Desktop Only) */}
           <div className="hidden sm:block">
             {/* Left edge drag handle */}
@@ -1184,8 +1214,9 @@ Please ask something related to Clyptus Software Solutions and our website:
                   </button>
                 </form>
               </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
