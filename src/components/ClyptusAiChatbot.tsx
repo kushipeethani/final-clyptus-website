@@ -2010,6 +2010,32 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
   const findAnswer = (query: string): { text: string; quickActions?: QuickAction[] } => {
     const cleanQuery = query.toLowerCase().trim();
 
+    // Strict Scope Guardrail: Block unwanted / off-topic queries immediately to preserve Clyptus website focus
+    const OFF_TOPIC_REGEXES = [
+      /\b(recipe|recipes|cook|cooking|bake|baking|ingredients?|cake|pizza|burger|pasta|biryani|sandwich|food|dish|restaurant)\b/i,
+      /\b(weather|temperature|forecast|rain today|climate|humidity)\b/i,
+      /\b(sports?|cricket|football|soccer|tennis|basketball|ipl|world cup|olympics?|messi|ronaldo|kohli|dhoni)\b/i,
+      /\b(movie|movies|cinema|actor|actress|hollywood|bollywood|song|songs|lyrics|singer|celebrity)\b/i,
+      /\b(politics|politician|president|prime minister|election|elections|government|parliament|congress|bjp|democrat|republican)\b/i,
+      /\b(joke|jokes|riddle|riddles|poem|poems|sing a song|tell a story|fairy tale)\b/i,
+      /\b(homework|solve this math|calculus|algebra|physics problem|chemistry equation|photosynthesis|biology)\b/i,
+      /\b(horoscope|zodiac|astrology|fortune teller)\b/i,
+      /\b(who is (elon musk|bill gates|mark zuckerberg|steve jobs|trump|biden|modi))\b/i,
+      /\b(write (a )?(python|java|c\+\+|javascript) (code|script|program) for (fibonacci|binary search|sorting|calculator|game))\b/i,
+    ];
+
+    if (OFF_TOPIC_REGEXES.some((r) => r.test(cleanQuery))) {
+      return {
+        text: `I am Keva, the AI assistant for **Clyptus Software Solutions**.\n\nI can only assist with questions directly related to Clyptus, our enterprise IT services (ERP & SAP, GenAI, Cloud, Cybersecurity, CRM, Salesforce, Data Engineering, Staffing), leadership, careers, and website navigation.\n\nHow can I help you explore Clyptus today?`,
+        quickActions: [
+          { label: 'Browse All Services', pageTarget: 'Services' },
+          { label: 'Go to About Us', pageTarget: 'About' },
+          { label: 'Explore Careers', pageTarget: 'Careers' },
+          { label: 'Go to Contact Page', pageTarget: 'Contact' }
+        ]
+      };
+    }
+
     // 0. Dedicated Direct Page Navigation Engine ("where is...", "go to...", "take me to...", page names)
     for (const nav of PAGE_NAV_DIRECTORY) {
       for (const pattern of nav.patterns) {
@@ -2083,26 +2109,28 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
     }
 
     // High confidence threshold (prevents weak coincidences from picking the wrong topic)
-    if (bestMatch && highestScore >= 8) {
+    if (bestMatch && highestScore >= 16) {
       return { text: bestMatch.answer, quickActions: bestMatch.quickActions };
     }
 
-    // 3. Fallback when no match is found (Full, helpful interactive guide to website pages)
+    // 3. Fallback when no match is found (Polite website-focused boundary response)
     return {
-      text: `I couldn't find a direct match for that question.
+      text: `I can only provide information related to **Clyptus Software Solutions** and the enterprise services on our website.
 
-Here are the main pages and services you can explore across the Clyptus website:
+Here are the key areas you can explore across Clyptus:
 • **ERP & SAP Services**: S/4HANA migrations, SAP BRIM billing, and SAP BTP clean core
 • **AI Solutions**: Custom enterprise LLMs, Agentic AI swarms, and predictive analytics
-• **Cloud & DevOps**: Multi-cloud consulting across AWS, Azure, GCP, and Kubernetes
-• **Insights & Blogs**: 2026 SAP migration roadmaps and technical engineering articles
-• **Global Offices**: Contact our hubs in Hyderabad (HQ), Dubai (DIFC), and California
+• **Multi-Cloud & DevOps**: Multi-cloud consulting across AWS, Azure, GCP, and Kubernetes
+• **Cybersecurity & Compliance**: 24/7 Managed SOC, Zero-Trust, and ISO 27001 / SOC 2
+• **Data Engineering**: Snowflake, Databricks, and real-time Kafka streaming
+• **CRM & Salesforce**: Dynamics 365, SAP CX, and Salesforce Agentforce
+• **Careers & Leadership**: Global openings, Founder & CEO Vamsi Krishna Are, and executive leadership
 
-Use any of the buttons below to jump directly to that page:`,
+Click any button below to jump directly to a page or ask any question about Clyptus services:`,
       quickActions: [
+        { label: 'Browse All Services', pageTarget: 'Services' },
         { label: 'Go to Insights Page', pageTarget: 'Blogs' },
         { label: 'Go to ERP & SAP Services', pageTarget: 'SAP' },
-        { label: 'Go to Cloud Services', pageTarget: 'Cloud' },
         { label: 'Go to AI Solutions', pageTarget: 'AI' },
         { label: 'Go to Contact Page', pageTarget: 'Contact' }
       ]
