@@ -1,23 +1,49 @@
-# Clyptus — Enterprise Technology & Talent Solutions
+# Clyptus Software Solutions — Enterprise Technology & Talent Platform
 
-An enterprise web application built for **Clyptus**, showcasing three core pillars:
-1. **SAP Consulting, Implementation & Support Services** (S/4HANA, BTP, BRIM, AMS)
-2. **AI Development & Automation Services** (Custom AI Agents, CrewAI, Workflow Automation, RAG, Databricks)
-3. **IT & SAP Recruitment and Staffing Services** (Contract, Permanent, Executive Search, Global RPO)
+Official web application and digital enterprise portal for **Clyptus Software Solutions** (SAP Silver Partner).
 
-Built with **React 19**, **TypeScript**, **Vite 8**, **Tailwind CSS v4**, **Three.js**, and **Framer Motion**.
+The platform showcases Clyptus's 8 core enterprise technology practices, global delivery infrastructure across India, UAE, and the USA, executive leadership, client case studies, a protected HR policy portal, and **Keva**, our AI assistant powered by Groq LLM integration with automatic local fallback.
+
+Built with **React 19**, **TypeScript**, **Vite 8**, **Tailwind CSS v4**, **Three.js**, **Globe.gl**, and **Framer Motion**.
 
 ---
 
-## 🚀 Quick Start Guide
+## 📋 Table of Contents
+1. [System Requirements](#-system-requirements)
+2. [Requirements Installation Commands](#-requirements-installation-commands)
+3. [Quick Start & Setup Process](#-quick-start--setup-process)
+4. [Environment Configuration (`.env`)](#-environment-configuration-env)
+5. [All Available Processes & Scripts](#-all-available-processes--scripts)
+6. [Multi-Page Architecture & Route Directory](#-multi-page-architecture--route-directory)
+7. [Backend & Server Architecture](#-backend--server-architecture)
+8. [Keva AI Chatbot Architecture](#-keva-ai-chatbot-architecture)
+9. [Production Build & Deployment Guide](#-production-build--deployment-guide)
+10. [Troubleshooting & FAQs](#-troubleshooting--faqs)
 
-### Prerequisites
-Ensure you have the following installed on your machine:
-* **Node.js**: `v18.0.0` or higher (recommended: Node 20+ LTS)
-* **npm**: `v9.0.0` or higher (bundled with Node.js)
-* **Git**
+---
 
-Verify your versions:
+## 💻 System Requirements
+
+Before running the project, verify that your machine meets the following minimum requirements:
+
+| Component | Minimum Requirement | Recommended |
+| :--- | :--- | :--- |
+| **Operating System** | Windows 10/11, macOS 12+, or Ubuntu 20.04+ | Any modern 64-bit OS |
+| **Node.js** | `v18.0.0` or higher | `v20.x` or `v22.x` (LTS) |
+| **npm** | `v9.0.0` or higher | `v10.x` (bundled with Node.js) |
+| **Git** | `v2.30.0` or higher | Latest stable Git |
+| **Memory (RAM)** | 4 GB minimum | 8 GB or higher |
+| **Storage** | 500 MB free space | 1 GB free space |
+| **Web Browser** | Chrome, Edge, Firefox, Safari (WebGL-enabled) | Latest Chrome / Edge |
+
+---
+
+## 🛠️ Requirements Installation Commands
+
+Follow the commands below for your operating system to install the prerequisites:
+
+### 1. Verify Existing Installations
+Check if Node.js, npm, and Git are already installed:
 ```bash
 node -v
 npm -v
@@ -26,162 +52,296 @@ git --version
 
 ---
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/khaja9963/Mixing-2.O.git
-cd Mixing-2.O
+### 2. Installing Prerequisites by Operating System
+
+#### Windows (via winget or official installer)
+Option A: Using Windows Package Manager (`winget` in PowerShell / Command Prompt as Administrator):
+```powershell
+# Install Node.js LTS
+winget install OpenJS.NodeJS.LTS
+
+# Install Git
+winget install Git.Git
 ```
 
-### 2. Install Dependencies
-Install all project dependencies using npm:
+Option B: Manual Download:
+* [Download Node.js LTS (Windows Installer .msi)](https://nodejs.org/)
+* [Download Git for Windows](https://git-scm.com/download/win)
+
+#### macOS (via Homebrew)
+```bash
+# Install Homebrew (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node.js LTS and Git
+brew install node@20 git
+```
+
+#### Linux (Ubuntu / Debian)
+```bash
+# Update package list
+sudo apt update && sudo apt upgrade -y
+
+# Install Git and build essentials
+sudo apt install -y git curl build-essential
+
+# Install Node.js 20 LTS via NodeSource
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install -y nodejs
+```
+
+---
+
+## 🚀 Quick Start & Setup Process
+
+Follow these step-by-step instructions to get the application running locally from scratch:
+
+### Step 1: Clone the Repository
+```bash
+git clone https://github.com/kushipeethani/final-clyptus-website.git
+cd final-clyptus-website
+```
+
+### Step 2: Install Project Dependencies
+Run `npm install` to download and install all required runtime and developer packages:
 ```bash
 npm install
 ```
 
-### 3. Run the Development Server
-Start the local Vite development server with Hot Module Replacement (HMR):
+> **What gets installed:**
+> * **Frontend Core**: `react` (v19), `react-dom`, `typescript` (~6.0), `vite` (v8)
+> * **Styling**: `tailwindcss` (v4), `@tailwindcss/vite`
+> * **Animations & 3D**: `framer-motion`, `gsap`, `three`, `globe.gl`
+> * **PDF & Utilities**: `pdfjs-dist`, `dompurify`, `lucide-react`, `oxlint`
+
+### Step 3: Configure Environment Variables
+Copy the example environment file:
+* **Windows (PowerShell):**
+  ```powershell
+  Copy-Item .env.example .env
+  ```
+* **macOS / Linux:**
+  ```bash
+  cp .env.example .env
+  ```
+
+*(Optional)* Open `.env` and insert your **Groq API Key** to enable cloud-powered conversational completions for the Keva chatbot:
+```env
+GROQ_API_KEY=gsk_your_groq_api_key_here
+```
+> **Tip:** You can obtain a free Groq API key with generous limits from [console.groq.com/keys](https://console.groq.com/keys). If no key is set or quota is reached, Keva automatically runs on the high-speed built-in local engine!
+
+### Step 4: Start the Development Server
 ```bash
 npm run dev
 ```
 
-Open your browser and navigate to:
-* **Local:** [http://localhost:5173/](http://localhost:5173/)
-* **Network:** Check your terminal output for the local network IP (e.g. `http://192.168.x.x:5173/`).
+The application will start with instant Hot Module Replacement (HMR) at:
+* **Local URL:** [http://localhost:5173/](http://localhost:5173/)
+* **Network URL:** Displayed in the terminal for testing on mobile or other devices on the same Wi-Fi.
 
 ---
 
-## 📦 Available Scripts
+## ⚙️ Environment Configuration (`.env`)
 
-In the project root, you can run:
+The project supports optional environment variables defined in `.env`:
 
-| Command | Description |
-| :--- | :--- |
-| `npm run dev` | Starts the Vite dev server with instant HMR at `http://localhost:5173/`. |
-| `npm run build` | Compiles TypeScript (`tsc -b`) and generates optimized production bundles for all multi-page entries in `dist/`. |
-| `npm run preview` | Locally serves the production build from `dist/` to preview performance before deploying. |
-| `npm run lint` | Runs `oxlint` for fast code linting and style validation. |
-
----
-
-## 🌐 Multi-Page & SEO Architecture
-
-The application is structured for both single-page client transitions and multi-page static search engine indexing.
-
-### Verified Routes
-Each route has its own dedicated static HTML page with unique Title, Meta Description, Canonical URL, Open Graph cards, and Schema.org Structured Data:
-
-* **Homepage (`/`):** [`index.html`](index.html) — `https://clyptus.com/`
-* **SAP Services (`/sap` or `/#sap`):** [`sap/index.html`](sap/index.html) — `https://clyptus.com/sap`
-* **AI Development (`/ai` or `/#ai`):** [`ai/index.html`](ai/index.html) — `https://clyptus.com/ai`
-* **IT Recruiting (`/recruiting` or `/#recruiting`):** [`recruiting/index.html`](recruiting/index.html) — `https://clyptus.com/recruiting`
-* **Contact (`/contact` or `/#contact`):** [`contact/index.html`](contact/index.html) — `https://clyptus.com/contact`
-
-### Search Engine Crawling & Verification
-* **Sitemap:** [`public/sitemap.xml`](public/sitemap.xml) (Accessible at `https://clyptus.com/sitemap.xml`)
-* **Robots File:** [`public/robots.txt`](public/robots.txt) (Accessible at `https://clyptus.com/robots.txt`)
-* **1200 × 630 px Social Banner:** [`public/clyptus-og-banner.png`](public/clyptus-og-banner.png) (Guarantees crisp preview cards on LinkedIn, WhatsApp, Facebook, and Twitter/X)
-
----
-
-## 🔒 Security & Server Architecture
-
-The application includes an enterprise server layer providing secure authentication, rate-limiting, confidential document access, and inquiry handling with local Vite dev parity and Vercel serverless functions.
-
-### Environment Variables
-Configure the following optional variables in `.env` (local) or Vercel Environment Variables:
-
-| Variable | Description | Default |
+| Variable | Description | Default / Fallback |
 | :--- | :--- | :--- |
-| `SESSION_SECRET` | 32+ character HMAC secret used to sign session cookies | Secure random fallback |
-| `AUTH_CLYPTUS_HASH` | PBKDF2-SHA512 hash for the `clyptus` administrative user | Pre-computed PBKDF2 hash |
-| `AUTH_CLYPTUS_SALT` | Cryptographic salt for `clyptus` user password | Pre-computed salt |
-| `AUTH_AUDIT_HASH` | PBKDF2-SHA512 hash for the `audit` compliance user | Pre-computed PBKDF2 hash |
-| `AUTH_AUDIT_SALT` | Cryptographic salt for `audit` user password | Pre-computed salt |
-| `RESEND_API_KEY` | Optional: Resend API Key for automatic contact email delivery | None (logs to `server/logs/inquiries.jsonl`) |
-| `CONTACT_RECEIVER_EMAIL` | Optional: Destination email address for customer inquiries | `contact@clyptus.com` |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` | Optional: Custom SMTP server credentials | None |
+| `GROQ_API_KEY` | Groq API Key powering the Keva AI assistant | Built-in local QA rule engine |
+| `SESSION_SECRET` | 32+ character HMAC secret used to sign session cookies for protected HR policies | Ephemeral secure random secret |
+| `AUTH_CLYPTUS_SALT` | Cryptographic salt for `clyptus` user login | Pre-computed PBKDF2 salt |
+| `AUTH_CLYPTUS_HASH` | PBKDF2-SHA512 hash for `clyptus` user password | Pre-computed PBKDF2 hash |
+| `AUTH_AUDIT_SALT` | Cryptographic salt for `audit` user login | Pre-computed PBKDF2 salt |
+| `AUTH_AUDIT_HASH` | PBKDF2-SHA512 hash for `audit` user password | Pre-computed PBKDF2 hash |
+| `RESEND_API_KEY` | Resend API key for direct contact form email forwarding | Logged to `server/logs/inquiries.jsonl` |
+| `CONTACT_RECEIVER_EMAIL` | Destination mailbox for customer inquiries | `contact@clyptus.com` |
+| `SMTP_HOST`, `SMTP_PORT` | Custom SMTP host & port if using SMTP instead of Resend | None |
+| `SMTP_USER`, `SMTP_PASS` | Custom SMTP authentication credentials | None |
+| `VITE_DOMAIN` | Canonical domain for structured metadata | `https://clyptus.com` |
 
-### Rotating Administrative Credentials
-To generate a new PBKDF2 salt and hash for credential rotation:
+---
+
+## ⚡ All Available Processes & Scripts
+
+All primary development, verification, and deployment processes are accessible through npm scripts:
+
+| Command | Process Description |
+| :--- | :--- |
+| **`npm run dev`** | Starts the Vite development server with backend API middleware at `http://localhost:5173/`. |
+| **`npm run build`** | Runs TypeScript type checking (`tsc -b`) and generates production bundles for all 15 multi-page routes in `dist/`. |
+| **`npm run preview`** | Serves the production build from `dist/` locally to test real performance before deploying. |
+| **`npm run lint`** | Runs `oxlint` for high-speed static code analysis, syntax verification, and linting. |
+| **`npm run tunnel`** | Launches a Cloudflare Tunnel daemon to expose your local development server to a secure public HTTPS URL. |
+
+### Command Execution Details
+
+#### 1. Running the Development Server
 ```bash
-node scripts/generate-password-hash.js "YourNewSecurePasswordHere"
+npm run dev
 ```
-Copy the generated `SALT` and `HASH` values into your environment variables (`AUTH_CLYPTUS_SALT` / `AUTH_CLYPTUS_HASH`).
+Starts Vite on port `5173`. Includes integrated Vite API middleware handling `/api/chat`, `/api/contact`, `/api/auth/*`, and `/api/documents`.
 
-### Protected HR & Compliance Documents
-Confidential employee handbooks and audit documents are located in `server/protected-documents/`. They are:
-1. Excluded from `dist/` and `public/` builds.
-2. Delivered exclusively through authenticated endpoint `/api/documents?id=<policy-id>`.
-3. Protected by session cookie verification (`HttpOnly`, `SameSite=Lax`, `Secure` in HTTPS) and path traversal prevention.
-
----
-
-## ⚙️ Configuration Before Production Launch
-
-Before launching to production:
-
-1. **Google Analytics 4 (GA4):**
-   * Replace `G-XXXXXXXXXX` in `index.html` and subpages with your verified production measurement ID.
-2. **Google Search Console (GSC):**
-   * Replace `YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE` with your verification token.
-3. **Contact Email Provider (Optional):**
-   * Add `RESEND_API_KEY` or SMTP credentials in your hosting platform environment variables to deliver incoming inquiries directly to your inbox. Inquiries are always safely stored in `server/logs/inquiries.jsonl`.
-4. **Deploying on Vercel:**
-   * Build Command: `npm run build`
-   * Output Directory: `dist`
-   * Serverless functions in `api/` will deploy automatically.
-
----
-
-### Step 1: Create Production Build
+#### 2. Running a Production Build
 ```bash
 npm run build
 ```
-This outputs all compiled assets to the `dist/` directory:
-```
-dist/
-├── index.html            # Home page
-├── sap/index.html        # SAP page
-├── ai/index.html         # AI page
-├── recruiting/index.html # Recruiting page
-├── contact/index.html    # Contact page
-├── sitemap.xml
-├── robots.txt
-├── clyptus-og-banner.png
-└── assets/               # Minified JS, CSS, and optimized images
-```
+Executes two tasks in sequence:
+1. `tsc -b`: Validates all TypeScript types across the entire project.
+2. `vite build`: Bundles all pages, minifies assets, optimizes styles with Tailwind v4, and generates the `dist/` distribution folder.
 
-### Step 2: Test Locally
+#### 3. Previewing the Production Build
 ```bash
 npm run preview
 ```
+Runs a local web server serving the `dist/` output folder so you can verify that production bundles, assets, and routes load smoothly.
 
-### Step 3: Deploy `dist/` to Your Host
-Deploy the contents of the `dist/` folder to your hosting provider:
-* **Vercel / Netlify:** Connect the GitHub repository and set build command to `npm run build` with output directory `dist`.
-* **Nginx / Apache / Shared Hosting:** Upload all files inside `dist/` directly to your `public_html` or web root directory.
-* **Cloudflare Pages:** Set framework preset to `Vite`, build command to `npm run build`, and output folder to `dist`.
+#### 4. Linting Code
+```bash
+npm run lint
+```
+Uses `oxlint` to scan files for errors, unused variables, and code health.
 
----
-
-## 🛠️ Technology Stack
-
-* **Frontend Library:** [React 19](https://react.dev/)
-* **Language:** [TypeScript](https://www.typescriptlang.org/)
-* **Build Tool:** [Vite 8](https://vitejs.dev/)
-* **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-* **Motion & Animations:** [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://gsap.com/)
-* **3D & Visualizations:** [Three.js](https://threejs.org/) & [Globe.gl](https://globe.gl/)
-* **Icons:** [Lucide React](https://lucide.dev/)
+#### 5. Exposing via Cloudflare Tunnel
+```bash
+npm run tunnel
+```
+Connects `http://localhost:5173` through `cloudflared` to a public `trycloudflare.com` HTTPS URL for remote stakeholder testing.
 
 ---
 
-## 🏢 Official Social Media Channels
+## 🌐 Multi-Page Architecture & Route Directory
 
-* **LinkedIn:** [Clyptus on LinkedIn](https://www.linkedin.com/company/clyptus/posts/)
-* **Facebook:** [Clyptus on Facebook](https://www.facebook.com/share/19amDstBuo/)
-* **Instagram:** [@clyptussoftwaresolutions](https://instagram.com/clyptussoftwaresolutions?vrfl=c2JucW9hcGRrZWts)
-* **YouTube:** [Clyptus Official Channel](https://www.youtube.com/)
+The application uses a hybrid architecture: it behaves as an instant, smooth single-page application (SPA) while generating separate static HTML entry points for maximum SEO indexing:
+
+| Page Route | Source HTML Entry | Primary Topics Covered |
+| :--- | :--- | :--- |
+| **`/`** | [`index.html`](index.html) | Flagship 3D spiral hero, live corporate metrics, enterprise overview. |
+| **`/services`** | [`services/index.html`](services/index.html) | All 8 enterprise technology practices, solution matrix. |
+| **`/sap`** | [`sap/index.html`](sap/index.html) | SAP S/4HANA, SAP BRIM, Clean Core, SAP BTP, 24/7 Managed AMS. |
+| **`/ai`** | [`ai/index.html`](ai/index.html) | Custom GenAI LLMs, autonomous agent swarms, MLOps, Industry 4.0. |
+| **`/cloud`** | [`cloud/index.html`](cloud/index.html) | AWS, Azure, GCP, Kubernetes, Terraform IaC, multi-cloud migrations. |
+| **`/security`** | [`security/index.html`](security/index.html) | 24/7 Managed SOC, Zero-Trust Architecture, ISO 27001, SOC 2 Type II. |
+| **`/crm`** | [`crm/index.html`](crm/index.html) | Microsoft Dynamics 365, SAP CX, CPQ, revenue operations. |
+| **`/salesforce`** | [`salesforce/index.html`](salesforce/index.html) | Salesforce Agentforce AI, Sales & Service Cloud, LWC, MuleSoft. |
+| **`/data-engineering`** | [`data-engineering/index.html`](data-engineering/index.html) | Snowflake, Databricks, BigQuery, Kafka streaming, dbt transforms. |
+| **`/recruiting`** | [`recruiting/index.html`](recruiting/index.html) | Contract staffing, permanent placement, executive search, CoE. |
+| **`/industries`** | [`industries/index.html`](industries/index.html) | Banking & BFSI, Healthcare, Retail & CPG, Manufacturing, Telecom. |
+| **`/about`** | [`about/index.html`](about/index.html) | Company journey since 2014, leadership team, corporate vision. |
+| **`/careers`** | [`careers/index.html`](careers/index.html) | Active vacancies, hiring perks, application submission. |
+| **`/blogs`** | [`blogs/index.html`](blogs/index.html) | Technical whitepapers, 2026 SAP roadmap, architecture deep dives. |
+| **`/contact`** | [`contact/index.html`](contact/index.html) | Interactive 3D globe, regional hub selector (India, Dubai, USA). |
+
+---
+
+## 🔒 Backend & Server Architecture
+
+The server functionality runs seamlessly in both development (via Vite middleware plugin `server/viteApiPlugin.ts`) and production (via Vercel/Node serverless handlers):
+
+### Active Endpoints:
+* **`/api/chat` (`POST`)**: Handles chatbot queries for Keva. Connects to Groq cloud API or triggers instant auto-fallback to local knowledge base.
+* **`/api/contact` (`POST`)**: Processes client contact inquiries, stores them in `server/logs/inquiries.jsonl`, and dispatches emails via Resend/SMTP if configured.
+* **`/api/auth/login` (`POST`)**: Authenticates corporate and compliance personnel accessing protected HR handbooks.
+* **`/api/auth/logout` (`POST`)**: Invalidates the active session cookie.
+* **`/api/auth/session` (`GET`)**: Verifies current session status.
+* **`/api/documents` (`GET`)**: Serves confidential PDF documents located in `server/protected-documents/` exclusively to verified sessions.
+
+---
+
+## 🤖 Keva AI Chatbot Architecture
+
+Keva is the intelligent enterprise assistant for Clyptus (`src/components/ClyptusAiChatbot.tsx`):
+
+### Key Capabilities:
+1. **Grounded Company Knowledge**:
+   - Covers all 8 enterprise practices, executive leadership (CEO Vamsi Krishna Are, Operations Manager Satya Narayana K, Project Manager Nandhini P), company journey since 2014, and all Indian delivery hubs (Hyderabad, Bengaluru, Chennai, Vijayawada, Indore).
+2. **Instant Quota & Rate-Limit Auto-Fallback**:
+   - If a configured Groq API key exhausts its rate limit (HTTP 429) or billing quota, Keva activates an automatic 60-second cooldown and seamlessly answers from the local knowledge engine with **zero delay**.
+3. **Strict Website-Scope Guardrail**:
+   - If an off-topic or unrelated question is asked (e.g. food recipes, sports, weather, politics, jokes), Keva politely replies with the approved corporate message:
+   > *"I’m here to help with questions about Clyptus Software Solutions and its services. If you have any queries related to our products, support, or anything else Clyptus‑related, feel free to ask!"*
+
+---
+
+## 🚢 Production Build & Deployment Guide
+
+### Building for Production
+Run the build script:
+```bash
+npm run build
+```
+This generates the optimized `dist/` directory:
+```
+dist/
+├── index.html            # Main home page
+├── services/index.html   # Services hub
+├── sap/index.html        # SAP ERP page
+├── ai/index.html         # AI & GenAI page
+├── contact/index.html    # Contact page
+├── ...                   # All other subpages
+├── sitemap.xml           # Verified XML sitemap
+├── robots.txt            # Search engine directives
+├── clyptus-og-banner.png # 1200x630 social preview card
+└── assets/               # Minified CSS, JS bundles, and optimized images
+```
+
+### Deploying to Hosting Platforms
+
+#### Deploy to Vercel
+1. Push the repository to GitHub.
+2. Import the project into Vercel.
+3. Vercel automatically detects Vite:
+   * **Framework Preset**: `Vite`
+   * **Build Command**: `npm run build`
+   * **Output Directory**: `dist`
+4. Add environment variables (`GROQ_API_KEY`, `SESSION_SECRET`, etc.) in the Vercel Project Settings.
+
+#### Deploy to Netlify
+1. Connect repository in Netlify.
+2. Build Settings:
+   * **Build command**: `npm run build`
+   * **Publish directory**: `dist`
+3. Add redirect rule in `public/_redirects`:
+   ```
+   /*    /index.html   200
+   ```
+
+#### Deploy to Nginx / Apache VPS
+1. Run `npm run build` on your CI/CD runner or server.
+2. Copy the contents of the `dist/` directory to your web root (e.g. `/var/www/clyptus.com/html`).
+3. Configure your server to serve static assets and proxy `/api/*` requests to your Node process.
+
+---
+
+## ❓ Troubleshooting & FAQs
+
+### Q: Port 5173 is already in use
+**Fix**: Specify a different port or allow Vite to choose the next open port automatically:
+```bash
+npx vite --port 5174
+```
+
+### Q: Error: `Payload too large` or `fetch failed`
+**Fix**: Verify your internet connection. Ensure the Node.js version is `v18.0.0` or higher (`node -v`).
+
+### Q: Groq API key gives 429 Rate Limit error
+**Fix**: You do not need to do anything! Keva automatically detects the 429 status and switches to the local question answering system with zero downtime. You can also replace or rotate your key in `.env`.
+
+### Q: How do I rotate administrative credentials for HR policies?
+**Fix**: Run the password hashing script:
+```bash
+node scripts/generate-password-hash.js "YourNewPassword"
+```
+Copy the resulting `SALT` and `HASH` values into your `.env` file as `AUTH_CLYPTUS_SALT` and `AUTH_CLYPTUS_HASH`.
+
+---
+
+## 🏢 Corporate Headquarters & Contact
+
+* **Global HQ (India)**: 12A01A, 13th Floor, Manjeera Trinity Corporate, JNTU–Hitech City Road, Kukatpally, Hyderabad, Telangana 500072. Phone: `+91 77999 88139`
+* **Middle East Hub (Dubai)**: 101 Sheikh Zayed Rd, Trade Centre 1, DIFC, Dubai, UAE. Phone: `+971 52 350 3297`
+* **North America Office (USA)**: 45627 Basswood Ct, Temecula, CA 92592. Phone: `+1 480 427-6373`
+* **Official Emails**: `sales@clyptus.com` | `hr.india@clyptus.com` | `contact@clyptus.com`
 
 ---
 
