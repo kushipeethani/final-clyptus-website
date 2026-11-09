@@ -214,49 +214,63 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
 
   messagesPayload.push({ role: 'user', content: message });
 
-  // 5. Query Groq API with 8-second timeout
-  try {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000);
+  // 5. Query Groq API with robust model fallback and 12-second timeout
+  const CANDIDATE_MODELS = [
+    'openai/gpt-oss-120b',
+    'openai/gpt-oss-20b',
+    'llama-3.3-70b-versatile',
+    'llama-3.1-8b-instant'
+  ];
 
-    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${groqApiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: messagesPayload,
-        temperature: 0.4,
-        max_tokens: 700,
-        top_p: 0.9,
-      }),
-      signal: controller.signal,
-    });
+  let aiText = '';
 
-    clearTimeout(timeoutId);
+  for (const model of CANDIDATE_MODELS) {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
 
-    if (!groqResponse.ok) {
-      const errText = await groqResponse.text();
-      console.error('Groq API Error Status:', groqResponse.status, errText);
-      return sendJson(200, {
-        success: true,
-        useFallback: true,
-        reason: `Groq error: ${groqResponse.status}`,
+      const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${groqApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model,
+          messages: messagesPayload,
+          temperature: 0.3,
+          max_tokens: 1200,
+        }),
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
+
+      if (groqResponse.ok) {
+        const data: any = await groqResponse.json();
+        const content = data?.choices?.[0]?.message?.content?.trim() || '';
+        if (content) {
+          aiText = content;
+          break; // Successfully got response from Groq
+        }
+      } else {
+        const errText = await groqResponse.text();
+        console.warn(`Groq model ${model} unavailable (${groqResponse.status}):`, errText);
+        // Continue to next candidate model
+      }
+    } catch (modelErr: any) {
+      console.warn(`Groq model ${model} error:`, modelErr?.message || modelErr);
+      // Continue to next candidate model
     }
+  }
 
-    const data: any = await groqResponse.json();
-    const aiText = data?.choices?.[0]?.message?.content?.trim() || '';
+  if (!aiText) {
+    return sendJson(200, { success: true, useFallback: true, reason: 'No Groq models responded' });
+  }
 
-    if (!aiText) {
-      return sendJson(200, { success: true, useFallback: true });
-    }
-
-    // 6. Infer Navigation & Quick Action Recommendations from Query & Answer
-    const lowerQ = message.toLowerCase();
-    const lowerA = aiText.toLowerCase();
+  // 6. Infer Navigation & Quick Action Recommendations from Query & Answer
+  const lowerQ = message.toLowerCase();
+  const lowerA = aiText.toLowerCase();
 
     let pageTarget: string | undefined = undefined;
     const quickActions: QuickActionItem[] = [];
@@ -312,13 +326,4 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
       pageTarget,
       quickActions,
     });
-  } catch (err: any) {
-    console.error('Groq Execution Error:', err?.message || err);
-    // Seamless fallback to local knowledge engine
-    return sendJson(200, {
-      success: true,
-      useFallback: true,
-      reason: 'Groq call timed out or failed.',
-    });
-  }
 }
