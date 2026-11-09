@@ -137,12 +137,13 @@ export async function handleDocumentsRequest(req: IncomingMessage, res: ServerRe
 
   const policy = POLICY_FILE_MAP[docId];
 
-  // Resolve file safely inside server/protected-documents with fallbacks for serverless runtimes
-  let protectedDir = path.resolve(process.cwd(), 'server', 'protected-documents');
+  // Resolve file safely inside backend/protected-documents with fallbacks for serverless runtimes
+  let protectedDir = path.resolve(process.cwd(), 'backend', 'protected-documents');
   if (!fs.existsSync(protectedDir)) {
     const candidateDirs = [
       path.resolve(import.meta.dirname, '..', 'protected-documents'),
-      path.resolve(import.meta.dirname, '..', '..', 'server', 'protected-documents'),
+      path.resolve(import.meta.dirname, '..', '..', 'backend', 'protected-documents'),
+      path.resolve(process.cwd(), 'server', 'protected-documents'),
       path.resolve(process.cwd(), 'public', 'documents'),
     ];
     for (const d of candidateDirs) {

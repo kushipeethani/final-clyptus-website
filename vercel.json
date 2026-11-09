@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "functions": {
     "api/documents.ts": {
-      "includeFiles": "server/protected-documents/**"
+      "includeFiles": "backend/protected-documents/**"
     }
   },
   "headers": [

@@ -9,5 +9,5 @@
     "esModuleInterop": true,
     "strict": false
   },
-  "include": ["**/*.ts", "../server/**/*.ts"]
+  "include": ["**/*.ts", "../backend/**/*.ts"]
 }
