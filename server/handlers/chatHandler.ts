@@ -228,7 +228,7 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
   const method = req.method || 'GET';
   const clientIp =
     (req.headers['x-forwarded-for'] as string)?.split(',')[0].trim() ||
-    req.socket.remoteAddress ||
+    req.socket?.remoteAddress ||
     '127.0.0.1';
 
   const sendJson = (status: number, data: any) => {
@@ -263,23 +263,27 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
     chatRateLimitMap.set(clientIp, { count: 1, windowStart: now });
   }
 
-  // 2. Read Request Body
+  // 2. Read Request Body (supports both pre-parsed Vercel body and raw Node stream)
   let body: any;
-  try {
-    const raw = await new Promise<string>((resolve, reject) => {
-      let accum = '';
-      req.on('data', (chunk) => {
-        accum += chunk;
-        if (accum.length > 50000) {
-          reject(new Error('Payload too large'));
-        }
+  if ((req as any).body !== undefined && (req as any).body !== null) {
+    body = typeof (req as any).body === 'string' ? JSON.parse((req as any).body) : (req as any).body;
+  } else {
+    try {
+      const raw = await new Promise<string>((resolve, reject) => {
+        let accum = '';
+        req.on('data', (chunk) => {
+          accum += chunk;
+          if (accum.length > 50000) {
+            reject(new Error('Payload too large'));
+          }
+        });
+        req.on('end', () => resolve(accum));
+        req.on('error', reject);
       });
-      req.on('end', () => resolve(accum));
-      req.on('error', reject);
-    });
-    body = raw ? JSON.parse(raw) : {};
-  } catch {
-    return sendJson(400, { success: false, error: 'Malformed JSON payload.' });
+      body = raw ? JSON.parse(raw) : {};
+    } catch {
+      return sendJson(400, { success: false, error: 'Malformed JSON payload.' });
+    }
   }
 
   const message = typeof body.message === 'string' ? body.message.trim() : '';

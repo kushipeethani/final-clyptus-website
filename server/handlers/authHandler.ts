@@ -15,7 +15,7 @@ export async function handleAuthRequest(req: IncomingMessage, res: ServerRespons
   const isSecure = req.headers['x-forwarded-proto'] === 'https';
   const clientIp =
     (req.headers['x-forwarded-for'] as string)?.split(',')[0].trim() ||
-    req.socket.remoteAddress ||
+    req.socket?.remoteAddress ||
     '127.0.0.1';
 
   // Helper to send JSON
@@ -28,8 +28,12 @@ export async function handleAuthRequest(req: IncomingMessage, res: ServerRespons
     res.end(JSON.stringify(data));
   };
 
-  // Helper to read JSON body
+  // Helper to read JSON body (supports both pre-parsed Vercel body and raw Node stream)
   const readJsonBody = async (): Promise<any> => {
+    if ((req as any).body !== undefined && (req as any).body !== null) {
+      return typeof (req as any).body === 'string' ? JSON.parse((req as any).body) : (req as any).body;
+    }
+
     return new Promise((resolve, reject) => {
       let body = '';
       req.on('data', (chunk) => {
