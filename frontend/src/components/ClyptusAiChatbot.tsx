@@ -1493,7 +1493,7 @@ Click the navigation button below to explore all published insights directly on 
     ]
   },
 
-  // 20. HR POLICIES & EMPLOYEE COMPLIANCE PORTAL
+  // 20. HR POLICIES & EMPLOYEE COMPLIANCE PORTAL (STRICTLY RESTRICTED)
   {
     category: 'hr-policies',
     keywords: [
@@ -1507,23 +1507,15 @@ Click the navigation button below to explore all published insights directly on 
       /\b(posh|leave policy|maternity policy|disciplinary policy|code of conduct|benefits policy)\b/i,
       /\bwhere (is|are) (the )?(hr\s?policies?|policies?)\b/i
     ],
-    answer: `**Clyptus HR Policies & Employee Compliance Portal**
+    answer: `**Clyptus HR Policies & Employee Compliance Portal (Restricted Access)**
 
-Our official corporate repository contains all workplace guidelines, employee entitlements, and compliance frameworks:
+Clyptus HR policies, employee handbooks, leave entitlements, and compliance frameworks are strictly confidential and restricted to authorized corporate personnel.
 
-• **Available Policy Documents (Protected PDF Downloads)**:
-  1. *Code of Conduct & Professional Ethics*
-  2. *Employee Benefits & Healthcare Coverage*
-  3. *Leave, Maternity & Paternity Policy*
-  4. *Disciplinary Policy & Dispute Resolution*
-  5. *Grievance Redressal Procedure*
-  6. *Clyptus Employee Handbook*
-  7. *POSH (Prevention of Sexual Harassment) Policy*
-  8. *Enterprise Data Privacy & Confidentiality Policy*
-  9. *Rejoin & Alumni Rehire Policy*
+• **Strict Access Restriction**:
+  Internal policy documents, operational guidelines, and employee benefit details are not publicly accessible. Public disclosure of internal policy files is strictly restricted.
 
-• **Secure Corporate Access**:
-  The portal is protected for verified employees and authorized compliance auditors with encrypted credential login.`,
+• **Authorized Employee Access**:
+  To access compliance documents, authorized employees and auditors must sign in with their corporate credentials on our secure HR Policies Portal.`,
     quickActions: [
       { label: 'Go to HR Policies Portal', pageTarget: 'HR Policies' },
       { label: 'Explore Careers', pageTarget: 'Careers' },
@@ -1948,7 +1940,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
         /\b(where can i (find|see) (the )?(hr policies|policies))\b/i,
         /\b(hr policies|policies)(\s+page)?$/i
       ],
-      answer: `**Clyptus HR Policies & Compliance Portal**\n\nOur secure internal repository for company standards, employee entitlements, and compliance:\n\n• **Protected Policy Documents**: Code of Conduct, Employee Benefits, Leave & Maternity Policy, Disciplinary Policy, Grievance Redressal, Employee Handbook, POSH, and Data Privacy.\n• **Secure Login**: Access is protected for verified employees and authorized compliance auditors.\n\nClick below to open the HR Policies Portal.`,
+      answer: `**Clyptus HR Policies & Compliance Portal (Restricted Access)**\n\nAll employee policies, handbooks, and compliance frameworks are strictly confidential and restricted to authorized corporate personnel.\n\n• **Access Restriction**: Internal policy documents are not publicly disclosed.\n• **Authorized Access**: Active employees and auditors must log in with authorized corporate credentials to access compliance files.\n\nClick below to open the secure portal.`,
       secondaryActions: [
         { label: 'Explore Careers', pageTarget: 'Careers' },
         { label: 'Contact Us', pageTarget: 'Contact' }

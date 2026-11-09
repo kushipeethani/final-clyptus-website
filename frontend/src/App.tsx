@@ -187,17 +187,17 @@ export function App() {
     setAuthenticatedUser(null);
   };
 
-  // Restore authenticated HR session on initial mount / page refresh
+  // Sign out whenever user navigates away from HR Policies to keep confidential documents strictly restricted
   useEffect(() => {
-    fetch('/api/auth/session', { credentials: 'same-origin' })
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data && data.authenticated && data.user?.username) {
-          setIsHrAuthenticated(true);
-          setAuthenticatedUser(data.user.username);
-        }
-      })
-      .catch(() => {});
+    if (currentPage !== 'HR Policies' && isHrAuthenticated) {
+      handleHrLogout();
+    }
+  }, [currentPage, isHrAuthenticated]);
+
+  // Ensure fresh signout on initial mount or page refresh so restricted policies are never exposed by default
+  useEffect(() => {
+    setIsHrAuthenticated(false);
+    setAuthenticatedUser(null);
   }, []);
 
   // Filter cards by search term
