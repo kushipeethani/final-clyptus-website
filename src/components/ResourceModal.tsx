@@ -49,81 +49,10 @@ export const ResourceModal: React.FC<ResourceModalProps> = ({ type, onClose, onN
           </button>
         </div>
 
-        {/* Modal Scrollable Content */}
-        <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm font-sans leading-relaxed text-slate-300">
-          {type === 'privacy' && (
-            <div className="space-y-6">
-              <section className="p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50">
-                <h4 className="text-base font-extrabold text-white mb-2">1. Data Privacy Commitment</h4>
-                <p>
-                  At Clyptus Software Solutions, we take data security and user privacy with utmost seriousness. We comply with GDPR, CCPA, and global ISO/IEC 27001 standards to ensure all client, partner, and enterprise employee data remains encrypted and safeguarded.
-                </p>
-              </section>
-
-              <section className="space-y-3">
-                <h4 className="text-base font-extrabold text-white">2. Information Collection & Usage</h4>
-                <p>
-                  We collect professional contact information provided during consultation requests, SAP ERP audit inquiries, and talent deployment registrations. This data is strictly utilized for fulfilling operational agreements and optimizing enterprise solution deliveries.
-                </p>
-              </section>
-
-              <section className="space-y-3">
-                <h4 className="text-base font-extrabold text-white">3. Third-Party Sharing & Storage</h4>
-                <p>
-                  Clyptus never sells, rents, or monetizes client or enterprise data to third parties. Data processed through our SAP Cloud and AI platforms is maintained within tier-4 certified cloud data centers with end-to-end AES-256 encryption.
-                </p>
-              </section>
-            </div>
-          )}
-
-          {type === 'terms' && (
-            <div className="space-y-6">
-              <section className="p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50">
-                <h4 className="text-base font-extrabold text-white mb-2">1. Terms of Enterprise Service</h4>
-                <p>
-                  By utilizing Clyptus ERP transformation services, AI solutions, or IT talent deployment tools, you agree to comply with our Master Services Agreement (MSA) and standard professional conduct guidelines.
-                </p>
-              </section>
-
-              <section className="space-y-3">
-                <h4 className="text-base font-extrabold text-white">2. Intellectual Property Rights</h4>
-                <p>
-                  All proprietary SAP Rapid Deployment Solution (RDS) packages, AI agent custom models, and pre-built software accelerators created by Clyptus remain the exclusive IP of Clyptus Software Solutions, unless explicitly assigned under custom client contracts.
-                </p>
-              </section>
-
-              <section className="space-y-3">
-                <h4 className="text-base font-extrabold text-white">3. Service Level Agreements (SLAs)</h4>
-                <p>
-                  Enterprise SAP AMS and AI system uptime SLAs are maintained at 99.9% availability, monitored 24/7 by our dedicated global operations centers in India and UAE.
-                </p>
-              </section>
-            </div>
-          )}
-
-          {type === 'cookies' && (
-            <div className="space-y-6">
-              <section className="p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50">
-                <h4 className="text-base font-extrabold text-white mb-2">Cookie Usage Notice</h4>
-                <p>
-                  Our website uses essential performance cookies to enhance user navigation across 3D interactive stages, store session parameters, and maintain high-speed CDN delivery.
-                </p>
-              </section>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-slate-800/30 border border-slate-700/40">
-                  <h5 className="font-extrabold text-blue-400 mb-1">Essential Cookies</h5>
-                  <p className="text-xs text-slate-400">Required for website security, 3D Canvas rendering, and page routing state.</p>
-                </div>
-                <div className="p-4 rounded-2xl bg-slate-800/30 border border-slate-700/40">
-                  <h5 className="font-extrabold text-sky-400 mb-1">Analytics Cookies</h5>
-                  <p className="text-xs text-slate-400">Helps us measure site traffic performance and refine user experience.</p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {type === 'faqs' && (
+        {/* Modal Scrollable Content (Inner data removed for privacy, terms, and cookies per request) */}
+        {(type === 'faqs' || type === 'insights') && (
+          <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-sm font-sans leading-relaxed text-slate-300">
+            {type === 'faqs' && (
             <div className="space-y-4">
               <div className="p-5 rounded-2xl bg-slate-800/40 border border-slate-700/60">
                 <h4 className="text-base font-extrabold text-white mb-2">Q: What core SAP services does Clyptus specialize in?</h4>
@@ -166,6 +95,7 @@ export const ResourceModal: React.FC<ResourceModalProps> = ({ type, onClose, onN
             </div>
           )}
         </div>
+        )}
 
         {/* Modal Footer */}
         <div className="p-6 border-t border-slate-800 bg-slate-900/90 flex flex-col sm:flex-row items-center justify-between gap-4">
