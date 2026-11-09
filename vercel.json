@@ -16,9 +16,19 @@
     }
   ],
   "rewrites": [
+    { "source": "/services", "destination": "/services/index.html" },
     { "source": "/sap", "destination": "/sap/index.html" },
     { "source": "/ai", "destination": "/ai/index.html" },
+    { "source": "/cloud", "destination": "/cloud/index.html" },
+    { "source": "/security", "destination": "/security/index.html" },
+    { "source": "/crm", "destination": "/crm/index.html" },
+    { "source": "/salesforce", "destination": "/salesforce/index.html" },
+    { "source": "/data-engineering", "destination": "/data-engineering/index.html" },
     { "source": "/recruiting", "destination": "/recruiting/index.html" },
+    { "source": "/industries", "destination": "/industries/index.html" },
+    { "source": "/about", "destination": "/about/index.html" },
+    { "source": "/careers", "destination": "/careers/index.html" },
+    { "source": "/blogs", "destination": "/blogs/index.html" },
     { "source": "/contact", "destination": "/contact/index.html" },
     { "source": "/((?!api/|.*\\..*).*)", "destination": "/index.html" }
   ]
