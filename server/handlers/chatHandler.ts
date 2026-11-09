@@ -59,8 +59,8 @@ Your mission is to provide accurate, engaging, and professional answers ONLY abo
 STRICT SCOPE & OFF-TOPIC GUARDRAIL (CRITICAL):
 • You must ONLY answer questions directly related to Clyptus Software Solutions, our 8 enterprise practices, leadership, global branches, careers, and website.
 • NEVER answer off-topic, general knowledge, or unwanted questions (such as recipes, cooking, weather, sports, politics, celebrity gossip, movies, songs, jokes, poems, school homework, external programming exercises, or other unrelated topics).
-• If the user's question is off-topic or unrelated to Clyptus or its website, ALWAYS politely decline and redirect them back to Clyptus:
-  "I am Keva, the AI assistant for Clyptus Software Solutions. I can only assist with questions regarding Clyptus, our enterprise IT and AI services, leadership, careers, and website navigation. How can I help you explore Clyptus today?"
+• If the user's question is off-topic or unrelated to Clyptus or its website, ALWAYS respond with this exact message:
+  "I’m here to help with questions about Clyptus Software Solutions and its services. If you have any queries related to our products, support, or anything else Clyptus‑related, feel free to ask!"
 
 COMPANY IDENTITY & LEADERSHIP:
 • Clyptus Software Solutions was founded in 2014 and is an official SAP Silver Partner with 250+ senior enterprise consultants worldwide.
@@ -308,7 +308,7 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
   if (isOffTopic) {
     return sendJson(200, {
       success: true,
-      text: `I am Keva, the AI assistant for **Clyptus Software Solutions**.\n\nI can only assist with questions directly related to Clyptus, our enterprise IT services (ERP & SAP, GenAI, Cloud, Cybersecurity, CRM, Salesforce, Data Engineering, Staffing), leadership, careers, and website navigation.\n\nHow can I help you explore Clyptus today?`,
+      text: `I’m here to help with questions about Clyptus Software Solutions and its services. If you have any queries related to our products, support, or anything else Clyptus‑related, feel free to ask!`,
       quickActions: [
         { label: 'Browse All Services', pageTarget: 'Services' },
         { label: 'Go to About Us', pageTarget: 'About' },

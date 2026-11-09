@@ -2026,7 +2026,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
 
     if (OFF_TOPIC_REGEXES.some((r) => r.test(cleanQuery))) {
       return {
-        text: `I am Keva, the AI assistant for **Clyptus Software Solutions**.\n\nI can only assist with questions directly related to Clyptus, our enterprise IT services (ERP & SAP, GenAI, Cloud, Cybersecurity, CRM, Salesforce, Data Engineering, Staffing), leadership, careers, and website navigation.\n\nHow can I help you explore Clyptus today?`,
+        text: `I’m here to help with questions about Clyptus Software Solutions and its services. If you have any queries related to our products, support, or anything else Clyptus‑related, feel free to ask!`,
         quickActions: [
           { label: 'Browse All Services', pageTarget: 'Services' },
           { label: 'Go to About Us', pageTarget: 'About' },
@@ -2115,7 +2115,7 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
 
     // 3. Fallback when no match is found (Polite website-focused boundary response)
     return {
-      text: `I can only provide information related to **Clyptus Software Solutions** and the enterprise services on our website.
+      text: `I’m here to help with questions about Clyptus Software Solutions and its services. If you have any queries related to our products, support, or anything else Clyptus‑related, feel free to ask!
 
 Here are the key areas you can explore across Clyptus:
 • **ERP & SAP Services**: S/4HANA migrations, SAP BRIM billing, and SAP BTP clean core
