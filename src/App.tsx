@@ -154,15 +154,27 @@ export function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: u, password: p }),
       });
-      const data = await res.json();
-      if (res.ok && data.success) {
+      let data: any = null;
+      try {
+        data = await res.json();
+      } catch {
+        const text = await res.text().catch(() => '');
+        return {
+          success: false,
+          error: `Authentication service error (HTTP ${res.status}): ${text || 'Server returned invalid response.'}`,
+        };
+      }
+      if (res.ok && data?.success) {
         setIsHrAuthenticated(true);
         setAuthenticatedUser(data.user.username);
         return { success: true };
       }
-      return { success: false, error: data.error || 'Invalid credentials. Access denied.' };
-    } catch {
-      return { success: false, error: 'Authentication service unreachable. Please try again.' };
+      return { success: false, error: data?.error || 'Invalid credentials. Access denied.' };
+    } catch (err: any) {
+      return {
+        success: false,
+        error: `Authentication service unreachable (${err?.message || 'Network error'}). Please try again.`,
+      };
     }
   };
 

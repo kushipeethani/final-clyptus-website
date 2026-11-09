@@ -90,8 +90,19 @@ const POLICY_FILE_MAP: Record<string, { fileName: string; title: string }> = {
 
 export async function handleDocumentsRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const method = req.method || 'GET';
+  if (method === 'OPTIONS') {
+    res.writeHead(204, {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      'Access-Control-Max-Age': '86400',
+    });
+    res.end();
+    return;
+  }
+
   if (method !== 'GET' && method !== 'HEAD') {
-    res.writeHead(405, { 'Content-Type': 'application/json' });
+    res.writeHead(405, { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
     res.end(JSON.stringify({ error: 'Method not allowed' }));
     return;
   }

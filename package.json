@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/node": "^24.13.3",
     "dompurify": "^3.4.17",
     "framer-motion": "^14.0.0",
     "globe.gl": "^2.46.2",
@@ -25,7 +26,6 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@types/dompurify": "^3.0.5",
-    "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
     "@types/three": "^0.186.0",

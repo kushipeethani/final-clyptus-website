@@ -231,10 +231,23 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
     req.socket?.remoteAddress ||
     '127.0.0.1';
 
+  // Handle CORS preflight
+  if (method === 'OPTIONS') {
+    res.writeHead(204, {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      'Access-Control-Max-Age': '86400',
+    });
+    res.end();
+    return;
+  }
+
   const sendJson = (status: number, data: any) => {
     res.writeHead(status, {
       'Content-Type': 'application/json',
       'X-Content-Type-Options': 'nosniff',
+      'Access-Control-Allow-Origin': '*',
     });
     res.end(JSON.stringify(data));
   };
@@ -267,22 +280,32 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
   let body: any;
   if ((req as any).body !== undefined && (req as any).body !== null) {
     body = typeof (req as any).body === 'string' ? JSON.parse((req as any).body) : (req as any).body;
+  } else if (req.readableEnded || (req as any).complete) {
+    body = {};
   } else {
     try {
-      const raw = await new Promise<string>((resolve, reject) => {
+      const raw = await new Promise<string>((resolve) => {
         let accum = '';
+        const timer = setTimeout(() => resolve(''), 2500);
         req.on('data', (chunk) => {
           accum += chunk;
           if (accum.length > 50000) {
-            reject(new Error('Payload too large'));
+            clearTimeout(timer);
+            resolve('');
           }
         });
-        req.on('end', () => resolve(accum));
-        req.on('error', reject);
+        req.on('end', () => {
+          clearTimeout(timer);
+          resolve(accum);
+        });
+        req.on('error', () => {
+          clearTimeout(timer);
+          resolve('');
+        });
       });
       body = raw ? JSON.parse(raw) : {};
     } catch {
-      return sendJson(400, { success: false, error: 'Malformed JSON payload.' });
+      body = {};
     }
   }
 

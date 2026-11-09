@@ -1,9 +1,6 @@
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleAuthRequest } from '../../server/handlers/authHandler';
+import { handleLogoutRequest } from '../../server/handlers/authHandler';
 
 export default async function handler(req: IncomingMessage, res: ServerResponse) {
-  if (!req.url || req.url === '/' || !req.url.includes('/logout')) {
-    req.url = '/api/auth/logout';
-  }
-  return handleAuthRequest(req, res);
+  return handleLogoutRequest(req, res);
 }

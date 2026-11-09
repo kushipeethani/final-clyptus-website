@@ -43,10 +43,23 @@ export async function handleContactRequest(req: IncomingMessage, res: ServerResp
     req.socket?.remoteAddress ||
     '127.0.0.1';
 
+  // Handle CORS preflight
+  if (method === 'OPTIONS') {
+    res.writeHead(204, {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+      'Access-Control-Max-Age': '86400',
+    });
+    res.end();
+    return;
+  }
+
   const sendJson = (status: number, data: any) => {
     res.writeHead(status, {
       'Content-Type': 'application/json',
       'X-Content-Type-Options': 'nosniff',
+      'Access-Control-Allow-Origin': '*',
     });
     res.end(JSON.stringify(data));
   };
