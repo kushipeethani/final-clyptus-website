@@ -18,6 +18,13 @@ const chatRateLimitMap = new Map<string, { count: number; windowStart: number }>
 const CHAT_WINDOW_MS = 60 * 1000; // 1 minute
 const MAX_CHAT_PER_MINUTE = 40;
 
+// Groq API quota & rate limit cooldown tracker:
+// When Groq returns 429 (rate limit) or 401/402/403 (quota/billing limit),
+// we instantly enter cooldown so all subsequent messages fallback to the local
+// question-answering system with zero delay or failed network attempts.
+let groqCooldownUntil = 0;
+let groqCooldownReason = '';
+
 function getGroqApiKey(): string | undefined {
   if (process.env.GROQ_API_KEY && process.env.GROQ_API_KEY.trim()) {
     return process.env.GROQ_API_KEY.trim();
@@ -194,7 +201,13 @@ export function sanitizeAndFormatChat(text: string): string {
 
   // Remove any remaining raw HTML tags
   let result = processedLines.join('\n');
-  result = result.replace(/<\/?(br|p|div|span|strong|b|em|i)>/gi, '');
+  result = result.replace(/<[^>]*>/g, '');
+
+  // Clean any stray table boundary pipes or markdown markers
+  result = result
+    .replace(/^\|\s*/gm, '• ')
+    .replace(/\s*\|$/gm, '')
+    .replace(/\s*\|\s*/g, ' — ');
 
   return result.trim();
 }
@@ -275,6 +288,15 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
     });
   }
 
+  // Auto-Fallback: Check if Groq API is in quota exhaustion or rate-limit cooldown
+  if (Date.now() < groqCooldownUntil) {
+    return sendJson(200, {
+      success: true,
+      useFallback: true,
+      reason: groqCooldownReason || 'Groq API quota/rate-limit cooldown active. Using local default QA system.',
+    });
+  }
+
   // 4. Build Groq Chat Payload
   const messagesPayload: Array<{ role: 'system' | 'user' | 'assistant'; content: string }> = [
     { role: 'system', content: SYSTEM_PROMPT },
@@ -328,12 +350,35 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
         const content = data?.choices?.[0]?.message?.content?.trim() || '';
         if (content) {
           aiText = content;
+          groqCooldownUntil = 0; // Reset cooldown on successful response
           break; // Successfully got response from Groq
         }
       } else {
         const errText = await groqResponse.text();
-        console.warn(`Groq model ${model} unavailable (${groqResponse.status}):`, errText);
-        // Continue to next candidate model
+        const status = groqResponse.status;
+        console.warn(`Groq model ${model} unavailable (${status}):`, errText);
+
+        // Check if error is due to rate limiting, quota exhaustion, or invalid auth
+        const isQuotaOrRateLimit =
+          status === 429 ||
+          status === 402 ||
+          status === 403 ||
+          status === 401 ||
+          /rate_limit|rate limit|quota|insufficient_quota|exceeded.*quota|too many requests|tokens per minute|tpm|rpm/i.test(errText);
+
+        if (isQuotaOrRateLimit) {
+          // Key limit reached across all models! Trying other candidate models will fail identically.
+          // Set cooldown for 60 seconds and immediately fall back to the local question answering system.
+          groqCooldownUntil = Date.now() + 60 * 1000;
+          groqCooldownReason = `Groq API limit exceeded (${status}). Active cooldown enabled.`;
+          console.warn(`[ChatHandler] Groq API limit reached (${status}). Auto-falling back to local default QA.`);
+          return sendJson(200, {
+            success: true,
+            useFallback: true,
+            reason: 'Groq API rate limit or quota exceeded. Switched to local default QA system.',
+          });
+        }
+        // Continue to next candidate model if it's just a model-specific error
       }
     } catch (modelErr: any) {
       console.warn(`Groq model ${model} error:`, modelErr?.message || modelErr);

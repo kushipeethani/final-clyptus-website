@@ -2152,20 +2152,18 @@ Use any of the buttons below to jump directly to that page:`,
       console.warn('API Chat call failed, using local knowledge engine fallback:', err);
     }
 
-    // 2. High-speed local knowledge engine fallback
-    setTimeout(() => {
-      const response = findAnswer(text);
-      const aiMessage: Message = {
-        id: `ai-${Date.now()}`,
-        sender: 'ai',
-        text: response.text,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        quickActions: response.quickActions
-      };
+    // 2. High-speed instant fallback to local question answering system
+    const response = findAnswer(text);
+    const aiMessage: Message = {
+      id: `ai-${Date.now()}`,
+      sender: 'ai',
+      text: response.text,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      quickActions: response.quickActions
+    };
 
-      setMessages((prev) => [...prev, aiMessage]);
-      setIsTyping(false);
-    }, 350);
+    setMessages((prev) => [...prev, aiMessage]);
+    setIsTyping(false);
   };
 
   const handleClearChat = () => {
