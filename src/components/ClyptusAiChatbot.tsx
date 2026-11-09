@@ -4,9 +4,9 @@ import {
   Send, 
   X, 
   RotateCcw, 
-  ArrowRight, 
-  BotMessageSquare
+  ArrowRight 
 } from 'lucide-react';
+import { KevaBotLogo } from './KevaBotLogo';
 
 interface ClyptusAiChatbotProps {
   onNavigate?: (page: string) => void;
@@ -861,7 +861,7 @@ Please ask something related to Clyptus Software Solutions and our website:
           <a
             key={pIdx}
             href={`mailto:${part}`}
-            className="font-medium text-orange-600 hover:text-orange-700 underline underline-offset-2 decoration-orange-300 hover:decoration-orange-600 transition-colors select-text inline-flex items-center gap-0.5"
+            className="font-medium text-blue-600 hover:text-blue-800 underline underline-offset-2 decoration-blue-300 hover:decoration-blue-600 transition-colors select-text inline-flex items-center gap-0.5"
             title={`Send email to ${part}`}
           >
             <span>{part}</span>
@@ -876,7 +876,7 @@ Please ask something related to Clyptus Software Solutions and our website:
           <a
             key={pIdx}
             href={`tel:${cleanPhone}`}
-            className="font-medium text-slate-700 hover:text-orange-600 underline underline-offset-2 decoration-slate-300 hover:decoration-orange-400 transition-colors select-text inline-flex items-center gap-0.5"
+            className="font-medium text-slate-700 hover:text-blue-600 underline underline-offset-2 decoration-slate-300 transition-colors select-text inline-flex items-center gap-0.5"
             title={`Call ${part}`}
           >
             <span>{part}</span>
@@ -922,7 +922,7 @@ Please ask something related to Clyptus Software Solutions and our website:
         const rest = numberedMatch[2];
         return (
           <div key={idx} className="flex items-start gap-2.5 my-1.5 pl-0.5">
-            <span className="w-5 h-5 rounded-full bg-orange-50 text-orange-600 font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5 border border-orange-200/70">
+            <span className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5 border border-blue-200/70">
               {num}
             </span>
             <div className="flex-1 text-slate-700 leading-relaxed text-sm sm:text-[15px]">
@@ -937,7 +937,7 @@ Please ask something related to Clyptus Software Solutions and our website:
         const bulletText = line.replace(/^[\s•-]+/, '');
         return (
           <div key={idx} className="flex items-start gap-2.5 my-1 pl-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-orange-400 mt-2.5 shrink-0" />
+            <span className="w-1.5 h-1.5 rounded-full bg-slate-400 mt-2.5 shrink-0" />
             <div className="flex-1 text-slate-700 leading-relaxed text-sm sm:text-[15px]">
               {renderInlineContent(bulletText)}
             </div>
@@ -987,13 +987,14 @@ Please ask something related to Clyptus Software Solutions and our website:
                 }}
               />
 
-              {/* Inner Pill Button (Icon Removed, Text 'Ask Keva') */}
+              {/* Inner Pill Button with Exact Keva Logo beside 'Ask Keva' */}
               <button
                 onClick={() => setIsOpen(true)}
-                className="relative z-10 flex items-center justify-center rounded-full bg-white text-slate-900 px-4 py-1.5 sm:px-5 sm:py-2 transition-all cursor-pointer select-none"
+                className="relative z-10 flex items-center justify-center gap-1.5 sm:gap-2 rounded-full bg-white text-slate-900 px-3.5 py-1.5 sm:px-4 sm:py-2 transition-all cursor-pointer select-none"
                 title="Ask Keva"
                 aria-label="Ask Keva"
               >
+                <KevaBotLogo className="w-4 h-4 sm:w-5 sm:h-5 text-slate-900 group-hover:text-orange-600 transition-colors shrink-0" />
                 <span className="font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 group-hover:text-orange-600 transition-colors whitespace-nowrap">
                   Ask Keva
                 </span>
@@ -1032,74 +1033,61 @@ Please ask something related to Clyptus Software Solutions and our website:
               height: typeof window !== 'undefined' && window.innerWidth < 640 ? undefined : `${dimensions.height}px`,
               transformOrigin: 'top right'
             }}
-            className={`fixed inset-x-2.5 top-2.5 bottom-2.5 sm:inset-auto sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] sm:max-w-[calc(100vw-32px)] sm:max-h-[calc(100dvh-32px)] bg-white/95 backdrop-blur-2xl rounded-2xl sm:rounded-3xl shadow-[0_24px_70px_-15px_rgba(255,113,56,0.2),0_12px_40px_rgba(59,130,246,0.12),0_1px_3px_rgba(0,0,0,0.06)] border border-white/80 flex flex-col overflow-hidden origin-top-right will-change-transform ${
+            className={`fixed inset-x-2.5 top-2.5 bottom-2.5 sm:inset-auto sm:top-4 sm:right-6 lg:top-3.5 lg:right-8 z-[70] sm:max-w-[calc(100vw-32px)] sm:max-h-[calc(100dvh-32px)] bg-white rounded-2xl sm:rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3),0_0_25px_rgba(255,113,56,0.18)] border border-slate-200/90 flex flex-col overflow-hidden origin-top-right will-change-transform ${
               isResizing ? 'transition-none select-none' : ''
             }`}
           >
-          {/* Ambient Aurora Glows (Behind Content) */}
-          <div className="absolute -top-24 -left-24 w-72 h-72 bg-gradient-to-br from-orange-400/20 via-amber-300/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute top-1/3 -right-24 w-64 h-64 bg-gradient-to-bl from-sky-400/15 via-teal-300/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-12 w-64 h-64 bg-gradient-to-tr from-amber-400/15 via-orange-300/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-
           {/* Edge Drag Handles for Resizing (Desktop Only) */}
           <div className="hidden sm:block">
             {/* Left edge drag handle */}
             <div
               onMouseDown={(e) => startResize(e, 'left')}
               onTouchStart={(e) => startResize(e, 'left')}
-              className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-orange-500/15 active:bg-orange-500/25 transition-colors z-30"
+              className="absolute left-0 top-0 bottom-6 w-2.5 cursor-w-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
               title="Drag to resize width"
             />
             {/* Bottom edge drag handle */}
             <div
               onMouseDown={(e) => startResize(e, 'bottom')}
               onTouchStart={(e) => startResize(e, 'bottom')}
-              className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-orange-500/15 active:bg-orange-500/25 transition-colors z-30"
+              className="absolute left-6 right-0 bottom-0 h-2.5 cursor-s-resize hover:bg-blue-500/15 active:bg-blue-500/25 transition-colors z-30"
               title="Drag to resize height"
             />
             {/* Bottom-Left corner drag handle */}
             <div
               onMouseDown={(e) => startResize(e, 'bottom-left')}
               onTouchStart={(e) => startResize(e, 'bottom-left')}
-              className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-orange-500/20 active:bg-orange-500/30 rounded-bl-3xl transition-colors z-40 group"
+              className="absolute left-0 bottom-0 w-6 h-6 cursor-sw-resize flex items-end justify-start p-1.5 hover:bg-blue-500/20 active:bg-blue-500/30 rounded-bl-3xl transition-colors z-40 group"
               title="Drag edge to resize"
             >
               <div className="w-2.5 h-2.5 flex flex-col justify-end items-start gap-[2px] opacity-40 group-hover:opacity-100 transition-opacity">
-                <div className="w-1 h-[2px] bg-slate-300 group-hover:bg-orange-500 rounded-full" />
-                <div className="w-2 h-[2px] bg-slate-300 group-hover:bg-orange-500 rounded-full" />
-                <div className="w-2.5 h-[2px] bg-slate-300 group-hover:bg-orange-500 rounded-full" />
+                <div className="w-1 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                <div className="w-2 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
+                <div className="w-2.5 h-[2px] bg-slate-400 group-hover:bg-blue-600 rounded-full" />
               </div>
             </div>
           </div>
 
-          {/* Header Bar - Liquid Glass & Aurora (Strictly No Black) */}
-          <div className="shrink-0 relative px-4 sm:px-5 py-3.5 bg-white/85 backdrop-blur-xl border-b border-slate-100/90 flex items-center justify-between z-20">
-            {/* Shimmering Top Aurora Ribbon */}
-            <div className="absolute top-0 inset-x-0 h-[2.5px] bg-gradient-to-r from-orange-500 via-amber-400 via-sky-400 to-indigo-500 opacity-90" />
-            {/* Ambient soft glow under ribbon */}
-            <div className="absolute -top-3 inset-x-0 h-8 bg-gradient-to-r from-orange-400/20 via-amber-300/15 to-sky-400/20 blur-md pointer-events-none" />
+          {/* Header Bar */}
+          <div className="shrink-0 relative px-4 sm:px-5 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-between border-b border-slate-800">
+            {/* Subtle ambient light */}
+            <div className="absolute top-0 right-1/4 w-32 h-6 bg-blue-500/15 blur-lg pointer-events-none" />
 
             <div className="flex items-center gap-2.5 relative z-10">
-              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-orange-500 via-amber-500 to-sky-500 flex items-center justify-center text-white shadow-[0_2px_10px_rgba(255,113,56,0.3)]">
-                <BotMessageSquare className="w-5 h-5 stroke-[2.2]" />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white" />
+              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 flex items-center justify-center text-white shadow-sm">
+                <KevaBotLogo className="w-5 h-5 text-white" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-slate-900" />
               </div>
-              <div className="flex flex-col text-left">
-                <h3 className="font-bold text-[15px] bg-gradient-to-r from-slate-900 via-slate-800 to-orange-600 bg-clip-text text-transparent tracking-tight leading-tight">
-                  Ask Keva
-                </h3>
-                <span className="text-[10px] font-medium text-emerald-600 flex items-center gap-1 leading-tight mt-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                  AI Assistant Online
-                </span>
+              <div className="flex items-center text-left">
+                <h3 className="font-bold text-[15px] text-white tracking-tight">Ask Keva</h3>
               </div>
             </div>
 
-            {/* Action Buttons: Reset, Close (Frosted Light Glass Buttons, No Black) */}
-            <div className="flex items-center gap-1.5 relative z-10">
+            {/* Action Buttons: Reset, Close */}
+            <div className="flex items-center gap-1 relative z-10">
               <button
                 onClick={handleClearChat}
-                className="p-1.5 rounded-xl text-slate-500 hover:text-orange-600 hover:bg-orange-50/80 border border-slate-200/60 hover:border-orange-200/80 transition-all cursor-pointer shadow-2xs active:scale-95"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors cursor-pointer"
                 title="Restart conversation"
                 aria-label="Restart conversation"
               >
@@ -1107,7 +1095,7 @@ Please ask something related to Clyptus Software Solutions and our website:
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-xl text-slate-500 hover:text-red-500 hover:bg-red-50/80 border border-slate-200/60 hover:border-red-200/80 transition-all cursor-pointer shadow-2xs active:scale-95"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-red-500/20 hover:text-red-400 transition-colors cursor-pointer"
                 title="Close chat"
                 aria-label="Close chat"
               >
@@ -1116,8 +1104,8 @@ Please ask something related to Clyptus Software Solutions and our website:
             </div>
           </div>
 
-          {/* Chat Messages Body - Liquid Glass with Aurora Ambient Backing */}
-          <div className="flex-1 min-h-0 p-3.5 sm:p-4 overflow-y-auto space-y-3.5 bg-gradient-to-b from-white/70 via-slate-50/50 to-orange-50/20 text-left relative z-10">
+          {/* Chat Messages Body - min-h-0 ensures container scrolls and never pushes input off-screen */}
+          <div className="flex-1 min-h-0 p-3.5 sm:p-4 overflow-y-auto space-y-3.5 bg-slate-50/60 text-left">
                 {messages.map((msg) => (
                   <div
                     key={msg.id}
@@ -1125,16 +1113,16 @@ Please ask something related to Clyptus Software Solutions and our website:
                   >
                     <div className="flex items-end gap-2 max-w-[92%]">
                       {msg.sender === 'ai' && (
-                        <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-orange-500 via-amber-500 to-sky-500 text-white flex items-center justify-center shrink-0 mb-1 shadow-2xs">
-                          <BotMessageSquare className="w-4 h-4 stroke-[2.2]" />
+                        <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shrink-0 mb-1 shadow-2xs">
+                          <KevaBotLogo className="w-4 h-4 text-white" />
                         </div>
                       )}
 
                       <div
-                        className={`rounded-2xl px-4 py-3 text-sm sm:text-[15px] leading-relaxed ${
+                        className={`rounded-2xl px-4 py-3 text-sm sm:text-[15px] leading-relaxed shadow-xs ${
                           msg.sender === 'user'
-                            ? 'bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white rounded-tr-xs font-normal shadow-[0_3px_14px_rgba(255,113,56,0.25)]'
-                            : 'bg-white/95 backdrop-blur-md text-slate-800 border border-slate-200/80 rounded-tl-xs font-normal shadow-[0_2px_12px_rgba(0,0,0,0.03)]'
+                            ? 'bg-blue-600 text-white rounded-tr-none font-normal'
+                            : 'bg-white text-slate-800 border border-slate-200/80 rounded-tl-none font-normal'
                         }`}
                       >
                         {msg.sender === 'user' ? (
@@ -1166,10 +1154,10 @@ Please ask something related to Clyptus Software Solutions and our website:
                                 handleActionClick(action.pageTarget);
                               }
                             }}
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-[13px] font-medium bg-white/85 backdrop-blur-sm hover:bg-orange-50/80 text-slate-700 hover:text-orange-600 border border-slate-200/80 hover:border-orange-300 shadow-[0_1px_4px_rgba(0,0,0,0.03)] hover:shadow-[0_2px_12px_rgba(255,113,56,0.18)] transition-all hover:scale-[1.02] cursor-pointer active:scale-95"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-[13px] font-medium bg-white hover:bg-slate-100 text-slate-700 hover:text-slate-900 border border-slate-200 shadow-2xs transition-all hover:scale-[1.02] cursor-pointer active:scale-95"
                           >
                             <span>{action.label}</span>
-                            <ArrowRight className="w-3 h-3 text-slate-400 group-hover:text-orange-500" />
+                            <ArrowRight className="w-3 h-3 text-slate-400" />
                           </button>
                         ))}
                       </div>
@@ -1185,13 +1173,13 @@ Please ask something related to Clyptus Software Solutions and our website:
                 {/* Animated Typing Indicator */}
                 {isTyping && (
                   <div className="flex items-center gap-2 text-slate-500 animate-in fade-in">
-                    <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-orange-500 via-amber-500 to-sky-500 text-white flex items-center justify-center shrink-0 shadow-2xs">
-                      <BotMessageSquare className="w-4 h-4 stroke-[2.2]" />
+                    <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 text-white flex items-center justify-center shrink-0">
+                      <KevaBotLogo className="w-4 h-4 text-white" />
                     </div>
-                    <div className="px-3.5 py-2 rounded-2xl rounded-tl-xs bg-white/95 backdrop-blur-md border border-slate-200/80 shadow-[0_2px_10px_rgba(0,0,0,0.03)] flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+                    <div className="px-3 py-2 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 )}
@@ -1199,8 +1187,8 @@ Please ask something related to Clyptus Software Solutions and our website:
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Input Control Bar - Liquid Glass Dock */}
-              <div className="shrink-0 p-3 bg-white/85 backdrop-blur-xl border-t border-slate-100 flex flex-col gap-1.5 pb-[max(0.75rem,env(safe-area-inset-bottom))] relative z-20">
+              {/* Input Control Bar - shrink-0 ensures input is always fixed and visible */}
+              <div className="shrink-0 p-3 bg-white border-t border-slate-200/80 flex flex-col gap-1.5 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -1213,13 +1201,13 @@ Please ask something related to Clyptus Software Solutions and our website:
                     type="text"
                     value={inputQuery}
                     onChange={(e) => setInputQuery(e.target.value)}
-                    placeholder="Ask Keva anything..."
-                    className="flex-1 px-4 py-2.5 rounded-full bg-white/90 border border-slate-200/80 text-sm sm:text-[15px] text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-orange-400 focus:ring-2 focus:ring-orange-400/25 focus:bg-white transition-all shadow-[inset_0_1px_2px_rgba(0,0,0,0.03)]"
+                    placeholder="Ask Keva..."
+                    className="flex-1 px-4 py-2.5 rounded-full bg-slate-100/90 border border-slate-200 text-sm sm:text-[15px] text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition-all shadow-inner"
                   />
                   <button
                     type="submit"
                     disabled={!inputQuery.trim() || isTyping}
-                    className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-[0_4px_16px_rgba(255,113,56,0.4)] shadow-[0_2px_8px_rgba(255,113,56,0.25)] active:scale-95 transition-all shrink-0 cursor-pointer"
+                    className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-95 shadow-xs active:scale-95 transition-all shrink-0 cursor-pointer"
                     title="Send query"
                     aria-label="Send query"
                   >
