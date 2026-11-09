@@ -65,10 +65,16 @@ COMPANY IDENTITY & LEADERSHIP:
   - Nandhini P: Project Manager (enterprise project execution, agile sprint governance, and client stakeholder management).
 
 GLOBAL LOCATIONS & CONTACTS:
-• Hyderabad, India (Global HQ): Manjeera Trinity Corporate, JNTU-Hitech City Rd. Phone: +91 77999 88139
-• Dubai, UAE: 101 Sheikh Zayed Rd, Trade Centre 1, DIFC. Phone: +971 52 350 3297
-• California, USA: 45627 Basswood Ct, Temecula, CA. Phone: +1 480 427-6373
+• India Branches & Global Headquarters:
+  - Hyderabad (Global HQ & Delivery Center): 12A01A, 13th Floor, Manjeera Trinity Corporate, JNTU–Hitech City Road, Kukatpally, Hyderabad, Telangana 500072. Phone: +91 77999 88139 (Sales) | Emails: hr.india@clyptus.com, sales@clyptus.com
+  - Bengaluru: AI & Cloud Development Lab (focusing on GenAI, autonomous agent swarms, and cloud-native engineering).
+  - Chennai: Enterprise Systems & Offshore Delivery Center (SAP S/4HANA enterprise implementations and large-scale integrations).
+  - Vijayawada: Regional Delivery Center (agile sprint execution, ERP testing, and client delivery).
+  - Indore: Central India Operations (ERP modernization, support, and business applications).
+• Dubai, UAE: Middle East Regional Office, 101 Sheikh Zayed Rd, Trade Centre 1, DIFC. Phone: +971 52 350 3297 | Email: hr.uae@clyptus.com
+• California, USA: North America Corporate Office, 45627 Basswood Ct, Temecula, CA 92592. Phone: +1 480 427-6373 | Email: hr.usa@clyptus.com
 • Official Emails: sales@clyptus.com | hr.india@clyptus.com | hr.uae@clyptus.com | hr.usa@clyptus.com | contact@clyptus.com
+• When asked about offices, locations, or branches in India, ALWAYS detail all 5 Indian branches (Hyderabad HQ, Bengaluru, Chennai, Vijayawada, and Indore) and their specific roles.
 
 8 CORE ENTERPRISE PRACTICES:
 1. ERP & SAP Solutions (SAP Silver Partner):
@@ -433,7 +439,7 @@ export async function handleChatRequest(req: IncomingMessage, res: ServerRespons
     } else if (/\b(about|leadership|founder|journey|history)\b/i.test(lowerQ)) {
       pageTarget = 'About';
       quickActions.push({ label: 'Go to About Us', pageTarget: 'About' });
-    } else if (/\b(contact|office|locations?|email|phone)\b/i.test(lowerQ)) {
+    } else if (/\b(contact|office|locations?|email|phone|branches?|hyderabad|bengaluru|bangalore|chennai|vijayawada|indore)\b/i.test(lowerQ)) {
       pageTarget = 'Contact';
       quickActions.push({ label: 'Go to Contact Page', pageTarget: 'Contact' });
     }

@@ -164,7 +164,7 @@ export const ContactSection: React.FC = () => {
                         : 'bg-slate-100 hover:bg-slate-200/80 text-slate-700'
                         }`}
                     >
-                      <span>{office.city}</span>
+                      <span>{office.tabLabel || office.city}</span>
                     </button>
                   );
                 })}

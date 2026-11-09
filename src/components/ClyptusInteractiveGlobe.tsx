@@ -6,6 +6,7 @@ export interface OfficeLocation {
   id: 'hyderabad' | 'dubai' | 'usa';
   city: string;
   country: string;
+  tabLabel?: string;
   label: string;
   badge: string;
   lat: number;
@@ -23,6 +24,7 @@ export const CLYPTUS_OFFICES: OfficeLocation[] = [
     id: 'hyderabad',
     city: 'Hyderabad',
     country: 'India',
+    tabLabel: 'India',
     label: 'Hyderabad, India',
     badge: 'HEAD OFFICE',
     lat: 17.45,
@@ -38,6 +40,7 @@ export const CLYPTUS_OFFICES: OfficeLocation[] = [
     id: 'dubai',
     city: 'Dubai',
     country: 'UAE',
+    tabLabel: 'Dubai',
     label: 'Dubai, UAE',
     badge: 'UAE OFFICE',
     lat: 25.2137,
@@ -53,6 +56,7 @@ export const CLYPTUS_OFFICES: OfficeLocation[] = [
     id: 'usa',
     city: 'California',
     country: 'USA',
+    tabLabel: 'California',
     label: 'California, USA',
     badge: 'USA OFFICE',
     lat: 33.4936,

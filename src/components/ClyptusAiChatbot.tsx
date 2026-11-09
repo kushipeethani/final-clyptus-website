@@ -199,36 +199,78 @@ Clyptus is actively delivering high-impact enterprise transformations globally:
       'locations', 'offices', 'address', 'office address', 'headquarters', 
       'hyderabad', 'dubai', 'california', 'temecula', 'india', 'uae', 'usa', 
       'branches', 'office locations', 'delivery centers', 'directions', 'map', 
+      'bengaluru', 'bangalore', 'chennai', 'vijayawada', 'indore', 'india branches',
       'phone', 'phone number', 'call', 'telephone', 'contact number'
     ],
     patterns: [
       /\b(locations?|offices?|address(es)?|headquarters|branches?)\b/i,
       /where (is clyptus|are the offices|are you located)/i,
       /\b(phone|call|telephone|contact number)\b/i,
-      /\b(hyderabad|dubai|california|temecula)\b/i
+      /\b(hyderabad|dubai|california|temecula|bengaluru|bangalore|chennai|vijayawada|indore)\b/i
     ],
     answer: `**Global Delivery Centers & Office Locations**
 
-We operate 3 strategic regional hubs delivering 24/7 enterprise engineering and consulting:
+Clyptus delivers 24/7 enterprise engineering and consulting across our strategic hubs:
 
-• **Hyderabad, India (Global Headquarters & Delivery Center)**
-  12A01A, 13th Floor, Manjeera Trinity Corporate, JNTU–Hitech City Road, Kukatpally, Hyderabad, Telangana 500072
-  Emails: Sales@clyptus.com | hr.india@clyptus.com
-  Phone: +91 77999 88139
+• **India Headquarters & Delivery Network**:
+  • **Hyderabad (Global HQ & Delivery Center)**: 12A01A, 13th Floor, Manjeera Trinity Corporate, JNTU–Hitech City Road, Kukatpally, Hyderabad, Telangana 500072 (Phone: +91 77999 88139)
+  • **Bengaluru**: AI & Cloud Development Lab
+  • **Chennai**: Enterprise Systems & Offshore Delivery Center
+  • **Vijayawada**: Regional Delivery Center
+  • **Indore**: Central India Operations
+  *(Official Emails: sales@clyptus.com | hr.india@clyptus.com)*
 
-• **Dubai, UAE (Middle East Regional Center & DIFC Operations)**
-  101 Sheikh Zayed Rd, Trade Centre, DIFC, Dubai, UAE
-  Email: hr.uae@clyptus.com
-  Phone: +971 52 350 3297
+• **Dubai, UAE (Middle East Regional Center & DIFC Operations)**:
+  101 Sheikh Zayed Rd, Trade Centre 1, DIFC, Dubai, UAE (Phone: +971 52 350 3297 | Email: hr.uae@clyptus.com)
 
-• **California, USA (North America Business Hub)**
-  45627 Basswood Ct, Temecula, California 92592
-  Email: hr.usa@clyptus.com
-  Phone: +1 480 427-6373`,
+• **California, USA (North America Business Hub)**:
+  45627 Basswood Ct, Temecula, California 92592 (Phone: +1 480 427-6373 | Email: hr.usa@clyptus.com)`,
     quickActions: [
-      { label: 'Interactive Globe', pageTarget: 'Contact' },
+      { label: 'View Hubs on Map', pageTarget: 'Contact' },
       { label: 'Official Emails', chatQuery: 'What are your official emails?' },
-      { label: 'Company Journey', chatQuery: 'Tell me about the company journey' }
+      { label: 'India Branches Details', chatQuery: 'Tell me about all branches in India' }
+    ]
+  },
+
+  // 5.1 INDIA BRANCHES & REGIONAL DELIVERY HUBS
+  {
+    category: 'india-branches',
+    keywords: [
+      'india branches', 'branches in india', 'indian branches', 'indian offices', 
+      'offices in india', 'bengaluru', 'bangalore', 'chennai', 'vijayawada', 'indore',
+      'hyderabad branch', 'bengaluru branch', 'chennai branch', 'vijayawada branch', 'indore branch',
+      'locations in india', 'delivery centers in india', 'all branches in india'
+    ],
+    patterns: [
+      /\b(india\s+branches?|branches\s+in\s+india|indian\s+(branches?|offices?)|offices?\s+in\s+india|locations?\s+in\s+india)\b/i,
+      /\b(bengaluru|bangalore|chennai|vijayawada|indore)\b/i
+    ],
+    answer: `**Clyptus Delivery Network Across India**
+
+In India, Clyptus operates a distributed engineering and delivery network across 5 strategic hubs:
+
+• **1. Hyderabad (Global Headquarters & Delivery Center)**
+  - Address: 12A01A, 13th Floor, Manjeera Trinity Corporate, JNTU–Hitech City Road, Kukatpally, Hyderabad, Telangana 500072
+  - Role: Corporate Executive Headquarters, SAP Center of Excellence & Global Client Delivery
+  - Phone: +91 77999 88139 | Emails: sales@clyptus.com, hr.india@clyptus.com
+
+• **2. Bengaluru (Karnataka)**
+  - Role: AI & Cloud Development Lab (GenAI research, autonomous agent swarms & cloud-native engineering)
+
+• **3. Chennai (Tamil Nadu)**
+  - Role: Enterprise Systems & Offshore Delivery Center (SAP S/4HANA enterprise implementations & large-scale integration governance)
+
+• **4. Vijayawada (Andhra Pradesh)**
+  - Role: Regional Delivery Center (agile sprint execution, ERP testing & client delivery)
+
+• **5. Indore (Madhya Pradesh)**
+  - Role: Central India Operations (ERP modernization, support & enterprise business applications)
+
+Explore our interactive India map on the Contact page:`,
+    quickActions: [
+      { label: 'Open Contact & Map', pageTarget: 'Contact' },
+      { label: 'About Leadership', pageTarget: 'About' },
+      { label: 'Careers in India', pageTarget: 'Careers' }
     ]
   },
 
@@ -1407,8 +1449,8 @@ We are here to assist you with technical assessments, architecture roadmaps, or 
   UAE: +971 52 350 3297
   USA: +1 480 427-6373
 
-• **Corporate Hubs**:
-  Hyderabad: Manjeera Trinity Corporate, JNTU-Hitech City Rd
+• **Corporate Hubs & Delivery Centers**:
+  India: Hyderabad (Global HQ), Bengaluru (AI Lab), Chennai (Enterprise Systems), Vijayawada & Indore
   Dubai: 101 Sheikh Zayed Rd, DIFC
   California: 45627 Basswood Ct, Temecula, CA
 
@@ -1918,12 +1960,12 @@ export const ClyptusAiChatbot: React.FC<ClyptusAiChatbotProps> = ({ onNavigate }
       name: 'Contact Us & Global Offices',
       buttonLabel: 'Go to Contact Page',
       patterns: [
-        /\bwhere (is|are) (the )?(contact|contact us|offices?|addresses?|headquarters|phone|call)(\s+page)?\b/i,
-        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(contact|contact us|offices)(\s+page)?\b/i,
+        /\bwhere (is|are) (the )?(contact|contact us|offices?|addresses?|headquarters|branches?|phone|call)(\s+page)?\b/i,
+        /\b(take me to|navigate to|open|show|show me|view|go to|display) (the )?(contact|contact us|offices|branches)(\s+page)?\b/i,
         /\b(where can i (find|reach|call) (clyptus|you))\b/i,
         /\b(contact|contact us)(\s+page)?$/i
       ],
-      answer: `**Get in Touch with Clyptus Software Solutions**\n\nConnect with our leadership, sales, and engineering teams:\n\n• **Regional Phone Lines**: India: +91 77999 88139 | UAE: +971 52 350 3297 | USA: +1 480 427-6373\n• **Official Emails**: Sales@clyptus.com | hr.india@clyptus.com | contact@clyptus.com\n• **Global Offices**: Hyderabad HQ (Manjeera Trinity), Dubai DIFC (Sheikh Zayed Rd), California (Temecula).\n\nClick below to open our Contact page with interactive 3D globe and inquiry form.`,
+      answer: `**Get in Touch with Clyptus Software Solutions**\n\nConnect with our leadership, sales, and engineering teams:\n\n• **Regional Phone Lines**: India: +91 77999 88139 | UAE: +971 52 350 3297 | USA: +1 480 427-6373\n• **Official Emails**: Sales@clyptus.com | hr.india@clyptus.com | contact@clyptus.com\n• **Global Footprint**: India (Hyderabad HQ, Bengaluru, Chennai, Vijayawada, Indore), Dubai DIFC (Sheikh Zayed Rd), California (Temecula).\n\nClick below to open our Contact page with interactive 3D globe and inquiry form.`,
       secondaryActions: [
         { label: 'View All Emails', chatQuery: 'What are your official emails?' },
         { label: 'Browse All Services', pageTarget: 'Services' }
