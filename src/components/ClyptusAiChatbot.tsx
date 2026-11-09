@@ -1068,18 +1068,15 @@ Please ask something related to Clyptus Software Solutions and our website:
             </div>
           </div>
 
-          {/* Header Bar */}
-          <div className="shrink-0 relative px-4 sm:px-5 py-3 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 text-white flex items-center justify-between border-b border-slate-800">
-            {/* Subtle ambient light */}
-            <div className="absolute top-0 right-1/4 w-32 h-6 bg-blue-500/15 blur-lg pointer-events-none" />
-
+          {/* Header Bar (Clean Light Theme) */}
+          <div className="shrink-0 relative px-4 sm:px-5 py-3 bg-white text-slate-900 flex items-center justify-between border-b border-slate-200/90 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">
             <div className="flex items-center gap-2.5 relative z-10">
               <div className="relative w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-500 flex items-center justify-center text-white shadow-sm">
                 <KevaBotLogo className="w-5 h-5 text-white" />
-                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-slate-900" />
+                <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white" />
               </div>
               <div className="flex items-center text-left">
-                <h3 className="font-bold text-[15px] text-white tracking-tight">Ask Keva</h3>
+                <h3 className="font-bold text-[15px] text-slate-900 tracking-tight">Ask Keva</h3>
               </div>
             </div>
 
@@ -1087,7 +1084,7 @@ Please ask something related to Clyptus Software Solutions and our website:
             <div className="flex items-center gap-1 relative z-10">
               <button
                 onClick={handleClearChat}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
                 title="Restart conversation"
                 aria-label="Restart conversation"
               >
@@ -1095,7 +1092,7 @@ Please ask something related to Clyptus Software Solutions and our website:
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-red-500/20 hover:text-red-400 transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
                 title="Close chat"
                 aria-label="Close chat"
               >
