@@ -959,26 +959,37 @@ Please ask something related to Clyptus Software Solutions and our website:
       {/* ---------------------------------------------------- */}
       {!isOpen && (
         <div className="fixed top-2.5 sm:top-3 right-3 sm:right-5 lg:top-3 lg:right-7 z-50 flex items-center">
-          {/* Mobile: Circle Chatbot Logo Button; Desktop: Pill Trigger with 'Ask Keva' label */}
-          <button
-            onClick={() => setIsOpen(true)}
-            className="group relative flex items-center justify-center rounded-full bg-white/95 hover:bg-white text-slate-800 hover:text-blue-600 border border-slate-200/90 shadow-[0_3px_14px_rgba(0,0,0,0.08)] hover:shadow-[0_6px_20px_rgba(37,99,235,0.18)] backdrop-blur-md transition-all duration-200 hover:scale-[1.04] active:scale-95 cursor-pointer select-none
-                       w-12 h-12 p-0
-                       lg:w-auto lg:h-auto lg:px-4 lg:py-2 lg:gap-2.5"
-            title="Ask Keva"
-            aria-label="Ask Keva"
-          >
-            {/* Modern AI Chatbot Logo Badge */}
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 via-indigo-600 to-sky-400 text-white flex items-center justify-center shrink-0 shadow-sm relative">
-              <BotMessageSquare className="w-5 h-5 stroke-[2.2]" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white absolute -bottom-0.5 -right-0.5 animate-pulse" />
-            </div>
+          {/* Rotating Glowing Orange Border Effect Container (Clockwise) */}
+          <div className="relative group p-[2px] rounded-full overflow-hidden flex items-center justify-center shadow-[0_2px_14px_rgba(255,113,56,0.28)] hover:shadow-[0_4px_24px_rgba(255,113,56,0.55)] transition-all duration-300 hover:scale-[1.05] active:scale-95">
+            
+            {/* Clockwise Rotating Conic Orange Glow Beam */}
+            <div
+              className="absolute inset-[-200%] animate-spin-clockwise pointer-events-none"
+              style={{
+                background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #ff9800 310deg, #ff5722 340deg, #ff3d00 360deg)'
+              }}
+            />
 
-            {/* Desktop Label: Ask Keva */}
-            <span className="hidden lg:inline font-bold text-sm tracking-tight text-slate-800 group-hover:text-blue-600 transition-colors">
-              Ask Keva
-            </span>
-          </button>
+            {/* Ambient Blurred Orange Halo Behind the Border */}
+            <div
+              className="absolute inset-[-200%] animate-spin-clockwise blur-sm opacity-75 pointer-events-none"
+              style={{
+                background: 'conic-gradient(from 0deg at 50% 50%, transparent 0deg, transparent 260deg, #ff9800 310deg, #ff5722 340deg, #ff3d00 360deg)'
+              }}
+            />
+
+            {/* Inner Pill Button (Icon Removed, Text 'Ask Keva') */}
+            <button
+              onClick={() => setIsOpen(true)}
+              className="relative z-10 flex items-center justify-center rounded-full bg-white text-slate-900 px-4 py-1.5 sm:px-5 sm:py-2 transition-all cursor-pointer select-none"
+              title="Ask Keva"
+              aria-label="Ask Keva"
+            >
+              <span className="font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 group-hover:text-orange-600 transition-colors whitespace-nowrap">
+                Ask Keva
+              </span>
+            </button>
+          </div>
         </div>
       )}
 
