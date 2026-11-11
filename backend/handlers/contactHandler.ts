@@ -174,7 +174,7 @@ export async function handleContactRequest(req: IncomingMessage, res: ServerResp
         },
         body: JSON.stringify({
           from: process.env.CONTACT_FROM_EMAIL || 'Clyptus Website <onboarding@resend.dev>',
-          to: process.env.CONTACT_TO_EMAIL || 'contact@clyptus.com',
+          to: process.env.CONTACT_TO_EMAIL || process.env.CONTACT_RECEIVER_EMAIL || 'contact@clyptus.com',
           reply_to: email,
           subject: `[New Inquiry] ${service} - from ${name}`,
           text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nService: ${service}\nTime: ${inquiry.submittedAt}\n\nMessage:\n${message}`,
@@ -218,11 +218,15 @@ export async function handleContactRequest(req: IncomingMessage, res: ServerResp
     }
     const logPath = path.resolve(logDir, 'inquiries.jsonl');
     fs.appendFileSync(logPath, JSON.stringify(inquiry) + '\n', 'utf8');
-    if (!deliveryResult.delivered) {
-      deliveryResult = { delivered: true, provider: 'server_audit_log', details: 'Inquiry securely recorded in server queue' };
-    }
   } catch (err: any) {
     console.error('Failed to write inquiry log:', err.message);
+  }
+
+  if (!deliveryResult.delivered) {
+    return sendJson(502, {
+      success: false,
+      error: 'We could not email your inquiry. Please email contact@clyptus.com directly.',
+    });
   }
 
   return sendJson(200, {

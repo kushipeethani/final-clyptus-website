@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 interface CyberSecurityPageProps {
   onNavigateContact?: () => void;
 }
 
 export const CyberSecurityPage: React.FC<CyberSecurityPageProps> = ({ onNavigateContact }) => {
+  const serviceCardsRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     document.title = 'Cybersecurity Services | Clyptus';
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -15,6 +17,28 @@ export const CyberSecurityPage: React.FC<CyberSecurityPageProps> = ({ onNavigate
       );
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const cards = serviceCardsRef.current?.querySelectorAll<HTMLElement>('.cyber-service-card-reveal');
+    if (!cards?.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach((card) => card.setAttribute('data-visible', 'true'));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          entry.target.setAttribute('data-visible', String(entry.isIntersecting));
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
   }, []);
 
   const handleContact = () => {
@@ -321,7 +345,7 @@ export const CyberSecurityPage: React.FC<CyberSecurityPageProps> = ({ onNavigate
       {/* ==================================================== */}
       {/* 2. BENTO SERVICES SECTION                            */}
       {/* ==================================================== */}
-      <section id="services" className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/50">
+      <section ref={serviceCardsRef} id="services" className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-slate-50/50">
         <div className="max-w-[1280px] mx-auto flex flex-col gap-12">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -347,45 +371,51 @@ export const CyberSecurityPage: React.FC<CyberSecurityPageProps> = ({ onNavigate
                 {row.tiles.map((tile, tIdx) => (
                   <div
                     key={tIdx}
-                    className={`relative overflow-hidden min-w-0 min-h-[420px] ${tile.flexClass} rounded-[28px] p-7 sm:p-9 bg-gradient-to-br ${tile.bg} border border-slate-200/90 ${tile.borderHover} shadow-[0_4px_20px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_45px_rgba(15,23,42,0.1)] transition-all duration-300 flex flex-col justify-between group`}
+                    data-visible="false"
+                    data-entry-direction={tIdx % 2 === 0 ? 'left' : 'right'}
+                    className={`cyber-service-card-reveal min-w-0 ${tile.flexClass}`}
                   >
-                    {/* Minimal Ambient Colored Glows in Background (No Heavy Images) */}
-                    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[28px]">
-                      <div className={`absolute -top-14 -right-14 w-52 h-52 rounded-full blur-3xl pointer-events-none ${tile.glow} transition-opacity duration-500 opacity-60 group-hover:opacity-100`} />
-                      <div className={`absolute -bottom-14 -left-14 w-44 h-44 rounded-full blur-3xl pointer-events-none ${tile.glow} transition-opacity duration-500 opacity-30 group-hover:opacity-60`} />
-                    </div>
+                    <div
+                      className={`cyber-service-card relative overflow-hidden min-h-[420px] rounded-[28px] p-7 sm:p-9 bg-gradient-to-br ${tile.bg} border border-slate-200/90 ${tile.borderHover} shadow-[0_4px_20px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_45px_rgba(15,23,42,0.1)] transition-all duration-300 flex flex-col justify-between group`}
+                    >
+                      {/* Minimal Ambient Colored Glows in Background (No Heavy Images) */}
+                      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-[28px]">
+                        <div className={`absolute -top-14 -right-14 w-52 h-52 rounded-full blur-3xl pointer-events-none ${tile.glow} transition-opacity duration-500 opacity-60 group-hover:opacity-100`} />
+                        <div className={`absolute -bottom-14 -left-14 w-44 h-44 rounded-full blur-3xl pointer-events-none ${tile.glow} transition-opacity duration-500 opacity-30 group-hover:opacity-60`} />
+                      </div>
 
-                    <div className="relative z-10 flex-1 flex flex-col justify-between">
-                      <div className="flex flex-col h-full justify-between">
-                        <div>
-                          {/* Badge with Card Accent Color */}
-                          <div className="flex items-center justify-between mb-4">
-                            <span className={`font-mono font-extrabold text-xs px-3.5 py-1 rounded-full bg-white border border-slate-200/90 shadow-2xs ${tile.accent}`}>
-                              {tile.num}
-                            </span>
+                      <div className="relative z-10 flex-1 flex flex-col justify-between">
+                        <div className="flex flex-col h-full justify-between">
+                          <div>
+                            {/* Badge with Card Accent Color */}
+                            <div className="flex items-center justify-between mb-4">
+                              <span className={`font-mono font-extrabold text-xs px-3.5 py-1 rounded-full bg-white border border-slate-200/90 shadow-2xs ${tile.accent}`}>
+                                {tile.num}
+                              </span>
+                            </div>
+
+                            {/* Side Heading (Tile Title) */}
+                            <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug mb-3">
+                              {renderStyledHeading(tile.title)}
+                            </h3>
+
+                            {/* Blurb */}
+                            <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed mb-6">
+                              {tile.blurb}
+                            </p>
                           </div>
 
-                          {/* Side Heading (Tile Title) */}
-                          <h3 className="text-2xl sm:text-3xl font-black tracking-tight leading-snug mb-3">
-                            {renderStyledHeading(tile.title)}
-                          </h3>
-
-                          {/* Blurb */}
-                          <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed mb-6">
-                            {tile.blurb}
-                          </p>
-                        </div>
-
-                        {/* Sub-services pinned cleanly at bottom */}
-                        <div className="flex flex-col gap-2.5 pt-2">
-                          {tile.subs.map((sub, sIdx) => (
-                            <div key={sIdx} className="flex items-start gap-3 text-sm sm:text-base font-normal text-slate-800 leading-snug">
-                              <span className="w-4 h-4 rounded-full bg-white border border-slate-200/90 shadow-2xs flex items-center justify-center shrink-0 mt-0.5">
-                                <span className={`w-1.5 h-1.5 rounded-full ${tile.bulletBg}`} />
-                              </span>
-                              <span>{sub}</span>
-                            </div>
-                          ))}
+                          {/* Sub-services pinned cleanly at bottom */}
+                          <div className="flex flex-col gap-2.5 pt-2">
+                            {tile.subs.map((sub, sIdx) => (
+                              <div key={sIdx} className="flex items-start gap-3 text-sm sm:text-base font-normal text-slate-800 leading-snug">
+                                <span className="w-4 h-4 rounded-full bg-white border border-slate-200/90 shadow-2xs flex items-center justify-center shrink-0 mt-0.5">
+                                  <span className={`w-1.5 h-1.5 rounded-full ${tile.bulletBg}`} />
+                                </span>
+                                <span>{sub}</span>
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>

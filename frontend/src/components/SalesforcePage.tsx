@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
   ArrowRight, 
   Check 
 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 
 // Component that renders text with letters that float and move randomly on hover
 interface RandomMovingTextProps {
@@ -78,11 +78,15 @@ interface ProductCardProps {
     title: string;
     desc: string;
   };
+  index: number;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [hoverNonce, setHoverNonce] = useState(1);
+  const shouldReduceMotion = useReducedMotion();
+  const isInView = useInView(cardRef, { once: false, amount: 0.2 });
 
   const handleMouseEnter = () => {
     setHoverNonce((prev) => prev + 1);
@@ -94,10 +98,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div
+    <motion.div
+      ref={cardRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative rounded-3xl p-7 bg-white hover:bg-slate-50/80 text-slate-900 border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-blue-300 transition-all duration-300 flex flex-col justify-between group cursor-pointer"
+      initial={shouldReduceMotion ? { opacity: 0, y: 20 } : { opacity: 0, rotateY: index % 2 === 0 ? -75 : 75, scale: 0.9 }}
+      animate={
+        isInView
+          ? shouldReduceMotion
+            ? { opacity: 1, y: 0 }
+            : { opacity: 1, rotateY: 0, scale: 1 }
+          : shouldReduceMotion
+            ? { opacity: 0, y: 20 }
+            : { opacity: 0, rotateY: index % 2 === 0 ? -75 : 75, scale: 0.9 }
+      }
+      transition={{ duration: 0.75, delay: (index % 4) * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      style={{ transformOrigin: 'center' }}
+      className="relative rounded-3xl p-7 bg-white hover:bg-slate-50/80 text-slate-900 border border-slate-200/90 shadow-xs hover:shadow-lg hover:border-blue-300 transition-[background-color,border-color,box-shadow] duration-300 flex flex-col justify-between group cursor-pointer"
     >
       <div>
         <h3 className="text-xl sm:text-2xl font-black tracking-tight mb-2.5 text-slate-900 group-hover:text-blue-600 transition-colors">
@@ -118,7 +135,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           />
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -127,6 +144,9 @@ interface SalesforcePageProps {
 }
 
 export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContact }) => {
+  const pipelineBarsRef = useRef<HTMLDivElement>(null);
+  const [pipelineVisible, setPipelineVisible] = useState(false);
+
   useEffect(() => {
     document.title = 'Salesforce Services | Clyptus';
     const metaDesc = document.querySelector('meta[name="description"]');
@@ -137,6 +157,24 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
       );
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
+    const pipelineBars = pipelineBarsRef.current;
+    if (!pipelineBars) return;
+
+    if (!('IntersectionObserver' in window)) {
+      setPipelineVisible(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setPipelineVisible(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+
+    observer.observe(pipelineBars);
+    return () => observer.disconnect();
   }, []);
 
   const handleContact = () => {
@@ -398,7 +436,7 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
               </div>
 
               {/* Pipeline Bars */}
-              <div className="flex flex-col gap-3.5">
+              <div ref={pipelineBarsRef} className="flex flex-col gap-3.5">
                 
                 {/* 1. New Leads */}
                 <div className="bg-slate-50/80 p-3.5 rounded-2xl border border-slate-200/70">
@@ -407,7 +445,7 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
                     <span className="font-mono text-slate-600">1,240</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full rounded-full bg-blue-600 transition-all duration-1000" style={{ width: '88%' }} />
+                    <div className="sales-pipeline-bar h-full rounded-full bg-blue-600" style={{ width: pipelineVisible ? '88%' : '0%', transitionDelay: '0ms' }} />
                   </div>
                 </div>
 
@@ -418,7 +456,7 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
                     <span className="font-mono text-slate-600">612</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full rounded-full bg-indigo-600 transition-all duration-1000" style={{ width: '62%' }} />
+                    <div className="sales-pipeline-bar h-full rounded-full bg-indigo-600" style={{ width: pipelineVisible ? '62%' : '0%', transitionDelay: '140ms' }} />
                   </div>
                 </div>
 
@@ -429,7 +467,7 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
                     <span className="font-mono text-slate-600">238</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full rounded-full bg-amber-500 transition-all duration-1000" style={{ width: '38%' }} />
+                    <div className="sales-pipeline-bar h-full rounded-full bg-amber-500" style={{ width: pipelineVisible ? '38%' : '0%', transitionDelay: '280ms' }} />
                   </div>
                 </div>
 
@@ -440,7 +478,7 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
                     <span className="font-mono text-slate-600">96</span>
                   </div>
                   <div className="w-full h-2.5 rounded-full bg-slate-200 overflow-hidden">
-                    <div className="h-full rounded-full bg-emerald-500 transition-all duration-1000" style={{ width: '22%' }} />
+                    <div className="sales-pipeline-bar h-full rounded-full bg-emerald-500" style={{ width: pipelineVisible ? '22%' : '0%', transitionDelay: '420ms' }} />
                   </div>
                 </div>
 
@@ -483,9 +521,9 @@ export const SalesforcePage: React.FC<SalesforcePageProps> = ({ onNavigateContac
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {products.map((p) => (
-              <ProductCard key={p.id} product={p} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 [perspective:1200px]">
+            {products.map((p, index) => (
+              <ProductCard key={p.id} product={p} index={index} />
             ))}
           </div>
 

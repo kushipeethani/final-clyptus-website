@@ -20,6 +20,8 @@ Built with **React 19**, **TypeScript**, **Vite 8**, **Tailwind CSS v4**, **Thre
 9. [Production Build & Deployment Guide](#-production-build--deployment-guide)
 10. [Troubleshooting & FAQs](#-troubleshooting--faqs)
 
+For the complete Render, Resend, API key, domain verification, and contact email setup, see [DEPLOYMENT.md](./DEPLOYMENT.md).
+
 ---
 
 ## 💻 System Requirements
@@ -154,10 +156,9 @@ The project supports optional environment variables defined in `.env`:
 | `AUTH_CLYPTUS_HASH` | PBKDF2-SHA512 hash for `clyptus` user password | Pre-computed PBKDF2 hash |
 | `AUTH_AUDIT_SALT` | Cryptographic salt for `audit` user login | Pre-computed PBKDF2 salt |
 | `AUTH_AUDIT_HASH` | PBKDF2-SHA512 hash for `audit` user password | Pre-computed PBKDF2 hash |
-| `RESEND_API_KEY` | Resend API key for direct contact form email forwarding | Logged to `server/logs/inquiries.jsonl` |
-| `CONTACT_RECEIVER_EMAIL` | Destination mailbox for customer inquiries | `contact@clyptus.com` |
-| `SMTP_HOST`, `SMTP_PORT` | Custom SMTP host & port if using SMTP instead of Resend | None |
-| `SMTP_USER`, `SMTP_PASS` | Custom SMTP authentication credentials | None |
+| `RESEND_API_KEY` | Resend API key for direct contact form email forwarding | Inquiry is only logged server-side |
+| `CONTACT_TO_EMAIL` | Destination mailbox for contact form inquiries (`CONTACT_RECEIVER_EMAIL` is also accepted) | `contact@clyptus.com` |
+| `CONTACT_FROM_EMAIL` | Sender address for Resend; production sending requires a verified domain | `Clyptus Website <onboarding@resend.dev>` |
 | `VITE_DOMAIN` | Canonical domain for structured metadata | `https://clyptus.com` |
 
 ---
@@ -240,11 +241,13 @@ The server functionality runs seamlessly in both development (via Vite middlewar
 
 ### Active Endpoints:
 * **`/api/chat` (`POST`)**: Handles chatbot queries for Keva. Connects to Groq cloud API or triggers instant auto-fallback to local knowledge base.
-* **`/api/contact` (`POST`)**: Processes client contact inquiries, stores them in `server/logs/inquiries.jsonl`, and dispatches emails via Resend/SMTP if configured.
+* **`/api/contact` (`POST`)**: Processes client contact inquiries, stores them in `server/logs/inquiries.jsonl`, and dispatches emails via Resend if configured.
 * **`/api/auth/login` (`POST`)**: Authenticates corporate and compliance personnel accessing protected HR handbooks.
 * **`/api/auth/logout` (`POST`)**: Invalidates the active session cookie.
 * **`/api/auth/session` (`GET`)**: Verifies current session status.
 * **`/api/documents` (`GET`)**: Serves confidential PDF documents located in `server/protected-documents/` exclusively to verified sessions.
+
+To email contact form submissions, configure `RESEND_API_KEY` and `CONTACT_TO_EMAIL` in the server environment. For production, set `CONTACT_FROM_EMAIL` to an address on a domain verified with Resend. Do not expose the API key in frontend code or commit it to source control.
 
 ---
 

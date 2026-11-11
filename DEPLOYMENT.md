@@ -1,0 +1,119 @@
+# Clyptus Website Deployment Guide
+
+This guide deploys the full application to Render. The website is a Vite/React frontend with API handlers served by the same Node/Vite process; do not deploy it as a static-only site if you need the contact form, chatbot API, or protected document APIs.
+
+## 1. Before deployment
+
+- Have access to the project repository and a Render account.
+- If using email, have a Resend account and access to the receiving mailbox.
+- For production email from `@clyptus.com`, have the person who manages that domain's DNS available to add the records Resend provides.
+- **Rotate any API keys that have been pasted into chat, screenshots, source code, or a public repository.** Add only the replacement keys in the provider dashboards. Never commit secrets or put them in frontend variables such as `VITE_RESEND_API_KEY`.
+
+## 2. Create or rotate API keys
+
+### Groq (optional chatbot enhancement)
+
+The chatbot can fall back to its built-in local answers without a Groq key. To enable the Groq-backed responses:
+
+1. Sign in to [Groq Console](https://console.groq.com/keys).
+2. Create a new API key. Copy it once and store it privately.
+3. If an earlier key was exposed, revoke it in the Groq Console.
+4. Add the replacement as `GROQ_API_KEY` in Render's environment settings (see section 4).
+
+### Resend (contact form email)
+
+1. Sign in to [Resend](https://resend.com/) and open **API Keys**.
+2. Create an API key for this application. Use the minimum permissions that support sending emails.
+3. Copy the key once. If an earlier key was shared or exposed, revoke it and use a replacement.
+4. Add it to Render as `RESEND_API_KEY`. Do not add a `VITE_` prefix: the key must stay server-side.
+
+## 3. Verify the sending domain in Resend
+
+Resend's test sender is limited to the email address associated with the Resend account. To send from the company domain to other recipients:
+
+1. In Resend, open [Domains](https://resend.com/domains) and select **Add Domain**.
+2. Add `clyptus.com` or a dedicated subdomain (for example, `mail.clyptus.com`) and select the region Resend recommends for your recipients.
+3. Open that domain's DNS records in Resend and copy the records exactly.
+4. Send the records to the DNS administrator for `clyptus.com` and ask them to add them at the current DNS provider. Do not remove or replace existing mail records without their approval. If Resend shows a CNAME, follow its proxying instructions (usually DNS-only, not proxied).
+5. Wait for Resend to show the domain as **Verified**. This can take minutes, and DNS propagation can sometimes take up to 72 hours.
+6. Choose a sender address on the verified domain, such as `Clyptus Website <website@clyptus.com>`. Resend does not require that mailbox to receive mail, but the domain must be verified for sending.
+
+Until the domain is verified, a test email can only be sent to the email address associated with the Resend account, using Resend's permitted test sender (typically `Clyptus Website <onboarding@resend.dev>`). A 403 response about testing emails or domain verification means this requirement is not met.
+
+## 4. Deploy the application on Render
+
+1. Push the project to a Git provider supported by Render.
+2. In Render, choose **New +** → **Blueprint** (or create a **Web Service** and connect the repository). If using the Blueprint, select the repository containing `render.yaml`.
+3. Confirm the service settings:
+   - Runtime: **Node**
+   - Build command: `npm install && npm run build`
+   - Start command: `npm start`
+   - The service must run as a web service, not a static site. The start script runs Vite Preview, which includes this project's API middleware.
+4. Open the service's **Environment** settings. Add or confirm the following values:
+
+   | Variable | Value |
+   | --- | --- |
+   | `GROQ_API_KEY` | Replacement Groq key; optional, but enables Groq chatbot responses |
+   | `RESEND_API_KEY` | Replacement Resend API key; required for Resend email |
+   | `CONTACT_TO_EMAIL` | Inbox for inquiries, e.g. `yatheesh242@gmail.com` |
+   | `CONTACT_FROM_EMAIL` | Sender, e.g. `Clyptus Website <website@clyptus.com>` after domain verification |
+   | `SESSION_SECRET` | Generate a unique secret of at least 32 characters; the Render Blueprint generates this automatically |
+
+   `CONTACT_FROM_EMAIL` can use `Clyptus Website <onboarding@resend.dev>` only for permitted Resend testing. For production, use an address on the verified domain.
+
+5. Save environment changes and deploy. If you changed environment variables after deployment, trigger a new deploy so the running service uses them.
+6. Wait for the Render deploy to finish successfully and open the service URL. The contact page is at `/contact`.
+
+The repository's `render.yaml` declares these variables. In Render, `sync: false` values are intentionally entered through the dashboard and are not stored in the repository. `SESSION_SECRET` is generated by Render.
+
+## 5. Local development with email
+
+At the project root (the directory containing `package.json`), create or edit the ignored `.env` file:
+
+```env
+GROQ_API_KEY=your_replacement_groq_key
+RESEND_API_KEY=your_replacement_resend_key
+CONTACT_TO_EMAIL=yatheesh242@gmail.com
+CONTACT_FROM_EMAIL="Clyptus Website <onboarding@resend.dev>"
+SESSION_SECRET=use_a_unique_random_secret_of_at_least_32_characters
+```
+
+Use the verified-domain sender instead of the test sender once the domain is verified. `.env` is ignored by Git; do not copy these values into `.env.example`, source files, or a public repository. Restart `npm run dev` after editing `.env`.
+
+Run the app from the repository root:
+
+```powershell
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173/contact`. Running `npm run dev` from `frontend` is not the recommended workflow; use the repository root so the backend and root `.env` configuration are found consistently.
+
+## 6. Verify deployment and email delivery
+
+1. Open the deployed contact form and send a test with a valid name, email, and message of at least 10 characters.
+2. Confirm the form reports success.
+3. Check the `CONTACT_TO_EMAIL` inbox, including spam/junk.
+4. In Resend, open **Emails/Logs** and check whether the message was delivered, rejected, or bounced.
+5. In Render, inspect the service logs for `Resend delivery error` if the form reports a send failure.
+6. Test the chatbot and protected API routes separately. A successful frontend build alone does not confirm that provider credentials or DNS are configured.
+
+The app's `/api/contact` endpoint returns an error if no email provider successfully delivers the inquiry; a server-side log entry is not the same as an email being sent.
+
+## 7. Common issues
+
+- **403: “You can only send testing emails to your own email address”** — verify the sending domain in Resend, use a sender on that verified domain, and retry. A test sender cannot deliver to arbitrary recipients.
+- **403/domain not verified** — ask the DNS administrator to add the exact records from the Resend Domains page and wait for verification.
+- **401/invalid API key** — verify `RESEND_API_KEY` in the Render service environment, make sure it is a current sending key, and redeploy. Never paste the key into logs or chat.
+- **Form says success but no email arrives** — check the Resend logs and spam folder; confirm `CONTACT_TO_EMAIL` is correct and the Resend email status is delivered.
+- **Chatbot uses local answers** — confirm `GROQ_API_KEY` exists in Render. The fallback can still answer some requests without it.
+- **Local server does not use updated settings** — run from the project root and restart `npm run dev` after editing `.env`.
+- **API routes return 404 on deployment** — confirm Render is running this repository as a Node Web Service using `npm start`, not as a static site.
+
+## 8. Keep credentials safe
+
+- Store secrets only in local ignored `.env` files and hosting-provider secret settings.
+- Rotate keys immediately if they are exposed. Deleting a message or editing a local file does not revoke a key.
+- Use separate keys for local development and production when possible.
+- Never commit `.env`; keep `.env.example` limited to placeholders.
+- Limit access to Render, Resend, Groq, and domain DNS accounts to trusted administrators.
