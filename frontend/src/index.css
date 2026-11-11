@@ -117,6 +117,45 @@
 }
 
 /* Animations */
+.sales-pipeline-bar {
+  transition: width 1800ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sales-pipeline-bar {
+    transition: none;
+  }
+}
+
+.cyber-service-card-reveal > .cyber-service-card {
+  opacity: 0;
+  transition:
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 700ms ease-out;
+  will-change: transform, opacity;
+}
+
+.cyber-service-card-reveal[data-entry-direction="left"] > .cyber-service-card {
+  transform: translate3d(-105vw, 28px, 0) scale(0.96);
+}
+
+.cyber-service-card-reveal[data-entry-direction="right"] > .cyber-service-card {
+  transform: translate3d(105vw, 28px, 0) scale(0.96);
+}
+
+.cyber-service-card-reveal[data-visible="true"] > .cyber-service-card {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cyber-service-card-reveal > .cyber-service-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 @keyframes floatSlow {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
   50% { transform: translateY(-8px) rotate(1deg); }
@@ -188,5 +227,3 @@
 .animate-spin-clockwise {
   animation: spinClockwise 3s linear infinite;
 }
-
-

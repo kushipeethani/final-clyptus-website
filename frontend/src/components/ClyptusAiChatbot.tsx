@@ -5,7 +5,9 @@ import {
   X, 
   RotateCcw, 
   ArrowRight,
-  Compass 
+  Compass,
+  Mail,
+  Phone
 } from 'lucide-react';
 import { KevaBotLogo } from './KevaBotLogo';
 
@@ -25,6 +27,7 @@ interface Message {
   text: string;
   timestamp: string;
   quickActions?: QuickAction[];
+  showContactCard?: boolean;
 }
 
 interface KnowledgeArticle {
@@ -34,6 +37,125 @@ interface KnowledgeArticle {
   answer: string;
   quickActions?: QuickAction[];
 }
+
+const ContactConversationCard: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    setIsSubmitting(true);
+    setStatus(null);
+
+    const formData = new FormData(form);
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          service: 'General Inquiry',
+          message: formData.get('message'),
+        }),
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || 'Unable to send your inquiry. Please try again.');
+      }
+
+      setStatus({ type: 'success', text: 'Thanks! Your message has been sent to our team.' });
+      form.reset();
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        text: error instanceof Error ? error.message : 'Unable to send your inquiry. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="ml-9 mt-2 w-[min(22rem,calc(100%-2.25rem))] overflow-hidden rounded-2xl border border-sky-200 bg-white shadow-sm">
+      <div className="bg-gradient-to-r from-sky-50 to-indigo-50 p-4">
+        <p className="font-semibold text-slate-900">Send your details</p>
+        <p className="mt-1 text-xs leading-relaxed text-slate-600">
+          Share your requirements and our team will get back to you.
+        </p>
+        {!isOpen && (
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-105"
+          >
+            Start a Conversation
+            <ArrowRight className="h-4 w-4" />
+          </button>
+        )}
+      </div>
+      {isOpen && (
+        <form onSubmit={handleSubmit} className="space-y-3 border-t border-slate-100 p-4">
+          <label className="block text-xs font-medium text-slate-700">
+            Your name
+            <input name="name" required minLength={2} maxLength={100} autoComplete="name" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100" />
+          </label>
+          <label className="block text-xs font-medium text-slate-700">
+            Email
+            <input name="email" type="email" required maxLength={150} autoComplete="email" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100" />
+          </label>
+          <label className="block text-xs font-medium text-slate-700">
+            Phone (optional)
+            <input name="phone" type="tel" maxLength={25} autoComplete="tel" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100" />
+          </label>
+          <label className="block text-xs font-medium text-slate-700">
+            How can we help?
+            <textarea name="message" required minLength={10} maxLength={3000} rows={3} className="mt-1 w-full resize-y rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100" />
+          </label>
+          {status && (
+            <p role="status" className={`text-xs ${status.type === 'success' ? 'text-emerald-700' : 'text-red-600'}`}>
+              {status.text}
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-sky-600 to-violet-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSubmitting ? 'Sending...' : 'Send Inquiry'}
+            {!isSubmitting && <Send className="h-4 w-4" />}
+          </button>
+        </form>
+      )}
+      <div className="space-y-2 border-t border-slate-100 p-4 text-xs">
+        <a href="mailto:Sales@clyptus.com" className="flex items-center gap-2 text-slate-700 hover:text-sky-700">
+          <Mail className="h-3.5 w-3.5 text-sky-600" />
+          Sales@clyptus.com
+        </a>
+        <a href="mailto:contact@clyptus.com" className="flex items-center gap-2 text-slate-700 hover:text-sky-700">
+          <Mail className="h-3.5 w-3.5 text-sky-600" />
+          contact@clyptus.com
+        </a>
+        <a href="tel:+917799988139" className="flex items-center gap-2 text-slate-700 hover:text-sky-700">
+          <Phone className="h-3.5 w-3.5 text-sky-600" />
+          India: +91 77999 88139
+        </a>
+        <a href="tel:+971523503297" className="flex items-center gap-2 text-slate-700 hover:text-sky-700">
+          <Phone className="h-3.5 w-3.5 text-sky-600" />
+          UAE: +971 52 350 3297
+        </a>
+        <a href="tel:+14804276373" className="flex items-center gap-2 text-slate-700 hover:text-sky-700">
+          <Phone className="h-3.5 w-3.5 text-sky-600" />
+          USA: +1 480 427-6373
+        </a>
+      </div>
+    </div>
+  );
+};
 
 const KNOWLEDGE_BASE: KnowledgeArticle[] = [
   // 1. OFFICIAL EMAILS & DIRECT CONTACT CHANNELS
@@ -2146,6 +2268,28 @@ Click any button below to jump directly to a page or ask any question about Clyp
 
     const cleanQuery = text.toLowerCase().trim();
 
+    const wantsToContact = [
+      /\b(i|we)?\s*(want|need|would like|I'd like|we'd like)\s+to\s+(contact|talk|speak|connect|reach)\b/i,
+      /\bhow (can|do) (i|we) (contact|reach|talk|speak|connect)\b/i,
+      /\b(get in touch|start a conversation|contact (your|the) team|talk to (someone|your team))\b/i,
+      /\b(i|we) (want|need) to get in touch\b/i,
+    ].some((pattern) => pattern.test(cleanQuery));
+
+    if (wantsToContact && !/\b(email|phone|number|address)\b/i.test(cleanQuery)) {
+      setTimeout(() => {
+        const aiMessage: Message = {
+          id: `ai-${Date.now()}`,
+          sender: 'ai',
+          text: 'Send us a few details about what you need, and our team will get back to you.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          showContactCard: true
+        };
+        setMessages((prev) => [...prev, aiMessage]);
+        setIsTyping(false);
+      }, 250);
+      return;
+    }
+
     // 0. Fast-path check: Direct Page Navigation queries (e.g. "where is insights", "show carrers page")
     let directNavMatch = null;
     for (const nav of PAGE_NAV_DIRECTORY) {
@@ -2617,6 +2761,10 @@ Click any button below to jump directly to a page or ask any question about Clyp
                         )}
                       </div>
                     </div>
+
+                    {msg.sender === 'ai' && msg.showContactCard && (
+                      <ContactConversationCard />
+                    )}
 
                     {/* Quick Interactive Suggestions after any AI response (hidden on 1st initial greeting) */}
                     {msg.sender === 'ai' && msg.id !== 'welcome' && msg.id !== 'welcome-reset' && (
