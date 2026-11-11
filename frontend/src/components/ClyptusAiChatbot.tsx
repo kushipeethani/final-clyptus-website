@@ -157,6 +157,37 @@ const ContactConversationCard: React.FC = () => {
   );
 };
 
+const CONTACT_CONVERSATION_PATTERNS: RegExp[] = [
+  // Casual & direct intent verbs: "i want to contact", "i wanna talk", "need to reach out", "looking to connect"
+  /\b(?:i|we)?\s*(?:want|wanna|need|gonna|would\s+like|i'd\s+like|we'd\s+like|wish|looking|trying|plan(?:ning)?|hope|hoping)\s*(?:to\s+)?(contact|talk|speak|connect|reach(?:\s+out)?|chat|message|inquire|enquire|consult|meet|collaborate|discuss|get\s+in\s+touch|touch\s+base)\b/i,
+  // Question forms: "how can i contact", "how do i reach out", "how to connect"
+  /\bhow\s+(?:can|do|should|to)\s*(?:i|we)?\s*(contact|reach(?:\s+out)?|talk|speak|connect|message|inquire|enquire|get\s+in\s+touch)\b/i,
+  // Conversational invitations: "let's talk", "can i speak", "please contact me"
+  /\b(?:can\s+(?:i|we|someone)|could\s+(?:i|we|someone)|may\s+(?:i|we)|let'?s|let\s+us|please)\s+(?:to\s+)?(contact|talk|speak|connect|reach(?:\s+out)?|chat|discuss|call\s+me|get\s+in\s+touch)\b/i,
+  // Direct phrases & team targets: "get in touch", "start a conversation", "contact us/team/sales/support/expert"
+  /\b(get\s+in\s+touch|touch\s+base|start\s+(?:a\s+)?conversation|begin\s+(?:a\s+)?conversation|open\s+(?:a\s+)?conversation|contact\s+(?:you|us|clyptus|(?:(?:your|the)\s+)?team|sales|support|(?:an?\s+)?expert|representative|someone))\b/i,
+  // Talking/connecting with a person or team: "talk to an expert", "speak with someone", "connect with sales"
+  /\b(talk|speak|chat|connect|reach\s+out)\s+(?:to|with)\s+(?:you|us|clyptus|someone|anybody|anyone|(?:an?\s+)?expert|(?:(?:your|the)\s+)?team|sales|support|(?:a\s+)?representative|(?:a\s+)?human|(?:a\s+)?live\s+agent|consultant)\b/i,
+  // Standalone short triggers
+  /^(?:contact|contact\s+us|contact\s+you|reach\s+out|connect|connect\s+me|talk\s+to\s+expert|live\s+chat|human\s+agent|callback|call\s+back|call\s+me|consultation|inquire|enquiry|contact\s+form|inquiry\s+form)[!?.]*$/i,
+  // Sending messages, inquiries, quotes, demos, callbacks, or scheduling calls/meetings
+  /\b(?:send|drop|leave|submit|make|have|write)\s+(?:an?\s+)?(message|inquiry|enquiry|note|request)\b/i,
+  /\b(?:book|schedule|set\s*up|setup|request|arrange)\s+(?:an?\s+)?(call|callback|call\s+back|meeting|appointment|consultation|demo|session|discussion)\b/i,
+  /\b(?:request|get|ask\s+for|need)\s+(?:an?\s+)?(quote|proposal|estimate|callback|call\s+back|consultation|demo|assistance|support)\b/i,
+  /\b(project\s+inquiry|business\s+inquiry|sales\s+inquiry|free\s+consultation|discuss\s+(?:a|my|our)\s+project|start\s+(?:a|our)\s+project|work\s+with\s+(?:you|clyptus)|partner\s+with\s+(?:you|clyptus)|hire\s+(?:you|clyptus|your\s+team))\b/i,
+];
+
+const CONTACT_EXCLUSION_PATTERN =
+  /\b(e-?mails?|phone|mobile|number|numbers|address|addresses|locations?|offices?|branches|headquarters|hq|where\s+(?:is|are)|contact\s+page|job|jobs|career|careers|apply|resume|cv|vacancy|vacancies|opening|openings|intern|internship|hiring)\b/i;
+
+/** Returns true when a user's query expresses intent to contact or start a conversation with the Clyptus team. */
+function isContactConversationIntent(cleanQuery: string): boolean {
+  if (!cleanQuery || CONTACT_EXCLUSION_PATTERN.test(cleanQuery)) {
+    return false;
+  }
+  return CONTACT_CONVERSATION_PATTERNS.some((pattern) => pattern.test(cleanQuery));
+}
+
 const KNOWLEDGE_BASE: KnowledgeArticle[] = [
   // 1. OFFICIAL EMAILS & DIRECT CONTACT CHANNELS
   {
@@ -2268,21 +2299,18 @@ Click any button below to jump directly to a page or ask any question about Clyp
 
     const cleanQuery = text.toLowerCase().trim();
 
-    const wantsToContact = [
-      /\b(i|we)?\s*(want|need|would like|I'd like|we'd like)\s+to\s+(contact|talk|speak|connect|reach)\b/i,
-      /\bhow (can|do) (i|we) (contact|reach|talk|speak|connect)\b/i,
-      /\b(get in touch|start a conversation|contact (your|the) team|talk to (someone|your team))\b/i,
-      /\b(i|we) (want|need) to get in touch\b/i,
-    ].some((pattern) => pattern.test(cleanQuery));
-
-    if (wantsToContact && !/\b(email|phone|number|address)\b/i.test(cleanQuery)) {
+    if (isContactConversationIntent(cleanQuery)) {
       setTimeout(() => {
         const aiMessage: Message = {
           id: `ai-${Date.now()}`,
           sender: 'ai',
           text: 'Send us a few details about what you need, and our team will get back to you.',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          showContactCard: true
+          showContactCard: true,
+          quickActions: [
+            { label: 'Go to Contact Page', pageTarget: 'Contact' },
+            { label: 'Official Emails', chatQuery: 'What are your official emails?' }
+          ]
         };
         setMessages((prev) => [...prev, aiMessage]);
         setIsTyping(false);
